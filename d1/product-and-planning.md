@@ -97,6 +97,47 @@ You must have at least 2 meetings with your project partner - an initial plannin
 * What did you discuss during the meeting (**note you must have meeting minutes**)?
 * What were the outcomes of each meeting?
 
+**_Meeting 1_**  
+**Time and Location**  
+Friday, Oct 4, 12-1pm @ David Naylor Building room 314
+
+**Minutes**  
+*Attendees:*
+* Team members: Alex Eng, Joey Wu, Julia Xu, Lucas Gismondi, Sandro Seryani, Tianze Xu, Wendy Hua
+* Project partners: Ike Okafor, Lauren Phillips
+
+*Discussion Key Points:*  
+* Determined what the project partners want in an MVP (bolded items are top priority).
+   * Website/web application that will calculate the cost of applying to med school.
+   * **A way to calculate and display cost data, resources such as med school links, and free/cheaper alternatives such as subsidization programs**.
+      * There is no api we need to access to get the cost data, so we would have a way for admins (project partners) to add cost data to our database.
+   * **User profiles where med school application cost data can be saved**.
+      * Currently the project partners are able to export user profiles to an excel file. This includes information such as the user's first name, last name, email, and whether they are a mentee or mentor.
+   * Email notifications for upcoming start dates, deadlines, interviews etc.
+* Determined resources that would be provided by the project partners.
+   * Data for the cost of applying to med school, updated perhaps once every application round.
+   * Dates for which emails should be sent.
+   * An excel file that contains user information.
+   * Data from MentorCity, such as resources including med school links, and free/cheaper alternatives to costs.
+   * Initial design kketches
+   * Funds for future hosting
+* Thought of ways we would approach the requirements.
+   * No existing codebase from the project partners to integrate with, will create standalone product.
+      * Project partners currently use MentorCity as a platform for prospective students where they are paired with a mentor. 
+      * MentorCity provides a page of resources we should link to.
+   * Cleared up meaning of "just-in time format" from the requirements. 
+      * It means to allow students receive information in a timely manner. 
+      * For example, once they've receieved an interview offer, they should receive an email with perhaps a link to our product so they can find out about the related fees quickly. They should also be informed of time frames, such as the set time frames for applying for MCAT.
+   * Design-wise
+      * Lauren will create design sketches.
+   * Hosting
+      * Project partners have not mapped out a detailed budget, but they do have the funds necessary for hosting.
+      * This will allow us to choose platforms that work well with our product.
+      
+*Next Steps:*
+* Project partners will need to ask their users for consent for us to access their profiles with the excel file.
+* Team members will email Adam for advice.
+
 
 #### Artifacts
 
