@@ -133,10 +133,15 @@ Friday, Oct 4, 12-1pm @ David Naylor Building room 314
    * Hosting
       * Project partners have not mapped out a detailed budget, but they do have the funds necessary for hosting.
       * This will allow us to choose platforms that work well with our product.
-      
+
+*Outcomes:*
+* Team members got better understanding of scope and requirements for project.
+* Team members and project partners came to a mutual understanding.
+
 *Next Steps:*
 * Project partners will need to ask their users for consent for us to access their profiles with the excel file.
 * Team members will email Adam for advice.
+
 
 
 #### Artifacts
