@@ -18,6 +18,20 @@
  * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
    For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
  * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
+ 
+ Our product will allow students, applying to medical school, to calculate the overall costs for such a process and be informed of cheaper
+ or free alternatives for certain steps in the process.
+ Information regarding how to lower medical school costs is currently spread out and difficult to keep track of. 
+ FOR EXAMPLE: TODO provide concrete examples
+ Our website plans to be the single source of truth for students applying to medical school within Canada.
+ It will assist students in:
+ * planning out their application process in easy to follow steps
+ * optimizing costs for a specific set of inputs
+ * saving their planned application process and keeping track of it 
+ 
+ It will also provide a medium for administrators to update cost information with ease.
+ 
+ TODO: INCLUDE MOCK UPS FROM LAUREN
 
 
 #### Q2: Who are your target users?
@@ -26,6 +40,9 @@
  * Be specific (e.g. a 'a third-year university student studying Computer Science' and not 'a student')
  * Feel free (but not obligated) to use personas.         
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
+
+ Canadian students applying to medical school, looking to save money and keep track of their application process.
+ TODO: EXPAND
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
@@ -38,6 +55,8 @@
     * Does this application exist in another form? If so, how does your differ and provide value to the users?
     * How does this align with your partner's organization's values/mission/mandate?
 
+ 
+
 #### Q4: How will you build it?
 
  * Short (1-2 min' read max)
@@ -47,12 +66,16 @@
  * Will you be using third party applications or APIs? If so, what are they?
  * What is your testing strategy?
 
+ 
+
 #### Q5: What are the user stories that make up the MVP?
 
  * At least 5 user stories concerning the main features of the application - note that this can broken down further
  * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
  * If you have a partner, these must be reviewed and accepted by them
  * The user stories should be written in Github and each one must have clear acceptance criteria
+
+ 
 
 ----
 
