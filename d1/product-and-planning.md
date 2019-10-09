@@ -75,8 +75,12 @@
  * If you have a partner, these must be reviewed and accepted by them
  * The user stories should be written in Github and each one must have clear acceptance criteria
 
- 
 
+- As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
+
+- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+
+- As a medical school applicant, I want to see what alternatives I have for several stages of the application (such as interview preparation) in order to try and save money.
 ----
 
 ## Process Details
