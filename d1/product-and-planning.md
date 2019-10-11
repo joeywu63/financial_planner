@@ -132,7 +132,6 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 
 - As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
 
-   Acceptance Criteria:
    - The ability to navigate through different stages of the medical school application
    - For each stage, show:
       - The price of different aspects within the stage
