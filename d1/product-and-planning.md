@@ -21,11 +21,11 @@
 
 ##### High-Level Description
 
-Our product will be a website that will allow prospective medical school sapplicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
+Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
 
 ##### Problem Description
 
-The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the ***various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
+The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the ***various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on institution, method of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
 
 ##### Product Description
 
@@ -34,11 +34,11 @@ Based on the problem, our solution/product will be a **website** that calculates
 * MCAT and MCAT preparation
 * Applications
 * Interviews
-* Travel, accomodation and attire
+* Travel, accommodation and attire
 
 For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease.
 
-In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile,save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and alternative resources with lower cost.
+In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile, save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and alternative resources with lower cost.
 
 ##### Similar Resources
 
@@ -59,7 +59,7 @@ TBD
  * Feel free (but not obligated) to use personas.         
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
 
- Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardles of financial status) can be considered secondary target users of our product.
+ Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
 
  TODO: ADD PERSONAS?
 
@@ -166,7 +166,7 @@ Friday, Oct 4, 12-1pm @ David Naylor Building room 314
    * Dates for which emails should be sent.
    * An excel file that contains user information.
    * Data from MentorCity, such as resources including med school links, and free/cheaper alternatives to costs.
-   * Initial design kketches
+   * Initial design sketches
    * Funds for future hosting
 * Thought of ways we would approach the requirements.
    * No existing codebase from the project partners to integrate with, will create standalone product.
@@ -174,7 +174,7 @@ Friday, Oct 4, 12-1pm @ David Naylor Building room 314
       * MentorCity provides a page of resources we should link to.
    * Cleared up meaning of "just-in time format" from the requirements.
       * It means to allow students receive information in a timely manner.
-      * For example, once they've receieved an interview offer, they should receive an email with perhaps a link to our product so they can find out about the related fees quickly. They should also be informed of time frames, such as the set time frames for applying for MCAT.
+      * For example, once they've received an interview offer, they should receive an email with perhaps a link to our product so they can find out about the related fees quickly. They should also be informed of time frames, such as the set time frames for applying for MCAT.
    * Design-wise
       * Lauren will create design sketches.
    * Hosting
@@ -190,11 +190,11 @@ Friday, Oct 4, 12-1pm @ David Naylor Building room 314
 * Team members will email Adam for advice.
 
 
-Meeting 2: Document Review Meeting
-Date: Oct 11, 2019.
-Location: Medical Sciences Building.
-Team attendees: Joey Wu, Julia Xu, Lucas Gismondi.
-Partner attendees: Lauren Phillips.
+***Meeting 2: Document Review Meeting***  
+Date: Oct 11, 2019.  
+Location: Medical Sciences Building.  
+Team attendees: Joey Wu, Julia Xu, Lucas Gismondi.  
+Partner attendees: Lauren Phillips.  
 
 Discussion:
 * Discussion of exact feature requirements:
