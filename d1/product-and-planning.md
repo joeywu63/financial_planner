@@ -104,9 +104,52 @@ TBD
 
 - As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
 
-- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+   Acceptance Criteria:
+   - The ability to navigate through different stages of the medical school application
+   - For each stage, show:
+      - The price of different aspects within the stage
+      - A link to a resource possibly explaining the price or showing next steps (e.g. A link to MCAT registration)
 
-- As a medical school applicant, I want to see what alternatives I have for several stages of the application (such as interview preparation) in order to try and save money.
+- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+   - The ability to modify the business rules found in the database
+   - The ability to log in as an administrator
+      - Some security rules as to who is an admin and what they can do  
+   - The interface should not rely on technical skills, and should ideally not intimidate someone who isn't technologically savvy
+      - A prebuilt set of options (representing different fees found in the database) - The idea here is to avoid free text when wanting to change something,
+        my initial thought is a dropdown of several stages like the transcript request fee at UofT, the MCAT textbook price etc... Of course this isn't
+        a decision we should take now, just something to keep in mind.
+
+- As an application admin, I want to see what users think about this application, so I can see how we can improve it.
+   - The ability to offer a survey for users when they finish using the tool
+   - The ability for an admin to view results in a user-friendly way
+      - Again, it is important to make these features accessible
+      - The ability to present statistical data (Flowcharts, diagrams etc...)
+
+- As a budget-conscious medical school applicant, I want to see what alternatives I have for several stages of the application (such as interview preparation) in order to try and save money.
+   - The ability to navigate through different stages of the medical school application
+   - For each stage, show:
+      - The price of different aspects within the stage
+      - Prioritize showing cheaper alternatives (Or whatever the client would want us to push towards) and more information about these
+
+- As a medical school applicant, I would like to exit the page and log back in tomorrow to pick up on the progress I made within the tool.
+   - The ability to sign in
+      - Store username/email
+      - Store password 
+         - Security concerns: How we will handle encryption
+      - Provide mechanism to recover password 
+         - Could send an email to the one they signed up with or do recovery questions
+   - The ability to store user interactions with the software
+      - Store what information they have filled in and what choices they have made
+      - Store at what point they were before they exited the application  
+
+- As a forgetful applicant, I would like to be reminded of upcoming deadlines in order to not mess up my medical school prospects.
+   - The ability to store crucial deadlines about several stages in the application
+   - The ability to send mass emails to users who consent 
+      - The ability to opt in to this option for users
+         - This entails a settings screen for a user to change information
+      - The ability to automatically send emails to users about upcoming deadlines
+         - The ability to store user emails 
+
 ----
 
 ## Process Details
