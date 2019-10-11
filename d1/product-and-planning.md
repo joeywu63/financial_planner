@@ -116,6 +116,11 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
  * What is your testing strategy?
 
  **discuss tomorrow**
+ - Javascript
+ - React
+ - Firebase
+    - Firestore
+    - Hosting
 
 #### Q5: What are the user stories that make up the MVP?
 
