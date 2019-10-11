@@ -29,17 +29,19 @@ The problem we hope to address is **poor accessibility of information regarding 
 
 ##### Product Description
 
-Based on the problem, our solution/product will be a **website** that calculates and displays the cumulative cost of their planned application process, which will be the sum of the costs incurred from the following categories throughout the overall process: 
+Based on the problem, our solution/product will be a **website** that calculates and displays the cumulative cost of their planned application process, which will be the sum of the costs incurred from the following categories throughout the overall process:
 
-* MCAT and MCAT preparation
+* MCAT and MCAT preparation (specify)
 * Applications
 * Interviews
 * Travel, accomodation and attire
 
 For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease. 
 
-In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile,save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and alternative resources with lower cost.
- 
+In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile, save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and _alternative resources with lower cost(?)_.
+
+* **Q: What exactly should users be notified of?**
+
 ##### Similar Resources
 
 The following are resources similar to (but not the same as) our product:
@@ -59,7 +61,9 @@ TBD
  * Feel free (but not obligated) to use personas.         
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
 
- Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardles of financial status) can be considered secondary target users of our product.
+ Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
+
+ **Q: other users?**
 
  TODO: ADD PERSONAS?
 
@@ -83,6 +87,7 @@ TBD
  * Will you be using third party applications or APIs? If so, what are they?
  * What is your testing strategy?
 
+ **discuss tomorrow**
  - Javascript
  - React
  - Firebase
@@ -117,6 +122,13 @@ List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
 
+ Some roles:
+ * Customer relations
+ * Tech guy
+ * QA, testing
+ * UX
+ * Scrum master
+
 #### Team Rules
 
 Describe your team's working culture.
@@ -124,19 +136,38 @@ Describe your team's working culture.
 Communications:
  * What is the expected frequency? What methods/channels are appropriate? 
  * If you have a partner project, what is your process (in detail) for communicating with your partner?
+
+   * meeting once per week in person
+   * slack/zoom/fb voice call
+   * for partner: email, in person meeting every 2/3? weeks
  
 Meetings:
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
+
+   * moderator/faciliator for meetings (take turns talking)
+   * 3 strikes? -> TA
  
 Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
+   * go to TA
+   * scenarios: multiple options -> vote
+   * planning poker?
 
 #### Events
 
 Describe meetings (and other events) you are planning to have:
  * When and where? Recurring or ad hoc? In-person or online?
+
+   * In person once/week, friday 12pm, recurring
+   * online (by voice) when necessary
+
  * What's the purpose of each meeting?
+
+   * get every1 on same page
+   * assign tasks
+   * review work
+
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
 
 #### Partner Meetings
