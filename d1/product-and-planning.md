@@ -19,20 +19,38 @@
    For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
  * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
  
- Our product will allow students, applying to medical school, to calculate the overall costs for such a process and be informed of cheaper
- or free alternatives for certain steps in the process.
- Information regarding how to lower medical school costs is currently spread out and difficult to keep track of. 
- FOR EXAMPLE: TODO provide concrete examples
- Our website plans to be the single source of truth for students applying to medical school within Canada.
- It will assist students in:
- * planning out their application process in easy to follow steps
- * optimizing costs for a specific set of inputs
- * saving their planned application process and keeping track of it 
- 
- It will also provide a medium for administrators to update cost information with ease.
- 
- TODO: INCLUDE MOCK UPS FROM LAUREN
+##### High-Level Description
 
+Our product will be a website that will allow prospective medical school sapplicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
+
+##### Problem Description
+
+The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the ***various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
+
+##### Product Description
+
+Based on the problem, our solution/product will be a **website** that calculates and displays the cumulative cost of their planned application process, which will be the sum of the costs incurred from the following categories throughout the overall process: 
+
+* MCAT and MCAT preparation
+* Applications
+* Interviews
+* Travel, accomodation and attire
+
+For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease. 
+
+In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile,save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and alternative resources with lower cost.
+ 
+##### Similar Resources
+
+The following are resources similar to (but not the same as) our product:
+
+* https://schools.studentdoctor.net/cost_calculator/index 
+* https://medicalschoolhq.net/medical-school-applications-cost-estimator/
+* https://mdm.ca/tools/medical-school-cost-calculator
+
+##### Mockups/Lo-fi Prototypes
+
+TBD
 
 #### Q2: Who are your target users?
 
@@ -41,8 +59,9 @@
  * Feel free (but not obligated) to use personas.         
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
 
- Canadian students applying to medical school, looking to save money and keep track of their application process.
- TODO: EXPAND
+ Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardles of financial status) can be considered secondary target users of our product.
+
+ TODO: ADD PERSONAS?
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
@@ -54,8 +73,6 @@
     * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
     * Does this application exist in another form? If so, how does your differ and provide value to the users?
     * How does this align with your partner's organization's values/mission/mandate?
-
- 
 
 #### Q4: How will you build it?
 
