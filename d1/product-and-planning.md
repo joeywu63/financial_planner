@@ -83,7 +83,11 @@ TBD
  * Will you be using third party applications or APIs? If so, what are they?
  * What is your testing strategy?
 
- 
+ - Javascript
+ - React
+ - Firebase
+    - Firestore
+    - Hosting
 
 #### Q5: What are the user stories that make up the MVP?
 
