@@ -21,7 +21,7 @@
  
 ##### High-Level Description
 
-Our product will be a website that will allow prospective medical school sapplicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
+Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
 
 ##### Problem Description
 
@@ -29,17 +29,26 @@ The problem we hope to address is **poor accessibility of information regarding 
 
 ##### Product Description
 
-Based on the problem, our solution/product will be a **website** that **calculates and displays the cumulative cost and cost breakdown of their planned application process**, which will be the sum of the costs incurred from the following categories throughout the overall process:
+Based on the problem, our solution/product will be a **website** that calculates and displays the cumulative cost of their planned application process, which will be the sum of the costs incurred from the following categories throughout the overall process:
 
-* MCAT and MCAT preparation (exam fees, courses, textbooks)
-* Applications (transcripts, application fees, review services)
-* Interviews (prep services, travel, accomodation and attire)
+* MCAT and MCAT preparation (specify)
+* Applications
+* Interviews
+* Travel, accommodation and attire
 
-For each category, the website will **display several options and their cost**, as provided to us by our partners. It will also provide a **medium for administrators to update cost information** with ease. 
+For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease. 
 
-In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to **create a profile**, **save/update their selected options and associated cost information** and track their application process by **checking off completed portions** of their application. Finally, the product will also include a **e-mail notification system** that sends users information about **upcoming deadlines** and _alternative resources with lower cost(?)_.
+In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile, save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and _alternative resources with lower cost(?)_.
 
 * **Q: What exactly should users be notified of?**
+
+##### Similar Resources
+
+The following are resources similar to (but not the same as) our product:
+
+* https://schools.studentdoctor.net/cost_calculator/index 
+* https://medicalschoolhq.net/medical-school-applications-cost-estimator/
+* https://mdm.ca/tools/medical-school-cost-calculator
 
 ##### Mockups/Lo-fi Prototypes
 
@@ -68,43 +77,6 @@ TBD
     * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
     * Does this application exist in another form? If so, how does your differ and provide value to the users?
     * How does this align with your partner's organization's values/mission/mandate?
-      * **ASK THIS**
-
-##### Why this product?
-
-Our product fits the needs of our users because it addresses both problems described in Q1. Firstly, by creating a tool to calculate the overall cost of the application & interview process, we centralize a vast amount of important information and improve accessibility to information that is otherwise scattered around multiple different resources. This includes information such as application fees for different institutions, transcript fees, fees to obtain additional documents required by certain instutitions, and so on. Secondly, by offering multiple options for each component of the application and having a notification system, we improve accessibility for information on cheaper alternative resources, thus helping financially-struggling students cut down on costs.
-
-##### User Benefits
-
-We outline the benefits of our product below:
-
-* **Saves users time**
-   * By centralizing cost information, users no longer need to look up the necessary information from multiple different sources.
-   * By saving the cost information and application steps on the users' profile, users no longer need to save and look up the information they've found elsewhere, or look it up every time they need it.
-      * This saves a tremendous amount of time throughout the entire application process, which can be quite lengthy.
-* **Facilitates financial planning**
-   * By having access to total cost and cost breakdown, it is much easier for users to budget around the application process.
-   * Checking off parts of the application process that are complete means always-relevant cost sum and breakdown, regardless of application stage.
-* **Provide users with more choice**
-   * By displaying alternatives and multiple options, users can analyze and assess the options available to them (in terms of various exam preparation resources, interview preparation services etc), and choose the one that fits their situation the best.
-   * Previously, users would likely have to actively seek out different options (e.g. visiting MDConsultants and BeMo individually to get information on their services), thus making it easy to miss alternatives.
-   * This also helps with financial planning, with regards to minimizing cost
-* **Lowers risk of unexpected costs**
-   * By outlining all the costs associated with the process, there is less chance users are burdened by surprise costs they have not account for.
-* **Improves user organization**
-   * A personalized profile and notification system means that users are less likely to miss deadlines and other pieces of crucial information, such as alternative resources. Therefore users are able to plan better.
-
-##### Similar Resources
-
-The following are resources similar to (but not the same as) our product:
-
-* https://schools.studentdoctor.net/cost_calculator/index 
-* https://medicalschoolhq.net/medical-school-applications-cost-estimator/
-* https://mdm.ca/tools/medical-school-cost-calculator
-
-Our product diffrentiate ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines (and alternatives?). In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to information limited to the US for two of the above resources.
-
-Our partners currently use MentorCity, which is a mentoring software for **WHAT FOR?**
 
 #### Q4: How will you build it?
 
@@ -116,11 +88,6 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
  * What is your testing strategy?
 
  **discuss tomorrow**
- - Javascript
- - React
- - Firebase
-    - Firestore
-    - Hosting
 
 #### Q5: What are the user stories that make up the MVP?
 
@@ -132,14 +99,52 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 
 - As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
 
-- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+   - The ability to navigate through different stages of the medical school application
+   - For each stage, show:
+      - The price of different aspects within the stage
+      - A link to a resource possibly explaining the price or showing next steps (e.g. A link to MCAT registration)
 
-- As a medical school applicant, I want to see what alternatives I have for several stages of the application (such as interview preparation) in order to try and save money.
-----
+- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+   - The ability to modify the business rules found in the database
+   - The ability to log in as an administrator
+      - Some security rules as to who is an admin and what they can do  
+   - The interface should not rely on technical skills, and should ideally not intimidate someone who isn't technologically savvy
+      - A prebuilt set of options (representing different fees found in the database) - The idea here is to avoid free text when wanting to change something,
+        my initial thought is a dropdown of several stages like the transcript request fee at UofT, the MCAT textbook price etc... Of course this isn't
+        a decision we should take now, just something to keep in mind.
+
+- As an application admin, I want to see what users think about this application, so I can see how we can improve it.
+   - The ability to offer a survey for users when they finish using the tool
+   - The ability for an admin to view results in a user-friendly way
+      - Again, it is important to make these features accessible
+      - The ability to present statistical data (Flowcharts, diagrams etc...)
+
+- As a budget-conscious medical school applicant, I want to see what alternatives I have for several stages of the application (such as interview preparation) in order to try and save money.
+   - The ability to navigate through different stages of the medical school application
+   - For each stage, show:
+      - The price of different aspects within the stage
+      - Prioritize showing cheaper alternatives (Or whatever the client would want us to push towards) and more information about these
+
+- As a medical school applicant, I would like to exit the page and log back in tomorrow to pick up on the progress I made within the tool.
+   - The ability to sign in
+      - Store username/email
+      - Store password 
+         - Security concerns: How we will handle encryption
+      - Provide mechanism to recover password 
+         - Could send an email to the one they signed up with or do recovery questions
+   - The ability to store user interactions with the software
+      - Store what information they have filled in and what choices they have made
+      - Store at what point they were before they exited the application  
+
+- As a forgetful applicant, I would like to be reminded of upcoming deadlines in order to not mess up my medical school prospects.
+   - The ability to store crucial deadlines about several stages in the application
+   - The ability to send mass emails to users who consent 
+      - The ability to opt in to this option for users
+         - This entails a settings screen for a user to change information
+      - The ability to automatically send emails to users about upcoming deadlines
+         - The ability to store user emails 
 
 ## Process Details
-
-
 
 #### Roles & responsibilities
 
@@ -249,7 +254,50 @@ Friday, Oct 4, 12-1pm @ David Naylor Building room 314
 * Project partners will need to ask their users for consent for us to access their profiles with the excel file.
 * Team members will email Adam for advice.
 
+***Meeting 2: Document Review Meeting***  
+Date: Oct 11, 2019.  
+Location: Medical Sciences Building.  
+Team attendees: Joey Wu, Julia Xu, Lucas Gismondi.  
+Partner attendees: Lauren Phillips.  
 
+Discussion:
+* Discussion of exact feature requirements:
+    * The most important feature is the calculator.
+    * Including: ability to export costs document.
+* Comparison to similar websites.
+* Timing of the notification system:
+    * 2-3 weeks before the application due date, test due date, or scheduled interview.
+    * For interviews, include notification on arranging accommodations, and only for people who indicate they have an interview.
+* Layout of cost selection:
+    * Each costs section contains multiple selections. After choosing a selection, a box of alternative options is displayed beside the selection area.
+* Alternatives for textbooks:
+    * Ike has a library of affordable books that can be linked to.
+* What is the purpose of the document export?
+    * Students can print, or send to parents.
+* Overlap with CRM.
+    * Do not want to students to repeatedly enter the same info.
+* Student selects what info they would like to be reminded of?
+    * Yes.
+* Notification of MentorCity users to sign up.
+    * Want all users from MentorCity to be notified of the new platform. Download first name, last name, or emails, or alternatively, send invitation link so students could sign up themselves.
+* Notifying new users of MentorCity after the initial release:
+    * Lauren will talk to MentorCity and ask.
+    * Link to website will be added to MentorCity resources section.
+* Other info that needs to be transferred?
+    * No.
+* Rest of the meeting was going through the product planning document with the partner. There were no issues during this review. Notes:
+    * Firebase was accepted as a user database technology.
+    * Number of total users: 300-400. Monthly, maybe 100-200. Usage is very seasonal.
+* Follow up:
+    * Lauren will send an email with specifics on costs, alternatives, and deadlines.
+    * Future meetings will be once every 2 weeks.
+    * Further communication through email.
+    * Final product planning document sent before Monday.
+
+Outcomes:
+* Clarification of features and usage details.
+* Agreement on product planning document.
+* Arrangement of further communications.
 
 #### Artifacts
 
