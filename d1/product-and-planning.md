@@ -42,14 +42,6 @@ In addition to the primary functionality of calculating cost and identifying low
 
 * **Q: What exactly should users be notified of?**
 
-##### Similar Resources
-
-The following are resources similar to (but not the same as) our product:
-
-* https://schools.studentdoctor.net/cost_calculator/index 
-* https://medicalschoolhq.net/medical-school-applications-cost-estimator/
-* https://mdm.ca/tools/medical-school-cost-calculator
-
 ##### Mockups/Lo-fi Prototypes
 
 TBD
@@ -78,6 +70,42 @@ TBD
     * Does this application exist in another form? If so, how does your differ and provide value to the users?
     * How does this align with your partner's organization's values/mission/mandate?
 
+##### Why this product?
+
+Our product fits the needs of our users because it addresses both problems described in Q1. Firstly, by creating a tool to calculate the overall cost of the application & interview process, we centralize a vast amount of important information and improve accessibility to information that is otherwise scattered around multiple different resources. This includes information such as application fees for different institutions, transcript fees, fees to obtain additional documents required by certain instutitions, and so on. Secondly, by offering multiple options for each component of the application and having a notification system, we improve accessibility for information on cheaper alternative resources, thus helping financially-struggling students cut down on costs.
+
+##### User Benefits
+
+We outline the benefits of our product below:
+
+* **Saves users time**
+   * By centralizing cost information, users no longer need to look up the necessary information from multiple different sources.
+   * By saving the cost information and application steps on the users' profile, users no longer need to save and look up the information they've found elsewhere, or look it up every time they need it.
+      * This saves a tremendous amount of time throughout the entire application process, which can be quite lengthy.
+* **Facilitates financial planning**
+   * By having access to total cost and cost breakdown, it is much easier for users to budget around the application process.
+   * Checking off parts of the application process that are complete means always-relevant cost sum and breakdown, regardless of application stage.
+* **Provide users with more choice**
+   * By displaying alternatives and multiple options, users can analyze and assess the options available to them (in terms of various exam preparation resources, interview preparation services etc), and choose the one that fits their situation the best.
+   * Previously, users would likely have to actively seek out different options (e.g. visiting MDConsultants and BeMo individually to get information on their services), thus making it easy to miss alternatives.
+   * This also helps with financial planning, with regards to minimizing cost
+* **Lowers risk of unexpected costs**
+   * By outlining all the costs associated with the process, there is less chance users are burdened by surprise costs they have not account for.
+* **Improves user organization**
+   * A personalized profile and notification system means that users are less likely to miss deadlines and other pieces of crucial information, such as alternative resources. Therefore users are able to plan better.
+
+##### Similar Resources
+
+The following are resources similar to (but not the same as) our product:
+
+* https://schools.studentdoctor.net/cost_calculator/index 
+* https://medicalschoolhq.net/medical-school-applications-cost-estimator/
+* https://mdm.ca/tools/medical-school-cost-calculator
+
+Our product diffrentiate ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines (and alternatives?). In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to information limited to the US for two of the above resources.
+
+Our partners currently use MentorCity, which is a mentoring software for **WHAT FOR?**
+
 #### Q4: How will you build it?
 
  * Short (1-2 min' read max)
@@ -87,7 +115,11 @@ TBD
  * Will you be using third party applications or APIs? If so, what are they?
  * What is your testing strategy?
 
- **discuss tomorrow**
+ - Javascript
+ - React
+ - Firebase
+    - Firestore
+    - Hosting
 
 #### Q5: What are the user stories that make up the MVP?
 
