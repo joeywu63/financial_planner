@@ -55,10 +55,6 @@ TBD
 
  Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
 
- **Q: other users?**
-
- TODO: ADD PERSONAS?
-
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
  * Short (1 - 2 min' read max)
@@ -115,11 +111,25 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
  * Will you be using third party applications or APIs? If so, what are they?
  * What is your testing strategy?
 
+##### Tech Stack
  - Javascript
  - React
  - Firebase
     - Firestore
+    - Authentication
     - Hosting
+    
+##### Deployment
+We will be deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
+
+##### Architecture
+System
+
+
+Database
+
+##### Testing Strategy
+We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that aspect.
 
 #### Q5: What are the user stories that make up the MVP?
 
@@ -189,7 +199,7 @@ List each team member and:
 
  Some roles:
  * Customer relations
- * Tech guy
+ * Tech Lead
  * QA, testing
  * UX
  * Scrum master
@@ -198,7 +208,7 @@ List each team member and:
  |-------------|------|-----------------------|--------------|---------------|
  | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
  | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design| 
-
+ | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment |
 
 #### Team Rules
 
@@ -230,7 +240,6 @@ Conflict Resolution:
 
    * go to TA
    * scenarios: multiple options -> vote
-   * planning poker?
 
 #### Events
 
