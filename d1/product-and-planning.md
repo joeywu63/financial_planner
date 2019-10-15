@@ -268,7 +268,8 @@ List each team member and:
  | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment, UX Design |
  | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies |
  | Tianze Xu | UX | Support UI dev. across user stories | Python, JavaScript, React, SQL | Firebase, Testing, Deployment |
- | Wendy Hua | Product Manager | Manage product backlog & development process | Javascript, React, Automated frontend testing (Puppeteer) | Firebase, Deployment
+ | Wendy Hua | Product Manager | Manage product backlog & development process | Javascript, React, Automated frontend testing (Puppeteer) | Firebase, Deployment|
+ | Alex Eng | QA | Test code for bugs & code verification | JavaScript, Python, C | React, Firebase, UX |
 
 #### Team Rules
 
@@ -422,6 +423,13 @@ List/describe the artifacts you will produce in order to organize your team.
    * How do you keep track of what needs to get done?
    * How do you prioritize tasks?
    * How do tasks get assigned to team members?
+ * Team will be utilizing MeisterTask, a task management platform for teams.
+ * Use MeisterTask to assign, organize and prioritize tasks between team members.
+ * Use MeisterTask to keep track of outstanding items that are not yet done.
+ * MeisterTask has ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
+ * Prioritize tasks by keeping them in an ordered list.
+ * Can also prioritize tasks by adding highlight tags to each, stating whether they are of high, medium or low priority.
+ * Tasks are assigned to team members according to their experience, priority and schedules. 
 
 ----
 ### Highlights
