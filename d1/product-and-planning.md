@@ -119,13 +119,13 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
     - Firestore
     - Authentication
     - Hosting
-    
+
 ##### Deployment
 We will be deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
 
 ##### Architecture
 *System*
-draw diagram of how Firebase auth, 
+draw diagram of how Firebase auth,
 
 *Database*
 User
@@ -201,14 +201,14 @@ Describe the different roles on the team and the responsibilities associated wit
 Below are the roles we will have for our team, and a short description of the responsibilities associated with each role, as well as who they will be working with.
 
  * Customer relations
-   * Communicates with our partners on behalf of the whole team. 
+   * Communicates with our partners on behalf of the whole team.
    * Updates our partners on the current progress.
    * Addresses questions, concerns, expectations and roadmaps for upcoming deliverables with our partners.
    * Schedules upcoming meetings with our partners.
 
  * Tech lead
-   * Responsible for managing the technical scope of the project. 
-   * Mentors the rest of the team on the chosen tech stack. 
+   * Responsible for managing the technical scope of the project.
+   * Mentors the rest of the team on the chosen tech stack.
    * Identifies the tasks that should be prioritized and provides estimations on the complexity of each.
    * Identifies potential problems, alternative solutions and other technical caveats that may arise in the project.
 
@@ -240,10 +240,10 @@ List each team member and:
 
  | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
  |-------------|------|-----------------------|--------------|---------------|
- | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
- | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design| 
+ | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | UX, Firebase, Scrum |
+ | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design|
  | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment, UX Design |
- | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies | 
+ | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies |
  | Tianze Xu | UX | Support UI dev. across user stories | Python, JavaScript, React, SQL | Firebase, Testing, Deployment |
  | Wendy Hua | Product Manager | Manage product backlog & development process | Javascript, React, Automated frontend testing (Puppeteer) | Firebase, Deployment
 
