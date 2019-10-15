@@ -25,7 +25,7 @@ Our product will be a website that will allow prospective medical school applica
 
 ##### Problem Description
 
-The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the ***various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
+The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the **various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
 
 ##### Product Description
 
@@ -153,11 +153,11 @@ Alternative
 
 UserProgress
 - userID
-- optionsSelected (list of options that were selected)
+- optionsSelected (list of options that were selected. This will include key value pairs where the key is an expense ID and its value is a boolean)
 
 
 ##### Testing Strategy
-We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that aspect.
+We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that part of the platform.
 
 #### Q5: What are the user stories that make up the MVP?
 
@@ -315,7 +315,7 @@ The purpose of team meetings is to keep everyone up-to-date on the state of the 
 
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
 
-We are not currently planning on having specialized events, because the most important team activities are covered in regular weekly meetings and beyond that, we would like to dedicate more time to coding.
+Two members of the team will be expected to complete code reviews for each Pull Request. We will also hold quick online sync meetings when necessary.
 
 #### Partner Meetings
 You must have at least 2 meetings with your project partner - an initial planning meeting and a document review meeting. Describe the meetings here:
