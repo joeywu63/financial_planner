@@ -265,16 +265,15 @@ Once every 2 weeks, there will be an in-person meeting with the partner.
 Meetings:
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
 
-If a team member is irresponsive, they will be told of the issue, then otherwise reported to the TA.
-
-   * moderator/facilitator for meetings (take turns talking)
-   * 3 strikes? -> TA
+Team members are responsible for attending the weekly meetings. We will allow some lenience for hectic schedules, but if a team member repeatedly misses meetings, we will go to the TA. At the meetings, we will have a time where we take turns talking about our progress from the previous week. If we could not complete tasks we were responsible for (tracked through meistertask), we will look at the causes. If it is due to unexpected technical challenges, we will take it into account in workload estimates of future tasks. Then we will have take time to prioritize and assign tasks for the preceeding week.
 
 Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
-   * go to TA
-   * scenarios: multiple options -> vote
+   * There is disagreement on how to accomplish a task (technical implementation, scope etc.): In one of the weekly meetings, we would have a discussion about the strengths of each option. Then, we would take a vote. If a team member still feels strongly about the result, we would repeat the discussion process.
+   * There is a task nobody wants to take on: If the task is large, we would subdivide it among the team. Otherwise, we would access the strengths and weakness of each member to decide who would have the easist time accomplishing the task. At the same time, we would make sure such "undesirable" tasks do not always go to the same person.
+   * A team member is writing poor quality code: In one of the weekly meetings, we would discuss what we find lacking and offer suggestions to improve the quality of the code.
+   * A team member is non-responsive/not contributing at all: If a team member is irresponsive, they will be told of the issue. If it becomes persistent, we will report to the TA.
 
 #### Events
 
