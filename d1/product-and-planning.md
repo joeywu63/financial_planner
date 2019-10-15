@@ -1,11 +1,11 @@
 # YOUR PRODUCT/TEAM NAME
 > _Note:_ This document is meant to evolve throughout the planning phase of your project.    
  > That is, it makes sense for you commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section).
- > Most importantly, it is a reflection of all the planning you work you've done in the first iteration. 
+ > Most importantly, it is a reflection of all the planning you work you've done in the first iteration.
  > **This document will serve as an agreement between your team and your partner.**
 
 ## Product Details
- 
+
 #### Q1: What are you planning to build?
 
  * Short (1 - 2 min' read)
@@ -18,7 +18,7 @@
  * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
    For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
  * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
- 
+
 ##### High-Level Description
 
 Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
@@ -36,7 +36,7 @@ Based on the problem, our solution/product will be a **website** that calculates
 * Interviews
 * Travel, accommodation and attire
 
-For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease. 
+For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease.
 
 In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile, save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and _alternative resources with lower cost(?)_.
 
@@ -54,10 +54,6 @@ TBD
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
 
  Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
-
- **Q: other users?**
-
- TODO: ADD PERSONAS?
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
@@ -99,7 +95,7 @@ We outline the benefits of our product below:
 
 The following are resources similar to (but not the same as) our product:
 
-* https://schools.studentdoctor.net/cost_calculator/index 
+* https://schools.studentdoctor.net/cost_calculator/index
 * https://medicalschoolhq.net/medical-school-applications-cost-estimator/
 * https://mdm.ca/tools/medical-school-cost-calculator
 
@@ -110,17 +106,31 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 #### Q4: How will you build it?
 
  * Short (1-2 min' read max)
- * What is the technology stack? Specify any and all languages, frameworks, libraries, PaaS products or tools. 
+ * What is the technology stack? Specify any and all languages, frameworks, libraries, PaaS products or tools.
  * How will you deploy the application?
- * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
+ * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here.
  * Will you be using third party applications or APIs? If so, what are they?
  * What is your testing strategy?
 
+##### Tech Stack
  - Javascript
  - React
  - Firebase
     - Firestore
+    - Authentication
     - Hosting
+    
+##### Deployment
+We will be deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
+
+##### Architecture
+System
+
+
+Database
+
+##### Testing Strategy
+We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that aspect.
 
 #### Q5: What are the user stories that make up the MVP?
 
@@ -161,9 +171,9 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 - As a medical school applicant, I would like to exit the page and log back in tomorrow to pick up on the progress I made within the tool.
    - The ability to sign in
       - Store username/email
-      - Store password 
+      - Store password
          - Security concerns: How we will handle encryption
-      - Provide mechanism to recover password 
+      - Provide mechanism to recover password
          - Could send an email to the one they signed up with or do recovery questions
    - The ability to store user interactions with the software
       - Store what information they have filled in and what choices they have made
@@ -171,17 +181,17 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 
 - As a forgetful applicant, I would like to be reminded of upcoming deadlines in order to not mess up my medical school prospects.
    - The ability to store crucial deadlines about several stages in the application
-   - The ability to send mass emails to users who consent 
+   - The ability to send mass emails to users who consent
       - The ability to opt in to this option for users
          - This entails a settings screen for a user to change information
       - The ability to automatically send emails to users about upcoming deadlines
-         - The ability to store user emails 
+         - The ability to store user emails
 
 ## Process Details
 
 #### Roles & responsibilities
 
-Describe the different roles on the team and the responsibilities associated with each role. 
+Describe the different roles on the team and the responsibilities associated with each role.
  * Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.
 
 Below are the roles we will have for our team, and a short description of the responsibilities associated with each role, as well as who they will be working with.
@@ -224,51 +234,60 @@ List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
 
- * Joey
-   * **Roles & Responsibilities**: Manages customer relations for the team. 
-   * **Strengths**: Python, C, Shell programming.
-   * **Weaknesses**: Lack of experience with JS libraries, lack of experience with databases, lack of experience with agile methodology.
+ | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
+ |-------------|------|-----------------------|--------------|---------------|
+ | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
+ | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design| 
+ | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment |
+ | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies | 
 
 #### Team Rules
 
 Describe your team's working culture.
 
 Communications:
- * What is the expected frequency? What methods/channels are appropriate? 
+ * What is the expected frequency? What methods/channels are appropriate?
+
+We are using the Slack app for general communications. Team members are expected to check for new messages on the app at least once per day. The Slack workspace is divided into channels for organization.
+
+For voice or video calls, we will use Facebook or Zoom.
+
  * If you have a partner project, what is your process (in detail) for communicating with your partner?
 
-   * meeting once per week in person
-   * slack/zoom/fb voice call
-   * for partner: email, in person meeting every 2/3? weeks
- 
+The main line of communication with the partner is through email, such as to provide updates on the project or arrange meetings. Our team representative will email the partner on behalf of the team, cc-ing the rest of the team members.
+
+Once every 2 weeks, there will be an in-person meeting with the partner.
+
 Meetings:
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
 
-   * moderator/faciliator for meetings (take turns talking)
+If a team member is irresponsive, they will be told of the issue, then otherwise reported to the TA.
+
+   * moderator/facilitator for meetings (take turns talking)
    * 3 strikes? -> TA
- 
+
 Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
    * go to TA
    * scenarios: multiple options -> vote
-   * planning poker?
 
 #### Events
 
 Describe meetings (and other events) you are planning to have:
  * When and where? Recurring or ad hoc? In-person or online?
 
-   * In person once/week, friday 12pm, recurring
-   * online (by voice) when necessary
+The team will have meetings once per week, on Fridays at 12 pm to 1 pm at Bahen, unless it has been decided that we will not be meeting that week.
+
+The team will have online voice call meetings as necessary, for more urgent conversations or when it is more convenient than an in-person meeting.
 
  * What's the purpose of each meeting?
 
-   * get every1 on same page
-   * assign tasks
-   * review work
+The purpose of team meetings is to keep everyone up-to-date on the state of the project, to assign new tasks for the upcoming week, and to review completed work.
 
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
+
+We are not currently planning on having specialized events, because the most important team activities are covered in regular weekly meetings and beyond that, we would like to dedicate more time to coding.
 
 #### Partner Meetings
 You must have at least 2 meetings with your project partner - an initial planning meeting and a document review meeting. Describe the meetings here:
@@ -302,10 +321,10 @@ Friday, Oct 4, 12-1pm @ David Naylor Building room 314
    * Funds for future hosting
 * Thought of ways we would approach the requirements.
    * No existing codebase from the project partners to integrate with, will create standalone product.
-      * Project partners currently use MentorCity as a platform for prospective students where they are paired with a mentor. 
+      * Project partners currently use MentorCity as a platform for prospective students where they are paired with a mentor.
       * MentorCity provides a page of resources we should link to.
-   * Cleared up meaning of "just-in time format" from the requirements. 
-      * It means to allow students receive information in a timely manner. 
+   * Cleared up meaning of "just-in time format" from the requirements.
+      * It means to allow students receive information in a timely manner.
       * For example, once they've receieved an interview offer, they should receive an email with perhaps a link to our product so they can find out about the related fees quickly. They should also be informed of time frames, such as the set time frames for applying for MCAT.
    * Design-wise
       * Lauren will create design sketches.
