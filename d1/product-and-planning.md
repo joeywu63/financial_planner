@@ -123,10 +123,14 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 We will be deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
 
 ##### Architecture
-System
+*System*
+draw diagram of how Firebase auth, 
 
-
-Database
+*Database*
+User
+Expense
+Alternative
+UserProgress
 
 ##### Testing Strategy
 We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that aspect.
@@ -208,7 +212,7 @@ List each team member and:
  |-------------|------|-----------------------|--------------|---------------|
  | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
  | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design| 
- | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment |
+ | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment, UX Design |
 
 #### Team Rules
 
