@@ -25,7 +25,7 @@ Our product will be a website that will allow prospective medical school applica
 
 #### Problem Description
 
-The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the ***various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
+The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the **various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
 
 #### Product Description
 
@@ -115,18 +115,45 @@ Our product diffrentiate ourselves from these tools with the personalized aspect
     - Firestore
     - Authentication
     - Hosting
-    
+
 ##### Deployment
 We will be deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
 
 ##### Architecture
-System
+*System*
 
+Since we are using Firebase, our architecture will simply be User <---> Firebase. There is no need for models or controllers but only views in this case. Our views will make requests to Firebase using the provided SDK, and Firebase will handle user authentication for each request.
 
-Database
+*Database*
+
+User
+- id
+- firstName
+- lastName
+- email
+- lastLoggedIn
+
+Expense
+- type
+- name
+- cost
+- description
+- url
+
+Alternative
+- type
+- name
+- cost
+- description
+- url
+
+UserProgress
+- userID
+- optionsSelected (list of options that were selected. This will include key value pairs where the key is an expense ID and its value is a boolean)
+
 
 ##### Testing Strategy
-We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that aspect.
+We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that part of the platform.
 
 #### Q5: What are the user stories that make up the MVP?
 
@@ -193,14 +220,14 @@ Describe the different roles on the team and the responsibilities associated wit
 Below are the roles we will have for our team, and a short description of the responsibilities associated with each role, as well as who they will be working with.
 
  * Customer relations
-   * Communicates with our partners on behalf of the whole team. 
+   * Communicates with our partners on behalf of the whole team.
    * Updates our partners on the current progress.
    * Addresses questions, concerns, expectations and roadmaps for upcoming deliverables with our partners.
    * Schedules upcoming meetings with our partners.
 
  * Tech lead
-   * Responsible for managing the technical scope of the project. 
-   * Mentors the rest of the team on the chosen tech stack. 
+   * Responsible for managing the technical scope of the project.
+   * Mentors the rest of the team on the chosen tech stack.
    * Identifies the tasks that should be prioritized and provides estimations on the complexity of each.
    * Identifies potential problems, alternative solutions and other technical caveats that may arise in the project.
 
@@ -232,10 +259,13 @@ List each team member and:
 
  | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
  |-------------|------|-----------------------|--------------|---------------|
- | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
- | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design| 
- | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment |
- | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies | 
+ | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | UX, Firebase, Scrum |
+ | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design|
+ | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment, UX Design |
+ | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies |
+ | Tianze Xu | UX | Support UI dev. across user stories | Python, JavaScript, React, SQL | Firebase, Testing, Deployment |
+ | Wendy Hua | Product Manager | Manage product backlog & development process | Javascript, React, Automated frontend testing (Puppeteer) | Firebase, Deployment|
+ | Alex Eng | QA | Test code for bugs & code verification | JavaScript, Python, C | React, Firebase, UX |
 
 #### Team Rules
 
@@ -257,16 +287,15 @@ Once every 2 weeks, there will be an in-person meeting with the partner.
 Meetings:
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
 
-If a team member is irresponsive, they will be told of the issue, then otherwise reported to the TA.
-
-   * moderator/facilitator for meetings (take turns talking)
-   * 3 strikes? -> TA
+Team members are responsible for attending the weekly meetings. We will allow some lenience for hectic schedules, but if a team member repeatedly misses meetings, we will go to the TA. At the meetings, we will have a time where we take turns talking about our progress from the previous week. If we could not complete tasks we were responsible for (tracked through meistertask), we will look at the causes. If it is due to unexpected technical challenges, we will take it into account in workload estimates of future tasks. Then we will have take time to prioritize and assign tasks for the preceeding week.
 
 Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
-   * go to TA
-   * scenarios: multiple options -> vote
+   * There is disagreement on how to accomplish a task (technical implementation, scope etc.): In one of the weekly meetings, we would have a discussion about the strengths of each option. Then, we would take a vote. If a team member still feels strongly about the result, we would repeat the discussion process.
+   * There is a task nobody wants to take on: If the task is large, we would subdivide it among the team. Otherwise, we would access the strengths and weakness of each member to decide who would have the easist time accomplishing the task. At the same time, we would make sure such "undesirable" tasks do not always go to the same person.
+   * A team member is writing poor quality code: In one of the weekly meetings, we would discuss what we find lacking and offer suggestions to improve the quality of the code.
+   * A team member is non-responsive/not contributing at all: If a team member is irresponsive, they will be told of the issue. If it becomes persistent, we will report to the TA.
 
 #### Events
 
@@ -283,7 +312,7 @@ The purpose of team meetings is to keep everyone up-to-date on the state of the 
 
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
 
-We are not currently planning on having specialized events, because the most important team activities are covered in regular weekly meetings and beyond that, we would like to dedicate more time to coding.
+Two members of the team will be expected to complete code reviews for each Pull Request. We will also hold quick online sync meetings when necessary.
 
 #### Partner Meetings
 You must have at least 2 meetings with your project partner - an initial planning meeting and a document review meeting. Describe the meetings here:
@@ -390,6 +419,13 @@ List/describe the artifacts you will produce in order to organize your team.
    * How do you keep track of what needs to get done?
    * How do you prioritize tasks?
    * How do tasks get assigned to team members?
+ * Team will be utilizing MeisterTask, a task management platform for teams.
+ * Use MeisterTask to assign, organize and prioritize tasks between team members.
+ * Use MeisterTask to keep track of outstanding items that are not yet done.
+ * MeisterTask has ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
+ * Prioritize tasks by keeping them in an ordered list.
+ * Can also prioritize tasks by adding highlight tags to each, stating whether they are of high, medium or low priority.
+ * Tasks are assigned to team members according to their experience, priority and schedules. 
 
 ----
 ### Highlights
