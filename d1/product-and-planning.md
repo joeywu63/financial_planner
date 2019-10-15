@@ -245,6 +245,7 @@ List each team member and:
  | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment, UX Design |
  | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies | 
  | Tianze Xu | UX | Support UI dev. across user stories | Python, JavaScript, React, SQL | Firebase, Testing, Deployment |
+ | Wendy Hua | Product Manager | Manage product backlog & development process | Javascript, React, Automated frontend testing (Puppeteer) | Firebase, Deployment
 
 #### Team Rules
 
