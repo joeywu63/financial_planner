@@ -125,13 +125,36 @@ We will be deploying the webapp through firebase hosting. This will allow our pa
 
 ##### Architecture
 *System*
-draw diagram of how Firebase auth,
+
+Since we are using Firebase, our architecture will simply be User <---> Firebase. There is no need for models or controllers but only views in this case. Our views will make requests to Firebase using the provided SDK, and Firebase will handle user authentication for each request.
 
 *Database*
+
 User
+- id
+- firstName
+- lastName
+- email
+- lastLoggedIn
+
 Expense
+- type
+- name
+- cost
+- description
+- url
+
 Alternative
+- type
+- name
+- cost
+- description
+- url
+
 UserProgress
+- userID
+- optionsSelected (list of options that were selected)
+
 
 ##### Testing Strategy
 We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that aspect.
