@@ -93,6 +93,7 @@ We outline the benefits of our product below:
    * By outlining all the costs associated with the process, there is less chance users are burdened by surprise costs they have not account for.
 * **Improves user organization**
    * A personalized profile and notification system means that users are less likely to miss deadlines and other pieces of crucial information, such as alternative resources. Therefore users are able to plan better.
+* **Improves successful application rate**
 
 ##### Similar Resources
 
@@ -183,16 +184,50 @@ Our partners currently use MentorCity, which is a mentoring software for **WHAT 
 Describe the different roles on the team and the responsibilities associated with each role. 
  * Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.
 
+Below are the roles we will have for our team, and a short description of the responsibilities associated with each role, as well as who they will be working with.
+
+ * Customer relations
+   * Communicates with our partners on behalf of the whole team. 
+   * Updates our partners on the current progress.
+   * Addresses questions, concerns, expectations and roadmaps for upcoming deliverables with our partners.
+   * Schedules upcoming meetings with our partners.
+
+ * Tech lead
+   * Responsible for managing the technical scope of the project. 
+   * Mentors the rest of the team on the chosen tech stack. 
+   * Identifies the tasks that should be prioritized and provides estimations on the complexity of each.
+   * Identifies potential problems, alternative solutions and other technical caveats that may arise in the project.
+
+ * Quality assurance & testing lead
+   * Executing tests and reviewing results after every update to the project.
+   * Documenting bugs and technical issues.
+   * Communicating bugs and technical issues with the rest of the team.
+   * Help team members troubleshoot bugs and technical issues.
+
+ * User experience lead
+   * Identifies usability problems in user interfaces.
+   * Conducts usability testing throughout the project with prototypes of varying fidelity.
+   * Communicates potential usability problems to the rest of the team.
+   * Identify ways to modify user interfaces to improve usability.
+
+ * Product manager
+   * Manage the product backlog by prioritizing and adding tasks.
+   * Guide the development process by creating actionable user stories.
+   * Ensure that completed work fulfills the user stories and acceptance criteria.
+
+ * Scrum master
+   * Identify obstacles in development and guides the team in overcoming them.
+   * Ensures that milestones and deliverables are achieved in a timely manner.
+   * Facilitates meetings and communication within the team.
+
 List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
 
- Some roles:
- * Customer relations
- * Tech guy
- * QA, testing
- * UX
- * Scrum master
+ * Joey
+   * **Roles & Responsibilities**: Manages customer relations for the team. 
+   * **Strengths**: Python, C, Shell programming.
+   * **Weaknesses**: Lack of experience with JS libraries, lack of experience with databases, lack of experience with agile methodology.
 
 #### Team Rules
 
