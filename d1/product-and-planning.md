@@ -197,6 +197,7 @@ List each team member and:
  | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
  |-------------|------|-----------------------|--------------|---------------|
  | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
+ | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design| 
 
 
 #### Team Rules
