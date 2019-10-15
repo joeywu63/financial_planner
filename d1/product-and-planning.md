@@ -194,6 +194,11 @@ List each team member and:
  * UX
  * Scrum master
 
+ | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
+ |-------------|------|-----------------------|--------------|---------------|
+ | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | Angular, .NET, C# |
+
+
 #### Team Rules
 
 Describe your team's working culture.
@@ -201,18 +206,22 @@ Describe your team's working culture.
 Communications:
  * What is the expected frequency? What methods/channels are appropriate?
 
-We are using the Slack app for online communications. Team members are expected to check new messages on the app at least once per day.
+We are using the Slack app for general communications. Team members are expected to check for new messages on the app at least once per day. The Slack workspace is divided into channels for organization.
+
+For voice or video calls, we will use Facebook or Zoom.
 
  * If you have a partner project, what is your process (in detail) for communicating with your partner?
 
-   * meeting once per week in person
-   * slack/zoom/fb voice call
-   * for partner: email, in person meeting every 2/3? weeks
+The main line of communication with the partner is through email, such as to provide updates on the project or arrange meetings. Our team representative will email the partner on behalf of the team, cc-ing the rest of the team members.
+
+Once every 2 weeks, there will be an in-person meeting with the partner.
 
 Meetings:
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
 
-   * moderator/faciliator for meetings (take turns talking)
+If a team member is irresponsive, they will be told of the issue, then otherwise reported to the TA.
+
+   * moderator/facilitator for meetings (take turns talking)
    * 3 strikes? -> TA
 
 Conflict Resolution:
@@ -227,17 +236,17 @@ Conflict Resolution:
 Describe meetings (and other events) you are planning to have:
  * When and where? Recurring or ad hoc? In-person or online?
 
-The team will have meetings once per week, on Fridays at 12 pm, unless it has been previously decided that we will not meet that week.
+The team will have meetings once per week, on Fridays at 12 pm to 1 pm at Bahen, unless it has been decided that we will not be meeting that week.
 
-The team will have online voice call meetings as necessary, for more urgent conversations or when it is more convenient that an in-person meeting.
+The team will have online voice call meetings as necessary, for more urgent conversations or when it is more convenient than an in-person meeting.
 
  * What's the purpose of each meeting?
 
-The purpose of team meetings is to keep everyone up-to-date on the state of the project, to assign new tasks, and to review completed work.
+The purpose of team meetings is to keep everyone up-to-date on the state of the project, to assign new tasks for the upcoming week, and to review completed work.
 
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
 
-We are not currently planning on having specialized events, because the most important team activities are covered in regular weekly meetings and beyond that we would like to dedicate more time to coding.
+We are not currently planning on having specialized events, because the most important team activities are covered in regular weekly meetings and beyond that, we would like to dedicate more time to coding.
 
 #### Partner Meetings
 You must have at least 2 meetings with your project partner - an initial planning meeting and a document review meeting. Describe the meetings here:
