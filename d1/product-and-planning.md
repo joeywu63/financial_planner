@@ -1,4 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
+# FINANCIAL PLANNER FOR CANADIAN MED-SCHOOL APPLICANTS
 > _Note:_ This document is meant to evolve throughout the planning phase of your project.    
  > That is, it makes sense for you commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section).
  > Most importantly, it is a reflection of all the planning you work you've done in the first iteration.
@@ -19,32 +19,29 @@
    For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
  * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
 
-##### High-Level Description
+#### High-Level Description
 
 Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
 
-##### Problem Description
+#### Problem Description
 
 The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the ***various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
 
-##### Product Description
+#### Product Description
 
 Based on the problem, our solution/product will be a **website** that calculates and displays the cumulative cost of their planned application process, which will be the sum of the costs incurred from the following categories throughout the overall process:
 
-* MCAT and MCAT preparation (specify)
-* Applications
-* Interviews
-* Travel, accommodation and attire
+* MCAT and MCAT preparation (exam fee, course fees, textbooks, CASPer)
+* Applications (transcripts, review services, application fees)
+* Interviews (travel, accommodation and attire)
 
-For each category, the website will display several options and their cost, as provided to us by our partners. It will also provide a medium for administrators to update cost information with ease.
+For each category, the website will **display several options and their cost**, as provided to us by our partners. Users will be able to **see the total cost updated live**, and will be able to **export the final cost plus breakdown into an excel sheet**. It will also provide a medium for administrators to **update cost information** with ease.
 
-In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to create a profile, save/update their selected options and associated cost information and track their application process by checking off completed portions of their application. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines and _alternative resources with lower cost(?)_.
+In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to **create a profile**, **save/update their selected options and associated cost information** and track their application process by **checking off completed portions of their application**. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines.
 
-* **Q: What exactly should users be notified of?**
+Below is a mockup of the user interface for the financial planner that will be included in our product, courtesy of our partners.
 
-##### Mockups/Lo-fi Prototypes
-
-TBD
+https://drive.google.com/file/d/1QG22roCqGMDGe-eIDUNPUr9P_Op-iZZj/view
 
 #### Q2: Who are your target users?
 
@@ -53,7 +50,7 @@ TBD
  * Feel free (but not obligated) to use personas.         
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
 
- Our primary target users are financially-struggling students planning to, or currently in the process of applying to any medical school within Canada. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
+ Our primary target users are **financially-struggling students planning to, or currently in the process of applying to any medical school within Canada**. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
@@ -66,11 +63,11 @@ TBD
     * Does this application exist in another form? If so, how does your differ and provide value to the users?
     * How does this align with your partner's organization's values/mission/mandate?
 
-##### Why this product?
+#### Why this product?
 
 Our product fits the needs of our users because it addresses both problems described in Q1. Firstly, by creating a tool to calculate the overall cost of the application & interview process, we centralize a vast amount of important information and improve accessibility to information that is otherwise scattered around multiple different resources. This includes information such as application fees for different institutions, transcript fees, fees to obtain additional documents required by certain instutitions, and so on. Secondly, by offering multiple options for each component of the application and having a notification system, we improve accessibility for information on cheaper alternative resources, thus helping financially-struggling students cut down on costs.
 
-##### User Benefits
+#### User Benefits
 
 We outline the benefits of our product below:
 
@@ -90,8 +87,9 @@ We outline the benefits of our product below:
 * **Improves user organization**
    * A personalized profile and notification system means that users are less likely to miss deadlines and other pieces of crucial information, such as alternative resources. Therefore users are able to plan better.
 * **Improves successful application rate**
+   * All of the benefits listed above will help achieve the goal of improving success rate of applications for financially struggling students, by helping them access and manage resources.
 
-##### Similar Resources
+#### Similar Resources
 
 The following are resources similar to (but not the same as) our product:
 
@@ -99,9 +97,7 @@ The following are resources similar to (but not the same as) our product:
 * https://medicalschoolhq.net/medical-school-applications-cost-estimator/
 * https://mdm.ca/tools/medical-school-cost-calculator
 
-Our product diffrentiate ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines (and alternatives?). In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to information limited to the US for two of the above resources.
-
-Our partners currently use MentorCity, which is a mentoring software for **WHAT FOR?**
+Our product diffrentiate ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines (and alternatives?). In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to being US-focused.
 
 #### Q4: How will you build it?
 
