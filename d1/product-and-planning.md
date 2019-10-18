@@ -71,23 +71,18 @@ Our product fits the needs of our users because it addresses both problems descr
 
 We outline the benefits of our product below:
 
-* **Saves users time**
-   * By centralizing cost information, users no longer need to look up the necessary information from multiple different sources.
-   * By saving the cost information and application steps on the users' profile, users no longer need to save and look up the information they've found elsewhere, or look it up every time they need it.
-      * This saves a tremendous amount of time throughout the entire application process, which can be quite lengthy.
-* **Facilitates financial planning**
-   * By having access to total cost and cost breakdown, it is much easier for users to budget around the application process.
-   * Checking off parts of the application process that are complete means always-relevant cost sum and breakdown, regardless of application stage.
-* **Provide users with more choice**
-   * By displaying alternatives and multiple options, users can analyze and assess the options available to them (in terms of various exam preparation resources, interview preparation services etc), and choose the one that fits their situation the best.
-   * Previously, users would likely have to actively seek out different options (e.g. visiting MDConsultants and BeMo individually to get information on their services), thus making it easy to miss alternatives.
-   * This also helps with financial planning, with regards to minimizing cost
-* **Lowers risk of unexpected costs**
-   * By outlining all the costs associated with the process, there is less chance users are burdened by surprise costs they have not account for.
-* **Improves user organization**
-   * A personalized profile and notification system means that users are less likely to miss deadlines and other pieces of crucial information, such as alternative resources. Therefore users are able to plan better.
-* **Improves successful application rate**
-   * All of the benefits listed above will help achieve the goal of improving success rate of applications for financially struggling students, by helping them access and manage resources.
+* **Saves users time**  
+   By centralizing cost information, users no longer need to look up the necessary information from multiple different sources. By saving the cost information and application steps on the users' profile, users no longer need to save and look up the information they've found elsewhere, or look it up every time they need it. This saves a tremendous amount of time throughout the entire application process, which can be quite lengthy.
+* **Facilitates financial planning**  
+   By having access to total cost and cost breakdown, it is much easier for users to budget around the application process. Checking off parts of the application process that are complete means always-relevant cost sum and breakdown, regardless of application stage.
+* **Provide users with more choice**  
+   By displaying alternatives and multiple options, users can analyze and assess the options available to them (in terms of various exam preparation resources, interview preparation services etc), and choose the one that fits their situation the best. Previously, users would likely have to actively seek out different options (e.g. visiting MDConsultants and BeMo individually to get information on their services), thus making it easy to miss alternatives. This also helps with financial planning, with regards to minimizing cost
+* **Lowers risk of unexpected costs**  
+   By outlining all the costs associated with the process, there is less chance users are burdened by surprise costs they have not account for.
+* **Improves user organization**  
+   A personalized profile and notification system means that users are less likely to miss deadlines and other pieces of crucial information, such as alternative resources. Therefore users are able to plan better.
+* **Improves successful application rate**  
+   All of the benefits listed above will help achieve the goal of improving success rate of applications for financially struggling students, by helping them access and manage resources.
 
 #### Similar Resources
 
@@ -97,7 +92,7 @@ The following are resources similar to (but not the same as) our product:
 * https://medicalschoolhq.net/medical-school-applications-cost-estimator/
 * https://mdm.ca/tools/medical-school-cost-calculator
 
-Our product diffrentiate ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines (and alternatives?). In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to being US-focused.
+Our product differentiates ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines and alternatives. In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to being US-focused.
 
 #### Q4: How will you build it?
 
