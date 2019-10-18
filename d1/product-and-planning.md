@@ -104,15 +104,21 @@ Our product differentiates ourselves from these tools with the personalized aspe
  * What is your testing strategy?
 
 ##### Tech Stack
+
+*Frontend*
  - Javascript
  - React
+ 
+*Backend*
  - Firebase
     - Firestore
     - Authentication
-    - Hosting
+
+*Hosting*
+- Firebase Hosting
 
 ##### Deployment
-We will be deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
+We will be manually deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
 
 ##### Architecture
 *System*
