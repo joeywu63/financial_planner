@@ -117,34 +117,40 @@ We will be deploying the webapp through firebase hosting. This will allow our pa
 ##### Architecture
 *System*
 
-Since we are using Firebase, our architecture will simply be User <---> Firebase. There is no need for models or controllers but only views in this case. Our views will make requests to Firebase using the provided SDK, and Firebase will handle user authentication for each request.
+Since we are using Firebase, our architecture will simply be `User <---> Firebase`. There is no need for models or controllers but only views in this case. Our views will make requests to Firebase using the provided SDK, and Firebase will handle user authentication for each request.
 
 *Database*
 
-User
-- id
-- firstName
-- lastName
-- email
-- lastLoggedIn
+|User|
+|:---:|
+|id|
+|firstName|
+|lastName|
+|email|
+|lastLoggedIn|
+___
+|Expense|
+|:---:|
+|type|
+|name|
+|cost|
+|description|
+|url|
+___
+|Alternative|
+|:---:|
+|type|
+|name|
+|cost|
+|description|
+|url|
+___
+|UserProgress|
+|:---:|
+|userID|
+|optionsSelected|
 
-Expense
-- type
-- name
-- cost
-- description
-- url
-
-Alternative
-- type
-- name
-- cost
-- description
-- url
-
-UserProgress
-- userID
-- optionsSelected (list of options that were selected. This will include key value pairs where the key is an expense ID and its value is a boolean)
+optionsSelected: (list of options that were selected. This will include key value pairs where the key is an expense ID and its value is a boolean)
 
 
 ##### Testing Strategy
