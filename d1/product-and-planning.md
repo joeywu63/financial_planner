@@ -170,14 +170,14 @@ We will be using react-testing-library to unit test our frontend. Since we are u
  * The user stories should be written in Github and each one must have clear acceptance criteria
 
 
-- As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
+- As a medical school applicant, I want to see how much a typical application would cost so that I can start planning a budget for the upcoming year.
 
    - The ability to navigate through different stages of the medical school application
    - For each stage, show:
       - The price of different aspects within the stage
       - A link to a resource possibly explaining the price or showing next steps (e.g. A link to MCAT registration)
 
-- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+- As an application admin, I want to change the MCAT test fee in the system in order to accurately reflect the new changes made this year.
    - The ability to modify the business rules found in the database
    - The ability to log in as an administrator
       - Some security rules as to who is an admin and what they can do  
@@ -186,7 +186,7 @@ We will be using react-testing-library to unit test our frontend. Since we are u
         my initial thought is a dropdown of several stages like the transcript request fee at UofT, the MCAT textbook price etc... Of course this isn't
         a decision we should take now, just something to keep in mind.
 
-- As an application admin, I want to see what users think about this application, so I can see how we can improve it.
+- As an application admin, I want to see what users think about this application, so that I can see how we can improve it.
    - The ability to offer a survey for users when they finish using the tool
    - The ability for an admin to view results in a user-friendly way
       - Again, it is important to make these features accessible
@@ -198,7 +198,7 @@ We will be using react-testing-library to unit test our frontend. Since we are u
       - The price of different aspects within the stage
       - Prioritize showing cheaper alternatives (Or whatever the client would want us to push towards) and more information about these
 
-- As a medical school applicant, I would like to exit the page and log back in tomorrow to pick up on the progress I made within the tool.
+- As a medical school applicant, I want to be able to exit the page and have my info saved for when I next log in so that I can pick up on the progress I made within the tool.
    - The ability to sign in
       - Store username/email
       - Store password
@@ -209,10 +209,10 @@ We will be using react-testing-library to unit test our frontend. Since we are u
       - Store what information they have filled in and what choices they have made
       - Store at what point they were before they exited the application  
 
-- As a forgetful applicant, I would like to be reminded of upcoming deadlines in order to not mess up my medical school prospects.
+- As a forgetful applicant, I want to be reminded of upcoming deadlines so that I can keep track of important deadlines.
    - The ability to store crucial deadlines about several stages in the application
-   - The ability to send mass emails to users who consent
-      - The ability to opt in to this option for users
+   - The ability for administrators to send mass emails to users who consent
+      - The ability for users to opt in to this option 
          - This entails a settings screen for a user to change information
       - The ability to automatically send emails to users about upcoming deadlines
          - The ability to store user emails
