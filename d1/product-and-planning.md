@@ -426,13 +426,12 @@ List/describe the artifacts you will produce in order to organize your team.
    * How do you keep track of what needs to get done?
    * How do you prioritize tasks?
    * How do tasks get assigned to team members?
- * Team will be utilizing MeisterTask, a task management platform for teams.
- * Use MeisterTask to assign, organize and prioritize tasks between team members.
- * Use MeisterTask to keep track of outstanding items that are not yet done.
- * MeisterTask has ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
- * Prioritize tasks by keeping them in an ordered list.
- * Can also prioritize tasks by adding highlight tags to each, stating whether they are of high, medium or low priority.
- * Tasks are assigned to team members according to their experience, priority and schedules. 
+ * The team will be utilizing MeisterTask, a task management platform for teams.
+ * We will use MeisterTask to assign, organize and prioritize tasks between team members.
+ * We will also use MeisterTask to keep track of outstanding items that are not yet done.
+ * We will utilize MeisterTask's ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
+ * The team will prioritize tasks by keeping them in an ordered list as well as adding highlight tags to each, stating whether they are of high, medium or low priority.
+ * Tasks will be assigned to team members according to their experience, priority and schedules. 
 
 ----
 ### Highlights
