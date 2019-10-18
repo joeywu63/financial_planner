@@ -176,7 +176,7 @@ We will be using react-testing-library to unit test our frontend. Since we are u
     - The price 
     - A link to show more information (Maybe redirect to a website e.g. if we want to present an alternative to MCAT courses, present a link to the website of someone offering a cheaper course)
 
-- As a medical school applicant, I would like to exit the page and log back in tomorrow to pick up on the progress I made within the tool.
+- As a medical school applicant, I want to be able to exit the page and have my info saved for when I next log in so that I can pick up on the progress I made within the tool.
    - The ability to sign in
       - Store username/email
       - Store password
@@ -190,9 +190,9 @@ We will be using react-testing-library to unit test our frontend. Since we are u
       - Basically, store everything they have answered up to the point of exit
       - Store at what point they were before they exited the application  
 
-- As a forgetful applicant, I would like to be reminded of upcoming deadlines in order to not mess up my medical school prospects by missing a deadline.
+- As a forgetful applicant, I want to be reminded of upcoming deadlines so that I can keep track of important deadlines.
    - The ability to store crucial deadlines about several stages in the application
-   - The ability to send mass emails to users who consent
+   - The ability for administrators to send mass emails to users who consent
       - The ability to opt in / opt out to this option for users 
          - This entails a settings screen for a user to change information
       - The ability to automatically send emails to users about upcoming deadlines
