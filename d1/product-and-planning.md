@@ -160,7 +160,7 @@ optionsSelected: (list of options that were selected. This will include key valu
 
 
 ##### Testing Strategy
-We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that part of the platform.
+We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that part of the platform. We will also be using a google sheet to store our manual tests for things that can't be tested through just frontend testing. This document will be used by our team throughout the development process, and by our partners after each major feature is complete. 
 
 #### Q5: What are the user stories that make up the MVP?
 
