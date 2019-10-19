@@ -29,19 +29,19 @@ The problem we hope to address is **poor accessibility of information regarding 
 
 #### Product Description
 
-Based on the problem, our solution/product will be a **website** that calculates and displays the cumulative cost of their planned application process, which will be the sum of the costs incurred from the following categories throughout the overall process:
+Based on the problem, our solution/product will be a **website** with a financial planner that **calculates, displays and saves the cumulative cost of their planned application process**, which will be the sum of the costs incurred from the following categories throughout the overall process:
 
 * MCAT and MCAT preparation (exam fee, course fees, textbooks, CASPer)
 * Applications (transcripts, review services, application fees)
 * Interviews (travel, accommodation and attire)
 
-For each category, the website will **display several options and their cost**, as provided to us by our partners. Users will be able to **see the total cost updated live**, and will be able to **export the final cost plus breakdown into an excel sheet**. It will also provide a medium for administrators to **update cost information** with ease.
-
-In addition to the primary functionality of calculating cost and identifying lower-cost alternatives, our product will also allow users to **create a profile**, **save/update their selected options and associated cost information** and track their application process by **checking off completed portions of their application**. Finally, the product will also include a e-mail notification system that sends users information about upcoming deadlines.
+In addition to the primary functionality described above, our product will also allow users to **create a profile** which **saves their selected options and associated cost information**, which can be updated by the user at any time, thus making the product more personalized, flexible and valuable to the user throughout the entire application process. Finally, the product will also include a notification system notifies users of about their personalized upcoming deadlines, with the goal of faciliating financial planning for the users.
 
 Below is a mockup of the user interface for the financial planner that will be included in our product, courtesy of our partners.
 
 https://drive.google.com/file/d/1QG22roCqGMDGe-eIDUNPUr9P_Op-iZZj/view
+
+As seen in the mockup, for each category, the website will **display several options and their cost**, as well as a list of affordable alternatives for each category, as provided to us by our partners. Users will be able to see a **live update** of their total cost, and will be able to **export the final cost plus breakdown into an excel sheet**. It will also provide a medium for administrators to **update cost information** with ease.
 
 #### Q2: Who are your target users?
 
@@ -51,6 +51,8 @@ https://drive.google.com/file/d/1QG22roCqGMDGe-eIDUNPUr9P_Op-iZZj/view
    You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
 
  Our primary target users are **financially-struggling students planning to, or currently in the process of applying to any medical school within Canada**. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
+
+ Our partners at the Office of Health Professions Student Affairs, Faculty of Medicine at UofT are also part of our target users. As mentors and advisers to our primary target users, they will be working with our product frequently in an administrative capacity. Thus we aim to make it simple and easy for administrators of the site (e.g. our partners) to add, update and remove available options for each step in the application/interview process supported by our product, as well as their costs and affordable alternatives. The goal is that with the finished product, our partners will be able to integrate the product into their workflow seamlessly and without concern for usability and security.
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
