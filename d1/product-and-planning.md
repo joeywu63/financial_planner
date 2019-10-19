@@ -172,52 +172,75 @@ We will be using react-testing-library to unit test our frontend. Since we are u
  * The user stories should be written in Github and each one must have clear acceptance criteria
 
 
-- As a medical school applicant, I want to see how much a typical application would cost so that I can start planning a budget for the upcoming year.
-
-   - The ability to navigate through different stages of the medical school application
+- As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
+   - The ability to navigate through different stages of the medical school application where stages mean initial application fees, MCAT-related fees, interview fees... 
    - For each stage, show:
-      - The price of different aspects within the stage
+      - A different page displaying the relevant information outlined below
+      - The price of different aspects within the stage (For example interview fees for the interview stage, textbook and course information in the MCAT stage)
       - A link to a resource possibly explaining the price or showing next steps (e.g. A link to MCAT registration)
+      - An accumulation of the total price at all stages up until the last user interaction. This should show up at the bottom of the page and be there for 
+      each page.
+   - After the last stage, show a page outlining the total price and how much each stage has costed
 
-- As an application admin, I want to change the MCAT test fee in the system in order to accurately reflect the new changes made this year.
-   - The ability to modify the business rules found in the database
-   - The ability to log in as an administrator
-      - Some security rules as to who is an admin and what they can do  
+
+- As an application admin, I want to change the MCAT test fee in the system to accurately reflect the new changes made this year.
+   - The ability to easily navigate to this page when the admin signs in to the application
+   - The ability to modify the business rules found in the database, these include the data about the different prices we would want to display and other relevant information like what altenatives to display
+      - The ability to log in as an administrator
+      - The ability to only show this page to the admin 
+   - Some security rules as to who is an admin, these entail one master admin account with a password only held by our clients, and a way to reliably store it in our database (Perhaps encrypting it before storing)
    - The interface should not rely on technical skills, and should ideally not intimidate someone who isn't technologically savvy
-      - A prebuilt set of options (representing different fees found in the database) - The idea here is to avoid free text when wanting to change something,
-        my initial thought is a dropdown of several stages like the transcript request fee at UofT, the MCAT textbook price etc... Of course this isn't
-        a decision we should take now, just something to keep in mind.
+      - This should be a simple UI with emphasis on accessibility, the page should include
+         - A search/filter mechanism to narrow down the potentially large amount of options 
+         - A prebuilt set of options (representing different fees found in the database) stored in a list separated with headers that indicate the different stages of the application
+      - The ability to create a new relevant fees in a stage and and the ability to completely delete others
+      - There should be indirect interaction with the database - i.e. User should just worry about inputting a number in a relevant textbox and click a button and assume this was saved
+         - The ability to sanitize inputs on the front end is necessary - Only take positive numbers and let the user know if the input is faulty
+         - Since this is crucial data for the overall application, provide a popup message to confirm saving the input to the database
+         - The ability to let the user know that the data was saved successfully - if something went wrong with the interaction with Firebase, inform the user the data wasn’t save via an error message
 
-- As an application admin, I want to see what users think about this application, so that I can see how we can improve it.
-   - The ability to offer a survey for users when they finish using the tool
+- As an application admin, I want to see what users think about this application, so I can see how we can improve it.
+   - The ability to offer a survey for users when they finish using the tool, where accepting will take them to a separate survey page
+      - The ability to store the answers to our database
+      - The page should have hardcoded questions, that the client wants to ask
+      - Admin should have the ability to add/remove questions and decide how the user can answer (via dropdown, free text, limits on free text length…)  
    - The ability for an admin to view results in a user-friendly way
-      - Again, it is important to make these features accessible
-      - The ability to present statistical data (Flowcharts, diagrams etc...)
+       - When admin signs it, they should have the ability to easily 
+       - The ability to present statistical data (Flowcharts, diagrams etc...) where necessary
+       - The ability to delete some answers (We might get faulty answers, some unnecessary answers, some ‘troll’ answers…)
+       - The ability to only show this page to the admin 
 
 - As a budget-conscious medical school applicant, I want to see what alternatives I have for several stages of the application (such as interview preparation) in order to try and save money.
    - The ability to navigate through different stages of the medical school application
    - For each stage, show:
-      - The price of different aspects within the stage
+      - The price of different aspects within the stage (Think for applying, transcript request fee, application fees to different universities)
       - Prioritize showing cheaper alternatives (Or whatever the client would want us to push towards) and more information about these
+      - For each alternative, provide:
+    - The price 
+    - A link to show more information (Maybe redirect to a website e.g. if we want to present an alternative to MCAT courses, present a link to the website of someone offering a cheaper course)
 
-- As a medical school applicant, I want to be able to exit the page and have my info saved for when I next log in so that I can pick up on the progress I made within the tool.
+- As a medical school applicant, I would like to exit the page and log back in tomorrow to pick up on the progress I made within the tool.
    - The ability to sign in
       - Store username/email
       - Store password
-         - Security concerns: How we will handle encryption
-      - Provide mechanism to recover password
+         - The ability to encrypt the password 
+      - Provide a mechanism to recover password
          - Could send an email to the one they signed up with or do recovery questions
-   - The ability to store user interactions with the software
+   - The ability to store user interactions with the application
       - Store what information they have filled in and what choices they have made
+      - Store what universities they applied to
+      - Store what MCAT course they went with
+      - Basically, store everything they have answered up to the point of exit
       - Store at what point they were before they exited the application  
 
-- As a forgetful applicant, I want to be reminded of upcoming deadlines so that I can keep track of important deadlines.
+- As a forgetful applicant, I would like to be reminded of upcoming deadlines in order to not mess up my medical school prospects by missing a deadline.
    - The ability to store crucial deadlines about several stages in the application
-   - The ability for administrators to send mass emails to users who consent
-      - The ability for users to opt in to this option 
+   - The ability to send mass emails to users who consent
+      - The ability to opt in / opt out to this option for users 
          - This entails a settings screen for a user to change information
       - The ability to automatically send emails to users about upcoming deadlines
          - The ability to store user emails
+         - The ability to automate this process on certain dates
 
 ## Process Details
 
