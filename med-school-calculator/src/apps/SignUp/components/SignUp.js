@@ -4,6 +4,8 @@ import { auth } from 'firebase';
 
 import Button from 'common/Button';
 
+import { createUser } from '../repository';
+
 class SignUp extends React.Component {
     state = {
         displayName: '',
@@ -24,11 +26,16 @@ class SignUp extends React.Component {
 
         auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(result => {
-                return result.user.updateProfile({ displayName });
+            .then(async result => {
+                try {
+                    await createUser({ uid: result.user.uid, email });
+                    await result.user.updateProfile({ displayName });
+                } catch (e) {
+                    console.log(e);
+                    alert('something went wrong');
+                }
             })
             .catch(error => {
-                console.log(error);
                 alert('something went wrong');
             });
     };

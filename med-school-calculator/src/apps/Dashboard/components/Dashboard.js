@@ -10,6 +10,8 @@ import Button from 'common/Button';
 import RouterButton from 'common/RouterButton';
 import PageWrapper from 'common/PageWrapper';
 
+import { hasAdminAccess } from 'utils/helpers';
+
 class Dashboard extends React.Component {
     handleLogOut = () => {
         auth()
@@ -23,7 +25,9 @@ class Dashboard extends React.Component {
                 <Router>
                     <RouterButton link="/calculator" title="Calculator" />
                     <RouterButton link="/profile" title="Profile" />
-                    <RouterButton link="/admin" title="Admin" />
+                    {hasAdminAccess() && (
+                        <RouterButton link="/admin" title="Admin" />
+                    )}
                     <Button text="Logout" onClick={this.handleLogOut} />
                     <PageWrapper>
                         <Switch>

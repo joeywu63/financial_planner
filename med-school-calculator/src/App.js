@@ -7,6 +7,7 @@ import SignUp from 'apps/SignUp/components/SignUp';
 import Dashboard from 'apps/Dashboard/components/Dashboard';
 
 import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
+import * as userModel from 'model/user';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyC4FMchr26grG-r3mrD2eKgauRl2alaBNQ',
@@ -32,15 +33,22 @@ class App extends React.Component {
     };
 
     checkIfLoggedIn = () => {
-        firebase.auth().onAuthStateChanged(user => {
+        firebase.auth().onAuthStateChanged(async user => {
             if (user) {
-                const currentUser = {
-                    displayName: user.displayName,
-                    email: user.email,
-                    uid: user.uid
-                };
-                setCurrentUser(currentUser);
-                this.setState({ isSignedIn: true, loading: false });
+                try {
+                    const userRole = (await userModel.get({uid: user.uid})).role;
+
+                    const currentUser = {
+                        uid: user.uid,
+                        email: user.email,
+                        displayName: user.displayName,
+                        role: userRole
+                    };
+                    setCurrentUser(currentUser);
+                    this.setState({isSignedIn: true, loading: false});
+                } catch (e) {
+                    alert('something went wrong');
+                }
             } else {
                 setCurrentUser(null);
                 this.setState({ isSignedIn: false, loading: false });
