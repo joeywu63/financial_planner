@@ -1,7 +1,14 @@
 import React from 'react';
 import { auth } from 'firebase';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Admin from 'apps/Admin/components/Admin';
+import Profile from 'apps/Profile/components/Profile';
+import Calculator from 'apps/Calculator/components/Calculator';
 
 import Button from 'common/Button';
+import RouterButton from 'common/RouterButton';
+import PageWrapper from 'common/PageWrapper';
 
 class Dashboard extends React.Component {
     handleLogOut = () => {
@@ -13,8 +20,19 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div>
-                <Button text="Logout" onClick={this.handleLogOut} />
-                Dashboard
+                <Router>
+                    <RouterButton link="/calculator" title="Calculator" />
+                    <RouterButton link="/profile" title="Profile" />
+                    <RouterButton link="/admin" title="Admin" />
+                    <Button text="Logout" onClick={this.handleLogOut} />
+                    <PageWrapper>
+                        <Switch>
+                            <Route path="/admin" component={Admin} />
+                            <Route path="/profile" component={Profile} />
+                            <Route path="/calculator" component={Calculator} />
+                        </Switch>
+                    </PageWrapper>
+                </Router>
             </div>
         );
     }
