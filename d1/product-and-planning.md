@@ -6,19 +6,6 @@
 
 ## Product Details
 
-#### Q1: What are you planning to build?
-
- * Short (1 - 2 min' read)
- * Start with a single sentence, high-level description of the product.
- * Be clear - Describe the problem you are solving in simple terms.
- * Be concrete. For example:
-    * What are you planning to build? Is it a website, mobile app,
-   browser extension, command-line app, etc.?      
-    * When describing the problem/need, give concrete examples of common use cases.
- * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
-   For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
- * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
-
 #### High-Level Description
 
 Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
@@ -43,27 +30,11 @@ https://drive.google.com/file/d/1QG22roCqGMDGe-eIDUNPUr9P_Op-iZZj/view
 
 As seen in the mockup, for each category, the website will **display several options and their cost**, as well as a list of affordable alternatives for each category, as provided to us by our partners. Users will be able to see a **live update** of their total cost, and will be able to **export the final cost plus breakdown into an excel sheet**. It will also provide a medium for administrators to **update cost information** with ease.
 
-#### Q2: Who are your target users?
-
- * Short (1 - 2 min' read max)
- * Be specific (e.g. a 'a third-year university student studying Computer Science' and not 'a student')
- * Feel free (but not obligated) to use personas.         
-   You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).
+#### Target Users
 
  Our primary target users are **financially-struggling students planning to, or currently in the process of applying to any medical school within Canada**. Since our product focuses on centralizing cost information and delivering information on lower-cost alternatives, it is designed primarily with financially struggling prospective students in mind. However, prospective medical school students in general (regardless of financial status) can be considered secondary target users of our product.
 
  Our partners at the Office of Health Professions Student Affairs, Faculty of Medicine at UofT are also part of our target users. As mentors and advisers to our primary target users, they will be working with our product frequently in an administrative capacity. Thus we aim to make it simple and easy for administrators of the site (e.g. our partners) to add, update and remove available options for each step in the application/interview process supported by our product, as well as their costs and affordable alternatives. The goal is that with the finished product, our partners will be able to integrate the product into their workflow seamlessly and without concern for usability and security.
-
-#### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
-
- * Short (1 - 2 min' read max)
- * We want you to "connect the dots" for us - Why does your product (as described in your answer to Q1) fits the needs of your users (as described in your answer to Q2)?
- * Explain the benefits of your product explicitly & clearly. For example:
-    * Save users time (how much?)
-    * Allow users to discover new information (which information? And, why couldn't they discover it before?)
-    * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
-    * Does this application exist in another form? If so, how does your differ and provide value to the users?
-    * How does this align with your partner's organization's values/mission/mandate?
 
 #### Why this product?
 
@@ -96,16 +67,9 @@ The following are resources similar to (but not the same as) our product:
 
 Our product differentiates ourselves from these tools with the personalized aspect - allowing users to save, update and track their application process, and by actively notifying users of deadlines and alternatives. In addition, our product is tailored to students applying to Canadian institutions, and thus includes information on fees specific to Canada and Canadian medical schools, as opposed to being US-focused.
 
-#### Q4: How will you build it?
+### Technical Details
 
- * Short (1-2 min' read max)
- * What is the technology stack? Specify any and all languages, frameworks, libraries, PaaS products or tools.
- * How will you deploy the application?
- * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here.
- * Will you be using third party applications or APIs? If so, what are they?
- * What is your testing strategy?
-
-##### Tech Stack
+#### Tech Stack
 
 *Frontend*
  - Javascript
@@ -119,10 +83,10 @@ Our product differentiates ourselves from these tools with the personalized aspe
 *Hosting*
 - Firebase Hosting
 
-##### Deployment
+#### Deployment
 We will be manually deploying the webapp through firebase hosting. This will allow our partner to easily rollback to previous versions in case there are any issues with new releases. This service is offered within Firebase, so every administrative service will be in one place and very easy to manage.
 
-##### Architecture
+#### Architecture
 *System*
 
 Since we are using Firebase, our architecture will simply be `User <---> Firebase`. There is no need for models or controllers but only views in this case. Our views will make requests to Firebase using the provided SDK, and Firebase will handle user authentication for each request.
@@ -160,17 +124,10 @@ ___
 
 optionsSelected: (list of options that were selected. This will include key value pairs where the key is an expense ID and its value is a boolean)
 
-
-##### Testing Strategy
+#### Testing Strategy
 We will be using react-testing-library to unit test our frontend. Since we are using firebase as our backend, we don't necessarily need tests for that part of the platform. We will also be using a google sheet to store our manual tests for things that can't be tested through just frontend testing. This document will be used by our team throughout the development process, and by our partners after each major feature is complete. 
 
-#### Q5: What are the user stories that make up the MVP?
-
- * At least 5 user stories concerning the main features of the application - note that this can broken down further
- * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
- * If you have a partner, these must be reviewed and accepted by them
- * The user stories should be written in Github and each one must have clear acceptance criteria
-
+#### User Stories
 
 - As a medical school applicant, I want to see how much a typical application would cost so I can start planning a budget for the upcoming year.
    - The ability to navigate through different stages of the medical school application where stages mean initial application fees, MCAT-related fees, interview fees... 
@@ -244,10 +201,7 @@ We will be using react-testing-library to unit test our frontend. Since we are u
 
 ## Process Details
 
-#### Roles & responsibilities
-
-Describe the different roles on the team and the responsibilities associated with each role.
- * Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.
+#### Roles & Responsibilities
 
 Below are the roles we will have for our team, and a short description of the responsibilities associated with each role, as well as who they will be working with.
 
@@ -285,9 +239,7 @@ Below are the roles we will have for our team, and a short description of the re
    * Ensures that milestones and deliverables are achieved in a timely manner.
    * Facilitates meetings and communication within the team.
 
-List each team member and:
- * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
+Below is a table which outlines each team member's role(s) and responsibilities outside of coding, as well as their technical strengths and weaknesses (e.g. languages, frameworks, libraries, development methodologies, etc.)
 
  | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
  |-------------|------|-----------------------|--------------|---------------|
@@ -301,28 +253,25 @@ List each team member and:
 
 #### Team Rules
 
-Describe your team's working culture.
-
-Communications:
- * What is the expected frequency? What methods/channels are appropriate?
+**Group Communications**:
 
 We are using the Slack app for general communications. Team members are expected to check for new messages on the app at least once per day. The Slack workspace is divided into channels for organization.
 
 For voice or video calls, we will use Facebook or Zoom.
 
- * If you have a partner project, what is your process (in detail) for communicating with your partner?
+**Partner Communications**:
 
 The main line of communication with the partner is through email, such as to provide updates on the project or arrange meetings. Our team representative will email the partner on behalf of the team, cc-ing the rest of the team members.
 
 Once every 2 weeks, there will be an in-person meeting with the partner.
 
-Meetings:
- * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
+**Meetings**:
 
 Team members are responsible for attending the weekly meetings. We will allow some lenience for hectic schedules, but if a team member repeatedly misses meetings, we will go to the TA. At the meetings, we will have a time where we take turns talking about our progress from the previous week. If we could not complete tasks we were responsible for (tracked through meistertask), we will look at the causes. If it is due to unexpected technical challenges, we will take it into account in workload estimates of future tasks. Then we will have take time to prioritize and assign tasks for the preceeding week.
 
-Conflict Resolution:
- * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
+**Conflict Resolution**:
+ 
+ Below are several hypothetical scenarios/conflicts that may arise, and how we will resolve them.
 
    * There is disagreement on how to accomplish a task (technical implementation, scope etc.): In one of the weekly meetings, we would have a discussion about the strengths of each option. Then, we would take a vote. If a team member still feels strongly about the result, we would repeat the discussion process.
    * There is a task nobody wants to take on: If the task is large, we would subdivide it among the team. Otherwise, we would access the strengths and weakness of each member to decide who would have the easist time accomplishing the task. At the same time, we would make sure such "undesirable" tasks do not always go to the same person.
@@ -331,26 +280,19 @@ Conflict Resolution:
 
 #### Events
 
-Describe meetings (and other events) you are planning to have:
- * When and where? Recurring or ad hoc? In-person or online?
+**Meetings**:
 
 The team will have meetings once per week, on Fridays at 12 pm to 1 pm at Bahen, unless it has been decided that we will not be meeting that week.
 
 The team will have online voice call meetings as necessary, for more urgent conversations or when it is more convenient than an in-person meeting.
 
- * What's the purpose of each meeting?
-
 The purpose of team meetings is to keep everyone up-to-date on the state of the project, to assign new tasks for the upcoming week, and to review completed work.
-
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
 
 Two members of the team will be expected to complete code reviews for each Pull Request. We will also hold quick online sync meetings when necessary.
 
 #### Partner Meetings
-You must have at least 2 meetings with your project partner - an initial planning meeting and a document review meeting. Describe the meetings here:
-* When and where?
-* What did you discuss during the meeting (**note you must have meeting minutes**)?
-* What were the outcomes of each meeting?
+
+**Meeting Descriptions**:
 
 **_Meeting 1_**  
 **Time and Location**  
