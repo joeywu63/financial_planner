@@ -98,24 +98,23 @@ Since we are using Firebase, our architecture will simply be `User <---> Firebas
 |id|
 |firstName|
 |lastName|
+|role|
 |email|
 |lastLoggedIn|
+
+role: 0 for admin, 1 for user
 ___
 |Expense|
 |:---:|
+|id|
 |type|
 |name|
 |cost|
 |description|
 |url|
-___
-|Alternative|
-|:---:|
-|type|
-|name|
-|cost|
-|description|
-|url|
+|isDefault|
+
+isDefault: indicates whether or the resource is an alternative or default
 ___
 |UserProgress|
 |:---:|
