@@ -108,6 +108,7 @@ ___
 |:---:|
 |id|
 |type|
+|subtype|
 |name|
 |cost|
 |description|
