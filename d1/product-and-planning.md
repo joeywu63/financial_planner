@@ -107,15 +107,28 @@ ___
 |Expense|
 |:---:|
 |id|
-|type|
-|subtype|
+|typeID|
+|subtypeID|
 |name|
 |cost|
 |description|
 |url|
 |isDefault|
 
-isDefault: indicates whether or the resource is an alternative or default
+isDefault: indicates whether or the expense is an alternative or default
+___
+|Type|
+|:---:|
+|id|
+|name|
+___
+|Subtype|
+|:---:|
+|id|
+|name|
+|typeID|
+
+typeID: the ID of the type the subtype is accosiated with
 ___
 |UserProgress|
 |:---:|
