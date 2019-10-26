@@ -113,9 +113,9 @@ ___
 |cost|
 |description|
 |url|
-|isDefault|
+|isAlternative|
 
-isDefault: indicates whether or the expense is an alternative or default
+isAlternative: indicates whether or not the expense is an alternative or default
 ___
 |Type|
 |:---:|
