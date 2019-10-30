@@ -3,7 +3,8 @@ import React from 'react';
 import { getCurrentUser } from 'utils/currentUser';
 import { PROFILEPAGES } from '../constants';
 import Button from 'common/Button';
-
+import ChangeInfo from './ChangeInfo';
+import ChangePassword from './ChangePassword';
 
 class Profile extends React.Component {
 
@@ -38,6 +39,7 @@ class Profile extends React.Component {
     };
 
     render() {
+        const { page } = this.state;
         return (
             <>
             {page === PROFILEPAGES.default ? (
