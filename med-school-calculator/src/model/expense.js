@@ -3,6 +3,7 @@ import firebase from 'firebase';
 const EXPENSE_COLLECTION = 'expense';
 const expensedb = firebase.firestore().collection(EXPENSE_COLLECTION);
 
+
 // get expense document with this uid
 export const getExpenseByID = ({ uid }) => {
     expensedb
@@ -15,9 +16,9 @@ export const getExpenseByID = ({ uid }) => {
 };
 
 // get list of all default expenses
-export const getAllDefaultExpenses = async () => {
+export const getAllDefaultExpenses = () => {
     const expenses = [];
-    await expensedb
+    expensedb
         .where('isAlternative', '==', false)
         .get()
         .then(querySnapshot => {
@@ -30,9 +31,9 @@ export const getAllDefaultExpenses = async () => {
 };
 
 // get list of all alternative expenses
-export const getAllAlternativeExpenses = async () => {
+export const getAllAlternativeExpenses = () => {
     const expenses = [];
-    await expensedb
+    expensedb
         .where('isAlternative', '==', true)
         .get()
         .then(querySnapshot => {
@@ -44,30 +45,10 @@ export const getAllAlternativeExpenses = async () => {
     return expenses;
 };
 
-// creates an expense document
-export const createExpense = async ({
-    name,
-    cost,
-    typeID,
-    subtypeID,
-    description,
-    url
-}) => {
-    await expensedb
-        .add({
-            name: name,
-            cost: cost,
-            typeID: typeID,
-            subtypeID: subtypeID,
-            description: description,
-            url: url
-        })
-        .catch(error => error);
-};
 
 // update this expense document's field with newval
-export const updateExpense = async ({ uid, field, newval }) => {
-    await expensedb
+export const updateExpense = ({ uid, field, newval }) => {
+    expensedb
         .doc(uid)
         .update({
             [field]: newval
