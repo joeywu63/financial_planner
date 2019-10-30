@@ -2,15 +2,37 @@ import firebase from 'firebase';
 
 const EXPENSE_COLLECTION = 'expense';
 
-// get expense document with this uid
-export const getExpenseByID = ({ uid }) => {
-    firebase
+export const get = ({ typeID, subTypeID }) => {
+    return firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)
-        .doc(uid)
+        .where('typeID', '==', typeID)
+        .where('subtypeID', '==', subTypeID)
         .get()
-        .then(doc => {
-            return doc.exists ? doc.data() : 'This expense does not exist';
+        .then(collection => {
+            const data = [];
+
+            collection.forEach(doc => {
+                data.push({ id: doc.id, ...doc.data() });
+            });
+            return data;
+        })
+        .catch(error => error);
+};
+
+export const getBySubtype = ({ subTypeID }) => {
+    return firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
+        .where('subtypeID', '==', subTypeID)
+        .get()
+        .then(collection => {
+            const data = [];
+
+            collection.forEach(doc => {
+                data.push({ id: doc.id, ...doc.data() });
+            });
+            return data;
         })
         .catch(error => error);
 };

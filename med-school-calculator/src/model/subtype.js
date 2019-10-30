@@ -20,6 +20,22 @@ export const get = ({ typeID }) => {
         .catch(error => error);
 };
 
+export const getAll = () => {
+    return firebase
+        .firestore()
+        .collection(SUB_TYPE_COLLECTION)
+        .get()
+        .then(collection => {
+            const data = [];
+
+            collection.forEach(doc => {
+                data.push({ id: doc.id, ...doc.data() });
+            });
+            return data;
+        })
+        .catch(error => error);
+};
+
 export const create = ({ typeID, name }) => {
     const subTypeRef = firebase
         .firestore()
