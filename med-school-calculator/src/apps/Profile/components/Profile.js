@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getCurrentUser } from 'utils/currentUser';
+import { PROFILEPAGES } from '../constants';
 import Button from 'common/Button';
 
 
