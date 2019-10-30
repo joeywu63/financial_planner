@@ -18,15 +18,15 @@ class TypeForm extends React.Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        const { handleCreate } = this.props;
+        const { handleSubmit } = this.props;
         const { name } = this.state;
 
         this.setState({ loading: true });
-        handleCreate(name);
+        handleSubmit(name);
     };
 
     render() {
-        const { handleCancel } = this.props;
+        const { handleCancel, isUpdateForm } = this.props;
         const { name } = this.state;
 
         return (
@@ -41,7 +41,7 @@ class TypeForm extends React.Component {
                             onChange={this.handleChange}
                         />
                     </label>
-                    <input type="submit" value="Create" />
+                    <input type="submit" value={isUpdateForm ? 'Update' : 'Create'} />
                 </form>
                 <Button text="Cancel" onClick={handleCancel} />
             </>
@@ -50,8 +50,13 @@ class TypeForm extends React.Component {
 }
 
 TypeForm.propTypes = {
-    handleCreate: PropTypes.func.isRequired,
-    handleCancel: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    handleCancel: PropTypes.func.isRequired,
+    isUpdateForm: PropTypes.bool
+};
+
+TypeForm.defaultProps = {
+    isUpdateForm: false
 };
 
 export default TypeForm;

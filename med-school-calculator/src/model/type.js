@@ -41,7 +41,8 @@ export const deleteType = ({ typeID }) => {
     batch.delete(typeRef);
 
     // delete subtypes
-    return db.collection(SUB_TYPE_COLLECTION)
+    return db
+        .collection(SUB_TYPE_COLLECTION)
         .where('typeID', '==', typeID)
         .get()
         .then(querySnapshot => {
@@ -49,7 +50,8 @@ export const deleteType = ({ typeID }) => {
                 batch.delete(doc.ref);
             });
 
-            return db.collection(EXPENSE_COLLECTION)
+            return db
+                .collection(EXPENSE_COLLECTION)
                 .where('typeID', '==', typeID)
                 .get();
         })
@@ -60,5 +62,14 @@ export const deleteType = ({ typeID }) => {
 
             return batch.commit();
         })
+        .catch(error => error);
+};
+
+export const update = ({ typeID, name }) => {
+    return firebase
+        .firestore()
+        .collection(TYPE_COLLECTION)
+        .doc(typeID)
+        .update({ name })
         .catch(error => error);
 };

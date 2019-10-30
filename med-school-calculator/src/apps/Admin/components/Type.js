@@ -31,7 +31,8 @@ class Type extends React.Component {
         loading: true,
         expenses: null,
         subTypes: null,
-        isAddingSubType: false
+        isAddingSubType: false,
+        isEditingType: false
     };
 
     async componentDidMount() {
@@ -81,14 +82,30 @@ class Type extends React.Component {
         }
     };
 
+    handleUpdateType = (id, name) => {
+        const { handleUpdateType } = this.props;
+
+        handleUpdateType(id, name);
+
+        this.setState({ isEditingType: false });
+    };
+
     renderHeader = () => {
         const { handleDeleteType } = this.props;
         const { id, name } = this.props.type;
+        const { isEditingType } = this.state;
 
-        return (
+        return isEditingType ? (
+            <TypeForm
+                handleCancel={this.toggleEditType}
+                handleSubmit={name => this.handleUpdateType(id, name)}
+                isUpdateForm={true}
+            />
+        ) : (
             <TypeWrapper>
                 <TypeHeader>{name}</TypeHeader>
                 <Button text="Delete" onClick={() => handleDeleteType(id)} />
+                <Button text="Edit" onClick={this.toggleEditType} />
             </TypeWrapper>
         );
     };
@@ -118,6 +135,11 @@ class Type extends React.Component {
         this.setState({ isAddingSubType: !isAddingSubType });
     };
 
+    toggleEditType = () => {
+        const { isEditingType } = this.state;
+        this.setState({ isEditingType: !isEditingType });
+    };
+
     render() {
         const { loading, isAddingSubType } = this.state;
 
@@ -132,7 +154,7 @@ class Type extends React.Component {
                         {this.renderSubTypes()}
                         {isAddingSubType ? (
                             <TypeForm
-                                handleCreate={this.handleCreateSubType}
+                                handleSubmit={this.handleCreateSubType}
                                 handleCancel={this.toggleAddingSubType}
                             />
                         ) : (
@@ -150,7 +172,8 @@ class Type extends React.Component {
 
 Type.propTypes = {
     type: PropTypes.object.isRequired,
-    handleDeleteType: PropTypes.func.isRequired
+    handleDeleteType: PropTypes.func.isRequired,
+    handleUpdateType: PropTypes.func.isRequired
 };
 
 export default Type;

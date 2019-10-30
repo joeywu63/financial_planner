@@ -5,7 +5,7 @@ import TypeForm from './TypeForm';
 
 import Button from 'common/Button';
 
-import { getTypes, createType, deleteType } from '../repository';
+import { getTypes, createType, deleteType, updateType } from '../repository';
 
 class ExpenseList extends React.Component {
     state = {
@@ -53,6 +53,24 @@ class ExpenseList extends React.Component {
         }
     };
 
+    handleUpdateType = async (typeID, name) => {
+        try {
+            const {types} = this.state;
+
+            await updateType({ typeID, name });
+
+            const newTypes = types.map(type => {
+                if (type.id === typeID) {
+                    type.name = name;
+                }
+                return type;
+            });
+            this.setState({types: newTypes});
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     renderTypes = () => {
         const { types } = this.state;
 
@@ -61,6 +79,7 @@ class ExpenseList extends React.Component {
                 key={type.id}
                 type={type}
                 handleDeleteType={this.handleDeleteType}
+                handleUpdateType={this.handleUpdateType}
             />
         ));
     };
@@ -80,7 +99,7 @@ class ExpenseList extends React.Component {
                 {this.renderTypes()}
                 {isAddingType ? (
                     <TypeForm
-                        handleCreate={this.handleCreateType}
+                        handleSubmit={this.handleCreateType}
                         handleCancel={this.toggleAddingType}
                     />
                 ) : (
