@@ -1,13 +1,17 @@
 import React from 'react';
 
 import Type from './Type';
+import TypeForm from './TypeForm';
 
-import { getTypes } from '../repository';
+import Button from 'common/Button';
+
+import { getTypes, createType } from '../repository';
 
 class ExpenseList extends React.Component {
     state = {
         loading: true,
-        types: null
+        types: null,
+        isAddingType: false
     };
 
     async componentDidMount() {
@@ -19,16 +23,52 @@ class ExpenseList extends React.Component {
         }
     }
 
+    createTemporaryType = (id, name) => {
+        return { id, name };
+    };
+
+    handleCreateType = async name => {
+        try {
+            const { types } = this.state;
+
+            const typeID = await createType({ name });
+
+            types.push(this.createTemporaryType(typeID, name));
+            this.setState({ isAddingType: false, types });
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     renderTypes = () => {
         const { types } = this.state;
 
         return types.map(type => <Type key={type.id} type={type} />);
     };
 
-    render() {
-        const { loading } = this.state;
+    toggleAddingType = () => {
+        const { isAddingType } = this.state;
+        this.setState({ isAddingType: !isAddingType });
+    };
 
-        return loading ? <div>loading</div> : this.renderTypes();
+    render() {
+        const { loading, isAddingType } = this.state;
+
+        return loading ? (
+            <div>loading</div>
+        ) : (
+            <>
+                {this.renderTypes()}
+                {isAddingType ? (
+                    <TypeForm
+                        handleCreate={this.handleCreateType}
+                        handleCancel={this.toggleAddingType}
+                    />
+                ) : (
+                    <Button text="Add Type" onClick={this.toggleAddingType} />
+                )}
+            </>
+        );
     }
 }
 

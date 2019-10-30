@@ -17,3 +17,14 @@ export const get = () => {
         })
         .catch(error => error);
 };
+
+export const create = ({ name }) => {
+    const typeRef = firebase
+        .firestore()
+        .collection(TYPE_COLLECTION)
+        .doc();
+    return typeRef
+        .set({ name })
+        .then(() => typeRef.id)
+        .catch(error => error);
+};

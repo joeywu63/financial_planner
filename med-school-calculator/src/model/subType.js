@@ -18,3 +18,14 @@ export const get = ({ typeID }) => {
         })
         .catch(error => error);
 };
+
+export const create = ({ typeID, name }) => {
+    const subTypeRef = firebase
+        .firestore()
+        .collection(SUB_TYPE_COLLECTION)
+        .doc();
+    return subTypeRef
+        .set({ typeID, name })
+        .then(() => subTypeRef.id)
+        .catch(error => error);
+};

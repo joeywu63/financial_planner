@@ -15,7 +15,10 @@ class SubType extends React.Component {
         try {
             const { id, typeID } = this.props.subType;
 
-            const expenses = await getSubTypeExpenses({ typeID, subTypeID: id });
+            const expenses = await getSubTypeExpenses({
+                typeID,
+                subTypeID: id
+            });
 
             this.setState({ expenses, loading: false });
         } catch (e) {
@@ -26,19 +29,19 @@ class SubType extends React.Component {
     renderExpenses = () => {
         const { expenses } = this.state;
 
-        return expenses.map(expense => <Expense key={expense.id} expense={expense} />);
+        return expenses.map(expense => (
+            <Expense key={expense.id} expense={expense} />
+        ));
     };
 
     render() {
         const { name } = this.props.subType;
         const { loading } = this.state;
 
-        return loading ? (
-            <div>loading</div>
-        ) : (
+        return (
             <>
                 <h2>{name}</h2>
-                {this.renderExpenses()}
+                {loading ? <div>loading</div> : this.renderExpenses()}
             </>
         );
     }
