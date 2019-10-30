@@ -54,3 +54,12 @@ export const deleteSubType = ({ subTypeID }) => {
         })
         .catch(error => error);
 };
+
+export const update = ({ subTypeID, name }) => {
+    return firebase
+        .firestore()
+        .collection(SUB_TYPE_COLLECTION)
+        .doc(subTypeID)
+        .update({ name })
+        .catch(error => error);
+};

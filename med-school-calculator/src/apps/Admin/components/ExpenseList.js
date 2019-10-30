@@ -55,7 +55,7 @@ class ExpenseList extends React.Component {
 
     handleUpdateType = async (typeID, name) => {
         try {
-            const {types} = this.state;
+            const { types } = this.state;
 
             await updateType({ typeID, name });
 
@@ -65,7 +65,7 @@ class ExpenseList extends React.Component {
                 }
                 return type;
             });
-            this.setState({types: newTypes});
+            this.setState({ types: newTypes });
         } catch (e) {
             // TODO: error
         }

@@ -12,7 +12,8 @@ import {
     getTypeExpenses,
     getSubTypes,
     createSubType,
-    deleteSubType
+    deleteSubType,
+    updateSubType
 } from '../repository';
 
 const TypeWrapper = styled.div`
@@ -90,6 +91,24 @@ class Type extends React.Component {
         this.setState({ isEditingType: false });
     };
 
+    handleUpdateSubType = async (subTypeID, name) => {
+        try {
+            const { subTypes } = this.state;
+
+            await updateSubType({ subTypeID, name });
+
+            const newSubTypes = subTypes.map(subType => {
+                if (subType.id === subTypeID) {
+                    subType.name = name;
+                }
+                return subType;
+            });
+            this.setState({ subTypes: newSubTypes });
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     renderHeader = () => {
         const { handleDeleteType } = this.props;
         const { id, name } = this.props.type;
@@ -104,7 +123,10 @@ class Type extends React.Component {
         ) : (
             <TypeWrapper>
                 <TypeHeader>{name}</TypeHeader>
-                <Button text="Delete" onClick={() => handleDeleteType(id)} />
+                <Button
+                    text="Delete"
+                    onClick={() => handleDeleteType(id)}
+                />
                 <Button text="Edit" onClick={this.toggleEditType} />
             </TypeWrapper>
         );
@@ -126,6 +148,7 @@ class Type extends React.Component {
                 key={subType.id}
                 subType={subType}
                 handleDeleteSubType={this.handleDeleteSubType}
+                handleUpdateSubType={this.handleUpdateSubType}
             />
         ));
     };

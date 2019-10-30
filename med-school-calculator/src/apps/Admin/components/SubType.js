@@ -7,6 +7,7 @@ import Expense from './Expense';
 import { getSubTypeExpenses } from '../repository';
 
 import Button from 'common/Button';
+import TypeForm from 'apps/Admin/components/TypeForm';
 
 const SubTypeWrapper = styled.div`
     display: flex;
@@ -22,7 +23,8 @@ const SubTypeHeader = styled.div`
 class SubType extends React.Component {
     state = {
         loading: true,
-        expenses: null
+        expenses: null,
+        isEditingSubType: false
     };
 
     async componentDidMount() {
@@ -40,6 +42,14 @@ class SubType extends React.Component {
         }
     }
 
+    handleUpdateSubType = (id, name) => {
+        const { handleUpdateSubType } = this.props;
+
+        handleUpdateSubType(id, name);
+
+        this.setState({ isEditingSubType: false });
+    };
+
     renderExpenses = () => {
         const { expenses } = this.state;
 
@@ -51,13 +61,26 @@ class SubType extends React.Component {
     renderHeader = () => {
         const { handleDeleteSubType } = this.props;
         const { id, name } = this.props.subType;
+        const { isEditingSubType } = this.state;
 
-        return (
+        return isEditingSubType ? (
+            <TypeForm
+                handleCancel={this.toggleEditSubType}
+                handleSubmit={name => this.handleUpdateSubType(id, name)}
+                isUpdateForm={true}
+            />
+        ) : (
             <SubTypeWrapper>
                 <SubTypeHeader>{name}</SubTypeHeader>
                 <Button text="Delete" onClick={() => handleDeleteSubType(id)} />
+                <Button text="Edit" onClick={this.toggleEditSubType} />
             </SubTypeWrapper>
         );
+    };
+
+    toggleEditSubType = () => {
+        const { isEditingSubType } = this.state;
+        this.setState({ isEditingSubType: !isEditingSubType });
     };
 
     render() {
@@ -74,7 +97,8 @@ class SubType extends React.Component {
 
 SubType.propTypes = {
     subType: PropTypes.object.isRequired,
-    handleDeleteSubType: PropTypes.func.isRequired
+    handleDeleteSubType: PropTypes.func.isRequired,
+    handleUpdateSubType: PropTypes.func.isRequired
 };
 
 export default SubType;

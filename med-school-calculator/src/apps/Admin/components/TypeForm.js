@@ -41,7 +41,10 @@ class TypeForm extends React.Component {
                             onChange={this.handleChange}
                         />
                     </label>
-                    <input type="submit" value={isUpdateForm ? 'Update' : 'Create'} />
+                    <input
+                        type="submit"
+                        value={isUpdateForm ? 'Update' : 'Create'}
+                    />
                 </form>
                 <Button text="Cancel" onClick={handleCancel} />
             </>
