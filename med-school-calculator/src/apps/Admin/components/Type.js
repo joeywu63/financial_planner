@@ -8,7 +8,12 @@ import TypeForm from './TypeForm';
 
 import Button from 'common/Button';
 
-import { getTypeExpenses, getSubTypes, createSubType } from '../repository';
+import {
+    getTypeExpenses,
+    getSubTypes,
+    createSubType,
+    deleteSubType
+} from '../repository';
 
 const TypeWrapper = styled.div`
     display: flex;
@@ -61,6 +66,21 @@ class Type extends React.Component {
         }
     };
 
+    handleDeleteSubType = async subTypeID => {
+        try {
+            const { subTypes } = this.state;
+
+            await deleteSubType({ subTypeID });
+
+            const newSubTypes = subTypes.filter(
+                subType => subType.id !== subTypeID
+            );
+            this.setState({ subTypes: newSubTypes });
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     renderHeader = () => {
         const { handleDeleteType } = this.props;
         const { id, name } = this.props.type;
@@ -85,7 +105,11 @@ class Type extends React.Component {
         const { subTypes } = this.state;
 
         return subTypes.map(subType => (
-            <SubType key={subType.id} subType={subType} />
+            <SubType
+                key={subType.id}
+                subType={subType}
+                handleDeleteSubType={this.handleDeleteSubType}
+            />
         ));
     };
 

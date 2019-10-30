@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 
 const SUB_TYPE_COLLECTION = 'subtype';
+const EXPENSE_COLLECTION = 'expense';
 
 export const get = ({ typeID }) => {
     return firebase
@@ -27,5 +28,29 @@ export const create = ({ typeID, name }) => {
     return subTypeRef
         .set({ typeID, name })
         .then(() => subTypeRef.id)
+        .catch(error => error);
+};
+
+export const deleteSubType = ({ subTypeID }) => {
+    const db = firebase.firestore();
+
+    const batch = db.batch();
+
+    // delete type
+    const subTypeRef = db.collection(SUB_TYPE_COLLECTION).doc(subTypeID);
+    batch.delete(subTypeRef);
+
+    // delete subtypes
+    return db
+        .collection(EXPENSE_COLLECTION)
+        .where('subtypeID', '==', subTypeID)
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                batch.delete(doc.ref);
+            });
+
+            return batch.commit();
+        })
         .catch(error => error);
 };

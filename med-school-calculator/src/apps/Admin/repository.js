@@ -16,3 +16,5 @@ export const createType = type.create;
 export const createSubType = subType.create;
 
 export const deleteType = type.deleteType;
+
+export const deleteSubType = subType.deleteSubType;

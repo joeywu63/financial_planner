@@ -1,9 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Expense from './Expense';
 
 import { getSubTypeExpenses } from '../repository';
+
+import Button from 'common/Button';
+
+const SubTypeWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const SubTypeHeader = styled.div`
+    font-weight: bold;
+    font-size: 25px;
+`;
 
 class SubType extends React.Component {
     state = {
@@ -34,13 +48,24 @@ class SubType extends React.Component {
         ));
     };
 
+    renderHeader = () => {
+        const { handleDeleteSubType } = this.props;
+        const { id, name } = this.props.subType;
+
+        return (
+            <SubTypeWrapper>
+                <SubTypeHeader>{name}</SubTypeHeader>
+                <Button text="Delete" onClick={() => handleDeleteSubType(id)} />
+            </SubTypeWrapper>
+        );
+    };
+
     render() {
-        const { name } = this.props.subType;
         const { loading } = this.state;
 
         return (
             <>
-                <h2>{name}</h2>
+                {this.renderHeader()}
                 {loading ? <div>loading</div> : this.renderExpenses()}
             </>
         );
@@ -48,7 +73,8 @@ class SubType extends React.Component {
 }
 
 SubType.propTypes = {
-    subType: PropTypes.object.isRequired
+    subType: PropTypes.object.isRequired,
+    handleDeleteSubType: PropTypes.func.isRequired
 };
 
 export default SubType;
