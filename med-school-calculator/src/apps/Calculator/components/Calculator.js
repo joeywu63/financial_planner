@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Chevron from "./Chevron"
 import CalculatorData from "./CalculatorData";
+import {getAllTypes} from "../repository";
 
 const CalculatorWrapper = styled.div`
     height: 90%;
@@ -24,27 +25,41 @@ const NavWrapper = styled.div`
 
 class Calculator extends React.Component {
 
-    // Plan: 
-    // 1. Retrieve all types from database in following function 
-    retrieveTypeNames() {
-        // Here make a call to firebase to get all the type names and store in array containing Name and Id
-        return Number.parseInt(this.props.history.location.pathname.split('/')[2]);
-        // In render(), use a for loop to add Chevron for each type
+    constructor(props) {
+        super(props);
+        this.state = {loading : true};
+    }
+
+    componentDidMount() {
+        getAllTypes().then(data => this.setState({loading: false, data: data}));
+    }
+
+    renderList = data => {
+        return (
+            <div>
+                {data.map(item => (
+                    <Chevron key={item.id} link={`/calculator/${item.name}`} title={item.name}> </Chevron>
+                ))}
+            </div>
+        );
+    }
+
+    getCurrentStage = () => {
+        const currentStageId = this.props.history.location.pathname.split('/')[2];
+        return currentStageId;
     }
 
     render() {
+        const { data, loading } = this.state; 
         return (
 
                 <CalculatorWrapper>
                     <NavWrapper>
                         <NavBar>
-                            <Chevron link="/calculator/1" title="Application Submission"> </Chevron>
-                            <Chevron link="/calculator/2" title="Interview Process"> </Chevron>
-                            <Chevron link="/calculator/3" title="MCAT"> </Chevron>
-                            <Chevron link="/calculator/4" title="Finish"> </Chevron>
+                            {loading ? console.log("Loading...") : this.renderList(data)}
                         </NavBar>
                     </NavWrapper>
-                    <CalculatorData stage={this.retrieveTypeNames()}>
+                    <CalculatorData title={this.getCurrentStage()}>
 
                     </CalculatorData>
                 </CalculatorWrapper>

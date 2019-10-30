@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <Router>
-                    <RouterButton link="/calculator" title="Calculator" />
+                    <RouterButton link="/calculator/Welcome" title="Calculator" />
                     <RouterButton link="/profile" title="Profile" />
                     {hasAdminAccess() && (
                         <RouterButton link="/admin" title="Admin" />

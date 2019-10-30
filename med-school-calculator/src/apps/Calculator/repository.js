@@ -1,5 +1,5 @@
 import * as expense from 'model/expense';
-import * as type from 'model/expense';
+import * as type from 'model/type';
 import * as subtype from 'model/expense';
 
 export const getAllTypes = () => {
