@@ -4,6 +4,8 @@ class CalculatorData extends React.Component {
 
 
     render() {
+        const {total} = this.props;
+        console.log(total);
         return (
             <div>
                 <h1>{this.props.title}</h1>
@@ -19,6 +21,8 @@ class CalculatorData extends React.Component {
                 <div>
                     <select></select> Price: 0$
                 </div>
+
+                <h1>Total so far: ${total}</h1>
             </div>
         )
     }

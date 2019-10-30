@@ -24,10 +24,12 @@ const NavWrapper = styled.div`
 `
 
 class Calculator extends React.Component {
-
     constructor(props) {
         super(props);
-        this.state = {loading : true};
+        this.state = {
+            loading : true,
+            total: 0}
+
     }
 
     componentDidMount() {
@@ -50,7 +52,7 @@ class Calculator extends React.Component {
     }
 
     render() {
-        const { data, loading } = this.state; 
+        const { data, loading } = this.state;
         return (
 
                 <CalculatorWrapper>
@@ -59,7 +61,7 @@ class Calculator extends React.Component {
                             {loading ? console.log("Loading...") : this.renderList(data)}
                         </NavBar>
                     </NavWrapper>
-                    <CalculatorData title={this.getCurrentStage()}>
+                    <CalculatorData title={this.getCurrentStage()} total={this.state.total}>
 
                     </CalculatorData>
                 </CalculatorWrapper>
