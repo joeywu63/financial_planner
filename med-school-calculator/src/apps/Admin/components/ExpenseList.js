@@ -5,7 +5,7 @@ import TypeForm from './TypeForm';
 
 import Button from 'common/Button';
 
-import { getTypes, createType } from '../repository';
+import { getTypes, createType, deleteType } from '../repository';
 
 class ExpenseList extends React.Component {
     state = {
@@ -40,10 +40,29 @@ class ExpenseList extends React.Component {
         }
     };
 
+    handleDeleteType = async typeID => {
+        try {
+            const { types } = this.state;
+
+            await deleteType({ typeID });
+
+            const newTypes = types.filter(type => type.id !== typeID);
+            this.setState({ types: newTypes });
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     renderTypes = () => {
         const { types } = this.state;
 
-        return types.map(type => <Type key={type.id} type={type} />);
+        return types.map(type => (
+            <Type
+                key={type.id}
+                type={type}
+                handleDeleteType={this.handleDeleteType}
+            />
+        ));
     };
 
     toggleAddingType = () => {

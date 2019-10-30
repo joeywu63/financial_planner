@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Expense from './Expense';
 import SubType from './SubType';
@@ -8,6 +9,17 @@ import TypeForm from './TypeForm';
 import Button from 'common/Button';
 
 import { getTypeExpenses, getSubTypes, createSubType } from '../repository';
+
+const TypeWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const TypeHeader = styled.div`
+    font-weight: bold;
+    font-size: 40px;
+`;
 
 class Type extends React.Component {
     state = {
@@ -49,6 +61,18 @@ class Type extends React.Component {
         }
     };
 
+    renderHeader = () => {
+        const { handleDeleteType } = this.props;
+        const { id, name } = this.props.type;
+
+        return (
+            <TypeWrapper>
+                <TypeHeader>{name}</TypeHeader>
+                <Button text="Delete" onClick={() => handleDeleteType(id)} />
+            </TypeWrapper>
+        );
+    };
+
     renderExpenses = () => {
         const { expenses } = this.state;
 
@@ -71,12 +95,11 @@ class Type extends React.Component {
     };
 
     render() {
-        const { name } = this.props.type;
         const { loading, isAddingSubType } = this.state;
 
         return (
             <>
-                <h1>{name}</h1>
+                {this.renderHeader()}
                 {loading ? (
                     <div>loading</div>
                 ) : (
@@ -102,7 +125,8 @@ class Type extends React.Component {
 }
 
 Type.propTypes = {
-    type: PropTypes.object.isRequired
+    type: PropTypes.object.isRequired,
+    handleDeleteType: PropTypes.func.isRequired
 };
 
 export default Type;
