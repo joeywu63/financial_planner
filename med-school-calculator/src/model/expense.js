@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 
 const EXPENSE_COLLECTION = 'expense';
-const expensedb = firebase.firestore().collection(EXPENSE_COLLECTION);
-
 
 // get expense document with this uid
 export const getExpenseByID = ({ uid }) => {
-    expensedb
+    firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
         .doc(uid)
         .get()
         .then(doc => {
@@ -18,7 +18,9 @@ export const getExpenseByID = ({ uid }) => {
 // get list of all default expenses
 export const getAllDefaultExpenses = () => {
     const expenses = [];
-    expensedb
+    firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
         .where('isAlternative', '==', false)
         .get()
         .then(querySnapshot => {
@@ -33,7 +35,9 @@ export const getAllDefaultExpenses = () => {
 // get list of all alternative expenses
 export const getAllAlternativeExpenses = () => {
     const expenses = [];
-    expensedb
+    firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
         .where('isAlternative', '==', true)
         .get()
         .then(querySnapshot => {
@@ -48,7 +52,9 @@ export const getAllAlternativeExpenses = () => {
 
 // update this expense document's field with newval
 export const updateExpense = ({ uid, field, newval }) => {
-    expensedb
+    firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
         .doc(uid)
         .update({
             [field]: newval

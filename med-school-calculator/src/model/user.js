@@ -2,25 +2,23 @@ import firebase from 'firebase';
 import { ROLES } from 'utils/constants';
 
 const USER_COLLECTION = 'user';
-const userdb = firebase.firestore().collection(USER_COLLECTION);
 
-// creates regular user
-export const createUser = ({ uid, email }) => {
-    userdb
+export const create = ({ uid, email }) => {
+    firebase
+        .firestore()
+        .collection(USER_COLLECTION)
         .doc(uid)
-        .set(
-            {
-                role: ROLES.user,
-                email: email
-            },
-            { merge: true }
-        )
+        .set({
+            role: ROLES.user,
+            email
+        })
         .catch(error => error);
 };
 
-// retrieve user document by uid
-export const getUser = ({ uid }) => {
-    return userdb
+export const get = ({ uid }) => {
+    return firebase
+        .firestore()
+        .collection(USER_COLLECTION)
         .doc(uid)
         .get()
         .then(doc => {
