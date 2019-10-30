@@ -17,7 +17,7 @@ class Profile extends React.Component {
         this.setState({ page });
     };
 
-    renderAccountInfo = () => {
+    renderProfileInfo = () => {
         const { displayName, email } = this.state.currentUser;
         return (
             <>
@@ -43,7 +43,7 @@ class Profile extends React.Component {
         return (
             <>
             {page === PROFILEPAGES.default ? (
-                    this.renderAccountInfo()
+                    this.renderProfileInfo()
                 ) : page === PROFILEPAGES.changepassword ? (
                     <ChangePassword handleSwitchPage={this.handleSwitchPage}/>
                 ) : page === PROFILEPAGES.changeinfo ? (
