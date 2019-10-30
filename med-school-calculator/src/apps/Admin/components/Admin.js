@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ExpenseList from './ExpenseList';
+
 import { hasAdminAccess } from 'utils/helpers';
 
 class Admin extends React.Component {
@@ -7,7 +9,7 @@ class Admin extends React.Component {
         return (
             <div>
                 {hasAdminAccess()
-                    ? 'Admin'
+                    ? <ExpenseList />
                     : 'You do not have access to this page'}
             </div>
         );
