@@ -25,20 +25,25 @@ class ChangePassword extends React.Component {
     };
 
     handleSubmit(event) {
+        event.preventDefault();
+
         if(this.state.newPassword == this.state.confirmNewPassword){
             auth().currentUser.updatePassword(this.state.newPassword).then(
                 () => {
-                    window.alert('password changed successfully')
+                    window.alert('password changed successfully');
                     this.props.handleSwitchPage(PROFILEPAGES.default);
+                }
+            ).catch(
+                (err) => {
+                    // TODO: error handling
+                    console.log(err);
+                    window.alert('something went wrong');
                 }
             )
         }else{
             // TODO: display password reqs
-            window.alert('passwords do not match')
+            window.alert('passwords do not match');
         }
-        
-        event.preventDefault();
-        
     }
 
     render() {
@@ -51,9 +56,8 @@ class ChangePassword extends React.Component {
                 <br></br>
                 <input type='submit' value='submit'></input>
             </form>
-        )
+        );
     }
-
 }
 
 ChangePassword.propTypes = {
