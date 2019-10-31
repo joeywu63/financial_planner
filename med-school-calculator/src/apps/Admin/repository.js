@@ -24,3 +24,5 @@ export const deleteExpense = expense.deleteExpense;
 export const updateType = type.update;
 
 export const updateSubType = subType.update;
+
+export const updateExpense = expense.update;

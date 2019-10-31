@@ -29,3 +29,12 @@ export const deleteExpense = ({ expenseID }) => {
         console.error(`Error removing expense ${expenseID}: ${error}`);
     });  
 };
+
+export const update = ({ expenseID, name }) => {
+    return firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
+        .doc(expenseID)
+        .update({ name })
+        .catch(error => error);
+};
