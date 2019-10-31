@@ -27,8 +27,8 @@ class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading : true,
-            total: 0}
+            loading : true
+        }
 
     }
 
@@ -61,7 +61,7 @@ class Calculator extends React.Component {
                             {loading ? console.log("Loading...") : this.renderList(data)}
                         </NavBar>
                     </NavWrapper>
-                    <CalculatorData title={this.getCurrentStage()} total={this.state.total}>
+                    <CalculatorData title={this.getCurrentStage()}>
 
                     </CalculatorData>
                 </CalculatorWrapper>
