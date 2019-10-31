@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Expense from './Expense';
 
-import { getSubTypeExpenses } from '../repository';
+import { getSubTypeExpenses, deleteExpense, updateExpense } from '../repository';
 
 import Button from 'common/Button';
 import TypeForm from 'apps/Admin/components/TypeForm';
@@ -50,11 +50,42 @@ class SubType extends React.Component {
         this.setState({ isEditingSubType: false });
     };
 
+    handleDeleteExpense = async expenseID => {
+        const { expenses } = this.state;
+        try {
+            await deleteExpense({ expenseID })
+        } catch (e) {
+            // TODO: error
+        }
+        const newExpenses = expenses.filter(
+            expense => expense.id !== expenseID
+        );
+        this.setState({ expenses: newExpenses });
+    };
+
+    handleUpdateExpense = async (expenseID, name) => {
+        try {
+            const { expenses } = this.state;
+
+            await updateExpense({ expenseID, name });
+
+            const newExpenses = expenses.map(expense => {
+                if (expense.id === expenseID) {
+                    expense.name = name;
+                }
+                return expense;
+            });
+            this.setState({ expenses: newExpenses });
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     renderExpenses = () => {
         const { expenses } = this.state;
 
         return expenses.map(expense => (
-            <Expense key={expense.id} expense={expense} />
+            <Expense key={expense.id} expense={expense} handleDeleteExpense={this.handleDeleteExpense} handleUpdateExpense={this.handleUpdateExpense}/>
         ));
     };
 

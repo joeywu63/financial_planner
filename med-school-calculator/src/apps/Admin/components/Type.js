@@ -13,7 +13,9 @@ import {
     getSubTypes,
     createSubType,
     deleteSubType,
-    updateSubType
+    updateSubType,
+    deleteExpense,
+    updateExpense
 } from '../repository';
 
 const TypeWrapper = styled.div`
@@ -48,6 +50,37 @@ class Type extends React.Component {
             // TODO: show error
         }
     }
+
+    handleDeleteExpense = async expenseID => {
+        const { expenses } = this.state;
+        try {
+            await deleteExpense({ expenseID })
+        } catch (e) {
+            // TODO: error
+        }
+        const newExpenses = expenses.filter(
+            expense => expense.id !== expenseID
+        );
+        this.setState({ expenses: newExpenses });
+    };
+
+    handleUpdateExpense = async (expenseID, name) => {
+        try {
+            const { expenses } = this.state;
+
+            await updateExpense({ expenseID, name });
+
+            const newExpenses = expenses.map(expense => {
+                if (expense.id === expenseID) {
+                    expense.name = name;
+                }
+                return expense;
+            });
+            this.setState({ expenses: newExpenses });
+        } catch (e) {
+            // TODO: error
+        }
+    };
 
     createTemporarySubType = (id, name) => {
         const { id: typeID } = this.props.type;
@@ -136,7 +169,7 @@ class Type extends React.Component {
         const { expenses } = this.state;
 
         return expenses.map(expense => (
-            <Expense key={expense.id} expense={expense} />
+            <Expense key={expense.id} expense={expense} handleDeleteExpense={this.handleDeleteExpense} handleUpdateExpense={this.handleUpdateExpense}/>
         ));
     };
 
