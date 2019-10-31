@@ -19,20 +19,21 @@ class Profile extends React.Component {
 
     renderProfileInfo = () => {
         const { displayName, email } = this.state.currentUser;
+
         return (
             <>
                 <div>Profile</div>
                 Name: {displayName}
                 Email: {email}
                 <Button
+                    text="Edit Profile"
+                    onClick={() => this.handleSwitchPage(PROFILEPAGES.changeinfo)}
+                />
+                <Button
                     text="Edit Password"
                     onClick={() =>
                         this.handleSwitchPage(PROFILEPAGES.changepassword)
                     }
-                />
-                <Button
-                    text="Edit Profile"
-                    onClick={() => this.handleSwitchPage(PROFILEPAGES.changeinfo)}
                 />
             </>
         );
