@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Chevron from "./Chevron"
 import CalculatorData from "./CalculatorData";
 import {getAllTypes} from "../repository";
+import Breakdown from "./Breakdown";
 
 const CalculatorWrapper = styled.div`
     height: 90%;
@@ -51,6 +52,16 @@ class Calculator extends React.Component {
         return currentStageId;
     }
 
+    renderCalculatorData = () => {
+        const titleOfCurrentStage = this.getCurrentStage();
+        if (titleOfCurrentStage === "Breakdown") {
+            return (<Breakdown></Breakdown>);
+        }
+        else {
+            return (<CalculatorData title={titleOfCurrentStage}> </CalculatorData>);
+        }
+    }
+ 
     render() {
         const { data, loading } = this.state;
         return (
@@ -61,9 +72,7 @@ class Calculator extends React.Component {
                             {loading ? console.log("Loading...") : this.renderList(data)}
                         </NavBar>
                     </NavWrapper>
-                    <CalculatorData title={this.getCurrentStage()}>
-
-                    </CalculatorData>
+                    {this.renderCalculatorData()}
                 </CalculatorWrapper>
         );
     }
