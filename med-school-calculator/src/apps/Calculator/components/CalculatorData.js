@@ -1,10 +1,18 @@
 import React from 'react';
+import Subtype from './Subtype';
+import {getSubtypesByType} from '../repository';
 
 class CalculatorData extends React.Component {
+
+    // TODO: This is a scotch tape fix for a memory leak, fix this eventually
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
             total: 0,
+            subtypes: [],
+            loading: true,
             costs: [
                 {name: "Option 1", cost: 50, selected: false},
                 {name: "Option 2", cost: 100, selected: false},
@@ -13,31 +21,66 @@ class CalculatorData extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this._isMounted = true;
+        getSubtypesByType(this.props.title).then(data => {
+                if (this._isMounted) {
+                    this.setState({loading: false, subtypes: data});
+                }
+        });
+    }
+
+    componentDidUpdate() {
+        getSubtypesByType(this.props.title).then(data => {
+            if (this._isMounted) {
+                this.setState({loading: false, subtypes: data});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    renderList = subtypes => {
+        return (
+            <div>
+                {subtypes.map(subtype => (
+                    <Subtype key={subtype.id} title={subtype.name}></Subtype>
+                ))}
+            </div>
+        );
+    }
+
     render() {
+        const {subtypes, loading} = this.state;
         return (
             <div>
                 <h1>{this.props.title}</h1>
-                <h2>Subtype 1: </h2>
-                <form>
-                    <input
-                        type={"checkbox"}
-                        id={this.state.costs[0].name}
-                        name={this.state.costs[0].name}
-                        onChange={this.selectCost}
-                        checked={this.state.costs[0].selected}
-                    />${this.state.costs[0].cost}: {this.state.costs[0].name}<br/>
-                    <input
-                        type={"checkbox"}
-                        id={this.state.costs[1].name}
-                        name={this.state.costs[1].name}
-                        onChange={this.selectCost}
-                        checked={this.state.costs[1].selected}
-                    />${this.state.costs[1].cost}: {this.state.costs[1].name}<br/>
-                </form>
+                {loading ? console.log("Loading...") : this.renderList(subtypes)}
                 <h2 >Total so far: ${this.state.total}</h2>
             </div>
         )
     }
+
+    // temp() {
+    //     <form>
+    //                 <input
+    //                     type={"checkbox"}
+    //                     id={this.state.costs[0].name}
+    //                     name={this.state.costs[0].name}
+    //                     onChange={this.selectCost}
+    //                     checked={this.state.costs[0].selected}
+    //                 />${this.state.costs[0].cost}: {this.state.costs[0].name}<br/>
+    //                 <input
+    //                     type={"checkbox"}
+    //                     id={this.state.costs[1].name}
+    //                     name={this.state.costs[1].name}
+    //                     onChange={this.selectCost}
+    //                     checked={this.state.costs[1].selected}
+    //                 />${this.state.costs[1].cost}: {this.state.costs[1].name}<br/>
+    //             </form>
+    // }
 
     selectCost = (event) => {
         const target = event.target;

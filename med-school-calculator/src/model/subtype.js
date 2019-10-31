@@ -3,7 +3,7 @@ import firebase from 'firebase';
 const SUB_TYPE_COLLECTION = 'subtype';
 const EXPENSE_COLLECTION = 'expense';
 
-export const get = ({ typeID }) => {
+export const get = ({typeID}) => {
     return firebase
         .firestore()
         .collection(SUB_TYPE_COLLECTION)

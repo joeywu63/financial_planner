@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const ChevronItem = styled.li`
     float: left; 
 `
-const ChevronAnchor = styled(Link)`
+const ChevronAnchor = styled.a`
     color: white;
     cursor: pointer;
     height: 5vh;
@@ -44,10 +44,15 @@ const ChevronAnchor = styled(Link)`
 `
 
 class Chevron extends React.Component {
+
+    handleClick = (e) => {
+        e.preventDefault();
+        this.props.onClick(e);
+    }
     
     render() {
         return ( 
-            <ChevronItem> <ChevronAnchor to={this.props.link}> {this.props.title} </ChevronAnchor> </ChevronItem>
+            <ChevronItem> <ChevronAnchor onClick={this.handleClick}> {this.props.title} </ChevronAnchor> </ChevronItem>
         );
     }
 }

@@ -21,6 +21,7 @@ export const get = ({ typeID, subTypeID }) => {
 };
 
 export const getBySubtype = ({ subTypeID }) => {
+    console.log(subTypeID)
     return firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)

@@ -21,16 +21,20 @@ const NavBar = styled.ul`
 const NavWrapper = styled.div`
     background-color: black;
     margin: auto;
-
 `
 
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading : true
+            loading : true,
+            currentStage: "Interview Process"
         }
 
+    }
+
+    handleClick = (e) => {
+        this.setState({currentStage: e.target.innerText});
     }
 
     componentDidMount() {
@@ -41,19 +45,14 @@ class Calculator extends React.Component {
         return (
             <div>
                 {data.map(item => (
-                    <Chevron key={item.id} link={`/calculator/${item.name}`} title={item.name}> </Chevron>
+                    <Chevron onClick={this.handleClick} key={item.id} title={item.name}> </Chevron>
                 ))}
             </div>
         );
     }
 
-    getCurrentStage = () => {
-        const currentStageId = this.props.history.location.pathname.split('/')[2];
-        return currentStageId;
-    }
-
     renderCalculatorData = () => {
-        const titleOfCurrentStage = this.getCurrentStage();
+        const titleOfCurrentStage = this.state.currentStage;
         if (titleOfCurrentStage === "Breakdown") {
             return (<Breakdown></Breakdown>);
         }
