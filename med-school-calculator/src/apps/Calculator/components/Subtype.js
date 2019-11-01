@@ -5,13 +5,10 @@ import Expense from "./Expense";
 
 class Subtype extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: true,
-            expenses: []
-        }
-    }
+    state = {
+        loading: true,
+        expenses: []
+    };
 
     componentDidMount() {
         getExpensesBySubtype({subtypeName: this.props.title}).then(data => this.setState({loading: false, expenses: data}));

@@ -1,51 +1,42 @@
 import React from 'react';
 import Subtype from './Subtype';
-import {getSubtypesByType} from '../repository';
 
 class CalculatorData extends React.Component {
 
-    // TODO: This is a scotch tape fix for a memory leak, fix this eventually
-    _isMounted = false;
+    // // TODO: This is a scotch tape fix for a memory leak, fix this eventually
+    // _isMounted = false;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            total: 0,
-            subtypes: [],
-            loading: true,
-            costs: [
-                {name: "Option 1", cost: 50, selected: false},
-                {name: "Option 2", cost: 100, selected: false},
-                {name: "Option 4", cost: 80, selected: false},
-            ]
-        }
+    state = {
+        total: 0,
+        subtypes: [],
     }
 
-    componentDidMount() {
-        this._isMounted = true;
-        getSubtypesByType(this.props.title).then(data => {
-                if (this._isMounted) {
-                    this.setState({loading: false, subtypes: data});
-                }
-        });
-    }
+    // componentDidMount() {
+    //     this._isMounted = true;
+    //     getSubtypesByType(this.props.title).then(data => {
+    //             if (this._isMounted) {
+    //                 this.setState({loading: false, subtypes: data});
+    //             }
+    //     });
+    // }
 
-    componentDidUpdate() {
-        //  Old code: getSubtypesByType(this.props.title).then(data => {
-        //     if (this._isMounted) {
-        //         this.setState({loading: false, subtypes: data});
-        //     }
-        // });
+    // componentDidUpdate() {
+    //     //  Old code: 
+    //     // getSubtypesByType(this.props.title).then(data => {
+    //     //     if (this._isMounted) {
+    //     //         this.setState({loading: false, subtypes: data});
+    //     //     }
+    //     // });
 
-        // New code:
-        if (this._isMounted) {
-            
-        }
-    }
+    //     // New code:
+    //     if (this._isMounted) {
+    //         this.setState({loading: false, subtypes: this.state['subtypes']});
+    //     }
+    // }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
+    // componentWillUnmount() {subtypes
+    //     this._isMounted = false;
+    // }
 
     renderList = subtypes => {
         return (
@@ -58,11 +49,11 @@ class CalculatorData extends React.Component {
     }
 
     render() {
-        const {subtypes, loading} = this.state;
+        const {subTypes} = this.props;
         return (
             <div>
                 <h1>{this.props.title}</h1>
-                {loading ? console.log("Loading...") : this.renderList(subtypes)}
+                {this.renderList(subTypes)}
                 <h2 >Total so far: ${this.state.total}</h2>
             </div>
         )
@@ -86,21 +77,21 @@ class CalculatorData extends React.Component {
     //             </form>
     // }
 
-    selectCost = (event) => {
-        const target = event.target;
-        const newCosts = this.state.costs.map((cost) => {
-            if (cost.name === target.id) {
-                cost.selected = !cost.selected;
-                if (cost.selected) {
-                    this.state.total += cost.cost;
-                } else {
-                    this.state.total -= cost.cost;
-                }
-            }
-            return cost;
-        });
-        this.setState({costs: newCosts})
-    }
+    // selectCost = (event) => {
+    //     const target = event.target;
+    //     const newCosts = this.state.costs.map((cost) => {
+    //         if (cost.name === target.id) {
+    //             cost.selected = !cost.selected;
+    //             if (cost.selected) {
+    //                 this.state.total += cost.cost;
+    //             } else {
+    //                 this.state.total -= cost.cost;
+    //             }
+    //         }
+    //         return cost;
+    //     });
+    //     this.setState({costs: newCosts})
+    // }
 }
 
 export default CalculatorData;

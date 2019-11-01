@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Chevron from "./Chevron"
 import CalculatorData from "./CalculatorData";
-import {getAllTypes} from "../repository";
+import {getAllTypes, getSubtypesByType} from "../repository";
 import Breakdown from "./Breakdown";
 
 const CalculatorWrapper = styled.div`
@@ -24,21 +24,23 @@ const NavWrapper = styled.div`
 `
 
 class Calculator extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading : true,
-            currentStage: "Interview Process"
-        }
 
+    state =  {
+        loading: true,
+        currentStage: "Interview Process",
+        types: [],
+        subTypes: []
     }
 
     handleClick = (e) => {
-        this.setState({currentStage: e.target.innerText});
+        const clickedType = e.target.innerText;
+        getSubtypesByType(clickedType).then(data => {
+            this.setState({currentStage: e.target.innerText, subTypes: data});
+        });
     }
 
     componentDidMount() {
-        getAllTypes().then(data => this.setState({loading: false, data: data}));
+        getAllTypes().then(data => this.setState({loading: false, types: data}));
     }
 
     renderList = data => {
@@ -52,23 +54,23 @@ class Calculator extends React.Component {
     }
 
     renderCalculatorData = () => {
-        const titleOfCurrentStage = this.state.currentStage;
-        if (titleOfCurrentStage === "Breakdown") {
+        const {currentStage} = this.state.currentStage;
+        if (currentStage === "Breakdown") {
             return (<Breakdown></Breakdown>);
         }
         else {
-            return (<CalculatorData title={titleOfCurrentStage}> </CalculatorData>);
+            return (<CalculatorData title={currentStage} subTypes={this.state.subTypes}> </CalculatorData>);
         }
     }
  
     render() {
-        const { data, loading } = this.state;
+        const { types, loading } = this.state;
         return (
 
                 <CalculatorWrapper>
                     <NavWrapper>
                         <NavBar>
-                            {loading ? console.log("Loading...") : this.renderList(data)}
+                            {loading ? console.log("Loading...") : this.renderList(types)}
                         </NavBar>
                     </NavWrapper>
                     {this.renderCalculatorData()}
