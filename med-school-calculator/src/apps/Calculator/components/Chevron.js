@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 
 const ChevronItem = styled.li`
     float: left; 
@@ -46,7 +45,6 @@ const ChevronAnchor = styled.a`
 class Chevron extends React.Component {
 
     handleClick = (e) => {
-        e.preventDefault();
         this.props.onClick(e);
     }
     

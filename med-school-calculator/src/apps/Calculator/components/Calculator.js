@@ -34,19 +34,22 @@ class Calculator extends React.Component {
 
     handleClick = (e) => {
         const clickedType = e.target.innerText;
-        getSubtypesByType(clickedType).then(data => {
-            this.setState({currentStage: e.target.innerText, subTypes: data});
-        });
+        this.setState({currentStage: e.target.innerText});
+        if (clickedType !== "Breakdown") {
+            getSubtypesByType(clickedType).then(data => {
+                this.setState({subTypes: data});
+            });
+        }   
     }
 
     componentDidMount() {
         getAllTypes().then(data => this.setState({loading: false, types: data}));
     }
 
-    renderList = data => {
+    renderList = types => {
         return (
             <div>
-                {data.map(item => (
+                {types.map(item => (
                     <Chevron onClick={this.handleClick} key={item.id} title={item.name}> </Chevron>
                 ))}
             </div>
@@ -54,7 +57,7 @@ class Calculator extends React.Component {
     }
 
     renderCalculatorData = () => {
-        const {currentStage} = this.state.currentStage;
+        const {currentStage} = this.state;
         if (currentStage === "Breakdown") {
             return (<Breakdown></Breakdown>);
         }
