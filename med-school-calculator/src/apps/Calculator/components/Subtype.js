@@ -1,5 +1,6 @@
 import React from 'react';
 import {getExpensesBySubtype} from "../repository";
+import Expense from "./Expense";
 
 
 class Subtype extends React.Component {
@@ -20,7 +21,7 @@ class Subtype extends React.Component {
         return (
             <div>
                 {expenses.map(expense => (
-                    <h4 key={expense.id}>{expense.name}</h4>
+                    <Expense key={expense.id} name={expense.name} description={expense.description} cost={expense.cost}></Expense>
                 ))}
             </div>
         );

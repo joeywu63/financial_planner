@@ -31,11 +31,16 @@ class CalculatorData extends React.Component {
     }
 
     componentDidUpdate() {
-        getSubtypesByType(this.props.title).then(data => {
-            if (this._isMounted) {
-                this.setState({loading: false, subtypes: data});
-            }
-        });
+        //  Old code: getSubtypesByType(this.props.title).then(data => {
+        //     if (this._isMounted) {
+        //         this.setState({loading: false, subtypes: data});
+        //     }
+        // });
+
+        // New code:
+        if (this._isMounted) {
+            
+        }
     }
 
     componentWillUnmount() {
@@ -70,7 +75,6 @@ class CalculatorData extends React.Component {
     //                     id={this.state.costs[0].name}
     //                     name={this.state.costs[0].name}
     //                     onChange={this.selectCost}
-    //                     checked={this.state.costs[0].selected}
     //                 />${this.state.costs[0].cost}: {this.state.costs[0].name}<br/>
     //                 <input
     //                     type={"checkbox"}
