@@ -23,10 +23,10 @@ _Reminder:_ The 0-4 marking scale means:
 - Q1: Great that you have mockups & good explanation
 - Q4: Great list of benefits, very thorough, evident that you did your research and that you understand the advantages of your product
 - Q5: 
-- You don't have to include high level design details (i.e. that the interface should be intuitive) when writing user stories
-- You can potentially break down some of your user stories into smaller user stories 
-    - For instance, logging in as an application admin can be separate from making changes in the system
-    - Creating surveys and viewing results can also be two different user stories
+    - You don't have to include high level design details (i.e. that the interface should be intuitive) when writing user stories
+    - You can potentially break down some of your user stories into smaller user stories 
+        - For instance, logging in as an application admin can be separate from making changes in the system
+        - Creating surveys and viewing results can also be two different user stories
 
 ### Process
 - Artifacts: Provide a link to your task management platform
