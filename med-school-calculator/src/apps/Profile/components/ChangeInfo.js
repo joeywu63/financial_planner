@@ -1,77 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import Button from 'common/Button';
-import { PROFILEPAGES } from '../constants';
-import Profile from './Profile';
-
-import { getCurrentUser } from 'utils/currentUser';
 import { auth } from 'firebase';
 
+import { getCurrentUser } from 'utils/currentUser';
+import Button from 'common/Button';
+import { PROFILEPAGES } from '../constants';
+
 class ChangeInfo extends React.Component {
-    constructor(props) {
-        super(props);
-        // TOFIX: info out of date if user edits twice without refreshing
-        const { displayName, email } = getCurrentUser();
-        this.state = {displayName: displayName, email: email};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleName = this.handleName.bind(this);
-        this.handleEmail = this.handleEmail.bind(this);
-    }
+    state = {
+        displayName: getCurrentUser().displayName,
+        email: getCurrentUser().email
+    };
 
-    handleChange(event) {
+    handleChange = event => {
         const key = event.target.getAttribute('name');
-        const value = event.target.value;
-
         this.setState({
-            [key]: value
+            [key]: event.target.value
         });
     };
 
-    handleName(event) {
+    handleSubmit = event => {
         event.preventDefault();
 
-        auth().currentUser.updateProfile({
-            displayName: this.state.displayName
-          }).then(
-              () => {
-                window.alert('name changed successfully');
-                this.props.handleSwitchPage(PROFILEPAGES.default);
-            }
-        ).catch(function(error) {
-            console.log(error);
-            window.alert('something went wrong');
-        });          
-    }
+        const user = auth().currentUser;
 
-    handleEmail(event) {
-        event.preventDefault();
+        let updates = [
+            user.updateProfile({
+                displayName: this.state.displayName
+            }),
+            user.updateEmail(this.state.email)
+        ];
 
-        auth().currentUser.updateEmail(this.state.email).then(
+        Promise.all(updates).then(
             () => {
-                window.alert('email changed successfully');
+                //TODO: update current user
+                window.alert('profile changed successfully');
                 this.props.handleSwitchPage(PROFILEPAGES.default);
             }
-        ).catch(function(error) {
-            console.log(error);
-            window.alert('something went wrong');
-        });
-          
+        ).catch(
+            //TODO: error handling, reauthenticate
+            (err) => {
+                console.log(err);
+                window.alert('something went wrong');
+            }
+        );
     }
 
     render() {
         return (
             <>
-                <form onSubmit={this.handleName}>
-                    Name:
+                <form onSubmit={this.handleSubmit}>
+                    name
                     <input type='text' name='displayName' value={this.state.displayName} onChange={this.handleChange}></input>
-                    <input type='submit' value='change name'></input>
-                </form>
-                <form onSubmit={this.handleEmail}>
-                    Email:
+                    email
                     <input type='text' name='email' value={this.state.email} onChange={this.handleChange}></input>
-                    <input type='submit' value='change email'></input>
+                    <input type='submit' value='submit'></input>
                 </form>
+                <Button onClick={() => this.props.handleSwitchPage(PROFILEPAGES.default)} text="cancel" />
             </>
         )
         }
