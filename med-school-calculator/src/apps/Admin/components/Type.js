@@ -11,6 +11,7 @@ import Button from 'common/Button';
 import {
     getTypeExpenses,
     getSubTypes,
+    createExpenseUnderType,
     createSubType,
     deleteSubType,
     updateSubType,
@@ -34,6 +35,7 @@ class Type extends React.Component {
         loading: true,
         expenses: null,
         subTypes: null,
+        isAddingExpense: false,
         isAddingSubType: false,
         isEditingType: false
     };
@@ -51,10 +53,29 @@ class Type extends React.Component {
         }
     }
 
+    createTemporaryExpense = (id, name) => {
+        const { id: typeID } = this.props.type;
+        return { id, typeID, name };
+    };
+
+    handleCreateExpense = async name => {
+        try {
+            const { id: typeID } = this.props.type;
+            const { expenses } = this.state;
+
+            const expenseID = await createExpenseUnderType({ typeID, name });
+
+            expenses.push(this.createTemporaryExpense(expenseID, name));
+            this.setState({ isAddingExpense: false, expenses });
+        } catch (e) {
+            // TODO: error
+        }
+    };
+
     handleDeleteExpense = async expenseID => {
         const { expenses } = this.state;
         try {
-            await deleteExpense({ expenseID })
+            await deleteExpense({ expenseID });
         } catch (e) {
             // TODO: error
         }
@@ -156,10 +177,7 @@ class Type extends React.Component {
         ) : (
             <TypeWrapper>
                 <TypeHeader>{name}</TypeHeader>
-                <Button
-                    text="Delete"
-                    onClick={() => handleDeleteType(id)}
-                />
+                <Button text="Delete" onClick={() => handleDeleteType(id)} />
                 <Button text="Edit" onClick={this.toggleEditType} />
             </TypeWrapper>
         );
@@ -169,7 +187,12 @@ class Type extends React.Component {
         const { expenses } = this.state;
 
         return expenses.map(expense => (
-            <Expense key={expense.id} expense={expense} handleDeleteExpense={this.handleDeleteExpense} handleUpdateExpense={this.handleUpdateExpense}/>
+            <Expense
+                key={expense.id}
+                expense={expense}
+                handleDeleteExpense={this.handleDeleteExpense}
+                handleUpdateExpense={this.handleUpdateExpense}
+            />
         ));
     };
 
@@ -186,6 +209,11 @@ class Type extends React.Component {
         ));
     };
 
+    toggleAddingExpense = () => {
+        const { isAddingExpense } = this.state;
+        this.setState({ isAddingExpense: !isAddingExpense });
+    };
+
     toggleAddingSubType = () => {
         const { isAddingSubType } = this.state;
         this.setState({ isAddingSubType: !isAddingSubType });
@@ -197,7 +225,7 @@ class Type extends React.Component {
     };
 
     render() {
-        const { loading, isAddingSubType } = this.state;
+        const { loading, isAddingSubType, isAddingExpense } = this.state;
 
         return (
             <>
@@ -207,6 +235,17 @@ class Type extends React.Component {
                 ) : (
                     <>
                         {this.renderExpenses()}
+                        {isAddingExpense ? (
+                            <TypeForm
+                                handleSubmit={this.handleCreateExpense}
+                                handleCancel={this.toggleAddingExpense}
+                            />
+                        ) : (
+                            <Button
+                                text="Add Expense"
+                                onClick={this.toggleAddingExpense}
+                            />
+                        )}
                         {this.renderSubTypes()}
                         {isAddingSubType ? (
                             <TypeForm
