@@ -71,6 +71,30 @@ Describe your Git / GitHub workflow. Essentially, we want to understand how your
  * What deployment tool(s) are you using and why
  * Don't forget to **explain why** you chose this workflow or particular aspects of it!
 
+##### Github Workflow
+When a team member begins writing code for a feature, they must create a branch off master and push their changes to the new branch.
+Once they are satisfied with their work, they will create a pull request to be reviewed by any two other members on the team. The two members
+reviewing the code will be responsible for two things. 
+1. Checking out the code and ensuring the feature satisfies the acceptance criteria
+2. The architecture/styling of the code follows some basic standards, which are the following:
+    - Any function that needs to directly access the firebase database must be in a file that lives in the 'model' directory
+    - Any function, within a react component, that needs to pull data, must call the function from a repository file in the respective components directory
+    - Any constant for a component must live within a constants file in the respective components directory
+
+Note: The reason for this type of architecture is that both the backend and frontend are clearly separated. This allows for the backend to be easily swapped with another backend.
+    
+Once the pull request is approved, the member who issued the pull request is responsible for merging their work.
+There could be conflicts with master when merging, so they will also be responsible for resolving conflicts.
+
+We have disabled directly merging to master without a pull request for our project, so team members will be forced to go through the process described above.
+The reason we chose to go this route is because this will ensure there are less bugs, higher quality code, and more team members are aware of changes.
+
+##### Deployment
+We are using firebase hosting for our project. ```firebase deploy``` is the only command we need to deploy our website.
+Once the deployment process is complete from running this command, we will be able to see our changes on a live website.
+We chose firebase hosting and firebase in general because of its ease of use. Firebase will save us 
+a significant amount of time when having to deploy which will allow our team to focus on the product and ensure it's the best
+it can be given the amount of time we have.
 
 
 ## Product
