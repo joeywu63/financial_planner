@@ -1,13 +1,9 @@
-# YOUR PRODUCT/TEAM NAME
+# FINANCIAL PLANNER FOR CANADIAN MED-SCHOOL APPLICANTS
 
- > _Note:_ This document is meant to be written during (or shortly after) your initial planning meeting.     
- > It does not really make sense for you to edit this document much (if at all) while working on the project - Instead, at the end of the planning phase, you can refer back to this document and decide which parts of your plan you are happy with and which parts you would like to change.
+## Iteration 2
 
-
-## Iteration XX
-
- * Start date: FILL IN THE DATE WHEN YOU HAD YOUR FIRST TEAM PLANNING MEETING
- * End date: FILL IN THE DATE WHEN YOU ARE PLANNING TO HAVE YOUR REVIEW MEETING
+ * Start date: Nov 1, 2019
+ * End date: Nov 15, 2019
 
 ## Process
 
@@ -15,50 +11,120 @@
 
 #### Roles & responsibilities
 
-Describe the different roles on the team and the responsibilities associated with each role. 
- * Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.
 
-List each team member and:
- * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
+Below are the roles we will have for our team, and a short description of the responsibilities associated with each role, as well as who they will be working with.
+
+ * Customer relations
+   * Communicates with our partners on behalf of the whole team.
+   * Updates our partners on the current progress.
+   * Addresses questions, concerns, expectations and roadmaps for upcoming deliverables with our partners.
+   * Schedules upcoming meetings with our partners.
+
+ * Tech lead
+   * Responsible for managing the technical scope of the project.
+   * Mentors the rest of the team on the chosen tech stack.
+   * Identifies the tasks that should be prioritized and provides estimations on the complexity of each.
+   * Identifies potential problems, alternative solutions and other technical caveats that may arise in the project.
+
+ * Quality assurance & testing lead
+   * Executing tests and reviewing results after every update to the project.
+   * Documenting bugs and technical issues.
+   * Communicating bugs and technical issues with the rest of the team.
+   * Help team members troubleshoot bugs and technical issues.
+
+ * User experience lead
+   * Identifies usability problems in user interfaces.
+   * Conducts usability testing throughout the project with prototypes of varying fidelity.
+   * Communicates potential usability problems to the rest of the team.
+   * Identify ways to modify user interfaces to improve usability.
+
+ * Product manager
+   * Manage the product backlog by prioritizing and adding tasks.
+   * Guide the development process by creating actionable user stories.
+   * Ensure that completed work fulfills the user stories and acceptance criteria.
+
+ * Scrum master
+   * Identify obstacles in development and guides the team in overcoming them.
+   * Ensures that milestones and deliverables are achieved in a timely manner.
+   * Facilitates meetings and communication within the team.
+
+Below is a table which outlines each team member's role(s) and responsibilities outside of coding, as well as their technical strengths and weaknesses (e.g. languages, frameworks, libraries, development methodologies, etc.)
+
+ | Team member | Role | Responsibilities      | Strengths    | Weaknesses    |
+ |-------------|------|-----------------------|--------------|---------------|
+ | Julia Xu | QA | Checking code, Finding bugs | JavaScript, Python, SQL | UX, Firebase, Scrum |
+ | Sandro Seryani | Scrum Master | Lead scrums, Apply Agile principles | JavaScript, React, Scrum methodologies | Deployment, Automated Testing, UX Design|
+ | Lucas Gismondi | Tech Lead | Third party tool support, architecture | JavaScript, React, Firebase, Frontend Unit Tests | Deployment, UX Design |
+ | Joey Wu | Customer relations | Manage partner meetings & communication | Python, C, Shell | React, Databases, Agile methodologies |
+ | Tianze Xu | UX | Support UI dev. across user stories | Python, JavaScript, React, SQL | Firebase, Testing, Deployment |
+ | Wendy Hua | Product Manager | Manage product backlog & development process | Javascript, React, Automated frontend testing (Puppeteer) | Firebase, Deployment|
+ | Alex Eng | QA | Test code for bugs & code verification | JavaScript, Python, C | React, Firebase, UX |
 
 #### Team Rules
 
 Describe your team's working culture.
 
-Communications:
- * What is the expected frequency? What methods/channels are appropriate? 
- * If you have a partner project, what is your process (in detail) for communicating with your partner?
+**Group Communications**:
+
+We are using the Slack app for general communications. Team members are expected to check for new messages on the app at least once per day. The Slack workspace is divided into channels for organization.
+
+For voice or video calls, we will use Facebook or Zoom.
+
+**Partner Communications**:
+
+The main line of communication with the partner is through email, such as to provide updates on the project or arrange meetings. Our team representative will email the partner on behalf of the team, cc-ing the rest of the team members.
+
+Once every 2 weeks, there will be an in-person meeting with the partner.
+
+**Meetings**:
+
+Team members are responsible for attending the weekly meetings. We will allow some lenience for hectic schedules, but if a team member repeatedly misses meetings, we will go to the TA. At the meetings, we will have a time where we take turns talking about our progress from the previous week. If we could not complete tasks we were responsible for (tracked through meistertask), we will look at the causes. If it is due to unexpected technical challenges, we will take it into account in workload estimates of future tasks. Then we will have take time to prioritize and assign tasks for the preceeding week.
+
+**Conflict Resolution**:
  
-Meetings:
- * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
- 
-Conflict Resolution:
- * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
+ Below are several hypothetical scenarios/conflicts that may arise, and how we will resolve them.
+
+   * There is disagreement on how to accomplish a task (technical implementation, scope etc.): In one of the weekly meetings, we would have a discussion about the strengths of each option. Then, we would take a vote. If a team member still feels strongly about the result, we would repeat the discussion process.
+   * There is a task nobody wants to take on: If the task is large, we would subdivide it among the team. Otherwise, we would access the strengths and weakness of each member to decide who would have the easist time accomplishing the task. At the same time, we would make sure such "undesirable" tasks do not always go to the same person.
+   * A team member is writing poor quality code: In one of the weekly meetings, we would discuss what we find lacking and offer suggestions to improve the quality of the code.
+   * A team member is non-responsive/not contributing at all: If a team member is irresponsive, they will be told of the issue. If it becomes persistent, we will report to the TA.
 
 
 #### Events
 
-Describe meetings (and other events) you are planning to have:
- * When and where? Recurring or ad hoc? In-person or online?
- * What's the purpose of each meeting?
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
+**Meetings**:
+
+The team will have meetings once per week, on Fridays at 12 pm to 1 pm at Bahen, unless it has been decided that we will not be meeting that week, or that we have a partner meeting that week.
+
+The team will have online voice call meetings as necessary, for more urgent conversations or when it is more convenient than an in-person meeting.
+
+The purpose of team meetings is to keep everyone up-to-date on the state of the project, to assign new tasks for the upcoming week, and to review completed work.
+
+Two members of the team will be expected to complete code reviews for each Pull Request. We will also hold quick online sync meetings when necessary.
 
 
 #### Partner Meetings
-You must have at least 2 meetings with your project partner - an initial planning meeting discussing the features you will build this iteration and a sprint demo meeting to review what you've done. Describe the meetings here:
-* When and where will you meet?
-* What do you intend to discuss(**note you will have meeting minutes in the review document**)?
 
-#### Artifacts
+**Meeting Descriptions**:
 
-List/describe the artifacts you will produce in order to organize your team.       
+**_Meeting 1_**  
+**Time and Location**  
+Friday, Nov 1, 12-1pm @ David Naylor Building room 314
 
- * Artifacts can be To-Do lists, Task boards, schedule(s), etc.
- * We want to understand:
-   * How do you keep track of what needs to get done?
-   * How do you prioritize tasks?
-   * How do tasks get assigned to team members?
+//TODO: Wendy will add minutes for the meeting before 11:59pm Nov 11
+
+**_Meeting 2_**  
+**Time and Location**  
+Friday, Nov 15, 12-1pm @ David Naylor Building room 314
+
+#### Artifacts   
+
+ * The team will be utilizing MeisterTask, a task management platform for teams.
+ * We will use MeisterTask to assign, organize and prioritize tasks between team members.
+ * We will also use MeisterTask to keep track of outstanding items that are not yet done.
+ * We will utilize MeisterTask's ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
+ * The team will prioritize tasks by keeping them in an ordered list as well as adding highlight tags to each, stating whether they are of high, medium or low priority.
+ * Tasks will be assigned to team members according to their experience, priority and schedules. 
 
 
 #### Deployment and Github Workflow
