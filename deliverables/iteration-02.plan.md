@@ -80,6 +80,8 @@ reviewing the code will be responsible for two things.
     - Any function that needs to directly access the firebase database must be in a file that lives in the 'model' directory
     - Any function, within a react component, that needs to pull data, must call the function from a repository file in the respective components directory
     - Any constant for a component must live within a constants file in the respective components directory
+
+Note: The reason for this type of architecture is that both the backend and frontend are clearly separated. This allows for the backend to be easily swapped with another backend.
     
 Once the pull request is approved, the member who issued the pull request is responsible for merging their work.
 There could be conflicts with master when merging, so they will also be responsible for resolving conflicts.
