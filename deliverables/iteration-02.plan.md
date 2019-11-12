@@ -129,18 +129,12 @@ Friday, Nov 15, 12-1pm @ David Naylor Building room 314
 
 #### Deployment and Github Workflow
 
-Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
-
- * Be concise, yet precise. For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.
- * If applicable, specify any naming conventions or standards you decide to adopt.
- * Describe your overall deployment process from writing code to viewing a live applicatioon
- * What deployment tool(s) are you using and why
- * Don't forget to **explain why** you chose this workflow or particular aspects of it!
-
 ##### Github Workflow
 When a team member begins writing code for a feature, they must create a branch off master and push their changes to the new branch.
-Once they are satisfied with their work, they will create a pull request to be reviewed by any two other members on the team. The two members
-reviewing the code will be responsible for two things. 
+For each feature, we are currently breaking off into mini-teams to work on a singular feature. The mini-teams are responsible for merging/staying up to date/resolving conflicts within their own branch.
+Once they are satisfied with their work, they will create a pull request to be reviewed by any two other members on the team.
+We made the choice of having two other members review the code because it is a good middle ground between speed/efficiency and getting enough feedback.
+The two members reviewing the code will be responsible for two things. 
 1. Checking out the code and ensuring the feature satisfies the acceptance criteria
 2. The architecture/styling of the code follows some basic standards, which are the following:
     - Any function that needs to directly access the firebase database must be in a file that lives in the 'model' directory
@@ -157,8 +151,8 @@ The reason we chose to go this route is because this will ensure there are less 
 
 ##### Deployment
 We are using firebase hosting for our project. ```firebase deploy``` is the only command we need to deploy our website.
-Once the deployment process is complete from running this command, we will be able to see our changes on a live website.
-We chose firebase hosting and firebase in general because of its ease of use. Firebase will save us 
+Once the deployment process is complete from running this command, we will be able to see our changes on a live website. (The URL has currently not been decided. We will be using a generated URL from firebase for the time being.)
+We chose firebase hosting and firebase in general because of its ease of use and the ability to easily switch hosting services depending on the partners needs. Firebase will save us 
 a significant amount of time when having to deploy which will allow our team to focus on the product and ensure it's the best
 it can be given the amount of time we have.
 
