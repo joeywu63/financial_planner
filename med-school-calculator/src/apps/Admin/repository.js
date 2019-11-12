@@ -15,6 +15,10 @@ export const createType = type.create;
 
 export const createSubType = subType.create;
 
+export const createExpense = expense.create;
+
+export const createExpenseUnderType = expense.createUnderType;
+
 export const deleteType = type.deleteType;
 
 export const deleteSubType = subType.deleteSubType;
