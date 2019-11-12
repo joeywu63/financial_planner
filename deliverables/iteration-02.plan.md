@@ -3,11 +3,9 @@
 ## Iteration 2
 
  * Start date: Nov 1, 2019
- * End date: Nov 15, 2019
+ * End date: Nov 22, 2019
 
 ## Process
-
-(Optional:) Quick introduction
 
 #### Roles & responsibilities
 
@@ -109,7 +107,32 @@ Two members of the team will be expected to complete code reviews for each Pull 
 **Time and Location**  
 Friday, Nov 1, 12-1pm @ David Naylor Building room 314
 
-//TODO: Wendy will add minutes for the meeting before 11:59pm Nov 11
+**Minutes**  
+*Attendees:*
+* Team members: Joey Wu, Lucas Gismondi, Sandro Seryani, Tianze Xu, Wendy Hua
+* Project partners: Ike Okafor, Lauren Phillips
+
+*Discussion Key Points:*  
+* Demonstrated basic functionalities we implemented in the last iteration (Login, profile, admin and calculator pages).
+* Discussed further functionalities we could *possibly* implement.
+  * Autosaving, or a button that allows users to save their progress.
+  * A way for the user to submit feedback and rate the app.
+  * An option for users to enter their amount for certain expenses with estimated costs (such as plane tickets) manually.
+  * An option for users to email their information to themselves.
+* Determined further information partners would provide to us.
+  * URLs to alternative resources
+  * Short description of alternative and default resources
+  * Communication timeline for MentorCity
+* Partners listed further requirements/preferences.
+  * Avoid too much overlap with MentorCity。
+  * Require that users create an account when using the app (instead of being able to use the app without an account).
+
+*Outcomes:*
+* Project partners were satisfied with current progress.
+
+*Next Steps:*
+* Project partners will provide info listed above.
+* Group members will work on implementing security measures (authentication) and other items listed below in "Goals and Tasks"
 
 **_Meeting 2_**  
 **Time and Location**  
@@ -185,5 +208,4 @@ The following are artifacts we will produce in order to present our project idea
 
 - **Diagrams of our data model**.  We will sketch a logical data model in our initial planning meeting, so that team members
 can discuss and come to a consensus with how to best structure our data. Later they will be converted to diagrams and
-illustrated in our product and planning document. This will be used to explain to our partners how data is organized in our database, which is important since they will likely be updating the database after the product is complete and delivered, and knowing
-our data model will make working with the database much easier.
+illustrated in our product and planning document. This will be used to explain to our partners how data is organized in our database, which is important since they will likely be updating the database after the product is complete and delivered, and knowing our data model will make working with the database much easier.
