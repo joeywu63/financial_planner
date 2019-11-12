@@ -62,8 +62,6 @@ Below is a table which outlines each team member's role(s) and responsibilities 
 
 #### Team Rules
 
-Describe your team's working culture.
-
 **Group Communications**:
 
 We are using the Slack app for general communications. Team members are expected to check for new messages on the app at least once per day. The Slack workspace is divided into channels for organization.
@@ -119,13 +117,14 @@ Friday, Nov 15, 12-1pm @ David Naylor Building room 314
 
 #### Artifacts   
 
- * The team will be utilizing MeisterTask, a task management platform for teams.
- * We will use MeisterTask to assign, organize and prioritize tasks between team members.
- * We will also use MeisterTask to keep track of outstanding items that are not yet done.
- * We will utilize MeisterTask's ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
- * The team will prioritize tasks by keeping them in an ordered list as well as adding highlight tags to each, stating whether they are of high, medium or low priority.
- * Tasks will be assigned to team members according to their experience, priority and schedules. 
+ The team will be utilizing [MeisterTask](https://www.meistertask.com/app/dashboard) (requires invite), which is a task management platform for teams. We will use MeisterTask to assign, organize and prioritize tasks between team members, as well as keeping track of outstanding items that are not yet done.
 
+ In MeisterTask, tasks can be created and freely moved around under four stages: Backlog, Open, In Progress and Done. We will use this
+ feature to keep track of the status of each task. Each task can also be assigned a deadline, which we will use to help keep team members on schedule for deliverables. Tasks can also be moved around in each individual column and be tagged with highlight tags,
+ we will use these features to prioritize tasks (more urgent tasks are placed at the top of the list)
+
+ For our task assignment process, we will be using a volunteering system. During planning meetings, after we have refined the broad list of tasks to complete for that iteration, team members will select some task(s) to work on for that iteration based on their experience with certain technologies, their schedule and the anticipated complexity of that task (more complex tasks will need more
+ team members working on them). Subteams will then be created based on the task(s) chosen by individual team members, and they will then be responsible for updating MeisterTask (moving tasks around, creating subtasks, marking them as complete) according to their progress.
 
 #### Deployment and Github Workflow
 
@@ -161,15 +160,30 @@ it can be given the amount of time we have.
 
 #### Goals and tasks
 
- * Describe your goals for this iteration and the tasks that you will have to complete in order to achieve these goals.
- * Order the items from most to least important.
- * Feel free (but not obligated) to specify some/all tasks as user stories.
+For this iteration, we aim to deliver a basic version of our product with the core functionality completed and usable
+by both groups of our intended users (med school applicants and our partners at the Faculty of Medicine). Applicants will be
+able to navigate through a financial planner divided into three sections, view and select from a list of costs for each section, 
+and see the summation of costs as they navigate through the planner. Admins (our partners) will be able to edit the name and
+cost associated with each option at will, as well as adding and deleting options.
+
+As we aim to work on the core functionality and deliver a basic, usable version of the product, styling of the product will not be included as part of this iteration.
+
+Below is the list of tasks we intend to complete for this iteration, ordered by importance:
+
+- Import cost data provided by our partners into Firestore
+- Be able to retrieve each cost item from our database
+- Be able to display it on a webpage organized by cost type (MCAT, Application, Interview)
+- Be able to display the sum of costs of selected options dynamically
+- Creating an interface allowing admins to add, delete and update individual expenses
+- Creating a login (authentication) system
+- Creating an account registration system
+- Be able to display a breakdown of costs by type, with net cost at the end
 
 #### Artifacts
 
-List/describe the artifacts you will produce in order to present your project idea.
+The following are artifacts we will produce in order to present our project idea.
 
- * Artifacts can be text, code, images, videos, interactive mock-ups and/or any other useful artifact you can think of.
- * Make sure to explain the purpose of each artifact (i.e. Why is it on your to-do list? Why is it useful for your team?)
- * Be concise, yet precise.         
-   For example: "Build the website" is not precise at all, but "Build a static home page and upload it somewhere, so that it is publicly accessible" is much clearer.
+- **Diagrams of our data model**.  We will sketch a logical data model in our initial planning meeting, so that team members
+can discuss and come to a consensus with how to best structure our data. Later they will be converted to diagrams and
+illustrated in our product and planning document. This will be used to explain to our partners how data is organized in our database, which is important since they will likely be updating the database after the product is complete and delivered, and knowing
+our data model will make working with the database much easier.
