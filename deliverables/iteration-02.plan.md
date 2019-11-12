@@ -132,11 +132,11 @@ Friday, Nov 1, 12-1pm @ David Naylor Building room 314
 
 *Next Steps:*
 * Project partners will provide info listed above.
-* Group members will work on implementing security measures (authentication) and other items listed below in "Goals and Tasks"
+* Group members will work on items listed below in "Goals and Tasks"
 
 **_Meeting 2_**  
 **Time and Location**  
-Friday, Nov 15, 12-1pm @ David Naylor Building room 314
+Friday, Nov 22, 12-1pm @ David Naylor Building room 314
 
 #### Artifacts   
 
