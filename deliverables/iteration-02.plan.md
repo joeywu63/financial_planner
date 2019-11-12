@@ -183,24 +183,22 @@ it can be given the amount of time we have.
 
 #### Goals and tasks
 
-For this iteration, we aim to deliver a basic version of our product with the core functionality completed and usable
-by both groups of our intended users (med school applicants and our partners at the Faculty of Medicine). Applicants will be
-able to navigate through a financial planner divided into three sections, view and select from a list of costs for each section, 
-and see the summation of costs as they navigate through the planner. Admins (our partners) will be able to edit the name and
-cost associated with each option at will, as well as adding and deleting options.
+For this iteration, we aim to improve on our basic version of our product by adding new features and improving existing ones. 
+Applicants will be able to save their progress when choosing their expenses on the calculator screen and will now be able to see 
+alternative options for various expenses. 
 
-As we aim to work on the core functionality and deliver a basic, usable version of the product, styling of the product will not be included as part of this iteration.
+As the core functionality is at near completion, this iteration will also see us focus on styling the different components of the 
+application. Some efforts will also be devoted to improving existing code. The final product at the end of this period should be 
+much more usable and user-friendly than the product we have now.
 
 Below is the list of tasks we intend to complete for this iteration, ordered by importance:
 
-- Import cost data provided by our partners into Firestore
-- Be able to retrieve each cost item from our database
-- Be able to display it on a webpage organized by cost type (MCAT, Application, Interview)
-- Be able to display the sum of costs of selected options dynamically
-- Creating an interface allowing admins to add, delete and update individual expenses
-- Creating a login (authentication) system
-- Creating an account registration system
-- Be able to display a breakdown of costs by type, with net cost at the end
+- Save functionality in the calculator. We should keep track of the progress made by the user (Their selections, at which stage they left the application).
+- The ability to display alternatives for expenses at each stage.
+- Styling of the calculator, login and navigation pages (Nice to do: Style admin and profile pages too)
+- Refactoring of the calculator-database interface to reduce the number of database calls by integrating caching
+- Improve error handling accross the application
+- Set database security rules to ensure that users can only access their own information
 
 #### Artifacts
 
