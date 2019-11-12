@@ -117,13 +117,14 @@ Friday, Nov 15, 12-1pm @ David Naylor Building room 314
 
 #### Artifacts   
 
- * The team will be utilizing MeisterTask, a task management platform for teams.
- * We will use MeisterTask to assign, organize and prioritize tasks between team members.
- * We will also use MeisterTask to keep track of outstanding items that are not yet done.
- * We will utilize MeisterTask's ability to assign deadlines for items which aids in keeping team members on schedule for deliverables.
- * The team will prioritize tasks by keeping them in an ordered list as well as adding highlight tags to each, stating whether they are of high, medium or low priority.
- * Tasks will be assigned to team members according to their experience, priority and schedules. 
+ The team will be utilizing [MeisterTask](https://www.meistertask.com/app/dashboard) (requires invite), which is a task management platform for teams. We will use MeisterTask to assign, organize and prioritize tasks between team members, as well as keeping track of outstanding items that are not yet done.
 
+ In MeisterTask, tasks can be created and freely moved around under four stages: Backlog, Open, In Progress and Done. We will use this
+ feature to keep track of the status of each task. Each task can also be assigned a deadline, which we will use to help keep team members on schedule for deliverables. Tasks can also be moved around in each individual column and be tagged with highlight tags,
+ we will use these features to prioritize tasks (more urgent tasks are placed at the top of the list)
+
+ For our task assignment process, we will be using a volunteering system. During planning meetings, after we have refined the broad list of tasks to complete for that iteration, team members will select some task(s) to work on for that iteration based on their experience with certain technologies, their schedule and the anticipated complexity of that task (more complex tasks will need more
+ team members working on them). Subteams will then be created based on the task(s) chosen by individual team members, and they will then be responsible for updating MeisterTask (moving tasks around, creating subtasks, marking them as complete) according to their progress.
 
 #### Deployment and Github Workflow
 
