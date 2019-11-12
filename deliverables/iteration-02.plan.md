@@ -165,10 +165,6 @@ it can be given the amount of time we have.
 
 #### Goals and tasks
 
- * Describe your goals for this iteration and the tasks that you will have to complete in order to achieve these goals.
- * Order the items from most to least important.
- * Feel free (but not obligated) to specify some/all tasks as user stories.
-
 For this iteration, we aim to deliver a basic version of our product with the core functionality completed and usable
 by both groups of our intended users (med school applicants and our partners at the Faculty of Medicine). Applicants will be
 able to navigate through a financial planner divided into three sections, view and select from a list of costs for each section, 
@@ -189,13 +185,6 @@ Below is the list of tasks we intend to complete for this iteration, ordered by 
 - Be able to display a breakdown of costs by type, with net cost at the end
 
 #### Artifacts
-
-List/describe the artifacts you will produce in order to present your project idea.
-
- * Artifacts can be text, code, images, videos, interactive mock-ups and/or any other useful artifact you can think of.
- * Make sure to explain the purpose of each artifact (i.e. Why is it on your to-do list? Why is it useful for your team?)
- * Be concise, yet precise.         
-   For example: "Build the website" is not precise at all, but "Build a static home page and upload it somewhere, so that it is publicly accessible" is much clearer.
 
 The following are artifacts we will produce in order to present our project idea.
 
