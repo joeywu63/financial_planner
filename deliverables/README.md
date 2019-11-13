@@ -25,6 +25,9 @@ create, update, and delete current expense information on the Admin Page. Once u
 3. Once the sign up process is complete you will be redirected to a blank page with 3 clickable buttons on the top left of the screen
 
 #### Profile Usage
+1. Click on the Profile button on the top left of the page.
+2. To edit your profile, click 'Edit Profile', make your changes and click submit or cancel.
+3. To change your password, click 'Edit Password', insert new password and confirm new password, then click submit or cancel.
 
 #### Calculator Usage
 1. Click on the Calculator button on the top left of the page.
@@ -33,18 +36,18 @@ create, update, and delete current expense information on the Admin Page. Once u
 
 #### Admin Usage
 NOTE: Before you use the admin page, please DO NOT delete any data that is currently there.
-We currently don't have a mechanism to confirm deletions. Only delete any data that you add to the system
+We currently don't have a mechanism to confirm deletions. Only delete any data that you add to the system.
 
 1. To gain access to Admin functionality please Logout and login with user: lucas.m.gismondi@gmail.com pass: 1234abcd
-2. Click the Admin button on the top left of the screen
-3. To create an expense Type, scroll to the bottom of page and click 'Add Type', insert name and click submit, or click cancel
-4. To edit an expense Type, click edit next to the Type you would like to edit, insert new name and click submit, or click cancel
-5. To delete an expense Type, click delete next to the Type you would like to delete 
-6. To create an expense Sub Type, scroll to the Type you want to add a Sub Type to and click 'Add Sub Type', insert name and click submit, or click cancel
-7. To edit an expense Sub Type, click edit next to the Sub Type you would like to edit, insert new name and click submit, or click cancel
-8. To delete an expense Sub Type, click delete next to the Sub Type you would like to delete
-3. To create an Expense, scroll to the Type/Sub Type you want to add an Expense to and click 'Add Expense', insert name and click submit, or click cancel
-4. To edit an Expense, click edit next to the Expense you would like to edit, insert new name and click submit, or click cancel
-5. To delete an Expense, click delete next to the Expense you would like to delete
+2. Click the Admin button on the top left of the screen.
+3. To create an expense Type, scroll to the bottom of page and click 'Add Type', insert name and click submit, or click cancel.
+4. To edit an expense Type, click edit next to the Type you would like to edit, insert new name and click submit, or click cancel.
+5. To delete an expense Type, click delete next to the Type you would like to delete .
+6. To create an expense Sub Type, scroll to the Type you want to add a Sub Type to and click 'Add Sub Type', insert name and click submit, or click cancel.
+7. To edit an expense Sub Type, click edit next to the Sub Type you would like to edit, insert new name and click submit, or click cancel.
+8. To delete an expense Sub Type, click delete next to the Sub Type you would like to delete.
+3. To create an Expense, scroll to the Type/Sub Type you want to add an Expense to and click 'Add Expense', insert name and click submit, or click cancel.
+4. To edit an Expense, click edit next to the Expense you would like to edit, insert new name and click submit, or click cancel.
+5. To delete an Expense, click delete next to the Expense you would like to delete.
 
 All changes are automatically saved
