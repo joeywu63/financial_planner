@@ -61,6 +61,56 @@ export const update = ({ expenseID, name }) => {
         .firestore()
         .collection(EXPENSE_COLLECTION)
         .doc(expenseID)
-        .update({ name })
+        .update({ name });
+};
+
+export const getBySubtype = ({ subTypeID }) => {
+    return firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
+        .where('subtypeID', '==', subTypeID)
+        .get()
+        .then(collection => {
+            const data = [];
+
+            collection.forEach(doc => {
+                data.push({ id: doc.id, ...doc.data() });
+            });
+            return data;
+        })
+        .catch(error => error);
+};
+
+// get list of all default expenses
+export const getAllDefaultExpenses = () => {
+    const expenses = [];
+    firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
+        .where('isAlternative', '==', false)
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.docs.forEach(doc => {
+                expenses.push(doc.data());
+            });
+            return expenses;
+        })
+        .catch(error => error);
+};
+
+// get list of all alternative expenses
+export const getAllAlternativeExpenses = () => {
+    const expenses = [];
+    firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
+        .where('isAlternative', '==', true)
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.docs.forEach(doc => {
+                expenses.push(doc.data());
+            });
+            return expenses;
+        })
         .catch(error => error);
 };

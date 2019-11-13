@@ -1,8 +1,102 @@
 import React from 'react';
+import styled from 'styled-components';
+import Chevron from './Chevron';
+import CalculatorData from './CalculatorData';
+import { getAllTypes, getSubtypesByType } from '../repository';
+import Breakdown from './Breakdown';
+
+const CalculatorWrapper = styled.div`
+    height: 90%;
+    width: 90%;
+    background-color: #dcdcdc99;
+    margin: auto;
+`;
+
+const NavBar = styled.ul`
+    list-style: none;
+    overflow: hidden;
+    margin: auto auto 2vh auto;
+`;
+
+const NavWrapper = styled.div`
+    background-color: black;
+    margin: auto;
+`;
 
 class Calculator extends React.Component {
+    state = {
+        loading: true,
+        currentStage: 'Interview Process',
+        types: [],
+        subTypes: []
+    };
+
+    handleClick = name => {
+        this.setState({
+            currentStage: name
+        });
+        if (name !== 'Breakdown') {
+            getSubtypesByType(name).then(data => {
+                this.setState({
+                    subTypes: data
+                });
+            });
+        }
+    };
+
+    componentDidMount() {
+        getAllTypes().then(data =>
+            this.setState({
+                loading: false,
+                types: data
+            })
+        );
+    }
+
+    renderList = types => {
+        return (
+            <div>
+                {types.map(item => (
+                    <Chevron
+                        onClick={() => {this.handleClick(item.name)}} 
+                        key={item.id}
+                        title={item.name}
+                    >
+                        {' '}
+                    </Chevron>
+                ))}
+            </div>
+        );
+    };
+
+    renderCalculatorData = () => {
+        const { currentStage } = this.state;
+        if (currentStage === 'Breakdown') {
+            return <Breakdown></Breakdown>;
+        } else {
+            return (
+                <CalculatorData
+                    title={currentStage}
+                    subTypes={this.state.subTypes}
+                ></CalculatorData>
+            );
+        }
+    };
+
     render() {
-        return <div>Calculator</div>
+        const { types, loading } = this.state;
+        return (
+            <CalculatorWrapper>
+                <NavWrapper>
+                    <NavBar>
+                        {loading
+                            ? console.log('Loading...')
+                            : this.renderList(types)}
+                    </NavBar>
+                </NavWrapper>
+                {this.renderCalculatorData()}
+            </CalculatorWrapper>
+        );
     }
 }
 
