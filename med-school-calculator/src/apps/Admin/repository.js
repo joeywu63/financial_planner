@@ -1,6 +1,6 @@
 import * as expense from 'model/expense';
 import * as type from 'model/type';
-import * as subType from 'model/subType';
+import * as subType from 'model/subtype';
 
 export const getTypes = type.get;
 
