@@ -61,7 +61,9 @@ export const update = ({ expenseID, name }) => {
         .firestore()
         .collection(EXPENSE_COLLECTION)
         .doc(expenseID)
-        .update({ name })
+        .update({name})
+};
+
 export const getBySubtype = ({ subTypeID }) => {
     console.log(subTypeID)
     return firebase

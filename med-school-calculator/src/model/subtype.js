@@ -3,27 +3,11 @@ import firebase from 'firebase';
 const SUB_TYPE_COLLECTION = 'subtype';
 const EXPENSE_COLLECTION = 'expense';
 
-export const get = ({typeID}) => {
+export const get = ({ typeID }) => {
     return firebase
         .firestore()
         .collection(SUB_TYPE_COLLECTION)
         .where('typeID', '==', typeID)
-        .get()
-        .then(collection => {
-            const data = [];
-
-            collection.forEach(doc => {
-                data.push({ id: doc.id, ...doc.data() });
-            });
-            return data;
-        })
-        .catch(error => error);
-};
-
-export const getAll = () => {
-    return firebase
-        .firestore()
-        .collection(SUB_TYPE_COLLECTION)
         .get()
         .then(collection => {
             const data = [];
