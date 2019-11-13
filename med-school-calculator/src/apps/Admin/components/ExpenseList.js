@@ -23,17 +23,13 @@ class ExpenseList extends React.Component {
         }
     }
 
-    createTemporaryType = (id, name) => {
-        return { id, name };
-    };
-
     handleCreateType = async name => {
         try {
             const { types } = this.state;
 
             const typeID = await createType({ name });
 
-            types.push(this.createTemporaryType(typeID, name));
+            types.push({id: typeID, name});
             this.setState({ isAddingType: false, types });
         } catch (e) {
             // TODO: error
