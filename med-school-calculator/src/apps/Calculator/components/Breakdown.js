@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { getAllTypes, getSubtypesByType } from '../repository';
 
 const Table = styled.table`
@@ -24,14 +24,17 @@ const TableHeader = styled.th`
 `;
 
 class Breakdown extends React.Component {
-    async componentDidMount() {
-        getAllTypes().then(data => this.setState({ types: data }));
-    }
-
     state = {
         selected: [],
         types: []
     };
+
+    async componentDidMount() {
+        const data = await getAllTypes();
+        this.setState({
+            types: data
+        });
+    }
 
     renderSubtypes() {}
 

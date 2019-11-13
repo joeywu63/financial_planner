@@ -61,11 +61,10 @@ export const update = ({ expenseID, name }) => {
         .firestore()
         .collection(EXPENSE_COLLECTION)
         .doc(expenseID)
-        .update({name})
+        .update({ name });
 };
 
 export const getBySubtype = ({ subTypeID }) => {
-    console.log(subTypeID)
     return firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)
@@ -94,9 +93,9 @@ export const getAllDefaultExpenses = () => {
             querySnapshot.docs.forEach(doc => {
                 expenses.push(doc.data());
             });
+            return expenses;
         })
         .catch(error => error);
-    return expenses;
 };
 
 // get list of all alternative expenses
@@ -111,20 +110,7 @@ export const getAllAlternativeExpenses = () => {
             querySnapshot.docs.forEach(doc => {
                 expenses.push(doc.data());
             });
-        })
-        .catch(error => error);
-    return expenses;
-};
-
-
-// update this expense document's field with newval
-export const updateExpense = ({ uid, field, newval }) => {
-    firebase
-        .firestore()
-        .collection(EXPENSE_COLLECTION)
-        .doc(uid)
-        .update({
-            [field]: newval
+            return expenses;
         })
         .catch(error => error);
 };
