@@ -7,8 +7,8 @@
 
 ## Iteration XX - Review & Retrospect
 
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
- * Where: PHYSICAL LOCATION AND/OR ONLINE
+ * When: 2019 Nov 13
+ * Where: Online
 
 ## Process - Reflection
 
@@ -18,56 +18,38 @@
 
 List process-related (i.e. team organization) decisions that, in retrospect, turned out to be successful.
 
+ 1. Weekly meetings: consistent, and helpful for keeping members on track.
+ 2. Using slack for communication: the different channels have been helpful for organizing work topics.
+ 3. Having two people review code before merging into master: good for assuring quality of code.
 
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
- * Feel free to refer/link to process artifact(s).
 
 #### Decisions that did not turn out as well as we hoped
 
-List process-related (i.e. team organization) decisions that, in retrospect, were not as successful as you thought they would be.
-
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Feel free to refer/link to process artifact(s).
-
+ 1. Meistertask: planned to use for organizing tasks, did not end up being used very often.
+ 2. Roles: the specific roles don't match with our workflow at this point (implementing basic functionalities).
 
 #### Planned changes
 
-List any process-related changes you are planning to make (if there are any)
-
- * Ordered from most to least important.
- * Explain why you are making a change.
-
+ None
 
 ## Product - Review
 
 #### Goals and/or tasks that were met/completed:
 
- * From most to least important.
- * Refer/link to artifact(s) that show that a goal/task was met/completed.
- * If a goal/task was not part of the original iteration plan, please mention it.
+ *add screenshot from meistertask*
 
 #### Goals and/or tasks that were planned but not met/completed:
 
- * From most to least important.
- * For each goal/task, explain why it was not met/completed.      
-   e.g. Did you change your mind, or did you just not get to it yet?
+ Cost breakdown on the calculator page: we hit the maximum number of reads to our FireBase for that day, so we couldn't access to the database, which was needed to work on this task.
 
 #### How was your product demo?
- * How did you prepare your demo?
- * What did you manage to demo to your partner?
- * Did your partner accept the features?
- * Were there change requests?
- * What did you learn from the demo from either a process or product perspective?
+ 
+ We prepared for our demo by planning who would demo which parts and testing it ourselves before demo-ing to our partners. We were able to demo the basic functionalities: Profile page (editing profile and password), calculator page (being able to see the cost of expenses and select expenses), admin page (), login page. Our partners were satisfied with the progress made so far. They mentioned that the order of the calculator headers needed to be changed to fit their requirements. During the demo, our partners were very open to any possible additional features we suggested, but we realized that implementing all of them would be excessive work for us. Through this, we learned how to manage expectations and set better internal deadlines for ourselves. We also learned how to explain our work to people who don't have technical backgrounds.
 
 ## Meeting Highlights
 
 Going into the next iteration, our main insights are:
-
- * 2 - 4 items
- * Short (no more than one short paragraph per item)
- * High-level concepts that should guide your work for the next iteration.
- * These concepts should help you decide on where to focus your efforts.
- * Can be related to product and/or process.
+ 1. Last iteration, we focused on basic functionality. This iteration, we will also focus on usability.
+ 2. Since we're working in subteams for separate pages, there needs to be more communication *between* the subteams as well as within them.
+ 3. We need to utilize our MeisterTask board in order to get a better vision or our tasks.
+ 4. We might have to cut features.
