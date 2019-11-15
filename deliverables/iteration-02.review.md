@@ -83,7 +83,7 @@ in helping us estimate how much work needs to be done, how much time it will tak
  We could not complete this task due to the incident with Firestore described above, since we were working on it the day
  before the project demo.
 
-#### How was your product demo?
+#### Product Demo
  
  **Preparation**: We prepared for our demo by planning who would demo which parts and testing it ourselves before demo-ing to our partners. We also did a walkthrough of how the targeted user would likely navigate through the system. Originally we had planned to merge all our feature branches into master the day before the demo and demo all features simultaneously on one computer, but due to the database incident we decided to instead demo feature branches separately.
  
