@@ -51,6 +51,9 @@ in helping us estimate how much work needs to be done, how much time it will tak
 
 #### Goals and/or tasks that were met/completed:
 
+ Screenshot from MeisterTask board that kept track of our tasks:  
+ ![](https://raw.githubusercontent.com/csc301-fall-2019/team-project-uoft-faculty-of-medicine/master/deliverables/images/d2completed.jpg?token=AHE5SWNO4FW4QSTIB6MBM3C53CVWA)
+ 
  Completed tasks, in order of importance:
  - Import cost data into Firestore
  - Be able to retrieve cost data (from Firestore)
@@ -67,9 +70,6 @@ in helping us estimate how much work needs to be done, how much time it will tak
 
  Completed tasks that weren't originally planned:
  - Create rules limiting access to Firestore
-
- Screenshot from MeisterTask board that kept track of our tasks:  
- ![](https://raw.githubusercontent.com/csc301-fall-2019/team-project-uoft-faculty-of-medicine/master/deliverables/images/d2completed.jpg?token=AHE5SWNO4FW4QSTIB6MBM3C53CVWA)
 
  We decided to add this task due to an incident with Firestore (our database) that occurred on the day before the project demo. 
  We hit our daily read operation quota (50K reads), thus rendering all our data inaccessible until the next day. Since we shouldn't even be close to hitting the limit, we initially had suspicions that unauthorized parties may have accessed our database. Even 
