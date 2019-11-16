@@ -43,7 +43,7 @@
 
 - **Setting internal deadlines**. One decision we neglected to make, but we think is important in retrospect is setting mini internal deadlines for tasks, instead of having 'soft' deadlines, such as project demo day and deliverable due dates. We think this is important because it would reduce 'crunch' on the days leading up to the soft deadlines, which we experienced throughout this iteration. Implementing this change would also help us better utilize our MeisterTask board.
 
-- **More personal responsiility in updating MeisterTask**. We have decided to place more emphasis on keeping the task board up to date, and ensuring that team members working on a task are responsible for updating the status of that task on the task board in a 
+- **More personal responsibility in updating MeisterTask**. We have decided to place more emphasis on keeping the task board up to date, and ensuring that team members working on a task are responsible for updating the status of that task on the task board in a 
 timely manner. We think this is an important change to make because having an accurate depiction of the task board is instrumental
 in helping us estimate how much work needs to be done, how much time it will take, whether we need to cut back on certain features, and also help us plan our time ahead more effectively.
 
@@ -71,8 +71,7 @@ in helping us estimate how much work needs to be done, how much time it will tak
  - Create rules limiting access to Firestore
 
  We decided to add this task due to an incident with Firestore (our database) that occurred on the day before the project demo. 
- We hit our daily read operation quota (50K reads), thus rendering all our data inaccessible until the next day. Since we shouldn't
- even be close to hitting the limit, we initially had suspicions that unauthorized parties may have accessed our database. Even 
+ We hit our daily read operation quota (50K reads), thus rendering all our data inaccessible until the next day. Since we shouldn't even be close to hitting the limit, we initially had suspicions that unauthorized parties may have accessed our database. Even 
  though this likely wasn't the case, we decided to prompty create access rules on our database in Firestore so that only we (and
  other approved users) could access the data.
 
@@ -90,7 +89,7 @@ in helping us estimate how much work needs to be done, how much time it will tak
  **Features demo-ed**: We were able to demo the basic functionalities, including the profile page (editing profile and password), calculator page (being able to see the cost of expenses organized by type of expense, select/deselect expenses and view dynamically updated cost), admin page (adding, editing, deleting expenses) and login flow (creating a profile, logging in). 
  
  **Demo results**: Our partners were satisfied with the progress made so far. The only **change request** they made was that the order of the sections under the calculator needed to be changed to fit their requirements (to MCAT -> Application -> Interview
- from Application -> MCAT -> Interview). We also raised the question of whether users should be able to use the calculator feature without having to sign in first, since it seemed logical, but our partners agreed with the way it was currently implemented (requiring login to use the feature). 
+ from Interview -> MCAT -> Application). We also raised the question of whether users should be able to use the calculator feature without having to sign in first, since it seemed logical, but our partners agreed with the way it was currently implemented (requiring login to use the feature). 
  
  **What we learned**: 
  - We learned that it is important to know our limits and manage our partners' expectations with regards to to-be-implemented features. During the demo, our partners were very open to any possible additional features we suggested (such as being able to manually enter costs along with selecting a predefined cost), but we realized that implementing all of the features with sufficient quality would take signficantly more time than we have. 
