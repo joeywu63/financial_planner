@@ -4,7 +4,11 @@ export const ROLES = {
 };
 
 export const COLOURS = {
-    white: '#ffffff',
-    buttonblue: '#308bb6',
-    greyblue: '#7398b1'
+    white: '#FCFCFC',
+    lightgrey: '#5D737E',
+    maroon: '#30292F',
+    darkgrey: '#3F4045',
+    darkblue: '#02111B',
+    lightblue: '#98B9F2',
+    lightorange: '#E2856E'
 };
