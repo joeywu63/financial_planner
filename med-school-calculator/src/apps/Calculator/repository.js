@@ -1,6 +1,7 @@
 import * as expense from 'model/expense';
 import * as type from 'model/type';
 import * as subtype from 'model/subtype';
+import * as alternative from 'model/alternative';
 
 export const getAllTypes = () => {
     return type.get();
@@ -31,4 +32,8 @@ export const getExpensesBySubtype = async ({ subtypeName }) => {
     } catch (e) {
         console.log(e);
     }
+};
+
+export const getAlternativesByExpense = ({ expenseID }) => {
+    return alternative.getAlternativesByExpense({ expenseID });
 };

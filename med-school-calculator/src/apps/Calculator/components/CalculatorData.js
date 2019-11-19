@@ -23,6 +23,7 @@ class CalculatorData extends React.Component {
                     <Subtype
                         handleSelection={this.handleSelection}
                         key={subtype.id}
+                        id={subtype.id}
                         title={subtype.name}
                     ></Subtype>
                 ))}
