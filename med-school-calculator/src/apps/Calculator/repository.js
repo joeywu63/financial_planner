@@ -2,9 +2,7 @@ import * as expense from 'model/expense';
 import * as type from 'model/type';
 import * as subtype from 'model/subtype';
 
-export const getAllTypes = () => {
-    return type.get();
-};
+export const getAllTypes = type.get;
 
 // takes string, returns [{id, data}, ...]
 // TODO: Move to /model
