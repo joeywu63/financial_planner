@@ -35,7 +35,7 @@ const LoginButton = styled.input`
     font-weight: 500;
     text-align: center;
     font-size: 16px;
-    color: ${COLOURS.white};
+    color: ${COLOURS.darkblue};
     background-color: ${COLOURS.lightorange};
     border: none;
     border-radius: 8px;
@@ -109,24 +109,20 @@ class Login extends React.Component {
                 <FormContainer onSubmit={this.handleSubmit}>
                     <Title>Welcome Back.</Title>
                     <Subtitle>Sign in to continue</Subtitle>
-                    <div>
-                        <LoginInfo
-                            name="email"
-                            type="text"
-                            placeholder="E-mail"
-                            value={email}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <LoginInfo
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    <LoginInfo
+                        name="email"
+                        type="text"
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={this.handleChange}
+                    />
+                    <LoginInfo
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={this.handleChange}
+                    />
                     <LoginButton type="submit" value="Sign In" />
                 </FormContainer>
             </LoginContainer>

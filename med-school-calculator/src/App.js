@@ -55,32 +55,16 @@ class App extends React.Component {
         });
     };
 
-    // toggleSignUp = () => {
-    //     const { isSigningUp } = this.state;
-
-    //     this.setState({ isSigningUp: !isSigningUp });
-    // };
-
     render() {
         const { loading, isSignedIn } = this.state;
-        const currentUser = getCurrentUser(); // we need to get current user also for security reasons
-
-        // return loading ? (
-        //     <div>Loading...</div>
-        // ) : isSignedIn && currentUser ? (
-        //     <Dashboard />
-        // ) : isSigningUp ? (
-        //     <SignUp cancel={this.toggleSignUp} />
-        // ) : (
-        //     <Login handleSignUp={this.toggleSignUp} />
-        // );
+        const currentUser = getCurrentUser(); // we need to get current user also for security reason
 
         return loading ? (
             <div>Loading...</div>
         ) : isSignedIn && currentUser ? (
             <Dashboard />
         ) : (
-            <Home></Home>
+            <Home/>
         );
     }
 }

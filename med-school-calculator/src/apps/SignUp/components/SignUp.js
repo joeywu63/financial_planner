@@ -116,39 +116,31 @@ class SignUp extends React.Component {
 
         return (
             <SignUpContainer>
-                <FormContainer>
+                <FormContainer onSubmit={this.handleSubmit}>
                     <Title>New User?</Title>
                     <Subtitle>Sign up to get started</Subtitle>
-                    <form onSubmit={this.handleSubmit}>
-                        <div>
-                            <SignUpInfo
-                                name="displayName"
-                                type="text"
-                                placeholder="Full Name"
-                                value={displayName}
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div>
-                            <SignUpInfo
-                                name="email"
-                                type="text"
-                                value={email}
-                                placeholder="E-mail"
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div>
-                            <SignUpInfo
-                                name="password"
-                                type="password"
-                                value={password}
-                                placeholder="Password"
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <SignUpButton type="submit" value="Sign Up" />
-                    </form>
+                    <SignUpInfo
+                        name="displayName"
+                        type="text"
+                        placeholder="Full Name"
+                        value={displayName}
+                        onChange={this.handleChange}
+                    />
+                    <SignUpInfo
+                        name="email"
+                        type="text"
+                        value={email}
+                        placeholder="E-mail"
+                        onChange={this.handleChange}
+                    />
+                    <SignUpInfo
+                        name="password"
+                        type="password"
+                        value={password}
+                        placeholder="Password"
+                        onChange={this.handleChange}
+                    />
+                    <SignUpButton type="submit" value="Sign Up" />
                 </FormContainer>
             </SignUpContainer>
         );
