@@ -2,8 +2,7 @@ import React from 'react';
 
 import * as firebase from 'firebase';
 
-import Login from 'apps/Login/components/Login';
-import SignUp from 'apps/SignUp/components/SignUp';
+import Home from 'apps/Login/components/Home';
 import Dashboard from 'apps/Dashboard/components/Dashboard';
 
 import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
@@ -28,15 +27,15 @@ class App extends React.Component {
 
     state = {
         loading: true,
-        isSignedIn: false,
-        isSigningUp: false
+        isSignedIn: false
     };
 
     checkIfLoggedIn = () => {
         firebase.auth().onAuthStateChanged(async user => {
             if (user) {
                 try {
-                    const userRole = (await userModel.get({uid: user.uid})).role;
+                    const userRole = (await userModel.get({ uid: user.uid }))
+                        .role;
 
                     const currentUser = {
                         uid: user.uid,
@@ -45,7 +44,7 @@ class App extends React.Component {
                         role: userRole
                     };
                     setCurrentUser(currentUser);
-                    this.setState({isSignedIn: true, loading: false});
+                    this.setState({ isSignedIn: true, loading: false });
                 } catch (e) {
                     alert('something went wrong');
                 }
@@ -56,24 +55,32 @@ class App extends React.Component {
         });
     };
 
-    toggleSignUp = () => {
-        const { isSigningUp } = this.state;
+    // toggleSignUp = () => {
+    //     const { isSigningUp } = this.state;
 
-        this.setState({ isSigningUp: !isSigningUp });
-    };
+    //     this.setState({ isSigningUp: !isSigningUp });
+    // };
 
     render() {
-        const { loading, isSignedIn, isSigningUp } = this.state;
+        const { loading, isSignedIn } = this.state;
         const currentUser = getCurrentUser(); // we need to get current user also for security reasons
+
+        // return loading ? (
+        //     <div>Loading...</div>
+        // ) : isSignedIn && currentUser ? (
+        //     <Dashboard />
+        // ) : isSigningUp ? (
+        //     <SignUp cancel={this.toggleSignUp} />
+        // ) : (
+        //     <Login handleSignUp={this.toggleSignUp} />
+        // );
 
         return loading ? (
             <div>Loading...</div>
         ) : isSignedIn && currentUser ? (
             <Dashboard />
-        ) : isSigningUp ? (
-            <SignUp cancel={this.toggleSignUp} />
         ) : (
-            <Login handleSignUp={this.toggleSignUp} />
+            <Home></Home>
         );
     }
 }
