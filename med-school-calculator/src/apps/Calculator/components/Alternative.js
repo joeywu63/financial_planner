@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const AltDiv = styled.div`
     margin-left: 30px;
@@ -20,7 +21,7 @@ class Alternative extends React.Component {
         return (
             <AltDiv>
                 <form>
-                    <label>{`Alternative option: ${name} : ${description}`}</label>
+                    <label>{`${name} : ${description}`}</label>
                     <input
                         type="checkbox"
                         checked={checked}
@@ -32,5 +33,10 @@ class Alternative extends React.Component {
         );
     }
 }
+
+Alternative.propTypes = {
+    cost: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired
+};
 
 export default Alternative;

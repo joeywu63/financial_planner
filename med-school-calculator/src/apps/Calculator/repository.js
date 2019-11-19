@@ -34,6 +34,4 @@ export const getExpensesBySubtype = async ({ subtypeName }) => {
     }
 };
 
-export const getAlternativesByExpense = ({ expenseID }) => {
-    return alternative.getAlternativesByExpense({ expenseID });
-};
+export const getAlternativesByExpense = alternative.getAlternativesByExpense

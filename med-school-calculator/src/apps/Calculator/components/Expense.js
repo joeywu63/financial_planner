@@ -19,20 +19,23 @@ class Expense extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        return (
-            <div>
-                {alternatives.map(alt => (
-                    <Alternative
-                        key={alt.id}
-                        id={alt.id}
-                        name={alt.name}
-                        description={alt.description}
-                        cost={alt.cost}
-                        onChange={this.props.onChange}
-                    ></Alternative>
-                ))}
-            </div>
-        );
+        if (!alternatives.length == 0) {
+            return (
+                <div>
+                    <b>Alternative options:</b>
+                    {alternatives.map(alt => (
+                        <Alternative
+                            key={alt.id}
+                            id={alt.id}
+                            name={alt.name}
+                            description={alt.description}
+                            cost={alt.cost}
+                            onChange={this.props.onChange}
+                        ></Alternative>
+                    ))}
+                </div>
+            );
+        }
     };
 
     render() {
@@ -49,7 +52,9 @@ class Expense extends React.Component {
                     ></input>
                     <small>{`${cost} $`}</small>
                 </form>
-                {loading ? console.log(loading) : this.renderAlternatives(alternatives)}
+                {loading
+                    ? console.log(loading)
+                    : this.renderAlternatives(alternatives)}
             </div>
         );
     }
