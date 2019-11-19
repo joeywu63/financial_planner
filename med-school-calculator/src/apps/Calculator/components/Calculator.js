@@ -1,26 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Chevron from './Chevron';
+import FirstChevron from './FirstChevron';
 import CalculatorData from './CalculatorData';
-import { getAllTypes, getSubtypesByType } from '../repository';
 import Breakdown from './Breakdown';
 
-const CalculatorWrapper = styled.div`
-    height: 90%;
-    width: 90%;
-    background-color: #dcdcdc99;
-    margin: auto;
-`;
+import { getAllTypes, getSubtypesByType } from '../repository';
 
 const NavBar = styled.ul`
     list-style: none;
     overflow: hidden;
-    margin: auto auto 2vh auto;
-`;
-
-const NavWrapper = styled.div`
-    background-color: black;
-    margin: auto;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
 `;
 
 class Calculator extends React.Component {
@@ -30,6 +24,15 @@ class Calculator extends React.Component {
         types: [],
         subTypes: []
     };
+
+    async componentDidMount() {
+        try {
+            const types = await getAllTypes();
+            this.setState({ loading: false, types });
+        } catch (e) {
+            console.log('something went wrong');
+        }
+    }
 
     handleClick = name => {
         this.setState({
@@ -44,58 +47,43 @@ class Calculator extends React.Component {
         }
     };
 
-    componentDidMount() {
-        getAllTypes().then(data =>
-            this.setState({
-                loading: false,
-                types: data
-            })
-        );
-    }
+    renderList = () => {
+        const { types, currentStage } = this.state;
 
-    renderList = types => {
-        return (
-            <div>
-                {types.map(item => (
-                    <Chevron
-                        onClick={() => {this.handleClick(item.name)}} 
-                        key={item.id}
-                        title={item.name}
-                    >
-                        {' '}
-                    </Chevron>
-                ))}
-            </div>
-        );
+        return types.map(item => (
+            <Chevron
+                onClick={() => this.handleClick(item.name)}
+                key={item.id}
+                title={item.name}
+                isSelected={currentStage === item.name}
+            />
+        ));
     };
 
     renderCalculatorData = () => {
         const { currentStage } = this.state;
         if (currentStage === 'Breakdown') {
-            return <Breakdown></Breakdown>;
+            return <Breakdown />;
         } else {
             return (
                 <CalculatorData
                     title={currentStage}
                     subTypes={this.state.subTypes}
-                ></CalculatorData>
+                />
             );
         }
     };
 
     render() {
-        const { types, loading } = this.state;
+        const { loading } = this.state;
         return (
-            <CalculatorWrapper>
-                <NavWrapper>
-                    <NavBar>
-                        {loading
-                            ? console.log('Loading...')
-                            : this.renderList(types)}
-                    </NavBar>
-                </NavWrapper>
+            <div>
+                <NavBar>
+                    <FirstChevron />
+                    {loading ? console.log('Loading...') : this.renderList()}
+                </NavBar>
                 {this.renderCalculatorData()}
-            </CalculatorWrapper>
+            </div>
         );
     }
 }
