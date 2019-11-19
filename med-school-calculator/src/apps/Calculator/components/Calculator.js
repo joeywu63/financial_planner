@@ -22,28 +22,40 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'Interview Process',
         types: [],
-        subTypes: []
+        subTypes: {}
     };
 
     async componentDidMount() {
         try {
+            const { currentStage } = this.state;
             const types = await getAllTypes();
-            this.setState({ loading: false, types });
+            const subTypes = await getSubtypesByType(currentStage);
+            const stateSubTypes = { ...this.state.subTypes };
+            stateSubTypes[currentStage] = subTypes;
+            this.setState({ loading: false, types, subTypes: stateSubTypes });
         } catch (e) {
             console.log('something went wrong');
         }
     }
 
     handleClick = name => {
-        this.setState({
-            currentStage: name
-        });
+        const stateSubtypes = { ...this.state.subTypes };
         if (name !== 'Breakdown') {
-            getSubtypesByType(name).then(data => {
-                this.setState({
-                    subTypes: data
+            if (!stateSubtypes[name]) {
+                console.log('about to make call')
+                getSubtypesByType(name).then(data => {
+                    stateSubtypes[name] = data;
+                    this.setState({
+                        subTypes: stateSubtypes,
+                        currentStage: name
+                    });
                 });
-            });
+            }
+            else {
+                this.setState({
+                    currentStage: name
+                });
+            }
         }
     };
 
@@ -61,14 +73,15 @@ class Calculator extends React.Component {
     };
 
     renderCalculatorData = () => {
-        const { currentStage } = this.state;
+        const { currentStage, subTypes } = this.state;
+        console.log(subTypes);
         if (currentStage === 'Breakdown') {
             return <Breakdown />;
         } else {
             return (
                 <CalculatorData
                     title={currentStage}
-                    subTypes={this.state.subTypes}
+                    subTypes={subTypes[currentStage]}
                 />
             );
         }
@@ -82,7 +95,9 @@ class Calculator extends React.Component {
                     <FirstChevron />
                     {loading ? console.log('Loading...') : this.renderList()}
                 </NavBar>
-                {this.renderCalculatorData()}
+                {loading
+                    ? console.log('Loading...')
+                    : this.renderCalculatorData()}
             </div>
         );
     }
