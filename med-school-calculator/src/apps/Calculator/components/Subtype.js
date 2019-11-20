@@ -35,6 +35,7 @@ class Subtype extends React.Component {
                 {expenses.map(expense => (
                     <Expense
                         key={expense.id}
+                        id={expense.id}
                         name={expense.name}
                         description={expense.description}
                         cost={expense.cost}
