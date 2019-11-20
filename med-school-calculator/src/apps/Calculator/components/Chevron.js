@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const ChevronAnchor = styled.button`
-    out
-    padding-top: 0px;
+    outpadding-top: 0px;
     padding-bottom: 0px;
     border-width: 0px;
     color: ${props => (props.isSelected ? 'white' : 'black')};
@@ -49,7 +48,7 @@ const ChevronAnchor = styled.button`
         :after {
             border-left: 30px solid black;
         }
-        outline:0;
+        outline: 0;
     }
 
     :hover {
@@ -65,9 +64,9 @@ class Chevron extends React.Component {
     render() {
         const { onClick, title, isSelected } = this.props;
         return (
-                <ChevronAnchor onClick={onClick} isSelected={isSelected}>
-                    {title}
-                </ChevronAnchor>
+            <ChevronAnchor onClick={onClick} isSelected={isSelected}>
+                {title}
+            </ChevronAnchor>
         );
     }
 }

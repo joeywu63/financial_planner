@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Chevron from './Chevron';
 import FirstChevron from './FirstChevron';
-import CalculatorData from './CalculatorData';
+import Type from './Type';
 import Breakdown from './Breakdown';
 
 import { getAllTypes, getSubtypesByType } from '../repository';
@@ -28,8 +28,17 @@ class Calculator extends React.Component {
     async componentDidMount() {
         try {
             const { currentStage } = this.state;
-            const types = await getAllTypes();
-            const subTypes = await getSubtypesByType(currentStage);
+            // See if all the types have been cached
+            if (!localStorage.getItem('allTypes')) {
+                const types = await getAllTypes();
+                localStorage.setItem('allTypes', JSON.stringify(types));
+            }
+            const types = JSON.parse(localStorage.getItem('allTypes'));
+            if (!localStorage.getItem(currentStage)) {
+                const subTypes = await getSubtypesByType(types[0].id);
+                localStorage.setItem(currentStage, JSON.stringify(subTypes));
+            }
+            const subTypes = JSON.parse(localStorage.getItem(currentStage));
             const stateSubTypes = { ...this.state.subTypes };
             stateSubTypes[currentStage] = subTypes;
             this.setState({ loading: false, types, subTypes: stateSubTypes });
@@ -38,24 +47,24 @@ class Calculator extends React.Component {
         }
     }
 
-    handleClick = name => {
+    handleClick = async (id, name) => {
+        if (name === 'Breakdown') {
+            this.setState({ currentStage: name });
+            return;
+        }
         const stateSubtypes = { ...this.state.subTypes };
-        if (name !== 'Breakdown') {
-            if (!stateSubtypes[name]) {
-                console.log('about to make call')
-                getSubtypesByType(name).then(data => {
-                    stateSubtypes[name] = data;
-                    this.setState({
-                        subTypes: stateSubtypes,
-                        currentStage: name
-                    });
-                });
+        if (!stateSubtypes[name]) {
+            if (!localStorage.getItem(name)) {
+                const subTypes = await getSubtypesByType(id);
+                localStorage.setItem(name, JSON.stringify(subTypes));
             }
-            else {
-                this.setState({
-                    currentStage: name
-                });
-            }
+            const subTypes = JSON.parse(localStorage.getItem(name));
+            stateSubtypes[name] = subTypes;
+            this.setState({ subTypes: stateSubtypes, currentStage: name });
+        } else {
+            this.setState({
+                currentStage: name
+            });
         }
     };
 
@@ -64,7 +73,7 @@ class Calculator extends React.Component {
 
         return types.map(item => (
             <Chevron
-                onClick={() => this.handleClick(item.name)}
+                onClick={() => this.handleClick(item.id, item.name)}
                 key={item.id}
                 title={item.name}
                 isSelected={currentStage === item.name}
@@ -72,17 +81,13 @@ class Calculator extends React.Component {
         ));
     };
 
-    renderCalculatorData = () => {
+    renderType = () => {
         const { currentStage, subTypes } = this.state;
-        console.log(subTypes);
         if (currentStage === 'Breakdown') {
             return <Breakdown />;
         } else {
             return (
-                <CalculatorData
-                    title={currentStage}
-                    subTypes={subTypes[currentStage]}
-                />
+                <Type title={currentStage} subTypes={subTypes[currentStage]} />
             );
         }
     };
@@ -95,9 +100,7 @@ class Calculator extends React.Component {
                     <FirstChevron />
                     {loading ? console.log('Loading...') : this.renderList()}
                 </NavBar>
-                {loading
-                    ? console.log('Loading...')
-                    : this.renderCalculatorData()}
+                {loading ? console.log('Loading...') : this.renderType()}
             </div>
         );
     }
