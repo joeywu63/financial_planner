@@ -11,12 +11,12 @@ class Subtype extends React.Component {
 
     async componentDidMount() {
         const { title, id } = this.props;
-        if (!localStorage.getItem(title)) {
-            const data = await getExpensesBySubtype(id);
-            localStorage.setItem(title, JSON.stringify(data));
+        let expenses = JSON.parse(localStorage.getItem(title));
+        if (!expenses) {
+            expenses = await getExpensesBySubtype(id);
+            localStorage.setItem(title, JSON.stringify(expenses));
         }
-        const data = JSON.parse(localStorage.getItem(title));
-        this.setState({ loading: false, expenses: data });
+        this.setState({ loading: false, expenses });
     }
 
     handleSelection = (expense, wasChecked) => {

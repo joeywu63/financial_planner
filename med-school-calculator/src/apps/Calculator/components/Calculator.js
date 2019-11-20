@@ -27,21 +27,20 @@ class Calculator extends React.Component {
 
     async componentDidMount() {
         try {
-            const { currentStage } = this.state;
+            const { currentStage, subTypes } = this.state;
             // See if all the types have been cached
-            if (!localStorage.getItem('allTypes')) {
-                const types = await getAllTypes();
-                localStorage.setItem('allTypes', JSON.stringify(types));
+            let allTypes = JSON.parse(localStorage.getItem('allTypes'));
+            if (!allTypes) {
+                allTypes = await getAllTypes();
+                localStorage.setItem('allTypes', JSON.stringify(allTypes));
             }
-            const types = JSON.parse(localStorage.getItem('allTypes'));
-            if (!localStorage.getItem(currentStage)) {
-                const subTypes = await getSubtypesByType(types[0].id);
-                localStorage.setItem(currentStage, JSON.stringify(subTypes));
+            let subTypesOfType = JSON.parse(localStorage.getItem(currentStage));
+            if (!subTypesOfType) {
+                subTypesOfType = await getSubtypesByType(allTypes[0].id);
+                localStorage.setItem(currentStage, JSON.stringify(subTypesOfType));
             }
-            const subTypes = JSON.parse(localStorage.getItem(currentStage));
-            const stateSubTypes = { ...this.state.subTypes };
-            stateSubTypes[currentStage] = subTypes;
-            this.setState({ loading: false, types, subTypes: stateSubTypes });
+            subTypes[currentStage]= subTypesOfType;
+            this.setState({ loading: false, types: allTypes, subTypes});
         } catch (e) {
             console.log('something went wrong');
         }
@@ -52,15 +51,15 @@ class Calculator extends React.Component {
             this.setState({ currentStage: name });
             return;
         }
-        const stateSubtypes = { ...this.state.subTypes };
-        if (!stateSubtypes[name]) {
-            if (!localStorage.getItem(name)) {
-                const subTypes = await getSubtypesByType(id);
-                localStorage.setItem(name, JSON.stringify(subTypes));
+        const {subTypes} = this.state;
+        if (!subTypes[name]) {
+            let subTypesOfType = JSON.parse(localStorage.getItem(name));
+            if (!subTypesOfType) {
+                subTypesOfType = await getSubtypesByType(id);
+                localStorage.setItem(name, JSON.stringify(subTypesOfType));
             }
-            const subTypes = JSON.parse(localStorage.getItem(name));
-            stateSubtypes[name] = subTypes;
-            this.setState({ subTypes: stateSubtypes, currentStage: name });
+            subTypes[name] = subTypesOfType;
+            this.setState({ subTypes, currentStage: name });
         } else {
             this.setState({
                 currentStage: name
