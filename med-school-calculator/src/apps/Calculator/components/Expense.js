@@ -1,7 +1,16 @@
 import React from 'react';
+import { getAlternativesByExpense } from '../repository';
+import Alternative from './Alternative';
 
 class Expense extends React.Component {
-    state = { checked: false };
+    async componentDidMount() {
+        const data = await getAlternativesByExpense({
+            expenseID: this.props.id
+        });
+        this.setState({ loading: false, alternatives: data });
+    }
+
+    state = { loading: true, checked: false, alternatives: [] };
 
     handleChange = () => {
         const { checked } = this.state;
@@ -9,8 +18,28 @@ class Expense extends React.Component {
         this.props.onChange(this.props, !checked);
     };
 
+    renderAlternatives = alternatives => {
+        if (!alternatives.length == 0) {
+            return (
+                <div>
+                    <b>Alternative options:</b>
+                    {alternatives.map(alt => (
+                        <Alternative
+                            key={alt.id}
+                            id={alt.id}
+                            name={alt.name}
+                            description={alt.description}
+                            cost={alt.cost}
+                            onChange={this.props.onChange}
+                        ></Alternative>
+                    ))}
+                </div>
+            );
+        }
+    };
+
     render() {
-        const { checked } = this.state;
+        const { loading, checked, alternatives } = this.state;
         const { name, description, cost } = this.props;
         return (
             <div>
@@ -23,6 +52,9 @@ class Expense extends React.Component {
                     ></input>
                     <small>{`${cost} $`}</small>
                 </form>
+                {loading
+                    ? console.log(loading)
+                    : this.renderAlternatives(alternatives)}
             </div>
         );
     }
