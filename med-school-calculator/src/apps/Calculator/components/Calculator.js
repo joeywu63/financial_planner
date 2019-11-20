@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Chevron from './Chevron';
 import FirstChevron from './FirstChevron';
-import CalculatorData from './CalculatorData';
+import Type from './Type';
 import Breakdown from './Breakdown';
 
 import { getAllTypes, getSubtypesByType } from '../repository';
@@ -22,27 +22,47 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'Interview Process',
         types: [],
-        subTypes: []
+        subTypes: {}
     };
 
     async componentDidMount() {
         try {
-            const types = await getAllTypes();
-            this.setState({ loading: false, types });
+            const { currentStage, subTypes } = this.state;
+            // See if all the types have been cached
+            let allTypes = JSON.parse(localStorage.getItem('allTypes'));
+            if (!allTypes) {
+                allTypes = await getAllTypes();
+                localStorage.setItem('allTypes', JSON.stringify(allTypes));
+            }
+            let subTypesOfType = JSON.parse(localStorage.getItem(currentStage));
+            if (!subTypesOfType) {
+                subTypesOfType = await getSubtypesByType(allTypes[0].id);
+                localStorage.setItem(currentStage, JSON.stringify(subTypesOfType));
+            }
+            subTypes[currentStage]= subTypesOfType;
+            this.setState({ loading: false, types: allTypes, subTypes});
         } catch (e) {
             console.log('something went wrong');
         }
     }
 
-    handleClick = name => {
-        this.setState({
-            currentStage: name
-        });
-        if (name !== 'Breakdown') {
-            getSubtypesByType(name).then(data => {
-                this.setState({
-                    subTypes: data
-                });
+    handleClick = async (id, name) => {
+        if (name === 'Breakdown') {
+            this.setState({ currentStage: name });
+            return;
+        }
+        const {subTypes} = this.state;
+        if (!subTypes[name]) {
+            let subTypesOfType = JSON.parse(localStorage.getItem(name));
+            if (!subTypesOfType) {
+                subTypesOfType = await getSubtypesByType(id);
+                localStorage.setItem(name, JSON.stringify(subTypesOfType));
+            }
+            subTypes[name] = subTypesOfType;
+            this.setState({ subTypes, currentStage: name });
+        } else {
+            this.setState({
+                currentStage: name
             });
         }
     };
@@ -52,7 +72,7 @@ class Calculator extends React.Component {
 
         return types.map(item => (
             <Chevron
-                onClick={() => this.handleClick(item.name)}
+                onClick={() => this.handleClick(item.id, item.name)}
                 key={item.id}
                 title={item.name}
                 isSelected={currentStage === item.name}
@@ -60,16 +80,13 @@ class Calculator extends React.Component {
         ));
     };
 
-    renderCalculatorData = () => {
-        const { currentStage } = this.state;
+    renderType = () => {
+        const { currentStage, subTypes } = this.state;
         if (currentStage === 'Breakdown') {
             return <Breakdown />;
         } else {
             return (
-                <CalculatorData
-                    title={currentStage}
-                    subTypes={this.state.subTypes}
-                />
+                <Type title={currentStage} subTypes={subTypes[currentStage]} />
             );
         }
     };
@@ -82,7 +99,7 @@ class Calculator extends React.Component {
                     <FirstChevron />
                     {loading ? console.log('Loading...') : this.renderList()}
                 </NavBar>
-                {this.renderCalculatorData()}
+                {loading ? console.log('Loading...') : this.renderType()}
             </div>
         );
     }

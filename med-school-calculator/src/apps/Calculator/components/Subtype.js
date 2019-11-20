@@ -10,10 +10,13 @@ class Subtype extends React.Component {
     };
 
     async componentDidMount() {
-        const data = await getExpensesBySubtype({
-            subtypeName: this.props.title
-        });
-        this.setState({ loading: false, expenses: data });
+        const { title, id } = this.props;
+        let expenses = JSON.parse(localStorage.getItem(title));
+        if (!expenses) {
+            expenses = await getExpensesBySubtype(id);
+            localStorage.setItem(title, JSON.stringify(expenses));
+        }
+        this.setState({ loading: false, expenses });
     }
 
     handleSelection = (expense, wasChecked) => {
@@ -49,7 +52,9 @@ class Subtype extends React.Component {
         return (
             <div>
                 <h2>{this.props.title}</h2>
-                {loading ? console.log(loading) : this.renderExpenses(expenses)}
+                {loading
+                    ? console.log('loading...')
+                    : this.renderExpenses(expenses)}
                 <h3>
                     Total of {this.props.title}: {this.state.totalPrice}$
                 </h3>

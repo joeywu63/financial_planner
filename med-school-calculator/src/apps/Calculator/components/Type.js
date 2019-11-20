@@ -1,7 +1,7 @@
 import React from 'react';
 import Subtype from './Subtype';
 
-class CalculatorData extends React.Component {
+class Type extends React.Component {
     state = {
         total: 0,
         subtypes: []
@@ -43,4 +43,4 @@ class CalculatorData extends React.Component {
     }
 }
 
-export default CalculatorData;
+export default Type;
