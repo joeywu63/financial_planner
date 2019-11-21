@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import Button from 'common/Button';
+import IconButton from 'common/IconButton';
+import Input from 'common/Input';
+
+const FormWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const StyledInput = styled(Input)`
+    width: 200px;
+`;
 
 class TypeForm extends React.Component {
     state = {
-        name: '',
+        name: this.props.name,
         loading: false
     };
 
@@ -26,28 +38,21 @@ class TypeForm extends React.Component {
     };
 
     render() {
-        const { handleCancel, isUpdateForm } = this.props;
+        const { handleCancel } = this.props;
         const { name } = this.state;
 
         return (
-            <>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input
-                            name="name"
-                            type="text"
-                            value={name}
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    <input
-                        type="submit"
-                        value={isUpdateForm ? 'Update' : 'Create'}
-                    />
-                </form>
-                <Button text="Cancel" onClick={handleCancel} />
-            </>
+            <FormWrapper>
+                <StyledInput
+                    name="name"
+                    type="text"
+                    value={name}
+                    placeholder="Name"
+                    onChange={this.handleChange}
+                />
+                <IconButton name="check" onClick={this.handleSubmit} />
+                <IconButton name="times" onClick={handleCancel} />
+            </FormWrapper>
         );
     }
 }
@@ -55,11 +60,12 @@ class TypeForm extends React.Component {
 TypeForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     handleCancel: PropTypes.func.isRequired,
-    isUpdateForm: PropTypes.bool
+    name: PropTypes.string
 };
 
 TypeForm.defaultProps = {
-    isUpdateForm: false
+    isUpdateForm: false,
+    name: ''
 };
 
 export default TypeForm;

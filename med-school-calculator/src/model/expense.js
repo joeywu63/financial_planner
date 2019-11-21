@@ -20,24 +20,13 @@ export const get = ({ typeID, subTypeID }) => {
         .catch(error => error);
 };
 
-export const create = ({ subTypeID, name }) => {
+export const create = ({ typeID, subTypeID, name, description, cost }) => {
     const expenseRef = firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)
         .doc();
     return expenseRef
-        .set({ subTypeID, name })
-        .then(() => expenseRef.id)
-        .catch(error => error);
-};
-
-export const createUnderType = ({ typeID, name }) => {
-    const expenseRef = firebase
-        .firestore()
-        .collection(EXPENSE_COLLECTION)
-        .doc();
-    return expenseRef
-        .set({ typeID, name })
+        .set({ typeID, subtypeID: subTypeID, name, description, cost })
         .then(() => expenseRef.id)
         .catch(error => error);
 };
@@ -48,20 +37,17 @@ export const deleteExpense = ({ expenseID }) => {
     db.collection(EXPENSE_COLLECTION)
         .doc(expenseID)
         .delete()
-        .then(() => {
-            console.log(`Expense ${expenseID} successfully deleted`);
-        })
         .catch(error => {
             console.error(`Error removing expense ${expenseID}: ${error}`);
         });
 };
 
-export const update = ({ expenseID, name }) => {
+export const update = ({ expenseID, name, description, cost }) => {
     return firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)
         .doc(expenseID)
-        .update({ name });
+        .update({ name, description, cost });
 };
 
 export const getBySubtype = ({ subTypeID }) => {

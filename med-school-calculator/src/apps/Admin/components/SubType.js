@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Cell, Grid } from 'styled-css-grid';
 
 import Expense from './Expense';
+import TypeForm from './TypeForm';
+import ExpenseForm from './ExpenseForm';
 
 import {
     getSubTypeExpenses,
@@ -12,7 +15,12 @@ import {
 } from '../repository';
 
 import Button from 'common/Button';
-import TypeForm from 'apps/Admin/components/TypeForm';
+import Hoverable from 'common/Hoverable';
+import IconButton from 'common/IconButton';
+
+const Wrapper = styled.div`
+    padding-left: 40px;
+`;
 
 const SubTypeWrapper = styled.div`
     display: flex;
@@ -23,6 +31,10 @@ const SubTypeWrapper = styled.div`
 const SubTypeHeader = styled.div`
     font-weight: bold;
     font-size: 25px;
+`;
+
+const StyledIconButton = styled(IconButton)`
+    visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
 `;
 
 class SubType extends React.Component {
@@ -56,19 +68,47 @@ class SubType extends React.Component {
         this.setState({ isEditingSubType: false });
     };
 
-    createTemporaryExpense = (id, name) => {
-        const { id: subTypeID } = this.props.subType;
-        return { id, subTypeID, name };
+    createTemporaryExpense = (
+        id,
+        typeID,
+        subTypeID,
+        name,
+        description,
+        cost
+    ) => {
+        return {
+            id,
+            typeID,
+            subTypeID,
+            name,
+            description,
+            cost
+        };
     };
 
-    handleCreateExpense = async name => {
+    handleCreateExpense = async (name, description, cost) => {
         try {
-            const { id: subTypeID } = this.props.subType;
+            const { id: subTypeID, typeID } = this.props.subType;
             const { expenses } = this.state;
 
-            const expenseID = await createExpense({ subTypeID, name });
+            const expenseID = await createExpense({
+                typeID,
+                subTypeID,
+                name,
+                description,
+                cost
+            });
 
-            expenses.push(this.createTemporaryExpense(expenseID, name));
+            expenses.push(
+                this.createTemporaryExpense(
+                    expenseID,
+                    typeID,
+                    subTypeID,
+                    name,
+                    description,
+                    cost
+                )
+            );
             this.setState({ isAddingExpense: false, expenses });
         } catch (e) {
             // TODO: error
@@ -88,15 +128,20 @@ class SubType extends React.Component {
         this.setState({ expenses: newExpenses });
     };
 
-    handleUpdateExpense = async (expenseID, name) => {
+    handleUpdateExpense = async (expenseID, name, description, cost) => {
         try {
             const { expenses } = this.state;
 
-            await updateExpense({ expenseID, name });
+            await updateExpense({ expenseID, name, description, cost });
 
             const newExpenses = expenses.map(expense => {
                 if (expense.id === expenseID) {
-                    expense.name = name;
+                    expense = {
+                        ...expense,
+                        name,
+                        description,
+                        cost
+                    };
                 }
                 return expense;
             });
@@ -107,16 +152,33 @@ class SubType extends React.Component {
     };
 
     renderExpenses = () => {
-        const { expenses } = this.state;
+        const { expenses, isAddingExpense } = this.state;
 
-        return expenses.map(expense => (
-            <Expense
-                key={expense.id}
-                expense={expense}
-                handleDeleteExpense={this.handleDeleteExpense}
-                handleUpdateExpense={this.handleUpdateExpense}
-            />
-        ));
+        return (
+            <Grid columns={10} gap="2px" alignContent="center">
+                {expenses.map(expense => (
+                    <Expense
+                        key={expense.id}
+                        expense={expense}
+                        handleDeleteExpense={this.handleDeleteExpense}
+                        handleUpdateExpense={this.handleUpdateExpense}
+                    />
+                ))}
+                {isAddingExpense ? (
+                    <ExpenseForm
+                        handleSubmit={this.handleCreateExpense}
+                        handleCancel={this.toggleAddingExpense}
+                    />
+                ) : (
+                    <Cell width={2}>
+                        <Button
+                            text="Add Expense"
+                            onClick={this.toggleAddingExpense}
+                        />
+                    </Cell>
+                )}
+            </Grid>
+        );
     };
 
     renderHeader = () => {
@@ -128,14 +190,29 @@ class SubType extends React.Component {
             <TypeForm
                 handleCancel={this.toggleEditSubType}
                 handleSubmit={name => this.handleUpdateSubType(id, name)}
-                isUpdateForm={true}
+                name={name}
             />
         ) : (
-            <SubTypeWrapper>
-                <SubTypeHeader>{name}</SubTypeHeader>
-                <Button text="Delete" onClick={() => handleDeleteSubType(id)} />
-                <Button text="Edit" onClick={this.toggleEditSubType} />
-            </SubTypeWrapper>
+            <Hoverable>
+                {(isHovering, mouseEnter, mouseLeave) => (
+                    <SubTypeWrapper
+                        onMouseEnter={mouseEnter}
+                        onMouseLeave={mouseLeave}
+                    >
+                        <SubTypeHeader>{name}</SubTypeHeader>
+                        <StyledIconButton
+                            name="pen"
+                            onClick={this.toggleEditSubType}
+                            isHovering={isHovering}
+                        />
+                        <StyledIconButton
+                            name="trash-alt"
+                            onClick={() => handleDeleteSubType(id)}
+                            isHovering={isHovering}
+                        />
+                    </SubTypeWrapper>
+                )}
+            </Hoverable>
         );
     };
 
@@ -150,24 +227,13 @@ class SubType extends React.Component {
     };
 
     render() {
-        const { loading, isAddingExpense } = this.state;
+        const { loading } = this.state;
 
         return (
-            <>
+            <Wrapper>
                 {this.renderHeader()}
                 {loading ? <div>loading</div> : this.renderExpenses()}
-                {isAddingExpense ? (
-                    <TypeForm
-                        handleSubmit={this.handleCreateExpense}
-                        handleCancel={this.toggleAddingExpense}
-                    />
-                ) : (
-                    <Button
-                        text="Add Expense"
-                        onClick={this.toggleAddingExpense}
-                    />
-                )}
-            </>
+            </Wrapper>
         );
     }
 }

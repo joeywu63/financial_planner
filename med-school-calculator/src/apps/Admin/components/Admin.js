@@ -8,9 +8,11 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-                {hasAdminAccess()
-                    ? <ExpenseList />
-                    : 'You do not have access to this page'}
+                {hasAdminAccess() ? (
+                    <ExpenseList />
+                ) : (
+                    'You do not have access to this page'
+                )}
             </div>
         );
     }

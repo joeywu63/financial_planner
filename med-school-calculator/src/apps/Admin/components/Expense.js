@@ -1,26 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Button from 'common/Button';
-import TypeForm from 'apps/Admin/components/TypeForm';
+import { Cell } from 'styled-css-grid';
 
-const ExpenseWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+import ExpenseForm from './ExpenseForm';
+
+import IconButton from 'common/IconButton';
+
+const StyledIconButton = styled(IconButton)`
+    visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
 `;
 
 class Expense extends React.Component {
     state = {
         loading: true,
         expenses: null,
-        isEditingExpense: false
+        isEditingExpense: false,
+        isHovering: false
     };
 
-    handleUpdateExpense = (id, name) => {
+    handleUpdateExpense = (name, description, cost) => {
         const { handleUpdateExpense } = this.props;
-        handleUpdateExpense(id, name);
+        const { id } = this.props.expense;
+
+        handleUpdateExpense(id, name, description, cost);
         this.setState({ isEditingExpense: false });
+    };
+
+    handleOnMouseEnter = () => {
+        this.setState({ isHovering: true });
+    };
+
+    handleOnMouseLeave = () => {
+        this.setState({ isHovering: false });
     };
 
     toggleEditExpense = () => {
@@ -32,24 +44,61 @@ class Expense extends React.Component {
         const { id, name, cost, description } = this.props.expense;
         //handleDeleteExpense passed in from either Type.js (expenses without a subtype) or SubType.js
         const { handleDeleteExpense } = this.props;
-        const { isEditingExpense } = this.state;
+        const { isEditingExpense, isHovering } = this.state;
 
         return isEditingExpense ? (
-            <TypeForm
+            <ExpenseForm
                 handleCancel={this.toggleEditExpense}
-                handleSubmit={name => this.handleUpdateExpense(id, name)}
-                isUpdateForm={true}
+                handleSubmit={this.handleUpdateExpense}
+                name={name}
+                description={description}
+                cost={cost}
             />
         ) : (
-            <ExpenseWrapper>
-                <div>
-                    {`${name} (cost: ${cost} ${
-                        description ? `description: ${description}` : ''
-                    })`}
-                </div>
-                <Button text="Delete" onClick={() => handleDeleteExpense(id)} />
-                <Button text="Edit" onClick={this.toggleEditExpense} />
-            </ExpenseWrapper>
+            <>
+                <Cell
+                    width={2}
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
+                    middle={true}
+                >
+                    {name}
+                </Cell>
+                <Cell
+                    width={5}
+                    middle={true}
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
+                >
+                    {description}
+                </Cell>
+                <Cell
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
+                    middle={true}
+                >{`$${cost}`}</Cell>
+                <Cell
+                    width={2}
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
+                >
+                    <StyledIconButton
+                        name="plus-square"
+                        onClick={() => {}}
+                        isHovering={isHovering}
+                    />
+                    <StyledIconButton
+                        name="pen"
+                        onClick={this.toggleEditExpense}
+                        isHovering={isHovering}
+                    />
+                    <StyledIconButton
+                        name="trash-alt"
+                        onClick={() => handleDeleteExpense(id)}
+                        isHovering={isHovering}
+                    />
+                </Cell>
+            </>
         );
     }
 }
