@@ -14,6 +14,7 @@ class Type extends React.Component {
         } else {
             this.setState({ total: total - expense.cost });
         }
+        this.props.handleSelection(expense, wasChecked);
     };
 
     renderList = subtypes => {
@@ -25,6 +26,7 @@ class Type extends React.Component {
                         key={subtype.id}
                         id={subtype.id}
                         title={subtype.name}
+                        checked={this.props.checked}
                     ></Subtype>
                 ))}
             </div>

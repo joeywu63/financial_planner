@@ -8,6 +8,10 @@ class Expense extends React.Component {
             expenseID: this.props.id
         });
         this.setState({ loading: false, alternatives: data });
+
+        if(this.props.checked){
+            this.handleChange();
+        }
     }
 
     state = { loading: true, checked: false, alternatives: [] };

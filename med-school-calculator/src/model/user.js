@@ -26,3 +26,16 @@ export const get = ({ uid }) => {
         })
         .catch(error => error);
 };
+
+export const updateProgress = (uid, expenses) => {
+    firebase
+        .firestore()
+        .collection(USER_COLLECTION)
+        .doc(uid)
+        .set(
+            {
+                progress: Array.from(expenses)
+            }, {merge: true}
+        )
+        .catch(err => alert(err));
+}

@@ -40,6 +40,7 @@ class Subtype extends React.Component {
                         description={expense.description}
                         cost={expense.cost}
                         onChange={this.handleSelection}
+                        checked={this.props.checked.has(expense.id)}
                     ></Expense>
                 ))}
             </div>
