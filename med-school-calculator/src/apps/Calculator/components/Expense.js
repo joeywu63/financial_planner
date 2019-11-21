@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styled from 'styled-components';
+import { Grid, Cell } from "styled-css-grid";
+import InfoTooltip from 'common/InfoTooltip';
 import { getAlternativesByExpense } from '../repository';
 import Alternative from './Alternative';
+import info_icon from 'img/question-mark-icon.png';
+
+const AltTitleDiv = styled.div`
+    font-weight: bold;
+    margin-left: 30px;
+`;
 
 class Expense extends React.Component {
     async componentDidMount() {
@@ -28,7 +37,7 @@ class Expense extends React.Component {
         if (!alternatives.length == 0) {
             return (
                 <div>
-                    <b>Alternative options:</b>
+                    <AltTitleDiv>Alternative options:</AltTitleDiv>
                     {alternatives.map(alt => (
                         <Alternative
                             key={alt.id}
@@ -50,13 +59,24 @@ class Expense extends React.Component {
         return (
             <div>
                 <form>
-                    <label>{`${name} : ${description}`}</label>
-                    <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={this.handleChange}
-                    ></input>
-                    <small>{`${cost} $`}</small>
+                    <Grid columns={"20px 45px auto"}>
+                        <Cell>
+                            <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={this.handleChange}
+                            ></input>
+                        </Cell>
+                        <Cell>{`$${cost}`}</Cell>
+                        <Cell>
+                            {`${name} `}
+                            {description ?
+                                <InfoTooltip
+                                    hoverMessage={description}
+                                    trigger={<img src={`${info_icon}`} width="15" height="15"/>}
+                                ></InfoTooltip> : ""}
+                        </Cell>
+                    </Grid>
                 </form>
                 {loading
                     ? console.log(loading)

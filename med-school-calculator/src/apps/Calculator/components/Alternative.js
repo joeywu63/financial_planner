@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Grid, Cell } from "styled-css-grid";
 import PropTypes from 'prop-types';
+import InfoTooltip from 'common/InfoTooltip';
+import info_icon from 'img/question-mark-icon.png';
 
 const AltDiv = styled.div`
     margin-left: 30px;
@@ -20,15 +23,24 @@ class Alternative extends React.Component {
         const { name, description, cost } = this.props;
         return (
             <AltDiv>
-                <form>
-                    <label>{`${name} : ${description}`}</label>
-                    <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={this.handleChange}
-                    ></input>
-                    <small>{`${cost} $`}</small>
-                </form>
+                <Grid columns={"20px 45px auto"}>
+                    <Cell>
+                        <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={this.handleChange}
+                        ></input>
+                    </Cell>
+                    <Cell>{`$${cost}`}</Cell>
+                    <Cell>
+                        {`${name} `}
+                        {description ?
+                            <InfoTooltip
+                                hoverMessage={description}
+                                trigger={<img src={`${info_icon}`} width="15" height="15"/>}
+                            ></InfoTooltip> : ""}
+                    </Cell>
+                </Grid>
             </AltDiv>
         );
     }
