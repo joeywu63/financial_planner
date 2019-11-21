@@ -68,19 +68,47 @@ class SubType extends React.Component {
         this.setState({ isEditingSubType: false });
     };
 
-    createTemporaryExpense = (id, name) => {
-        const { id: subTypeID } = this.props.subType;
-        return { id, subTypeID, name };
+    createTemporaryExpense = (
+        id,
+        typeID,
+        subTypeID,
+        name,
+        description,
+        cost
+    ) => {
+        return {
+            id,
+            typeID,
+            subTypeID,
+            name,
+            description,
+            cost
+        };
     };
 
-    handleCreateExpense = async name => {
+    handleCreateExpense = async (name, description, cost) => {
         try {
-            const { id: subTypeID } = this.props.subType;
+            const { id: subTypeID, typeID } = this.props.subType;
             const { expenses } = this.state;
 
-            const expenseID = await createExpense({ subTypeID, name });
+            const expenseID = await createExpense({
+                typeID,
+                subTypeID,
+                name,
+                description,
+                cost
+            });
 
-            expenses.push(this.createTemporaryExpense(expenseID, name));
+            expenses.push(
+                this.createTemporaryExpense(
+                    expenseID,
+                    typeID,
+                    subTypeID,
+                    name,
+                    description,
+                    cost
+                )
+            );
             this.setState({ isAddingExpense: false, expenses });
         } catch (e) {
             // TODO: error
