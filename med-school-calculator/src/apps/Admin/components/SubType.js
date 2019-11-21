@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Grid } from 'styled-css-grid';
 
 import Expense from './Expense';
+import TypeForm from './TypeForm';
 
 import {
     getSubTypeExpenses,
@@ -12,7 +14,12 @@ import {
 } from '../repository';
 
 import Button from 'common/Button';
-import TypeForm from 'apps/Admin/components/TypeForm';
+import Hoverable from 'common/Hoverable';
+import IconButton from 'common/IconButton';
+
+const Wrapper = styled.div`
+    padding-left: 40px;
+`;
 
 const SubTypeWrapper = styled.div`
     display: flex;
@@ -23,6 +30,10 @@ const SubTypeWrapper = styled.div`
 const SubTypeHeader = styled.div`
     font-weight: bold;
     font-size: 25px;
+`;
+
+const StyledIconButton = styled(IconButton)`
+    visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
 `;
 
 class SubType extends React.Component {
@@ -109,14 +120,18 @@ class SubType extends React.Component {
     renderExpenses = () => {
         const { expenses } = this.state;
 
-        return expenses.map(expense => (
-            <Expense
-                key={expense.id}
-                expense={expense}
-                handleDeleteExpense={this.handleDeleteExpense}
-                handleUpdateExpense={this.handleUpdateExpense}
-            />
-        ));
+        return (
+            <Grid columns={10} gap="2px" alignContent="center">
+                {expenses.map(expense => (
+                    <Expense
+                        key={expense.id}
+                        expense={expense}
+                        handleDeleteExpense={this.handleDeleteExpense}
+                        handleUpdateExpense={this.handleUpdateExpense}
+                    />
+                ))}
+            </Grid>
+        );
     };
 
     renderHeader = () => {
@@ -131,11 +146,26 @@ class SubType extends React.Component {
                 isUpdateForm={true}
             />
         ) : (
-            <SubTypeWrapper>
-                <SubTypeHeader>{name}</SubTypeHeader>
-                <Button text="Delete" onClick={() => handleDeleteSubType(id)} />
-                <Button text="Edit" onClick={this.toggleEditSubType} />
-            </SubTypeWrapper>
+            <Hoverable>
+                {(isHovering, mouseEnter, mouseLeave) => (
+                    <SubTypeWrapper
+                        onMouseEnter={mouseEnter}
+                        onMouseLeave={mouseLeave}
+                    >
+                        <SubTypeHeader>{name}</SubTypeHeader>
+                        <StyledIconButton
+                            name="trash-alt"
+                            onClick={() => handleDeleteSubType(id)}
+                            isHovering={isHovering}
+                        />
+                        <StyledIconButton
+                            name="edit"
+                            onClick={this.toggleEditSubType}
+                            isHovering={isHovering}
+                        />
+                    </SubTypeWrapper>
+                )}
+            </Hoverable>
         );
     };
 
@@ -153,7 +183,7 @@ class SubType extends React.Component {
         const { loading, isAddingExpense } = this.state;
 
         return (
-            <>
+            <Wrapper>
                 {this.renderHeader()}
                 {loading ? <div>loading</div> : this.renderExpenses()}
                 {isAddingExpense ? (
@@ -167,7 +197,7 @@ class SubType extends React.Component {
                         onClick={this.toggleAddingExpense}
                     />
                 )}
-            </>
+            </Wrapper>
         );
     }
 }

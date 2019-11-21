@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Grid } from 'styled-css-grid';
 
 import Expense from './Expense';
 import SubType from './SubType';
 import TypeForm from './TypeForm';
 
 import Button from 'common/Button';
+import IconButton from 'common/IconButton';
+import Hoverable from 'common/Hoverable';
 
 import {
     getTypeExpenses,
@@ -28,6 +31,10 @@ const TypeWrapper = styled.div`
 const TypeHeader = styled.div`
     font-weight: bold;
     font-size: 40px;
+`;
+
+const StyledIconButton = styled(IconButton)`
+    visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
 `;
 
 class Type extends React.Component {
@@ -175,25 +182,44 @@ class Type extends React.Component {
                 isUpdateForm={true}
             />
         ) : (
-            <TypeWrapper>
-                <TypeHeader>{name}</TypeHeader>
-                <Button text="Delete" onClick={() => handleDeleteType(id)} />
-                <Button text="Edit" onClick={this.toggleEditType} />
-            </TypeWrapper>
+            <Hoverable>
+                {(isHovering, mouseEnter, mouseLeave) => (
+                    <TypeWrapper
+                        onMouseEnter={mouseEnter}
+                        onMouseLeave={mouseLeave}
+                    >
+                        <TypeHeader>{name}</TypeHeader>
+                        <StyledIconButton
+                            name="trash-alt"
+                            onClick={() => handleDeleteType(id)}
+                            isHovering={isHovering}
+                        />
+                        <StyledIconButton
+                            name="edit"
+                            onClick={this.toggleEditType}
+                            isHovering={isHovering}
+                        />
+                    </TypeWrapper>
+                )}
+            </Hoverable>
         );
     };
 
     renderExpenses = () => {
         const { expenses } = this.state;
 
-        return expenses.map(expense => (
-            <Expense
-                key={expense.id}
-                expense={expense}
-                handleDeleteExpense={this.handleDeleteExpense}
-                handleUpdateExpense={this.handleUpdateExpense}
-            />
-        ));
+        return (
+            <Grid columns={10} gap="2px" alignContent="center">
+                {expenses.map(expense => (
+                    <Expense
+                        key={expense.id}
+                        expense={expense}
+                        handleDeleteExpense={this.handleDeleteExpense}
+                        handleUpdateExpense={this.handleUpdateExpense}
+                    />
+                ))}
+            </Grid>
+        );
     };
 
     renderSubTypes = () => {

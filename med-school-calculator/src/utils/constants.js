@@ -5,6 +5,7 @@ export const ROLES = {
 
 export const COLOURS = {
     white: '#FCFCFC',
+    offWhite: '#E0E0E0',
     lightgrey: '#5D737E',
     maroon: '#30292F',
     darkgrey: '#3F4045',
