@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Grid } from 'styled-css-grid';
+import { Grid, Cell } from 'styled-css-grid';
 
 import Expense from './Expense';
 import SubType from './SubType';
 import TypeForm from './TypeForm';
+import ExpenseForm from './ExpenseForm';
 
 import Button from 'common/Button';
 import IconButton from 'common/IconButton';
@@ -14,10 +15,10 @@ import Hoverable from 'common/Hoverable';
 import {
     getTypeExpenses,
     getSubTypes,
-    createExpenseUnderType,
     createSubType,
     deleteSubType,
     updateSubType,
+    createExpense,
     deleteExpense,
     updateExpense
 } from '../repository';
@@ -60,19 +61,39 @@ class Type extends React.Component {
         }
     }
 
-    createTemporaryExpense = (id, name) => {
-        const { id: typeID } = this.props.type;
-        return { id, typeID, name };
+    createTemporaryExpense = (id, typeID, name, description, cost) => {
+        return {
+            id,
+            typeID,
+            subTypeID: null,
+            name,
+            description,
+            cost
+        };
     };
 
-    handleCreateExpense = async name => {
+    handleCreateExpense = async (name, description, cost) => {
         try {
             const { id: typeID } = this.props.type;
             const { expenses } = this.state;
 
-            const expenseID = await createExpenseUnderType({ typeID, name });
+            const expenseID = await createExpense({
+                typeID,
+                subTypeID: null,
+                name,
+                description,
+                cost
+            });
 
-            expenses.push(this.createTemporaryExpense(expenseID, name));
+            expenses.push(
+                this.createTemporaryExpense(
+                    expenseID,
+                    typeID,
+                    name,
+                    description,
+                    cost
+                )
+            );
             this.setState({ isAddingExpense: false, expenses });
         } catch (e) {
             // TODO: error
@@ -92,15 +113,20 @@ class Type extends React.Component {
         this.setState({ expenses: newExpenses });
     };
 
-    handleUpdateExpense = async (expenseID, name) => {
+    handleUpdateExpense = async (expenseID, name, description, cost) => {
         try {
             const { expenses } = this.state;
 
-            await updateExpense({ expenseID, name });
+            await updateExpense({ expenseID, name, description, cost });
 
             const newExpenses = expenses.map(expense => {
                 if (expense.id === expenseID) {
-                    expense.name = name;
+                    expense = {
+                        ...expense,
+                        name,
+                        description,
+                        cost
+                    };
                 }
                 return expense;
             });
@@ -179,7 +205,7 @@ class Type extends React.Component {
             <TypeForm
                 handleCancel={this.toggleEditType}
                 handleSubmit={name => this.handleUpdateType(id, name)}
-                isUpdateForm={true}
+                name={name}
             />
         ) : (
             <Hoverable>
@@ -190,13 +216,13 @@ class Type extends React.Component {
                     >
                         <TypeHeader>{name}</TypeHeader>
                         <StyledIconButton
-                            name="trash-alt"
-                            onClick={() => handleDeleteType(id)}
+                            name="pen"
+                            onClick={this.toggleEditType}
                             isHovering={isHovering}
                         />
                         <StyledIconButton
-                            name="edit"
-                            onClick={this.toggleEditType}
+                            name="trash-alt"
+                            onClick={() => handleDeleteType(id)}
                             isHovering={isHovering}
                         />
                     </TypeWrapper>
@@ -206,7 +232,7 @@ class Type extends React.Component {
     };
 
     renderExpenses = () => {
-        const { expenses } = this.state;
+        const { expenses, isAddingExpense } = this.state;
 
         return (
             <Grid columns={10} gap="2px" alignContent="center">
@@ -218,6 +244,19 @@ class Type extends React.Component {
                         handleUpdateExpense={this.handleUpdateExpense}
                     />
                 ))}
+                {isAddingExpense ? (
+                    <ExpenseForm
+                        handleSubmit={this.handleCreateExpense}
+                        handleCancel={this.toggleAddingExpense}
+                    />
+                ) : (
+                    <Cell width={2}>
+                        <Button
+                            text="Add Expense"
+                            onClick={this.toggleAddingExpense}
+                        />
+                    </Cell>
+                )}
             </Grid>
         );
     };
@@ -251,7 +290,7 @@ class Type extends React.Component {
     };
 
     render() {
-        const { loading, isAddingSubType, isAddingExpense } = this.state;
+        const { loading, isAddingSubType } = this.state;
 
         return (
             <>
@@ -261,17 +300,6 @@ class Type extends React.Component {
                 ) : (
                     <>
                         {this.renderExpenses()}
-                        {isAddingExpense ? (
-                            <TypeForm
-                                handleSubmit={this.handleCreateExpense}
-                                handleCancel={this.toggleAddingExpense}
-                            />
-                        ) : (
-                            <Button
-                                text="Add Expense"
-                                onClick={this.toggleAddingExpense}
-                            />
-                        )}
                         {this.renderSubTypes()}
                         {isAddingSubType ? (
                             <TypeForm

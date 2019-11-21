@@ -29,7 +29,7 @@ class ExpenseList extends React.Component {
 
             const typeID = await createType({ name });
 
-            types.push({id: typeID, name});
+            types.push({ id: typeID, name });
             this.setState({ isAddingType: false, types });
         } catch (e) {
             // TODO: error
@@ -91,7 +91,7 @@ class ExpenseList extends React.Component {
         return loading ? (
             <div>loading</div>
         ) : (
-            <>
+            <div>
                 {this.renderTypes()}
                 {isAddingType ? (
                     <TypeForm
@@ -101,7 +101,7 @@ class ExpenseList extends React.Component {
                 ) : (
                     <Button text="Add Type" onClick={this.toggleAddingType} />
                 )}
-            </>
+            </div>
         );
     }
 }

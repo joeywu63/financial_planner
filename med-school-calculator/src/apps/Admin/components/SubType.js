@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Grid } from 'styled-css-grid';
+import { Cell, Grid } from 'styled-css-grid';
 
 import Expense from './Expense';
 import TypeForm from './TypeForm';
+import ExpenseForm from './ExpenseForm';
 
 import {
     getSubTypeExpenses,
@@ -99,15 +100,20 @@ class SubType extends React.Component {
         this.setState({ expenses: newExpenses });
     };
 
-    handleUpdateExpense = async (expenseID, name) => {
+    handleUpdateExpense = async (expenseID, name, description, cost) => {
         try {
             const { expenses } = this.state;
 
-            await updateExpense({ expenseID, name });
+            await updateExpense({ expenseID, name, description, cost });
 
             const newExpenses = expenses.map(expense => {
                 if (expense.id === expenseID) {
-                    expense.name = name;
+                    expense = {
+                        ...expense,
+                        name,
+                        description,
+                        cost
+                    };
                 }
                 return expense;
             });
@@ -118,7 +124,7 @@ class SubType extends React.Component {
     };
 
     renderExpenses = () => {
-        const { expenses } = this.state;
+        const { expenses, isAddingExpense } = this.state;
 
         return (
             <Grid columns={10} gap="2px" alignContent="center">
@@ -130,6 +136,19 @@ class SubType extends React.Component {
                         handleUpdateExpense={this.handleUpdateExpense}
                     />
                 ))}
+                {isAddingExpense ? (
+                    <ExpenseForm
+                        handleSubmit={this.handleCreateExpense}
+                        handleCancel={this.toggleAddingExpense}
+                    />
+                ) : (
+                    <Cell width={2}>
+                        <Button
+                            text="Add Expense"
+                            onClick={this.toggleAddingExpense}
+                        />
+                    </Cell>
+                )}
             </Grid>
         );
     };
@@ -143,7 +162,7 @@ class SubType extends React.Component {
             <TypeForm
                 handleCancel={this.toggleEditSubType}
                 handleSubmit={name => this.handleUpdateSubType(id, name)}
-                isUpdateForm={true}
+                name={name}
             />
         ) : (
             <Hoverable>
@@ -154,13 +173,13 @@ class SubType extends React.Component {
                     >
                         <SubTypeHeader>{name}</SubTypeHeader>
                         <StyledIconButton
-                            name="trash-alt"
-                            onClick={() => handleDeleteSubType(id)}
+                            name="pen"
+                            onClick={this.toggleEditSubType}
                             isHovering={isHovering}
                         />
                         <StyledIconButton
-                            name="edit"
-                            onClick={this.toggleEditSubType}
+                            name="trash-alt"
+                            onClick={() => handleDeleteSubType(id)}
                             isHovering={isHovering}
                         />
                     </SubTypeWrapper>
@@ -180,23 +199,12 @@ class SubType extends React.Component {
     };
 
     render() {
-        const { loading, isAddingExpense } = this.state;
+        const { loading } = this.state;
 
         return (
             <Wrapper>
                 {this.renderHeader()}
                 {loading ? <div>loading</div> : this.renderExpenses()}
-                {isAddingExpense ? (
-                    <TypeForm
-                        handleSubmit={this.handleCreateExpense}
-                        handleCancel={this.toggleAddingExpense}
-                    />
-                ) : (
-                    <Button
-                        text="Add Expense"
-                        onClick={this.toggleAddingExpense}
-                    />
-                )}
             </Wrapper>
         );
     }

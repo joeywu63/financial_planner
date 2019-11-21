@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Cell } from 'styled-css-grid';
 
-import TypeForm from 'apps/Admin/components/TypeForm';
+import ExpenseForm from './ExpenseForm';
 
 import IconButton from 'common/IconButton';
 
@@ -19,9 +19,11 @@ class Expense extends React.Component {
         isHovering: false
     };
 
-    handleUpdateExpense = (id, name) => {
+    handleUpdateExpense = (name, description, cost) => {
         const { handleUpdateExpense } = this.props;
-        handleUpdateExpense(id, name);
+        const { id } = this.props.expense;
+
+        handleUpdateExpense(id, name, description, cost);
         this.setState({ isEditingExpense: false });
     };
 
@@ -45,10 +47,12 @@ class Expense extends React.Component {
         const { isEditingExpense, isHovering } = this.state;
 
         return isEditingExpense ? (
-            <TypeForm
+            <ExpenseForm
                 handleCancel={this.toggleEditExpense}
-                handleSubmit={name => this.handleUpdateExpense(id, name)}
-                isUpdateForm={true}
+                handleSubmit={this.handleUpdateExpense}
+                name={name}
+                description={description}
+                cost={cost}
             />
         ) : (
             <>
@@ -79,18 +83,18 @@ class Expense extends React.Component {
                     onMouseLeave={this.handleOnMouseLeave}
                 >
                     <StyledIconButton
-                        name="trash-alt"
-                        onClick={() => handleDeleteExpense(id)}
+                        name="plus-square"
+                        onClick={() => {}}
                         isHovering={isHovering}
                     />
                     <StyledIconButton
-                        name="edit"
+                        name="pen"
                         onClick={this.toggleEditExpense}
                         isHovering={isHovering}
                     />
                     <StyledIconButton
-                        name="plus-square"
-                        onClick={() => {}}
+                        name="trash-alt"
+                        onClick={() => handleDeleteExpense(id)}
                         isHovering={isHovering}
                     />
                 </Cell>
