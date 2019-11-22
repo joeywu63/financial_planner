@@ -125,9 +125,9 @@ class Calculator extends React.Component {
             <div>
                 <NavBar>
                     <FirstChevron />
-                    {loading ? console.log('Loading...') : this.renderList()}
+                    {loading ? <>Loading...</> : this.renderList()}
                 </NavBar>
-                {loading ? console.log('Loading...') : this.renderType()}
+                {loading ? <>Loading...</> : this.renderType()}
             </div>
         );
     }

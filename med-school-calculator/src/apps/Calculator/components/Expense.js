@@ -36,6 +36,7 @@ class Expense extends React.Component {
                             name={alt.name}
                             description={alt.description}
                             cost={alt.cost}
+                            checked={this.props.checkedItems.has(alt.id)}
                             onChange={this.props.onChange}
                         ></Alternative>
                     ))}
@@ -59,7 +60,7 @@ class Expense extends React.Component {
                     <small>{`${cost} $`}</small>
                 </form>
                 {loading
-                    ? console.log(loading)
+                    ? <>Loading...</>
                     : this.renderAlternatives(alternatives)}
             </div>
         );

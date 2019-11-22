@@ -1,6 +1,6 @@
 import React from 'react';
 import Subtype from './Subtype';
-import { getExpense } from '../repository';
+import { getExpense, getAlternative } from '../repository';
 
 class Type extends React.Component {
     state = {
@@ -14,7 +14,12 @@ class Type extends React.Component {
         let sum = 0;
         for (const e of checked) {
             const expense = await getExpense({ expenseID: e });
-            sum += expense.cost;
+            if (expense !== undefined){
+                sum += expense.cost;
+            } else {
+                const alt = await getAlternative({ alternativeID: e });
+                sum += alt.cost;
+            }
         }
         Promise.all(checked).then(res => this.setState({ total: sum }));
     }
