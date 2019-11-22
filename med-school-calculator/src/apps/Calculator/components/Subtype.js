@@ -13,7 +13,7 @@ class Subtype extends React.Component {
         const { title, id } = this.props;
         let expenses = JSON.parse(localStorage.getItem(title));
         if (!expenses) {
-            expenses = await getExpensesBySubtype(id);
+            expenses = await getExpensesBySubtype({ subTypeID: id });
             localStorage.setItem(title, JSON.stringify(expenses));
         }
         this.setState({ loading: false, expenses });
