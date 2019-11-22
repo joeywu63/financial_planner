@@ -23,7 +23,7 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'MCAT',
         types: [],
-        subTypes: {}
+        subTypes: {},
     };
 
     checked = new Set();
