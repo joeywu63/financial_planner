@@ -6,7 +6,8 @@ import FirstChevron from './FirstChevron';
 import Type from './Type';
 import Breakdown from './Breakdown';
 
-import { getAllTypes, getSubtypesByType, saveProgress, getUser } from '../repository';
+import { getAllTypes, getSubtypesByType, saveProgress } from '../repository';
+import { getCurrentUser } from 'utils/currentUser';
 
 const NavBar = styled.ul`
     list-style: none;
@@ -22,20 +23,15 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'Interview Process',
         types: [],
-        subTypes: {},
-        checked: new Set()
+        subTypes: {}
     };
 
     checked = new Set();
 
     async componentDidMount() {
-        await getUser().then(
-            user => {
-                this.checked = new Set(user.progress);
-            }
-        ).catch(
-            err => alert(err)
-        );
+        this.checked = getCurrentUser().progress;
+        console.log('hey');
+        console.log(this.checked);
 
         try {
             const { currentStage, subTypes } = this.state;

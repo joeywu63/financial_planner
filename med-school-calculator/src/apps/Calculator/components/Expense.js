@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { getAlternativesByExpense } from '../repository';
 import Alternative from './Alternative';
 
@@ -62,6 +64,10 @@ class Expense extends React.Component {
             </div>
         );
     }
+}
+
+Expense.propTypes = {
+    checked: PropTypes.bool
 }
 
 export default Expense;

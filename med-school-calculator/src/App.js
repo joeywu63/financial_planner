@@ -34,15 +34,19 @@ class App extends React.Component {
         firebase.auth().onAuthStateChanged(async user => {
             if (user) {
                 try {
-                    const userRole = (await userModel.get({ uid: user.uid }))
-                        .role;
+                    const u = await userModel.get({ uid: user.uid });
+                    const userRole = u.role;
+                    const progress = u.progress;
 
                     const currentUser = {
                         uid: user.uid,
                         email: user.email,
                         displayName: user.displayName,
-                        role: userRole
+                        role: userRole,
+                        progress: new Set(progress)
                     };
+                    console.log(user);
+                    console.log(currentUser);
                     setCurrentUser(currentUser);
                     this.setState({ isSignedIn: true, loading: false });
                 } catch (e) {

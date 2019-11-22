@@ -2,7 +2,7 @@ import * as expense from 'model/expense';
 import * as type from 'model/type';
 import * as subtype from 'model/subtype';
 import * as alternative from 'model/alternative';
-import { updateProgress, get } from 'model/user';
+import { updateProgress } from 'model/user';
 import { auth } from 'firebase';
 
 export const getAllTypes = type.get;
@@ -40,8 +40,3 @@ export const saveProgress = async (checked) => {
     const uid = auth().currentUser.uid;
     updateProgress(uid, checked);
 };
-
-export const getUser = async () => {
-    const uid = auth().currentUser.uid;
-    return get({uid});
-}
