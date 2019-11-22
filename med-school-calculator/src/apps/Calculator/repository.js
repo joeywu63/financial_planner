@@ -18,6 +18,8 @@ export const getUser = getCurrentUser;
 
 export const getExpense = expense.getByID;
 
+export const getSubtype = subtype.getByID;
+
 export const saveProgress = async checked => {
     const uid = auth().currentUser.uid;
     updateProgress(uid, checked);

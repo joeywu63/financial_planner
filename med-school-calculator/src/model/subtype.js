@@ -20,6 +20,18 @@ export const get = ({ typeID }) => {
         .catch(error => error);
 };
 
+export const getByID = ({ subtypeID }) => {
+    return firebase
+        .firestore()
+        .collection(SUB_TYPE_COLLECTION)
+        .doc(subtypeID)
+        .get()
+        .then(docRef => {
+            return docRef.data();
+        })
+        .catch(error => error);
+};
+
 export const getAll = () => {
     return firebase
         .firestore()
