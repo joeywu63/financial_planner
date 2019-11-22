@@ -12,11 +12,11 @@ class Type extends React.Component {
         const { checked } = this.props;
 
         let sum = 0;
-        checked.forEach(async e => {
+        for (const e of checked) {
             const expense = await getExpense({ expenseID: e });
             sum += expense.cost;
-            this.setState({ total: sum });
-        });
+        }
+        Promise.all(checked).then(res => this.setState({ total: sum }));
     }
 
     handleSelection = (expense, wasChecked) => {
