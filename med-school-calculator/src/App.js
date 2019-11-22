@@ -45,8 +45,6 @@ class App extends React.Component {
                         role: userRole,
                         progress: new Set(progress)
                     };
-                    console.log(user);
-                    console.log(currentUser);
                     setCurrentUser(currentUser);
                     this.setState({ isSignedIn: true, loading: false });
                 } catch (e) {
