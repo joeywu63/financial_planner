@@ -20,6 +20,18 @@ export const get = ({ typeID, subTypeID }) => {
         .catch(error => error);
 };
 
+export const getByID = ({ expenseID }) => {
+    return firebase
+        .firestore()
+        .collection(EXPENSE_COLLECTION)
+        .doc(expenseID)
+        .get()
+        .then(docRef => {
+            return docRef.data();
+        })
+        .catch(error => error);
+};
+
 export const create = ({ typeID, subTypeID, name, description, cost }) => {
     const expenseRef = firebase
         .firestore()

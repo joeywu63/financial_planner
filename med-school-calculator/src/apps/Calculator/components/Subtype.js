@@ -13,7 +13,7 @@ class Subtype extends React.Component {
         const { title, id } = this.props;
         let expenses = JSON.parse(localStorage.getItem(title));
         if (!expenses) {
-            expenses = await getExpensesBySubtype(id);
+            expenses = await getExpensesBySubtype({ subTypeID: id });
             localStorage.setItem(title, JSON.stringify(expenses));
         }
         this.setState({ loading: false, expenses });
@@ -57,7 +57,7 @@ class Subtype extends React.Component {
                     ? console.log('loading...')
                     : this.renderExpenses(expenses)}
                 <h3>
-                    Total of {this.props.title}: {this.state.totalPrice}$
+                    Subtotal: ${this.state.totalPrice}
                 </h3>
             </div>
         );

@@ -1,16 +1,31 @@
 import React from 'react';
 import Subtype from './Subtype';
+import { getExpense } from '../repository';
 
 class Type extends React.Component {
     state = {
-        total: 0,
-        subtypes: []
+        subtypes: [],
+        total: 0
     };
 
+    async componentDidMount() {
+        const { checked } = this.props;
+
+        let sum = 0;
+        for (const e of checked) {
+            const expense = await getExpense({ expenseID: e });
+            sum += expense.cost;
+        }
+        Promise.all(checked).then(res => this.setState({ total: sum }));
+    }
+
     handleSelection = (expense, wasChecked) => {
+        const { checked } = this.props;
         const { total } = this.state;
         if (wasChecked) {
-            this.setState({ total: total + expense.cost });
+            if (!checked.has(expense.id)) {
+                this.setState({ total: total + expense.cost });
+            }
         } else {
             this.setState({ total: total - expense.cost });
         }

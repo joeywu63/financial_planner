@@ -21,9 +21,9 @@ const NavBar = styled.ul`
 class Calculator extends React.Component {
     state = {
         loading: true,
-        currentStage: 'Interview Process',
+        currentStage: 'MCAT',
         types: [],
-        subTypes: {}
+        subTypes: {},
     };
 
     checked = new Set();
@@ -40,14 +40,18 @@ class Calculator extends React.Component {
                 localStorage.setItem('allTypes', JSON.stringify(allTypes));
             }
             let subTypesOfType = JSON.parse(localStorage.getItem(currentStage));
+            const id = allTypes[0].id;
             if (!subTypesOfType) {
-                subTypesOfType = await getSubtypesByType(allTypes[0].id);
-                localStorage.setItem(currentStage, JSON.stringify(subTypesOfType));
+                subTypesOfType = await getSubtypesByType({ typeID: id });
+                localStorage.setItem(
+                    currentStage,
+                    JSON.stringify(subTypesOfType)
+                );
             }
-            subTypes[currentStage]= subTypesOfType;
-            this.setState({ loading: false, types: allTypes, subTypes});
+            subTypes[currentStage] = subTypesOfType;
+            this.setState({ loading: false, types: allTypes, subTypes });
         } catch (e) {
-            console.log('something went wrong');
+            console.log(e);
         }
     }
 
@@ -62,11 +66,11 @@ class Calculator extends React.Component {
             this.setState({ currentStage: name });
             return;
         }
-        const {subTypes} = this.state;
+        const { subTypes } = this.state;
         if (!subTypes[name]) {
             let subTypesOfType = JSON.parse(localStorage.getItem(name));
             if (!subTypesOfType) {
-                subTypesOfType = await getSubtypesByType(id);
+                subTypesOfType = await getSubtypesByType({ typeID: id });
                 localStorage.setItem(name, JSON.stringify(subTypesOfType));
             }
             subTypes[name] = subTypesOfType;

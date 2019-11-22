@@ -35,7 +35,8 @@ export const updateProgress = (uid, expenses) => {
         .set(
             {
                 progress: Array.from(expenses)
-            }, {merge: true}
+            },
+            { merge: true }
         )
         .catch(err => alert(err));
-}
+};
