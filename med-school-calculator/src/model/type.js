@@ -8,6 +8,7 @@ export const get = () => {
     return firebase
         .firestore()
         .collection(TYPE_COLLECTION)
+        .orderBy('order')
         .get()
         .then(collection => {
             const data = [];
