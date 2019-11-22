@@ -30,8 +30,6 @@ class Calculator extends React.Component {
 
     async componentDidMount() {
         this.checked = getCurrentUser().progress;
-        console.log('hey');
-        console.log(this.checked);
 
         try {
             const { currentStage, subTypes } = this.state;
