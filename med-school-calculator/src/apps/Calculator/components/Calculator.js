@@ -6,7 +6,8 @@ import FirstChevron from './FirstChevron';
 import Type from './Type';
 import Breakdown from './Breakdown';
 
-import { getAllTypes, getSubtypesByType } from '../repository';
+import { getAllTypes, getSubtypesByType, saveProgress } from '../repository';
+import { getCurrentUser } from 'utils/currentUser';
 
 const NavBar = styled.ul`
     list-style: none;
@@ -25,7 +26,11 @@ class Calculator extends React.Component {
         subTypes: {}
     };
 
+    checked = new Set();
+
     async componentDidMount() {
+        this.checked = getCurrentUser().progress;
+
         try {
             const { currentStage, subTypes } = this.state;
             // See if all the types have been cached
@@ -47,6 +52,12 @@ class Calculator extends React.Component {
     }
 
     handleClick = async (id, name) => {
+        saveProgress(this.checked).catch(
+            err => {
+                alert(err);
+            }
+        );
+
         if (name === 'Breakdown') {
             this.setState({ currentStage: name });
             return;
@@ -67,6 +78,14 @@ class Calculator extends React.Component {
         }
     };
 
+    handleSelection = (expense, wasChecked) => {
+        if(wasChecked){
+            this.checked.add(expense.id);
+        }else{
+            this.checked.delete(expense.id);
+        }
+    }
+
     renderList = () => {
         const { types, currentStage } = this.state;
 
@@ -86,7 +105,12 @@ class Calculator extends React.Component {
             return <Breakdown />;
         } else {
             return (
-                <Type title={currentStage} subTypes={subTypes[currentStage]} />
+                <Type
+                    handleSelection={this.handleSelection}
+                    title={currentStage} 
+                    subTypes={subTypes[currentStage]}
+                    checked={this.checked}
+                />
             );
         }
     };
