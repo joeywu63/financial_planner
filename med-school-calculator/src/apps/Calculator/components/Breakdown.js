@@ -5,7 +5,8 @@ import {
     getSubtype,
     getUser,
     getExpense,
-    getAlternative
+    getAlternative,
+    saveProgress
 } from '../repository';
 import { ExportCSV } from './ExportCSV';
 
@@ -67,7 +68,13 @@ class Breakdown extends React.Component {
                     Cost: `${item.cost}`
                 });
             } catch (e) {
-                continue
+                const removedInvalid = [...progress].filter(
+                    item => item !== id
+                );
+                saveProgress(removedInvalid).catch(err => {
+                    alert(err);
+                });
+                continue;
             }
         }
         Promise.all(selectedOptions).then(res => {
