@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     padding: 20px;
+    margin-top: 70px;
 `;
 
 class PageWrapper extends React.Component {
