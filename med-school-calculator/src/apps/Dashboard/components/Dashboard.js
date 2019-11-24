@@ -1,7 +1,7 @@
 import React from 'react';
 import { auth } from 'firebase';
 
-import NavigationBar from "../../../common/NavigationBar";
+import NavigationBar from "common/NavigationBar";
 
 class Dashboard extends React.Component {
     handleLogOut = () => {
