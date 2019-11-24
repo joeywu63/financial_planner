@@ -13,12 +13,16 @@ class Type extends React.Component {
 
         let sum = 0;
         for (const e of checked) {
-            const expense = await getExpense({ expenseID: e });
-            if (expense !== undefined){
-                sum += expense.cost;
-            } else {
-                const alt = await getAlternative({ alternativeID: e });
-                sum += alt.cost;
+            try {
+                const expense = await getExpense({ expenseID: e });
+                if (expense !== undefined) {
+                    sum += expense.cost;
+                } else {
+                    const alt = await getAlternative({ alternativeID: e });
+                    sum += alt.cost;
+                }
+            } catch (e) {
+                continue;
             }
         }
         Promise.all(checked).then(res => this.setState({ total: sum }));

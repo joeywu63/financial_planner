@@ -57,14 +57,18 @@ class Breakdown extends React.Component {
             if (item === undefined) {
                 item = await getAlternative({ alternativeID: id });
             }
-            const subtype = await getSubtype({ subtypeID: item.subtypeID });
-            selectedOptions.push({ expense: item, category: subtype.name });
-            exportData.push({
-                Item: `${item.name}`,
-                Description: `${item.description}`,
-                Category: `${subtype.name}`,
-                Cost: `${item.cost}`
-            });
+            try {
+                const subtype = await getSubtype({ subtypeID: item.subtypeID });
+                selectedOptions.push({ expense: item, category: subtype.name });
+                exportData.push({
+                    Item: `${item.name}`,
+                    Description: `${item.description}`,
+                    Category: `${subtype.name}`,
+                    Cost: `${item.cost}`
+                });
+            } catch (e) {
+                continue
+            }
         }
         Promise.all(selectedOptions).then(res => {
             this.setState({ types: data, selected: res });
