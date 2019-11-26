@@ -1,6 +1,6 @@
 import React from 'react';
 import Subtype from './Subtype';
-import { getExpense } from '../repository';
+import { getExpense, getAlternative, saveProgress } from '../repository';
 
 class Type extends React.Component {
     state = {
@@ -12,9 +12,24 @@ class Type extends React.Component {
         const { checked } = this.props;
 
         let sum = 0;
-        for (const e of checked) {
-            const expense = await getExpense({ expenseID: e });
-            sum += expense.cost;
+        for (const id of checked) {
+            try {
+                const expense = await getExpense({ expenseID: id });
+                if (expense !== undefined) {
+                    sum += expense.cost;
+                } else {
+                    const alt = await getAlternative({ alternativeID: id });
+                    sum += alt.cost;
+                }
+            } catch (error) {
+                const removedInvalid = [...checked].filter(
+                    item => item !== id
+                );
+                saveProgress(removedInvalid).catch(err => {
+                    alert(err);
+                });
+                continue;
+            }
         }
         Promise.all(checked).then(res => this.setState({ total: sum }));
     }

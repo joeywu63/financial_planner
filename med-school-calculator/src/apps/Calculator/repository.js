@@ -12,7 +12,11 @@ export const getSubtypesByType = subtype.get;
 
 export const getExpensesBySubtype = expense.getBySubtype;
 
+export const getAlternative = alternative.getByID;
+
 export const getAlternativesByExpense = alternative.getAlternativesByExpense;
+
+export const getAlternativesForSubtype = alternative.getAlternativesForSubtype;
 
 export const getUser = getCurrentUser;
 

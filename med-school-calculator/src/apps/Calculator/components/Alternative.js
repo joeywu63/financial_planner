@@ -10,6 +10,12 @@ const AltDiv = styled.div`
 `;
 
 class Alternative extends React.Component {
+    async componentDidMount() {
+        if(this.props.checked){
+            this.handleChange();
+        }
+    }
+
     state = { checked: false };
 
     handleChange = () => {
