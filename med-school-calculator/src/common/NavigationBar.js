@@ -22,6 +22,7 @@ const NavBar = styled.nav`
     background-color: ${COLOURS.maroon};
     overflow: hidden;
     border-bottom: 1px solid ${COLOURS.lightgrey};
+    z-index: 99;
 `;
 
 const Title = styled.h1`
