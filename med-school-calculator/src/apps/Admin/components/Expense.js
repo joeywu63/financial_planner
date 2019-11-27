@@ -6,6 +6,7 @@ import { Cell } from 'styled-css-grid';
 import ExpenseForm from './ExpenseForm';
 
 import IconButton from 'common/IconButton';
+import DeleteModal from 'common/DeleteModal';
 
 const StyledIconButton = styled(IconButton)`
     visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
@@ -16,7 +17,8 @@ class Expense extends React.Component {
         loading: true,
         expenses: null,
         isEditingExpense: false,
-        isHovering: false
+        isHovering: false,
+        isModalOpen: false
     };
 
     handleUpdateExpense = (name, description, cost) => {
@@ -40,11 +42,17 @@ class Expense extends React.Component {
         this.setState({ isEditingExpense: !isEditingExpense });
     };
 
+    toggleModal = () => {
+        const { isModalOpen } = this.state;
+
+        this.setState({ isModalOpen: !isModalOpen });
+    };
+
     render() {
         const { id, name, cost, description } = this.props.expense;
         //handleDeleteExpense passed in from either Type.js (expenses without a subtype) or SubType.js
         const { handleDeleteExpense } = this.props;
-        const { isEditingExpense, isHovering } = this.state;
+        const { isEditingExpense, isHovering, isModalOpen } = this.state;
 
         return isEditingExpense ? (
             <ExpenseForm
@@ -56,6 +64,12 @@ class Expense extends React.Component {
             />
         ) : (
             <>
+                <DeleteModal
+                    isOpen={isModalOpen}
+                    onRequestClose={this.toggleModal}
+                    onDelete={() => handleDeleteExpense(id)}
+                    deleteConfirmationName="DELETE"
+                />
                 <Cell
                     width={2}
                     onMouseEnter={this.handleOnMouseEnter}
@@ -94,7 +108,7 @@ class Expense extends React.Component {
                     />
                     <StyledIconButton
                         name="trash-alt"
-                        onClick={() => handleDeleteExpense(id)}
+                        onClick={this.toggleModal}
                         isHovering={isHovering}
                     />
                 </Cell>
