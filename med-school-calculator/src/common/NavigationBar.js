@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Admin from 'apps/Admin/components/Admin';
 import Profile from 'apps/Profile/components/Profile';
@@ -76,9 +76,10 @@ class NavigationBar extends React.Component {
 
                     <PageWrapper>
                         <Switch>
-                            <Route path="/admin" component={Admin} />
-                            <Route path="/profile" component={Profile} />
-                            <Route path="/calculator" component={Calculator} />
+                            <Route path='/admin' component={Admin} />
+                            <Route path='/profile' component={Profile} />
+                            <Route path='/calculator' component={Calculator} />
+                            <Redirect to='/calculator' />
                         </Switch>
                     </PageWrapper>
                 </Router>

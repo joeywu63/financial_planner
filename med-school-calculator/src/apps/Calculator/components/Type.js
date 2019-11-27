@@ -57,7 +57,7 @@ class Type extends React.Component {
                         id={subtype.id}
                         title={subtype.name}
                         checked={this.props.checked}
-                    ></Subtype>
+                    />
                 ))}
             </div>
         );
