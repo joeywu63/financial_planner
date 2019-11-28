@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth } from 'firebase';
-import { Redirect, BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Switch, Route, Link, HashRouter } from 'react-router-dom';
 
 
 import NavigationBar from "common/NavigationBar";
@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div>
-                <Router>
+                <HashRouter>
                     <NavigationBar handleLogOut={this.handleLogOut}/>
 
                     <PageWrapper>
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
                             <Redirect to='/calculator' />
                         </Switch>
                     </PageWrapper>
-                </Router>
+                </HashRouter>
             </div>
         );
     }
