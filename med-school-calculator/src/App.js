@@ -1,14 +1,16 @@
 import React from 'react';
 
 import * as firebase from 'firebase';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import Home from 'apps/Login/components/Home';
 import Dashboard from 'apps/Dashboard/components/Dashboard';
 
 import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 import * as userModel from 'model/user';
+
+import Spinner from 'common/Spinner';
 
 library.add(fas);
 const firebaseConfig = {
@@ -65,11 +67,11 @@ class App extends React.Component {
         const currentUser = getCurrentUser(); // we need to get current user also for security reason
 
         return loading ? (
-            <div>Loading...</div>
+            <Spinner />
         ) : isSignedIn && currentUser ? (
             <Dashboard />
         ) : (
-            <Home/>
+            <Home />
         );
     }
 }
