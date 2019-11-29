@@ -48,6 +48,7 @@ class Alternative extends React.Component {
                                         src={`${info_icon}`}
                                         width="15"
                                         height="15"
+                                        alt="description"
                                     />
                                 }
                             />

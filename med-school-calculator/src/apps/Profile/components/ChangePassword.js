@@ -10,6 +10,11 @@ import { PROFILEPAGES } from '../constants';
 
 import { successToast, errorToast } from 'utils/helpers';
 
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
 const ShortInput = styled(Input)`
     width: 400px;
 `;
@@ -63,7 +68,7 @@ class ChangePassword extends React.Component {
         return (
             <>
                 <PasswordHeader>Edit Password</PasswordHeader>
-                <form onSubmit={this.handleSubmit}>
+                <StyledForm onSubmit={this.handleSubmit}>
                     <div>New Password:</div>
                     <ShortInput
                         type="password"
@@ -78,14 +83,16 @@ class ChangePassword extends React.Component {
                         value={this.state.confirmNewPassword}
                         onChange={this.handleChange}
                     />
-                </form>
-                <SubmitButton value="Submit" />
-                <StyledButton
-                    onClick={() =>
-                        this.props.handleSwitchPage(PROFILEPAGES.default)
-                    }
-                    text="Cancel"
-                />
+                    <div>
+                        <SubmitButton value="Submit" />
+                        <StyledButton
+                            onClick={() =>
+                                this.props.handleSwitchPage(PROFILEPAGES.default)
+                            }
+                            text="Cancel"
+                        />
+                    </div>
+                </StyledForm>
             </>
         );
     }

@@ -10,6 +10,11 @@ import SubmitButton from 'common/SubmitButton';
 import { PROFILEPAGES } from '../constants';
 import { successToast, errorToast } from 'utils/helpers';
 
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
 const ShortInput = styled(Input)`
     width: 400px;
 `;
@@ -67,7 +72,7 @@ class ChangeInfo extends React.Component {
         return (
             <>
                 <InfoHeader>Edit Profile</InfoHeader>
-                <form onSubmit={this.handleSubmit}>
+                <StyledForm onSubmit={this.handleSubmit}>
                     <div>Name:</div>
                     <ShortInput
                         type="text"
@@ -82,14 +87,18 @@ class ChangeInfo extends React.Component {
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
-                </form>
-                <SubmitButton value="Submit" />
-                <StyledButton
-                    onClick={() =>
-                        this.props.handleSwitchPage(PROFILEPAGES.default)
-                    }
-                    text="Cancel"
-                />
+                    <div>
+                        <SubmitButton value="Submit" />
+                        <StyledButton
+                            onClick={() =>
+                                this.props.handleSwitchPage(
+                                    PROFILEPAGES.default
+                                )
+                            }
+                            text="Cancel"
+                        />
+                    </div>
+                </StyledForm>
             </>
         );
     }
