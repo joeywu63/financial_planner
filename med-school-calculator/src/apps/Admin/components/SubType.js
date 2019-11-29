@@ -6,6 +6,7 @@ import { Cell, Grid } from 'styled-css-grid';
 import Expense from './Expense';
 import TypeForm from './TypeForm';
 import ExpenseForm from './ExpenseForm';
+import DeleteModal from 'common/DeleteModal';
 
 import {
     getSubTypeExpenses,
@@ -43,7 +44,8 @@ class SubType extends React.Component {
         loading: true,
         expenses: null,
         isAddingExpense: false,
-        isEditingSubType: false
+        isEditingSubType: false,
+        isModalOpen: false
     };
 
     async componentDidMount() {
@@ -185,7 +187,7 @@ class SubType extends React.Component {
     renderHeader = () => {
         const { handleDeleteSubType } = this.props;
         const { id, name } = this.props.subType;
-        const { isEditingSubType } = this.state;
+        const { isEditingSubType, isModalOpen } = this.state;
 
         return isEditingSubType ? (
             <TypeForm
@@ -194,26 +196,34 @@ class SubType extends React.Component {
                 name={name}
             />
         ) : (
-            <Hoverable>
-                {(isHovering, mouseEnter, mouseLeave) => (
-                    <SubTypeWrapper
-                        onMouseEnter={mouseEnter}
-                        onMouseLeave={mouseLeave}
-                    >
-                        <SubTypeHeader>{name}</SubTypeHeader>
-                        <StyledIconButton
-                            name="pen"
-                            onClick={this.toggleEditSubType}
-                            isHovering={isHovering}
-                        />
-                        <StyledIconButton
-                            name="trash-alt"
-                            onClick={() => handleDeleteSubType(id)}
-                            isHovering={isHovering}
-                        />
-                    </SubTypeWrapper>
-                )}
-            </Hoverable>
+            <>
+                <DeleteModal
+                    isOpen={isModalOpen}
+                    onRequestClose={this.toggleModal}
+                    onDelete={() => handleDeleteSubType(id)}
+                    deleteConfirmationName="DELETE"
+                />
+                <Hoverable>
+                    {(isHovering, mouseEnter, mouseLeave) => (
+                        <SubTypeWrapper
+                            onMouseEnter={mouseEnter}
+                            onMouseLeave={mouseLeave}
+                        >
+                            <SubTypeHeader>{name}</SubTypeHeader>
+                            <StyledIconButton
+                                name="pen"
+                                onClick={this.toggleEditSubType}
+                                isHovering={isHovering}
+                            />
+                            <StyledIconButton
+                                name="trash-alt"
+                                onClick={this.toggleModal}
+                                isHovering={isHovering}
+                            />
+                        </SubTypeWrapper>
+                    )}
+                </Hoverable>
+            </>
         );
     };
 
@@ -225,6 +235,12 @@ class SubType extends React.Component {
     toggleAddingExpense = () => {
         const { isAddingExpense } = this.state;
         this.setState({ isAddingExpense: !isAddingExpense });
+    };
+
+    toggleModal = () => {
+        const { isModalOpen } = this.state;
+
+        this.setState({ isModalOpen: !isModalOpen });
     };
 
     render() {

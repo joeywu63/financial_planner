@@ -11,6 +11,7 @@ import ExpenseForm from './ExpenseForm';
 import Button from 'common/Button';
 import IconButton from 'common/IconButton';
 import Hoverable from 'common/Hoverable';
+import DeleteModal from 'common/DeleteModal';
 
 import {
     getTypeExpenses,
@@ -46,7 +47,8 @@ class Type extends React.Component {
         subTypes: null,
         isAddingExpense: false,
         isAddingSubType: false,
-        isEditingType: false
+        isEditingType: false,
+        isModalOpen: false
     };
 
     async componentDidMount() {
@@ -201,7 +203,7 @@ class Type extends React.Component {
     renderHeader = () => {
         const { handleDeleteType } = this.props;
         const { id, name } = this.props.type;
-        const { isEditingType } = this.state;
+        const { isEditingType, isModalOpen } = this.state;
 
         return isEditingType ? (
             <TypeForm
@@ -210,26 +212,34 @@ class Type extends React.Component {
                 name={name}
             />
         ) : (
-            <Hoverable>
-                {(isHovering, mouseEnter, mouseLeave) => (
-                    <TypeWrapper
-                        onMouseEnter={mouseEnter}
-                        onMouseLeave={mouseLeave}
-                    >
-                        <TypeHeader>{name}</TypeHeader>
-                        <StyledIconButton
-                            name="pen"
-                            onClick={this.toggleEditType}
-                            isHovering={isHovering}
-                        />
-                        <StyledIconButton
-                            name="trash-alt"
-                            onClick={() => handleDeleteType(id)}
-                            isHovering={isHovering}
-                        />
-                    </TypeWrapper>
-                )}
-            </Hoverable>
+            <>
+                <DeleteModal
+                    isOpen={isModalOpen}
+                    onRequestClose={this.toggleModal}
+                    onDelete={() => handleDeleteType(id)}
+                    deleteConfirmationName="DELETE"
+                />
+                <Hoverable>
+                    {(isHovering, mouseEnter, mouseLeave) => (
+                        <TypeWrapper
+                            onMouseEnter={mouseEnter}
+                            onMouseLeave={mouseLeave}
+                        >
+                            <TypeHeader>{name}</TypeHeader>
+                            <StyledIconButton
+                                name="pen"
+                                onClick={this.toggleEditType}
+                                isHovering={isHovering}
+                            />
+                            <StyledIconButton
+                                name="trash-alt"
+                                onClick={this.toggleModal}
+                                isHovering={isHovering}
+                            />
+                        </TypeWrapper>
+                    )}
+                </Hoverable>
+            </>
         );
     };
 
@@ -289,6 +299,12 @@ class Type extends React.Component {
     toggleEditType = () => {
         const { isEditingType } = this.state;
         this.setState({ isEditingType: !isEditingType });
+    };
+
+    toggleModal = () => {
+        const { isModalOpen } = this.state;
+
+        this.setState({ isModalOpen: !isModalOpen });
     };
 
     render() {

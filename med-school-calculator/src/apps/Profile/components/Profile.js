@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { getCurrentUser } from 'utils/currentUser';
 import { PROFILEPAGES } from '../constants';
@@ -6,8 +7,25 @@ import Button from 'common/Button';
 import ChangeInfo from './ChangeInfo';
 import ChangePassword from './ChangePassword';
 
-class Profile extends React.Component {
+const ProfileHeader = styled.div`
+    font-weight: bold;
+    font-size: 25px;
+`;
 
+const ProfileLine = styled.div`
+    margin-top: 15px;
+    margin-bottom: 10px;
+`;
+
+const ProfileCategories = styled.text`
+    font-weight: bold;
+`;
+
+const StyledButton = styled(Button)`
+    margin-top: 15px;
+`;
+
+class Profile extends React.Component {
     state = {
         currentUser: getCurrentUser(),
         page: PROFILEPAGES.default
@@ -22,14 +40,20 @@ class Profile extends React.Component {
 
         return (
             <>
-                <div>Profile</div>
-                Name: {displayName}
-                Email: {email}
-                <Button
+                <ProfileHeader>Profile</ProfileHeader>
+                <ProfileLine>
+                    <ProfileCategories>Name:</ProfileCategories> {displayName}
+                </ProfileLine>
+                <ProfileLine>
+                    <ProfileCategories>Email:</ProfileCategories> {email}
+                </ProfileLine>
+                <StyledButton
                     text="Edit Profile"
-                    onClick={() => this.handleSwitchPage(PROFILEPAGES.changeinfo)}
+                    onClick={() =>
+                        this.handleSwitchPage(PROFILEPAGES.changeinfo)
+                    }
                 />
-                <Button
+                <StyledButton
                     text="Edit Password"
                     onClick={() =>
                         this.handleSwitchPage(PROFILEPAGES.changepassword)
@@ -43,12 +67,12 @@ class Profile extends React.Component {
         const { page } = this.state;
         return (
             <>
-            {page === PROFILEPAGES.default ? (
+                {page === PROFILEPAGES.default ? (
                     this.renderProfileInfo()
                 ) : page === PROFILEPAGES.changepassword ? (
-                    <ChangePassword handleSwitchPage={this.handleSwitchPage}/>
+                    <ChangePassword handleSwitchPage={this.handleSwitchPage} />
                 ) : page === PROFILEPAGES.changeinfo ? (
-                    <ChangeInfo handleSwitchPage={this.handleSwitchPage}/>
+                    <ChangeInfo handleSwitchPage={this.handleSwitchPage} />
                 ) : null}
             </>
         );

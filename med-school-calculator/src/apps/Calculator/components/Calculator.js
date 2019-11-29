@@ -7,6 +7,9 @@ import Type from './Type';
 import Breakdown from './Breakdown';
 
 import { getAllTypes, getSubtypesByType, saveProgress } from '../repository';
+
+import Button from 'common/Button';
+
 import { getCurrentUser } from 'utils/currentUser';
 import { errorToast } from 'utils/helpers';
 
@@ -120,9 +123,25 @@ class Calculator extends React.Component {
         }
     };
 
+    handleNext = () => {
+        const { types } = this.state;
+        const currentName = types.findIndex( x => x.name === this.state.currentStage);
+        this.handleClick(types[currentName+1].id, types[currentName+1].name);
+    };
+
+    handlePrevious = () => {
+        const { types } = this.state;
+        const currentName = types.findIndex( x => x.name === this.state.currentStage);
+        this.handleClick(types[currentName-1].id, types[currentName-1].name);
+    };
+
+
     render() {
-        const { loading } = this.state;
+        const { loading, currentStage, types} = this.state;
+        const lastCategory = currentStage === 'Breakdown';
+        const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
+            <>
             <div>
                 <NavBar>
                     <FirstChevron />
@@ -130,6 +149,15 @@ class Calculator extends React.Component {
                 </NavBar>
                 {loading ? <>Loading...</> : this.renderType()}
             </div>
+            {!firstCategory ? (
+                <Button text="Previous" onClick={() => this.handlePrevious()}/>
+            ) : null
+            }
+            {!lastCategory ? (
+                <Button text="Next" onClick={() => this.handleNext()}/>
+            ) : null
+            }
+            </>
         );
     }
 }
