@@ -133,10 +133,11 @@ class Calculator extends React.Component {
         this.handleClick(types[currentName-1].id, types[currentName-1].name);
     };
 
+
     render() {
-        const { loading } = this.state;
-        const firstCategory = this.state.currentStage === 'Breakdown';
-        const lastCategory = this.state.currentStage === 'MCAT';
+        const { loading, currentStage, types} = this.state;
+        const lastCategory = currentStage === 'Breakdown';
+        const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
             <>
             <div>
@@ -146,11 +147,11 @@ class Calculator extends React.Component {
                 </NavBar>
                 {loading ? <>Loading...</> : this.renderType()}
             </div>
-            {!lastCategory ? (
+            {!firstCategory ? (
                 <Button text="Previous" onClick={() => this.handlePrevious()}/>
             ) : null
             }
-            {!firstCategory ? (
+            {!lastCategory ? (
                 <Button text="Next" onClick={() => this.handleNext()}/>
             ) : null
             }
