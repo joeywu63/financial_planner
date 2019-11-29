@@ -3,6 +3,8 @@ import React from 'react';
 import * as firebase from 'firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from 'apps/Login/components/Home';
 import Dashboard from 'apps/Dashboard/components/Dashboard';
@@ -13,6 +15,7 @@ import * as userModel from 'model/user';
 import Spinner from 'common/Spinner';
 
 library.add(fas);
+toast.configure();
 const firebaseConfig = {
     apiKey: 'AIzaSyC4FMchr26grG-r3mrD2eKgauRl2alaBNQ',
     authDomain: 'med-school-calculator.firebaseapp.com',

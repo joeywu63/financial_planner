@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Cell } from "styled-css-grid";
+import { Grid, Cell } from 'styled-css-grid';
 import PropTypes from 'prop-types';
 import InfoTooltip from 'common/InfoTooltip';
 import info_icon from 'img/question-mark-icon.png';
@@ -10,8 +10,8 @@ const AltDiv = styled.div`
 `;
 
 class Alternative extends React.Component {
-    async componentDidMount() {
-        if(this.props.checked){
+    componentDidMount() {
+        if (this.props.checked) {
             this.handleChange();
         }
     }
@@ -29,22 +29,31 @@ class Alternative extends React.Component {
         const { name, description, cost } = this.props;
         return (
             <AltDiv>
-                <Grid columns={"20px 45px auto"}>
+                <Grid columns={'20px 45px auto'}>
                     <Cell>
                         <input
                             type="checkbox"
                             checked={checked}
                             onChange={this.handleChange}
-                        ></input>
+                        />
                     </Cell>
                     <Cell>{`$${cost}`}</Cell>
                     <Cell>
                         {`${name} `}
-                        {description ?
+                        {description ? (
                             <InfoTooltip
                                 hoverMessage={description}
-                                trigger={<img src={`${info_icon}`} width="15" height="15"/>}
-                            ></InfoTooltip> : ""}
+                                trigger={
+                                    <img
+                                        src={`${info_icon}`}
+                                        width="15"
+                                        height="15"
+                                    />
+                                }
+                            />
+                        ) : (
+                            ''
+                        )}
                     </Cell>
                 </Grid>
             </AltDiv>

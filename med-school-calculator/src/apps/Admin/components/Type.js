@@ -22,6 +22,7 @@ import {
     deleteExpense,
     updateExpense
 } from '../repository';
+import { errorToast } from 'utils/helpers';
 
 const TypeWrapper = styled.div`
     display: flex;
@@ -57,7 +58,7 @@ class Type extends React.Component {
 
             this.setState({ expenses, subTypes, loading: false });
         } catch (e) {
-            // TODO: show error
+            errorToast();
         }
     }
 
@@ -96,7 +97,7 @@ class Type extends React.Component {
             );
             this.setState({ isAddingExpense: false, expenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -104,13 +105,14 @@ class Type extends React.Component {
         const { expenses } = this.state;
         try {
             await deleteExpense({ expenseID });
+
+            const newExpenses = expenses.filter(
+                expense => expense.id !== expenseID
+            );
+            this.setState({ expenses: newExpenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
-        const newExpenses = expenses.filter(
-            expense => expense.id !== expenseID
-        );
-        this.setState({ expenses: newExpenses });
     };
 
     handleUpdateExpense = async (expenseID, name, description, cost) => {
@@ -132,7 +134,7 @@ class Type extends React.Component {
             });
             this.setState({ expenses: newExpenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -151,7 +153,7 @@ class Type extends React.Component {
             subTypes.push(this.createTemporarySubType(subTypeID, name));
             this.setState({ isAddingSubType: false, subTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -166,7 +168,7 @@ class Type extends React.Component {
             );
             this.setState({ subTypes: newSubTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -192,7 +194,7 @@ class Type extends React.Component {
             });
             this.setState({ subTypes: newSubTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
