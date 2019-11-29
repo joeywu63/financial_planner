@@ -8,6 +8,8 @@ import Button from 'common/Button';
 import Input from 'common/Input';
 import { PROFILEPAGES } from '../constants';
 
+import { successToast, errorToast } from 'utils/helpers';
+
 const ShortInput = styled(Input)`
     width: 400px;
 `;
@@ -40,21 +42,20 @@ class ChangePassword extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        if (this.state.newPassword == this.state.confirmNewPassword) {
+        if (this.state.newPassword === this.state.confirmNewPassword) {
             auth()
                 .currentUser.updatePassword(this.state.newPassword)
                 .then(() => {
-                    window.alert('Password changed successfully');
+                    successToast('Password changed successfully');
                     this.props.handleSwitchPage(PROFILEPAGES.default);
                 })
                 .catch(err => {
                     // TODO: error handling, reauthenticate
-                    console.log(err);
-                    window.alert('Something went wrong');
+                    errorToast();
                 });
         } else {
             // TODO: display password reqs
-            window.alert('Passwords do not match');
+            errorToast('Passwords do not match');
         }
     };
 
@@ -69,14 +70,14 @@ class ChangePassword extends React.Component {
                         name="newPassword"
                         value={this.state.newPassword}
                         onChange={this.handleChange}
-                    ></ShortInput>
+                    />
                     <div>Confirm New Password:</div>
                     <ShortInput
                         type="password"
                         name="confirmNewPassword"
                         value={this.state.confirmNewPassword}
                         onChange={this.handleChange}
-                    ></ShortInput>
+                    />
                 </form>
                 <SubmitButton value="Submit" />
                 <StyledButton

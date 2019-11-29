@@ -63,8 +63,13 @@ class Breakdown extends React.Component {
                     item = await getAlternative({ alternativeID: id });
                 }
                 try {
-                    const subtype = await getSubtype({ subtypeID: item.subtypeID });
-                    selectedOptions.push({ expense: item, category: subtype.name });
+                    const subtype = await getSubtype({
+                        subtypeID: item.subtypeID
+                    });
+                    selectedOptions.push({
+                        expense: item,
+                        category: subtype.name
+                    });
                     exportData.push({
                         Item: `${item.name}`,
                         Description: `${item.description}`,

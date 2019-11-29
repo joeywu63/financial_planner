@@ -125,38 +125,48 @@ class Calculator extends React.Component {
 
     handleNext = () => {
         const { types } = this.state;
-        const currentName = types.findIndex( x => x.name === this.state.currentStage);
-        this.handleClick(types[currentName+1].id, types[currentName+1].name);
+        const currentName = types.findIndex(
+            x => x.name === this.state.currentStage
+        );
+        this.handleClick(
+            types[currentName + 1].id,
+            types[currentName + 1].name
+        );
     };
 
     handlePrevious = () => {
         const { types } = this.state;
-        const currentName = types.findIndex( x => x.name === this.state.currentStage);
-        this.handleClick(types[currentName-1].id, types[currentName-1].name);
+        const currentName = types.findIndex(
+            x => x.name === this.state.currentStage
+        );
+        this.handleClick(
+            types[currentName - 1].id,
+            types[currentName - 1].name
+        );
     };
 
-
     render() {
-        const { loading, currentStage, types} = this.state;
+        const { loading, currentStage, types } = this.state;
         const lastCategory = currentStage === 'Breakdown';
         const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
             <>
-            <div>
-                <NavBar>
-                    <FirstChevron />
-                    {loading ? <>Loading...</> : this.renderList()}
-                </NavBar>
-                {loading ? <>Loading...</> : this.renderType()}
-            </div>
-            {!firstCategory ? (
-                <Button text="Previous" onClick={() => this.handlePrevious()}/>
-            ) : null
-            }
-            {!lastCategory ? (
-                <Button text="Next" onClick={() => this.handleNext()}/>
-            ) : null
-            }
+                <div>
+                    <NavBar>
+                        <FirstChevron />
+                        {loading ? <>Loading...</> : this.renderList()}
+                    </NavBar>
+                    {loading ? <>Loading...</> : this.renderType()}
+                </div>
+                {!firstCategory ? (
+                    <Button
+                        text="Previous"
+                        onClick={() => this.handlePrevious()}
+                    />
+                ) : null}
+                {!lastCategory ? (
+                    <Button text="Next" onClick={() => this.handleNext()} />
+                ) : null}
             </>
         );
     }

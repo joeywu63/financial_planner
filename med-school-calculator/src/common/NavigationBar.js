@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { hasAdminAccess } from 'utils/helpers';
-import {COLOURS} from "utils/constants";
-
+import { COLOURS } from 'utils/constants';
 
 const NavBar = styled.nav`
     position: sticky;
     top: 0;
     height: 50px;
-    width: 100%; 
+    width: 100%;
     margin: 0;
     padding: 0;
     background-color: ${COLOURS.maroon};
@@ -51,19 +50,26 @@ const MenuOption = styled.li`
     }
 `;
 
-
 class NavigationBar extends React.Component {
-    render () {
+    render() {
         return (
             <NavBar>
                 <Title>Med School Application Costs Calculator</Title>
                 <List>
-                    <Link to={"/"} onClick={this.props.handleLogOut}><MenuOption>Log out</MenuOption></Link>
+                    <Link to={'/'} onClick={this.props.handleLogOut}>
+                        <MenuOption>Log out</MenuOption>
+                    </Link>
                     {hasAdminAccess() && (
-                        <Link to={"/admin"}><MenuOption>Admin</MenuOption></Link>
+                        <Link to={'/admin'}>
+                            <MenuOption>Admin</MenuOption>
+                        </Link>
                     )}
-                    <Link to={"/profile"}><MenuOption>Profile</MenuOption></Link>
-                    <Link to={"/calculator"}><MenuOption>Calculator</MenuOption></Link>
+                    <Link to={'/profile'}>
+                        <MenuOption>Profile</MenuOption>
+                    </Link>
+                    <Link to={'/calculator'}>
+                        <MenuOption>Calculator</MenuOption>
+                    </Link>
                 </List>
             </NavBar>
         );

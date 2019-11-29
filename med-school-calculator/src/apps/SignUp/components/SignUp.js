@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { COLOURS } from 'utils/constants';
 
 import { createUser } from '../repository';
+import { errorToast } from 'utils/helpers';
 
 const SignUpContainer = styled.div`
     border: 45px solid ${COLOURS.darkblue};
@@ -102,12 +103,11 @@ class SignUp extends React.Component {
                     await createUser({ uid: result.user.uid, email });
                     await result.user.updateProfile({ displayName });
                 } catch (e) {
-                    console.log(e);
-                    alert('something went wrong');
+                    errorToast();
                 }
             })
-            .catch(error => {
-                alert('something went wrong');
+            .catch(() => {
+                errorToast();
             });
     };
 
