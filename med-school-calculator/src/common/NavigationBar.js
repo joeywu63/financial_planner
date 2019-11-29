@@ -64,6 +64,7 @@ class NavigationBar extends React.Component {
                     )}
                     <Link to={"/profile"}><MenuOption>Profile</MenuOption></Link>
                     <Link to={"/calculator"}><MenuOption>Calculator</MenuOption></Link>
+                    <Link to={"/about"}><MenuOption>About Us</MenuOption></Link>
                 </List>
             </NavBar>
         );
