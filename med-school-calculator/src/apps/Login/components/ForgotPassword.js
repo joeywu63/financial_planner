@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { COLOURS } from 'utils/constants';
 import Button from 'common/Button';
 import SubmitButton from 'common/SubmitButton';
-import { errorToast } from 'utils/helpers';
+import { successToast, errorToast } from 'utils/helpers';
 
 const Popup = styled.div`
     position: fixed;
@@ -81,7 +81,7 @@ class ForgotPassword extends React.Component {
         auth()
             .sendPasswordResetEmail(this.state.email)
             .then(() => {
-                window.alert('Please Check Your Email For Password Reset');
+                successToast('Please Check Email For Password Reset');
             })
             .catch(err => {
                 errorToast();
