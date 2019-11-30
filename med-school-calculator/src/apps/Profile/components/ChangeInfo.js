@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { auth } from 'firebase';
 import styled from 'styled-components';
 
-import { getCurrentUser } from 'utils/currentUser';
+import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 import Button from 'common/Button';
 import Input from 'common/Input';
 import SubmitButton from 'common/SubmitButton';
@@ -56,6 +56,11 @@ class ChangeInfo extends React.Component {
             .then(() => {
                 //TODO: update current user
                 successToast('Profile updated successfully');
+
+                let currentUser = getCurrentUser();
+                currentUser.displayName = this.state.displayName;
+                setCurrentUser(currentUser);
+
                 this.props.handleSwitchPage(PROFILEPAGES.default);
             })
             .catch(

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { auth } from 'firebase';
 import styled from 'styled-components';
 
-import { getCurrentUser } from 'utils/currentUser';
+import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 import SubmitButton from 'common/SubmitButton';
 import Button from 'common/Button';
 import Input from 'common/Input';
@@ -59,6 +59,11 @@ class ChangePassword extends React.Component {
         ).then(
             () => {
                 successToast('Email updated successfully');
+
+                let currentUser = getCurrentUser();
+                currentUser.email = this.state.email;
+                setCurrentUser(currentUser);
+
                 this.props.handleSwitchPage(PROFILEPAGES.default);
             }
         ).catch(
