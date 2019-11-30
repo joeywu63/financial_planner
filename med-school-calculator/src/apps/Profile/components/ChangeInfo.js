@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { auth } from 'firebase';
 import styled from 'styled-components';
 
-import { getCurrentUser } from 'utils/currentUser';
+import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 import Button from 'common/Button';
 import Input from 'common/Input';
 import SubmitButton from 'common/SubmitButton';
@@ -31,8 +31,7 @@ const StyledButton = styled(Button)`
 
 class ChangeInfo extends React.Component {
     state = {
-        displayName: getCurrentUser().displayName,
-        email: getCurrentUser().email
+        displayName: getCurrentUser().displayName
     };
 
     handleChange = event => {
@@ -50,14 +49,18 @@ class ChangeInfo extends React.Component {
         let updates = [
             user.updateProfile({
                 displayName: this.state.displayName
-            }),
-            user.updateEmail(this.state.email)
+            })
         ];
 
         Promise.all(updates)
             .then(() => {
                 //TODO: update current user
                 successToast('Profile updated successfully');
+
+                let currentUser = getCurrentUser();
+                currentUser.displayName = this.state.displayName;
+                setCurrentUser(currentUser);
+
                 this.props.handleSwitchPage(PROFILEPAGES.default);
             })
             .catch(
@@ -78,13 +81,6 @@ class ChangeInfo extends React.Component {
                         type="text"
                         name="displayName"
                         value={this.state.displayName}
-                        onChange={this.handleChange}
-                    />
-                    <div>Email:</div>
-                    <ShortInput
-                        type="text"
-                        name="email"
-                        value={this.state.email}
                         onChange={this.handleChange}
                     />
                     <div>

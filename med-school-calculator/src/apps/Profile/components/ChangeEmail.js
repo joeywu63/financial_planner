@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { auth } from 'firebase';
 import styled from 'styled-components';
 
-import { getCurrentUser } from 'utils/currentUser';
+import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 import SubmitButton from 'common/SubmitButton';
 import Button from 'common/Button';
 import Input from 'common/Input';
@@ -32,9 +32,8 @@ const StyledButton = styled(Button)`
 
 class ChangePassword extends React.Component {
     state = {
-        oldPassword: '',
-        newPassword: '',
-        confirmNewPassword: ''
+        password: '',
+        email: getCurrentUser().email
     };
 
     handleChange = event => {
@@ -49,27 +48,29 @@ class ChangePassword extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        if (this.state.newPassword === this.state.confirmNewPassword) {
-            const credential = auth.EmailAuthProvider.credential(
-                getCurrentUser().email, 
-                this.state.oldPassword
-            );
-            auth().currentUser.reauthenticateWithCredential(credential).then(
-                () => {
-                    return auth().currentUser.updatePassword(this.state.newPassword)
-                } 
-            ).then(() => {
-                successToast('Password changed successfully');
+        const credential = auth.EmailAuthProvider.credential(
+            getCurrentUser().email, 
+            this.state.password
+        );
+        auth().currentUser.reauthenticateWithCredential(credential).then(
+            () => {
+                return auth().currentUser.updateEmail(this.state.email);
+            } 
+        ).then(
+            () => {
+                successToast('Email updated successfully');
+
+                let currentUser = getCurrentUser();
+                currentUser.email = this.state.email;
+                setCurrentUser(currentUser);
+
                 this.props.handleSwitchPage(PROFILEPAGES.default);
-            })
-            .catch(err => {
-                // TODO: error handling
+            }
+        ).catch(
+            err => {
                 errorToast();
-            });
-        } else {
-            // TODO: display password reqs
-            errorToast('Passwords do not match');
-        }
+            }
+        );
     };
 
     render() {
@@ -77,25 +78,18 @@ class ChangePassword extends React.Component {
             <>
                 <PasswordHeader>Edit Password</PasswordHeader>
                 <StyledForm onSubmit={this.handleSubmit}>
-                    <div>Old Password:</div>
+                    <div>Password:</div>
                         <ShortInput
                             type="password"
-                            name="oldPassword"
-                            value={this.state.oldPassword}
+                            name="password"
+                            value={this.state.password}
                             onChange={this.handleChange}
                     />
-                    <div>New Password:</div>
+                    <div>Email:</div>
                     <ShortInput
-                        type="password"
-                        name="newPassword"
-                        value={this.state.newPassword}
-                        onChange={this.handleChange}
-                    />
-                    <div>Confirm New Password:</div>
-                    <ShortInput
-                        type="password"
-                        name="confirmNewPassword"
-                        value={this.state.confirmNewPassword}
+                        type="text"
+                        name="email"
+                        value={this.state.email}
                         onChange={this.handleChange}
                     />
                     <div>
