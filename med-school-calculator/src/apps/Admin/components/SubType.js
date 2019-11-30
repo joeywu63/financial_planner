@@ -14,6 +14,7 @@ import {
     updateExpense,
     createExpense
 } from '../repository';
+import { errorToast } from 'utils/helpers';
 
 import Button from 'common/Button';
 import Hoverable from 'common/Hoverable';
@@ -58,7 +59,7 @@ class SubType extends React.Component {
 
             this.setState({ expenses, loading: false });
         } catch (e) {
-            // TODO: show error
+            errorToast();
         }
     }
 
@@ -113,7 +114,7 @@ class SubType extends React.Component {
             );
             this.setState({ isAddingExpense: false, expenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -122,7 +123,7 @@ class SubType extends React.Component {
         try {
             await deleteExpense({ expenseID });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
         const newExpenses = expenses.filter(
             expense => expense.id !== expenseID
@@ -149,7 +150,7 @@ class SubType extends React.Component {
             });
             this.setState({ expenses: newExpenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 

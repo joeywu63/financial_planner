@@ -3,7 +3,7 @@ import * as type from 'model/type';
 import * as subtype from 'model/subtype';
 import * as alternative from 'model/alternative';
 import { updateProgress } from 'model/user';
-import { getCurrentUser } from 'utils/currentUser'
+import { getCurrentUser } from 'utils/currentUser';
 import { auth } from 'firebase';
 
 export const getAllTypes = type.get;

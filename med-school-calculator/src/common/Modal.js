@@ -10,7 +10,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
 
 const customStyles = {
     content: {
-
         top: '100px',
         left: '200px',
         right: '200px',

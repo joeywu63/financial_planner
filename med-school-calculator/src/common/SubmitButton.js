@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {COLOURS} from '../utils/constants';
+import { COLOURS } from '../utils/constants';
 
 const StyledButton = styled.input`
     height: 35px;
@@ -24,7 +24,7 @@ class SubmitButton extends React.Component {
     render() {
         const { value } = this.props;
 
-        return <StyledButton type="submit" value={value}></StyledButton>
+        return <StyledButton type="submit" value={value} />;
     }
 }
 

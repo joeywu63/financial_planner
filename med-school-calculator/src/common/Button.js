@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {COLOURS} from '../utils/constants';
+import { COLOURS } from '../utils/constants';
 
 const StyledButton = styled.button`
     height: 35px;
@@ -24,7 +24,11 @@ class Button extends React.Component {
     render() {
         const { text, onClick, className } = this.props;
 
-        return <StyledButton type="button" className={className} onClick={onClick}>{text}</StyledButton>
+        return (
+            <StyledButton type="button" className={className} onClick={onClick}>
+                {text}
+            </StyledButton>
+        );
     }
 }
 

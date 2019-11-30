@@ -25,7 +25,7 @@ class ExpenseForm extends React.Component {
         });
     };
 
-    handleSubmit = async e => {
+    handleSubmit = e => {
         e.preventDefault();
         const { handleSubmit } = this.props;
         const { name, description, cost } = this.state;
