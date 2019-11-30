@@ -5,6 +5,7 @@ import { getCurrentUser } from 'utils/currentUser';
 import { PROFILEPAGES } from '../constants';
 import Button from 'common/Button';
 import ChangeInfo from './ChangeInfo';
+import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
 
 const ProfileHeader = styled.div`
@@ -44,13 +45,19 @@ class Profile extends React.Component {
                 <ProfileLine>
                     <ProfileCategories>Name:</ProfileCategories> {displayName}
                 </ProfileLine>
-                <ProfileLine>
-                    <ProfileCategories>Email:</ProfileCategories> {email}
-                </ProfileLine>
                 <StyledButton
                     text="Edit Profile"
                     onClick={() =>
                         this.handleSwitchPage(PROFILEPAGES.changeinfo)
+                    }
+                />
+                <ProfileLine>
+                    <ProfileCategories>Email:</ProfileCategories> {email}
+                </ProfileLine>
+                <StyledButton
+                    text="Edit Email"
+                    onClick={() =>
+                        this.handleSwitchPage(PROFILEPAGES.changeemail)
                     }
                 />
                 <StyledButton
@@ -71,6 +78,8 @@ class Profile extends React.Component {
                     this.renderProfileInfo()
                 ) : page === PROFILEPAGES.changepassword ? (
                     <ChangePassword handleSwitchPage={this.handleSwitchPage} />
+                ) : page === PROFILEPAGES.changeemail ? (
+                    <ChangeEmail handleSwitchPage={this.handleSwitchPage}/>
                 ) : page === PROFILEPAGES.changeinfo ? (
                     <ChangeInfo handleSwitchPage={this.handleSwitchPage} />
                 ) : null}
