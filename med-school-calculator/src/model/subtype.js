@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import {incrementVersion} from './version'
 
 const SUB_TYPE_COLLECTION = 'subtype';
 const EXPENSE_COLLECTION = 'expense';
@@ -49,6 +50,7 @@ export const getAll = () => {
 };
 
 export const create = ({ typeID, name }) => {
+    incrementVersion();
     const subTypeRef = firebase
         .firestore()
         .collection(SUB_TYPE_COLLECTION)
@@ -60,10 +62,9 @@ export const create = ({ typeID, name }) => {
 };
 
 export const deleteSubType = ({ subTypeID }) => {
+    incrementVersion();
     const db = firebase.firestore();
-
     const batch = db.batch();
-
     // delete type
     const subTypeRef = db.collection(SUB_TYPE_COLLECTION).doc(subTypeID);
     batch.delete(subTypeRef);
@@ -84,6 +85,7 @@ export const deleteSubType = ({ subTypeID }) => {
 };
 
 export const update = ({ subTypeID, name }) => {
+    incrementVersion();
     return firebase
         .firestore()
         .collection(SUB_TYPE_COLLECTION)

@@ -6,8 +6,14 @@ import FirstChevron from './FirstChevron';
 import Type from './Type';
 import Breakdown from './Breakdown';
 
-import { getAllTypes, getSubtypesByType, saveProgress } from '../repository';
-import { getCurrentUser } from 'utils/currentUser';
+import {
+    getAllTypes,
+    getSubtypesByType,
+    saveProgress,
+    getDatabaseVersion,
+    updateVersionForUser
+} from '../repository';
+import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 
 const NavBar = styled.ul`
     list-style: none;
@@ -23,7 +29,7 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'MCAT',
         types: [],
-        subTypes: {},
+        subTypes: {}
     };
 
     checked = new Set();
@@ -32,6 +38,15 @@ class Calculator extends React.Component {
         this.checked = getCurrentUser().progress;
 
         try {
+            // Check if user is up to date with database
+            const user = getCurrentUser();
+            const databaseVersion = await getDatabaseVersion();
+            if (user.version !== databaseVersion) {
+                localStorage.clear();
+                user.version = databaseVersion;
+                setCurrentUser(user);
+                updateVersionForUser(user.uid, databaseVersion);
+            }
             const { currentStage, subTypes } = this.state;
             // See if all the types have been cached
             let allTypes = JSON.parse(localStorage.getItem('allTypes'));
@@ -56,11 +71,9 @@ class Calculator extends React.Component {
     }
 
     handleClick = async (id, name) => {
-        saveProgress(this.checked).catch(
-            err => {
-                alert(err);
-            }
-        );
+        saveProgress(this.checked).catch(err => {
+            alert(err);
+        });
 
         if (name === 'Breakdown') {
             this.setState({ currentStage: name });
@@ -83,12 +96,12 @@ class Calculator extends React.Component {
     };
 
     handleSelection = (expense, wasChecked) => {
-        if(wasChecked){
+        if (wasChecked) {
             this.checked.add(expense.id);
-        }else{
+        } else {
             this.checked.delete(expense.id);
         }
-    }
+    };
 
     renderList = () => {
         const { types, currentStage } = this.state;
@@ -111,7 +124,7 @@ class Calculator extends React.Component {
             return (
                 <Type
                     handleSelection={this.handleSelection}
-                    title={currentStage} 
+                    title={currentStage}
                     subTypes={subTypes[currentStage]}
                     checked={this.checked}
                 />

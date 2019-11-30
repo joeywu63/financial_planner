@@ -40,13 +40,15 @@ class App extends React.Component {
                     const u = await userModel.get({ uid: user.uid });
                     const userRole = u.role;
                     const progress = u.progress;
+                    const userVersion = u.version;
 
                     const currentUser = {
                         uid: user.uid,
                         email: user.email,
                         displayName: user.displayName,
                         role: userRole,
-                        progress: new Set(progress)
+                        progress: new Set(progress),
+                        version: userVersion 
                     };
                     setCurrentUser(currentUser);
                     this.setState({ isSignedIn: true, loading: false });

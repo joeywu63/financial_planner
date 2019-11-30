@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import {incrementVersion} from './version'
 
 const TYPE_COLLECTION = 'type';
 const SUB_TYPE_COLLECTION = 'subtype';
@@ -22,6 +23,7 @@ export const get = () => {
 };
 
 export const create = ({ name }) => {
+    incrementVersion();
     const typeRef = firebase
         .firestore()
         .collection(TYPE_COLLECTION)
@@ -33,10 +35,10 @@ export const create = ({ name }) => {
 };
 
 export const deleteType = ({ typeID }) => {
+    incrementVersion();
     const db = firebase.firestore();
 
     const batch = db.batch();
-
     // delete type
     const typeRef = db.collection(TYPE_COLLECTION).doc(typeID);
     batch.delete(typeRef);
@@ -67,6 +69,7 @@ export const deleteType = ({ typeID }) => {
 };
 
 export const update = ({ typeID, name }) => {
+    incrementVersion();
     return firebase
         .firestore()
         .collection(TYPE_COLLECTION)
