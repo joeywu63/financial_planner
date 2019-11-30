@@ -8,6 +8,12 @@ import Button from 'common/Button';
 import Input from 'common/Input';
 import SubmitButton from 'common/SubmitButton';
 import { PROFILEPAGES } from '../constants';
+import { successToast, errorToast } from 'utils/helpers';
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
 
 const ShortInput = styled(Input)`
     width: 400px;
@@ -51,14 +57,13 @@ class ChangeInfo extends React.Component {
         Promise.all(updates)
             .then(() => {
                 //TODO: update current user
-                window.alert('profile changed successfully');
+                successToast('Profile updated successfully');
                 this.props.handleSwitchPage(PROFILEPAGES.default);
             })
             .catch(
                 //TODO: error handling, reauthenticate
-                err => {
-                    console.log(err);
-                    window.alert('something went wrong');
+                () => {
+                    errorToast();
                 }
             );
     };
@@ -67,29 +72,33 @@ class ChangeInfo extends React.Component {
         return (
             <>
                 <InfoHeader>Edit Profile</InfoHeader>
-                <form onSubmit={this.handleSubmit}>
+                <StyledForm onSubmit={this.handleSubmit}>
                     <div>Name:</div>
                     <ShortInput
                         type="text"
                         name="displayName"
                         value={this.state.displayName}
                         onChange={this.handleChange}
-                    ></ShortInput>
+                    />
                     <div>Email:</div>
                     <ShortInput
                         type="text"
                         name="email"
                         value={this.state.email}
                         onChange={this.handleChange}
-                    ></ShortInput>
-                </form>
-                <SubmitButton value="Submit" />
-                <StyledButton
-                    onClick={() =>
-                        this.props.handleSwitchPage(PROFILEPAGES.default)
-                    }
-                    text="Cancel"
-                />
+                    />
+                    <div>
+                        <SubmitButton value="Submit" />
+                        <StyledButton
+                            onClick={() =>
+                                this.props.handleSwitchPage(
+                                    PROFILEPAGES.default
+                                )
+                            }
+                            text="Cancel"
+                        />
+                    </div>
+                </StyledForm>
             </>
         );
     }

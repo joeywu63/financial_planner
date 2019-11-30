@@ -28,7 +28,7 @@ class TypeForm extends React.Component {
         });
     };
 
-    handleSubmit = async e => {
+    handleSubmit = e => {
         e.preventDefault();
         const { handleSubmit } = this.props;
         const { name } = this.state;

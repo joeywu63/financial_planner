@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import { ExportCSV } from './ExportCSV';
+
 import {
     getAllTypes,
     getSubtype,
@@ -8,7 +11,7 @@ import {
     getAlternative,
     saveProgress
 } from '../repository';
-import { ExportCSV } from './ExportCSV';
+import { errorToast } from 'utils/helpers';
 
 const Table = styled.table`
     margin: 0;
@@ -48,41 +51,55 @@ class Breakdown extends React.Component {
     };
 
     async componentDidMount() {
-        const data = await getAllTypes();
-        const user = getUser();
-        const progress = user.progress;
-        const selectedOptions = [];
-        const exportData = [];
-        for (const id of progress) {
-            let item = await getExpense({ expenseID: id });
-            if (item === undefined) {
-                item = await getAlternative({ alternativeID: id });
+        try {
+            const data = await getAllTypes();
+            const user = getUser();
+            const progress = user.progress;
+            const selectedOptions = [];
+            const exportData = [];
+            for (const id of progress) {
+                let item = await getExpense({ expenseID: id });
+                if (item === undefined) {
+                    item = await getAlternative({ alternativeID: id });
+                }
+                try {
+                    const subtype = await getSubtype({
+                        subtypeID: item.subtypeID
+                    });
+                    selectedOptions.push({
+                        expense: item,
+                        category: subtype.name
+                    });
+                    exportData.push({
+                        Item: `${item.name}`,
+                        Description: `${item.description}`,
+                        Category: `${subtype.name}`,
+                        Cost: `${item.cost}`
+                    });
+                } catch (e) {
+                    const removedInvalid = [...progress].filter(
+                        item => item !== id
+                    );
+                    saveProgress(removedInvalid).catch(err => {
+                        errorToast();
+                    });
+                    errorToast();
+                    continue;
+                }
             }
-            try {
-                const subtype = await getSubtype({ subtypeID: item.subtypeID });
-                selectedOptions.push({ expense: item, category: subtype.name });
-                exportData.push({
-                    Item: `${item.name}`,
-                    Description: `${item.description}`,
-                    Category: `${subtype.name}`,
-                    Cost: `${item.cost}`
-                });
-            } catch (e) {
-                const removedInvalid = [...progress].filter(
-                    item => item !== id
-                );
-                saveProgress(removedInvalid).catch(err => {
-                    alert(err);
-                });
-                continue;
-            }
+            Promise.all(selectedOptions)
+                .then(res => {
+                    this.setState({ types: data, selected: res });
+                })
+                .catch(() => errorToast());
+            Promise.all(exportData)
+                .then(res => {
+                    this.setState({ exportData: res, loading: false });
+                })
+                .catch(() => errorToast());
+        } catch (e) {
+            errorToast();
         }
-        Promise.all(selectedOptions).then(res => {
-            this.setState({ types: data, selected: res });
-        });
-        Promise.all(exportData).then(res => {
-            this.setState({ exportData: res, loading: false });
-        });
     }
 
     tableRow = (expense, subtype) => {

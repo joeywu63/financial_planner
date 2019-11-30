@@ -3,6 +3,8 @@ import { auth } from 'firebase';
 import styled from 'styled-components';
 import { COLOURS } from 'utils/constants';
 
+import { errorToast } from 'utils/helpers';
+
 const LoginContainer = styled.div`
     align-items: center;
     border: 45px solid ${COLOURS.white};
@@ -14,8 +16,8 @@ const LoginContainer = styled.div`
 const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
-    align-content: center
-    justify-content: center
+    align-content: center;
+    justify-content: center;
     background-color: ${COLOURS.white};
 `;
 
@@ -98,7 +100,7 @@ class Login extends React.Component {
 
         auth()
             .signInWithEmailAndPassword(email, password)
-            .catch(error => alert('unable to sign in, please try again later'));
+            .catch(() => errorToast());
     };
 
     render() {

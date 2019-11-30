@@ -2,6 +2,7 @@ import React from 'react';
 import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
+import { errorToast } from 'utils/helpers';
 
 class Subtype extends React.Component {
     state = {
@@ -12,14 +13,20 @@ class Subtype extends React.Component {
     };
 
     async componentDidMount() {
-        const { title, id } = this.props;
-        let expenses = JSON.parse(localStorage.getItem(title));
-        if (!expenses) {
-            expenses = await getExpensesBySubtype({ subTypeID: id });
-            localStorage.setItem(title, JSON.stringify(expenses));
+        try {
+            const { title, id } = this.props;
+            let expenses = JSON.parse(localStorage.getItem(title));
+            if (!expenses) {
+                expenses = await getExpensesBySubtype({ subTypeID: id });
+                localStorage.setItem(title, JSON.stringify(expenses));
+            }
+            const alternatives = await getAlternativesForSubtype({
+                subtypeID: id
+            });
+            this.setState({ loading: false, expenses, alternatives });
+        } catch (e) {
+            errorToast();
         }
-        const alternatives = await getAlternativesForSubtype({ subtypeID: id });
-        this.setState({ loading: false, expenses, alternatives });
     }
 
     handleSelection = (expense, wasChecked) => {
@@ -33,7 +40,7 @@ class Subtype extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        if (!alternatives.length == 0) {
+        if (alternatives.length !== 0) {
             return (
                 <div>
                     <b>Alternative options:</b>
@@ -46,7 +53,7 @@ class Subtype extends React.Component {
                             cost={alt.cost}
                             checked={this.props.checked.has(alt.id)}
                             onChange={this.handleSelection}
-                        ></Alternative>
+                        />
                     ))}
                 </div>
             );
@@ -66,7 +73,7 @@ class Subtype extends React.Component {
                         onChange={this.handleSelection}
                         checked={this.props.checked.has(expense.id)}
                         checkedItems={this.props.checked}
-                    ></Expense>
+                    />
                 ))}
             </div>
         );

@@ -7,9 +7,11 @@ import Type from './Type';
 import Breakdown from './Breakdown';
 
 import { getAllTypes, getSubtypesByType, saveProgress } from '../repository';
+
+import Button from 'common/Button';
+
 import { getCurrentUser } from 'utils/currentUser';
-import SubmitButton from '../../../common/SubmitButton';
-import Button from '../../../common/Button';
+import { errorToast } from 'utils/helpers';
 
 const NavBar = styled.ul`
     list-style: none;
@@ -25,7 +27,7 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'MCAT',
         types: [],
-        subTypes: {},
+        subTypes: {}
     };
 
     checked = new Set();
@@ -53,16 +55,12 @@ class Calculator extends React.Component {
             subTypes[currentStage] = subTypesOfType;
             this.setState({ loading: false, types: allTypes, subTypes });
         } catch (e) {
-            console.log(e);
+            errorToast();
         }
     }
 
     handleClick = async (id, name) => {
-        saveProgress(this.checked).catch(
-            err => {
-                alert(err);
-            }
-        );
+        saveProgress(this.checked).catch(() => errorToast());
 
         if (name === 'Breakdown') {
             this.setState({ currentStage: name });
@@ -72,8 +70,12 @@ class Calculator extends React.Component {
         if (!subTypes[name]) {
             let subTypesOfType = JSON.parse(localStorage.getItem(name));
             if (!subTypesOfType) {
-                subTypesOfType = await getSubtypesByType({ typeID: id });
-                localStorage.setItem(name, JSON.stringify(subTypesOfType));
+                try {
+                    subTypesOfType = await getSubtypesByType({ typeID: id });
+                    localStorage.setItem(name, JSON.stringify(subTypesOfType));
+                } catch (e) {
+                    errorToast();
+                }
             }
             subTypes[name] = subTypesOfType;
             this.setState({ subTypes, currentStage: name });
@@ -85,12 +87,12 @@ class Calculator extends React.Component {
     };
 
     handleSelection = (expense, wasChecked) => {
-        if(wasChecked){
+        if (wasChecked) {
             this.checked.add(expense.id);
-        }else{
+        } else {
             this.checked.delete(expense.id);
         }
-    }
+    };
 
     renderList = () => {
         const { types, currentStage } = this.state;
@@ -113,7 +115,7 @@ class Calculator extends React.Component {
             return (
                 <Type
                     handleSelection={this.handleSelection}
-                    title={currentStage} 
+                    title={currentStage}
                     subTypes={subTypes[currentStage]}
                     checked={this.checked}
                 />
@@ -123,38 +125,48 @@ class Calculator extends React.Component {
 
     handleNext = () => {
         const { types } = this.state;
-        const currentName = types.findIndex( x => x.name === this.state.currentStage);
-        this.handleClick(types[currentName+1].id, types[currentName+1].name);
+        const currentName = types.findIndex(
+            x => x.name === this.state.currentStage
+        );
+        this.handleClick(
+            types[currentName + 1].id,
+            types[currentName + 1].name
+        );
     };
 
     handlePrevious = () => {
         const { types } = this.state;
-        const currentName = types.findIndex( x => x.name === this.state.currentStage);
-        this.handleClick(types[currentName-1].id, types[currentName-1].name);
+        const currentName = types.findIndex(
+            x => x.name === this.state.currentStage
+        );
+        this.handleClick(
+            types[currentName - 1].id,
+            types[currentName - 1].name
+        );
     };
 
-
     render() {
-        const { loading, currentStage, types} = this.state;
+        const { loading, currentStage, types } = this.state;
         const lastCategory = currentStage === 'Breakdown';
         const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
             <>
-            <div>
-                <NavBar>
-                    <FirstChevron />
-                    {loading ? <>Loading...</> : this.renderList()}
-                </NavBar>
-                {loading ? <>Loading...</> : this.renderType()}
-            </div>
-            {!firstCategory ? (
-                <Button text="Previous" onClick={() => this.handlePrevious()}/>
-            ) : null
-            }
-            {!lastCategory ? (
-                <Button text="Next" onClick={() => this.handleNext()}/>
-            ) : null
-            }
+                <div>
+                    <NavBar>
+                        <FirstChevron />
+                        {loading ? <>Loading...</> : this.renderList()}
+                    </NavBar>
+                    {loading ? <>Loading...</> : this.renderType()}
+                </div>
+                {!firstCategory ? (
+                    <Button
+                        text="Previous"
+                        onClick={() => this.handlePrevious()}
+                    />
+                ) : null}
+                {!lastCategory ? (
+                    <Button text="Next" onClick={() => this.handleNext()} />
+                ) : null}
             </>
         );
     }
