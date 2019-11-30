@@ -31,8 +31,7 @@ const StyledButton = styled(Button)`
 
 class ChangeInfo extends React.Component {
     state = {
-        displayName: getCurrentUser().displayName,
-        email: getCurrentUser().email
+        displayName: getCurrentUser().displayName
     };
 
     handleChange = event => {
@@ -50,8 +49,7 @@ class ChangeInfo extends React.Component {
         let updates = [
             user.updateProfile({
                 displayName: this.state.displayName
-            }),
-            user.updateEmail(this.state.email)
+            })
         ];
 
         Promise.all(updates)
@@ -78,13 +76,6 @@ class ChangeInfo extends React.Component {
                         type="text"
                         name="displayName"
                         value={this.state.displayName}
-                        onChange={this.handleChange}
-                    />
-                    <div>Email:</div>
-                    <ShortInput
-                        type="text"
-                        name="email"
-                        value={this.state.email}
                         onChange={this.handleChange}
                     />
                     <div>
