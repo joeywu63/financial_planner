@@ -62,11 +62,10 @@ class Type extends React.Component {
                     <Subtype
                         handleSelection={this.handleSelection}
                         key={subtype.id || subtype.key}
+                        expenses={subtype.id === null ? expenses: null}
                         id={subtype.id}
                         title={subtype.name}
                         checked={this.props.checked}
-                        typeID={subtype.typeID}
-                        typeTitle={title}
                     ></Subtype>
                 ))}
             </div>

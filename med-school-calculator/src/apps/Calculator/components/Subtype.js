@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    getExpensesBySubtype,
-    getAlternativesForSubtype,
-    getTypeExpenses
-} from '../repository';
+import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
 
@@ -16,16 +12,11 @@ class Subtype extends React.Component {
     };
 
     async componentDidMount() {
-        const { title, id, typeID, typeTitle } = this.props;
-        const cacheLocation = id === null ? `${typeTitle}-expenses` : title;
-        let expenses = JSON.parse(localStorage.getItem(cacheLocation));
+        const { title, id } = this.props;
+        let { expenses } = this.props;
         if (!expenses) {
-            if (id === null) {
-                expenses = await getTypeExpenses({ typeID: typeID });
-            } else {
-                expenses = await getExpensesBySubtype({ subTypeID: id });
-            }
-            localStorage.setItem(cacheLocation, JSON.stringify(expenses));
+            expenses = await getExpensesBySubtype({ subTypeID: id });
+            localStorage.setItem(title, JSON.stringify(expenses));
         }
         let alternatives = JSON.parse(
             localStorage.getItem(`${title}-alternatives`)
