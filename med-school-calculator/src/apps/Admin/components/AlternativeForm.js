@@ -32,7 +32,7 @@ class AlternativeForm extends React.Component {
         const { name, description, cost, url } = this.state;
 
         this.setState({ loading: true });
-        handleSubmit(name, description, parseInt(cost), url);
+        handleSubmit(name, description, url, parseInt(cost));
     };
 
     render() {
@@ -57,19 +57,19 @@ class AlternativeForm extends React.Component {
                         onChange={this.handleChange}
                     />
                 </Cell>
+                <Cell width={2} middle={true}>
+                    <Input
+                        name="url"
+                        value={url}
+                        placeholder="url"
+                        onChange={this.handleChange}
+                    />
+                </Cell>
                 <Cell middle={true}>
                     <CostInput
                         name="cost"
                         type="number"
                         value={`${cost}`}
-                        onChange={this.handleChange}
-                    />
-                </Cell>
-                <Cell width={2}>
-                    <Input
-                        name="url"
-                        value={url}
-                        placeholder="url"
                         onChange={this.handleChange}
                     />
                 </Cell>
@@ -87,12 +87,14 @@ AlternativeForm.propTypes = {
     handleCancel: PropTypes.func.isRequired,
     name: PropTypes.string,
     description: PropTypes.string,
+    url: PropTypes.string,
     cost: PropTypes.number
 };
 
 AlternativeForm.defaultProps = {
     name: '',
     description: '',
+    url: '',
     cost: 0
 };
 

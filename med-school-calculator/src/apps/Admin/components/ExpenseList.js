@@ -71,14 +71,20 @@ class ExpenseList extends React.Component {
     renderTypes = () => {
         const { types } = this.state;
 
-        return types.map(type => (
-            <Type
-                key={type.id}
-                type={type}
-                handleDeleteType={this.handleDeleteType}
-                handleUpdateType={this.handleUpdateType}
-            />
-        ));
+        return types.map(type => {
+            if (type.name === 'Breakdown') {
+                return null;
+            }
+
+            return (
+                <Type
+                    key={type.id}
+                    type={type}
+                    handleDeleteType={this.handleDeleteType}
+                    handleUpdateType={this.handleUpdateType}
+                />
+            );
+        });
     };
 
     toggleAddingType = () => {

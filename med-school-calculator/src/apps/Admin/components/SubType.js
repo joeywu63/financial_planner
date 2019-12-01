@@ -17,14 +17,14 @@ import {
     createExpense,
     getAlternativesForSubtype,
     createAlternative,
-    deleteAlternative
+    deleteAlternative,
+    updateAlternative
 } from '../repository';
 import { errorToast } from 'utils/helpers';
 
 import Button from 'common/Button';
 import Hoverable from 'common/Hoverable';
 import IconButton from 'common/IconButton';
-import InfoTooltip from 'common/InfoTooltip';
 
 const Wrapper = styled.div`
     padding-left: 40px;
@@ -71,7 +71,6 @@ class SubType extends React.Component {
             const alternatives = await getAlternativesForSubtype({
                 subtypeID: id
             });
-            debugger
             this.setState({ expenses, alternatives, loading: false });
         } catch (e) {
             errorToast();
@@ -146,7 +145,7 @@ class SubType extends React.Component {
                     subTypeID,
                     name,
                     description,
-                    cost,
+                    cost
                 )
             );
             this.setState({ isAddingAlternative: false, alternatives });
@@ -196,7 +195,7 @@ class SubType extends React.Component {
         );
         this.setState({ alternatives: newAlternatives });
     };
-    
+
     handleDeleteExpense = async expenseID => {
         const { expenses } = this.state;
         try {
@@ -228,6 +227,42 @@ class SubType extends React.Component {
                 return expense;
             });
             this.setState({ expenses: newExpenses });
+        } catch (e) {
+            errorToast();
+        }
+    };
+
+    handleUpdateAlternative = async (
+        alternativeID,
+        name,
+        description,
+        url,
+        cost
+    ) => {
+        try {
+            const { alternatives } = this.state;
+
+            await updateAlternative({
+                alternativeID,
+                name,
+                description,
+                url,
+                cost
+            });
+
+            const newAlternatives = alternatives.map(alternative => {
+                if (alternative.id === alternativeID) {
+                    alternative = {
+                        ...alternative,
+                        name,
+                        description,
+                        url,
+                        cost
+                    };
+                }
+                return alternative;
+            });
+            this.setState({ alternatives: newAlternatives });
         } catch (e) {
             errorToast();
         }
@@ -267,7 +302,7 @@ class SubType extends React.Component {
         const { alternatives, isAddingAlternative } = this.state;
 
         return (
-            <>
+            <Grid columns={10} gap="2px" alignContent="center">
                 {alternatives.map(alternative => (
                     <Alternative
                         key={alternative.id}
@@ -284,7 +319,7 @@ class SubType extends React.Component {
                 ) : (
                     <></>
                 )}
-            </>
+            </Grid>
         );
     };
 
@@ -314,15 +349,11 @@ class SubType extends React.Component {
                             onMouseLeave={mouseLeave}
                         >
                             <SubTypeHeader>{name}</SubTypeHeader>
-                            <InfoTooltip
-                                hoverMessage={"Add Alternative"}
-                                trigger={
-                                    <StyledIconButton
-                                        name="plus-square"
-                                        onClick={this.toggleAddingAlternative}
-                                        isHovering={isHovering}
-                                    />
-                                }
+                            <StyledIconButton
+                                title="Add Alternative"
+                                name="plus-square"
+                                onClick={this.toggleAddingAlternative}
+                                isHovering={isHovering}
                             />
                             <StyledIconButton
                                 name="pen"
@@ -372,11 +403,17 @@ class SubType extends React.Component {
                     <>
                         <Cell width={10}>
                             <AltWrapper>
-                                {loading ? <div>loading</div> : this.renderAlternatives()}
+                                {loading ? (
+                                    <div>loading</div>
+                                ) : (
+                                    this.renderAlternatives()
+                                )}
                             </AltWrapper>
                         </Cell>
                     </>
-                ) : ''}
+                ) : (
+                    ''
+                )}
                 {loading ? <div>loading</div> : this.renderExpenses()}
             </Wrapper>
         );
