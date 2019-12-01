@@ -3,7 +3,6 @@ import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
 import { errorToast } from 'utils/helpers';
-import { errorToast } from 'utils/helpers';
 
 class Subtype extends React.Component {
     state = {

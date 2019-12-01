@@ -2,7 +2,6 @@ import React from 'react';
 import Subtype from './Subtype';
 import { getExpense, getAlternative, saveProgress } from '../repository';
 import { errorToast } from 'utils/helpers';
-import { errorToast } from 'utils/helpers';
 
 class Type extends React.Component {
     state = {
@@ -28,7 +27,6 @@ class Type extends React.Component {
                 saveProgress(removedInvalid).catch(() => {
                     errorToast();
                 });
-                errorToast();
                 errorToast();
                 continue;
             }
