@@ -14,7 +14,8 @@ const infoStyle = {
         fontSize: '.9em',
         color: 'black',
         align: 'center',
-        justify: 'center'
+        justify: 'center',
+        whitespace: 'normal'
     },
     arrow: {
         borderTop: `solid ${COLOURS.lightorange} 5px`

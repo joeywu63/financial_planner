@@ -69,10 +69,10 @@ export const getAlternativesForSubtype = ({ subtypeID }) => {
         .catch(error => error);
 };
 
-export const update = ({ alternativeID, name, description, cost }) => {
+export const update = ({ alternativeID, name, description, url, cost }) => {
     return firebase
         .firestore()
         .collection(ALTERNATIVES_COLLECTION)
         .doc(alternativeID)
-        .update({ name, description, cost });
+        .update({ name, description, url, cost });
 };
