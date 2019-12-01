@@ -2,8 +2,8 @@ import React from 'react';
 import { auth } from 'firebase';
 import styled from 'styled-components';
 import { COLOURS } from 'utils/constants';
-
-import { errorToast } from 'utils/helpers';
+import ForgotPassword from './ForgotPassword';
+import Button from 'common/Button';
 
 const LoginContainer = styled.div`
     align-items: center;
@@ -16,8 +16,8 @@ const LoginContainer = styled.div`
 const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    align-content: center
+    justify-content: center
     background-color: ${COLOURS.white};
 `;
 
@@ -81,10 +81,38 @@ const Subtitle = styled.h3`
     margin-top: 0.2em;
 `;
 
+const StyledButton = styled(Button)`
+    width: 270px;
+    height: 30px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 16px;
+    color: ${COLOURS.darkblue};
+    background-color: ${COLOURS.lightorange};
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    :hover {
+        background-color: ${COLOURS.lightgrey};
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+        transform: translateY(-5px);
+        position: relative;
+        z-index: 1;
+    }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+`;
+
 class Login extends React.Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        showPopup: false
     };
 
     handleChange = e => {
@@ -103,10 +131,21 @@ class Login extends React.Component {
             .catch(() => errorToast('Incorrect email or password'));
     };
 
+    handleClick = () => {
+
+    };
+
+    togglePopup() {
+        this.setState({
+             showPopup: !this.state.showPopup
+        });
+    }
+
     render() {
         const { email, password } = this.state;
 
         return (
+            <>
             <LoginContainer>
                 <FormContainer onSubmit={this.handleSubmit}>
                     <Title>Welcome Back.</Title>
@@ -126,8 +165,18 @@ class Login extends React.Component {
                         onChange={this.handleChange}
                     />
                     <LoginButton type="submit" value="Sign In" />
+                    <StyledButton text="Forgot Password?" onClick={this.togglePopup.bind(this)}/>
                 </FormContainer>
+
             </LoginContainer>
+            {this.state.showPopup ?
+                    <ForgotPassword
+                        text='Click "Close Button" to hide popup'
+                        closePopup={this.togglePopup.bind(this)}
+                    />
+                    : null
+            }
+            </>
         );
     }
 }

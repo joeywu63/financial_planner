@@ -15,7 +15,7 @@ const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     align-content: center;
-    min-height: 350px;
+    min-height: 390px;
     background-color: ${COLOURS.darkblue};
 `;
 
@@ -103,6 +103,7 @@ class SignUp extends React.Component {
             .createUserWithEmailAndPassword(email, password)
             .then(async result => {
                 try {
+                    await auth().currentUser.sendEmailVerification();
                     await createUser({ uid: result.user.uid, email });
                     await result.user.updateProfile({ displayName });
                 } catch (e) {
