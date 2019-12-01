@@ -100,7 +100,7 @@ class Login extends React.Component {
 
         auth()
             .signInWithEmailAndPassword(email, password)
-            .catch(() => errorToast());
+            .catch(() => errorToast('Incorrect email or password'));
     };
 
     render() {

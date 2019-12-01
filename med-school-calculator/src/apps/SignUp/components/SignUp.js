@@ -96,6 +96,9 @@ class SignUp extends React.Component {
         e.preventDefault();
         const { displayName, email, password } = this.state;
 
+        // TODO: check if email and password is in correct format
+
+
         auth()
             .createUserWithEmailAndPassword(email, password)
             .then(async result => {
