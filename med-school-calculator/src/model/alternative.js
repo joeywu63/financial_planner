@@ -19,9 +19,7 @@ export const deleteAlternative = ({ alternativeID }) => {
     db.collection(ALTERNATIVES_COLLECTION)
         .doc(alternativeID)
         .delete()
-        .catch(error => {
-            console.error(`Error removing alternative ${alternativeID}: ${error}`);
-        });
+        .catch(error => error);
 };
 
 export const getByID = ({ alternativeID }) => {

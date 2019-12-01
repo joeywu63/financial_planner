@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Grid, Cell } from 'styled-css-grid';
+import { Cell } from 'styled-css-grid';
 
 import Alternative from './Alternative';
 import AlternativeForm from './AlternativeForm';
@@ -14,6 +14,7 @@ import {
     createAlternative
 } from '../repository';
 
+import { errorToast } from 'utils/helpers';
 import IconButton from 'common/IconButton';
 import DeleteModal from 'common/DeleteModal';
 
@@ -46,7 +47,7 @@ class Expense extends React.Component {
 
             this.setState({ alternatives, loading: false });
         } catch (e) {
-            // TODO: show error
+            errorToast();
         }
     }
 
