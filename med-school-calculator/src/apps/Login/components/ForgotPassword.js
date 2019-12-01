@@ -16,14 +16,16 @@ const Popup = styled.div`
     bottom: 0;
     margin: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-content: center
+    align-items: center
+    justify-content: center
 `;
 
 const PopupInner = styled.div`
-    position: absolute;  
-    left: 35%;  
-    right: 35%;  
-    top: 35%;  
-    bottom: 35%;  
+    width: 600px;
+    height: 300px;
     margin: auto;  
     background: white;  
     display: flex;
