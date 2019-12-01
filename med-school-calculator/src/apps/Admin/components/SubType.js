@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Cell, Grid } from 'styled-css-grid';
 
+import Alternative from './Alternative';
+import AlternativeForm from './AlternativeForm';
 import Expense from './Expense';
 import TypeForm from './TypeForm';
 import ExpenseForm from './ExpenseForm';
@@ -12,7 +14,8 @@ import {
     getSubTypeExpenses,
     deleteExpense,
     updateExpense,
-    createExpense
+    createExpense,
+    getAlternativesForSubtype
 } from '../repository';
 import { errorToast } from 'utils/helpers';
 
@@ -21,6 +24,10 @@ import Hoverable from 'common/Hoverable';
 import IconButton from 'common/IconButton';
 
 const Wrapper = styled.div`
+    padding-left: 40px;
+`;
+
+const AltWrapper = styled.div`
     padding-left: 40px;
 `;
 
@@ -45,7 +52,8 @@ class SubType extends React.Component {
         expenses: null,
         isAddingExpense: false,
         isEditingSubType: false,
-        isModalOpen: false
+        isModalOpen: false,
+        alternatives: null
     };
 
     async componentDidMount() {
@@ -56,8 +64,11 @@ class SubType extends React.Component {
                 typeID,
                 subTypeID: id
             });
-
-            this.setState({ expenses, loading: false });
+            const alternatives = await getAlternativesForSubtype({
+                subtypeID: id
+            });
+            debugger
+            this.setState({ expenses, alternatives, loading: false });
         } catch (e) {
             errorToast();
         }
@@ -184,6 +195,31 @@ class SubType extends React.Component {
         );
     };
 
+    renderAlternatives = () => {
+        const { alternatives, isAddingAlternative } = this.state;
+
+        return (
+            <>
+                {alternatives.map(alternative => (
+                    <Alternative
+                        key={alternative.id}
+                        alternative={alternative}
+                        handleDeleteAlternative={this.handleDeleteAlternative}
+                        handleUpdateAlternative={this.handleUpdateAlternative}
+                    />
+                ))}
+                {isAddingAlternative ? (
+                    <AlternativeForm
+                        handleSubmit={this.handleCreateAlternative}
+                        handleCancel={this.toggleAddingAlternative}
+                    />
+                ) : (
+                    <></>
+                )}
+            </>
+        );
+    };
+
     renderHeader = () => {
         const { handleDeleteSubType } = this.props;
         const { id, name } = this.props.subType;
@@ -244,11 +280,20 @@ class SubType extends React.Component {
     };
 
     render() {
-        const { loading } = this.state;
+        const { loading, alternatives } = this.state;
 
         return (
             <Wrapper>
                 {this.renderHeader()}
+                {alternatives ? (
+                    <>
+                        <Cell width={10}>
+                            <AltWrapper>
+                                {loading ? <div>loading</div> : this.renderAlternatives()}
+                            </AltWrapper>
+                        </Cell>
+                    </>
+                ) : ''}
                 {loading ? <div>loading</div> : this.renderExpenses()}
             </Wrapper>
         );

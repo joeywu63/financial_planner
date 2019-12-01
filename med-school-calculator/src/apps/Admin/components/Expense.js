@@ -16,6 +16,7 @@ import {
 
 import { errorToast } from 'utils/helpers';
 import IconButton from 'common/IconButton';
+import InfoTooltip from 'common/InfoTooltip';
 import DeleteModal from 'common/DeleteModal';
 
 const StyledIconButton = styled(IconButton)`
@@ -174,6 +175,7 @@ class Expense extends React.Component {
 
         return (
             <>
+                
                 {alternatives.map(alternative => (
                     <Alternative
                         key={alternative.id}
@@ -198,7 +200,7 @@ class Expense extends React.Component {
         const { id, name, cost, description } = this.props.expense;
         //handleDeleteExpense passed in from either Type.js (expenses without a subtype) or SubType.js
         const { handleDeleteExpense } = this.props;
-        const { isEditingExpense, isHovering, isModalOpen, loading } = this.state;
+        const { isEditingExpense, isHovering, isModalOpen, loading, alternatives } = this.state;
 
         return isEditingExpense ? (
             <ExpenseForm
@@ -242,10 +244,15 @@ class Expense extends React.Component {
                     onMouseEnter={this.handleOnMouseEnter}
                     onMouseLeave={this.handleOnMouseLeave}
                 >
-                    <StyledIconButton
-                        name="plus-square"
-                        onClick={this.toggleAddingAlternative}
-                        isHovering={isHovering}
+                    <InfoTooltip
+                        hoverMessage={"Add Alternative"}
+                        trigger={
+                            <StyledIconButton
+                                name="plus-square"
+                                onClick={this.toggleAddingAlternative}
+                                isHovering={isHovering}
+                            />
+                        }
                     />
                     <StyledIconButton
                         name="pen"
@@ -259,9 +266,11 @@ class Expense extends React.Component {
                     />
                 </Cell>
                 <Cell width={10}>
-                    <AltWrapper>
-                        {loading ? <div>loading</div> : this.renderAlternatives()}
-                    </AltWrapper>
+                    {alternatives ? (
+                        <AltWrapper>
+                            {loading ? <div>loading</div> : this.renderAlternatives()}
+                        </AltWrapper>
+                    ) : ''}
                 </Cell>
             </>
         );
