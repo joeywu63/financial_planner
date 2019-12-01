@@ -17,8 +17,10 @@ At each step, the user is given a list of options to choose from for each type o
 This allows users to get an overview of how much the application process will cost them. The options chosen by users will be saved in our database for the users future reference.
 
 #### Admin Page
-Overtime, the expense data currently stored in the system could become outdated. We are giving admins to the site the ability to 
-create, update, and delete current expense information on the Admin Page. Once updated, users who visit the site will be able to view the new expense information.
+Overtime, the expense data currently stored in the system could become outdated. We are giving admins to the site the ability to create, update, and delete current expense information on the Admin Page. Once updated, users who visit the site will be able to view the new expense information.
+
+#### Exporting Cost Breakdown
+The last page of the calculator will allow users to see the breakdown of their expenses after they finish checking off their expenses in the calculator. Users will have an option to export the breakdown to a csv file so they can have a copy even when not logged in to the app.
 
 ## Instructions
 1. Visit https://med-school-calculator.firebaseapp.com
