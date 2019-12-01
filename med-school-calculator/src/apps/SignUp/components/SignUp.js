@@ -15,7 +15,7 @@ const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     align-content: center;
-    min-height: 350px;
+    min-height: 390px;
     background-color: ${COLOURS.darkblue};
 `;
 
