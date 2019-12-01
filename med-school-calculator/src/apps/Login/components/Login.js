@@ -5,6 +5,8 @@ import { COLOURS } from 'utils/constants';
 import ForgotPassword from './ForgotPassword';
 import Button from 'common/Button';
 
+import { errorToast } from 'utils/helpers';
+
 const LoginContainer = styled.div`
     align-items: center;
     border: 45px solid ${COLOURS.white};
@@ -29,7 +31,7 @@ const LoginInfo = styled.input`
     padding: 10px;
     border: none;
     border-radius: 8px;
-    margin-bottom: 1.2em;
+    margin-bottom: 1.5em;
 `;
 
 const LoginButton = styled.input`
