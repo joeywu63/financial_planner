@@ -100,7 +100,7 @@ class SignUp extends React.Component {
             .createUserWithEmailAndPassword(email, password)
             .then(async result => {
                 try {
-                    auth().currentUser.sendEmailVerification();
+                    await auth().currentUser.sendEmailVerification();
                     await createUser({ uid: result.user.uid, email });
                     await result.user.updateProfile({ displayName });
                 } catch (e) {
