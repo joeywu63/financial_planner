@@ -22,11 +22,11 @@ const NavBar = styled.nav`
 const Title = styled.h1`
     margin: 0;
     margin-top: 7px;
-    margin-left: 20px;
+    margin-left: 70px;
     padding: 0;
     float: left;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 500;
     color: white;
     white-space: nowrap;
 `;
@@ -57,7 +57,7 @@ class NavigationBar extends React.Component {
                 <Title>Med School Application Costs Calculator</Title>
                 <List>
                     <Link to={'/'} onClick={this.props.handleLogOut}>
-                        <MenuOption>Log out</MenuOption>
+                        <MenuOption>Log Out</MenuOption>
                     </Link>
                     {hasAdminAccess() && (
                         <Link to={'/admin'}>
