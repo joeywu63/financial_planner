@@ -53,8 +53,8 @@ class Home extends React.Component {
                 </Title>
                 <StyledPanel>
                     <LoginRegister>
-                        <SignUp cancel={this.toggleSignUp} />
-                        <Login handleSignUp={this.toggleSignUp} />
+                        <SignUp />
+                        <Login />
                     </LoginRegister>
                 </StyledPanel>
             </HomeWrapper>

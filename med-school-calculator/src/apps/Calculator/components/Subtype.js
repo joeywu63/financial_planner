@@ -2,6 +2,8 @@ import React from 'react';
 import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
+import { errorToast } from 'utils/helpers';
+import { errorToast } from 'utils/helpers';
 
 class Subtype extends React.Component {
     state = {
@@ -12,25 +14,29 @@ class Subtype extends React.Component {
     };
 
     async componentDidMount() {
-        const { title, id } = this.props;
-        let { expenses } = this.props;
-        if (!expenses) {
-            expenses = await getExpensesBySubtype({ subTypeID: id });
-            localStorage.setItem(title, JSON.stringify(expenses));
-        }
-        let alternatives = JSON.parse(
-            localStorage.getItem(`${title}-alternatives`)
-        );
-        if (!alternatives) {
-            const alternatives = await getAlternativesForSubtype({
-                subtypeID: id
-            });
-            localStorage.setItem(
-                `${title}-alternatives`,
-                JSON.stringify(alternatives)
+        try {
+            const { title, id } = this.props;
+            let { expenses } = this.props;
+            if (!expenses) {
+                expenses = await getExpensesBySubtype({ subTypeID: id });
+                localStorage.setItem(title, JSON.stringify(expenses));
+            }
+            let alternatives = JSON.parse(
+                localStorage.getItem(`${title}-alternatives`)
             );
+            if (!alternatives) {
+                const alternatives = await getAlternativesForSubtype({
+                    subtypeID: id
+                });
+                localStorage.setItem(
+                    `${title}-alternatives`,
+                    JSON.stringify(alternatives)
+                );
+            }
+            this.setState({ loading: false, expenses, alternatives });
+        } catch (e) {
+            errorToast();
         }
-        this.setState({ loading: false, expenses, alternatives });
     }
 
     handleSelection = (expense, wasChecked) => {
@@ -44,7 +50,7 @@ class Subtype extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        if (alternatives && !alternatives.length == 0) {
+        if (alternatives && alternatives.length !== 0) {
             return (
                 <div>
                     <b>Alternative options:</b>
@@ -57,7 +63,7 @@ class Subtype extends React.Component {
                             cost={alt.cost}
                             checked={this.props.checked.has(alt.id)}
                             onChange={this.handleSelection}
-                        ></Alternative>
+                        />
                     ))}
                 </div>
             );
@@ -77,7 +83,7 @@ class Subtype extends React.Component {
                         onChange={this.handleSelection}
                         checked={this.props.checked.has(expense.id)}
                         checkedItems={this.props.checked}
-                    ></Expense>
+                    />
                 ))}
             </div>
         );

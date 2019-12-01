@@ -1,6 +1,8 @@
 import React from 'react';
 import Subtype from './Subtype';
 import { getExpense, getAlternative, saveProgress } from '../repository';
+import { errorToast } from 'utils/helpers';
+import { errorToast } from 'utils/helpers';
 
 class Type extends React.Component {
     state = {
@@ -23,13 +25,17 @@ class Type extends React.Component {
                 }
             } catch (error) {
                 const removedInvalid = [...checked].filter(item => item !== id);
-                saveProgress(removedInvalid).catch(err => {
-                    alert(err);
+                saveProgress(removedInvalid).catch(() => {
+                    errorToast();
                 });
+                errorToast();
+                errorToast();
                 continue;
             }
         }
-        Promise.all(checked).then(res => this.setState({ total: sum }));
+        Promise.all(checked)
+            .then(res => this.setState({ total: sum }))
+            .catch(() => errorToast());
     }
 
     handleSelection = (expense, wasChecked) => {
@@ -66,7 +72,7 @@ class Type extends React.Component {
                         id={subtype.id}
                         title={subtype.name}
                         checked={this.props.checked}
-                    ></Subtype>
+                    />
                 ))}
             </div>
         );

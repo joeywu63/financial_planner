@@ -1,22 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
-import Admin from 'apps/Admin/components/Admin';
-import Profile from 'apps/Profile/components/Profile';
-import Calculator from 'apps/Calculator/components/Calculator';
-import PageWrapper from 'common/PageWrapper';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import { hasAdminAccess } from 'utils/helpers';
-import {COLOURS} from "utils/constants";
-
+import { COLOURS } from 'utils/constants';
 
 const NavBar = styled.nav`
-    position: fixed;
+    position: sticky;
     top: 0;
     height: 50px;
-    width: 100%; 
+    width: 100%;
     margin: 0;
     padding: 0;
     background-color: ${COLOURS.maroon};
@@ -56,33 +50,25 @@ const MenuOption = styled.li`
     }
 `;
 
-
 class NavigationBar extends React.Component {
-    render () {
+    render() {
         return (
-            <div>
-                <Router>
-                    <NavBar>
-                        <Title>Med School Application Costs Calculator</Title>
-                        <List>
-                            <Link to={"/"} onClick={this.props.handleLogOut}><MenuOption>Log out</MenuOption></Link>
-                            {hasAdminAccess() && (
-                                <Link to={"/admin"}><MenuOption>Admin</MenuOption></Link>
-                            )}
-                            <Link to={"/profile"}><MenuOption>Profile</MenuOption></Link>
-                            <Link to={"/calculator"}><MenuOption>Calculator</MenuOption></Link>
-                        </List>
-                    </NavBar>
-
-                    <PageWrapper>
-                        <Switch>
-                            <Route path="/admin" component={Admin} />
-                            <Route path="/profile" component={Profile} />
-                            <Route path="/calculator" component={Calculator} />
-                        </Switch>
-                    </PageWrapper>
-                </Router>
-            </div>
+            <NavBar>
+                <Title>Med School Application Costs Calculator</Title>
+                <List>
+                    <Link to={'/'} onClick={this.props.handleLogOut}>
+                        <MenuOption>Log out</MenuOption>
+                    </Link>
+                    {hasAdminAccess() && (
+                        <Link to={'/admin'}>
+                            <MenuOption>Admin</MenuOption>
+                        </Link>
+                    )}
+                    <Link to={"/profile"}><MenuOption>Profile</MenuOption></Link>
+                    <Link to={"/calculator"}><MenuOption>Calculator</MenuOption></Link>
+                    <Link to={"/about"}><MenuOption>About Us</MenuOption></Link>
+                </List>
+            </NavBar>
         );
     }
 }

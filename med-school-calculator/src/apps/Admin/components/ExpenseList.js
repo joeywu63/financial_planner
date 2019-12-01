@@ -6,6 +6,7 @@ import TypeForm from './TypeForm';
 import Button from 'common/Button';
 
 import { getTypes, createType, deleteType, updateType } from '../repository';
+import { errorToast } from 'utils/helpers';
 
 class ExpenseList extends React.Component {
     state = {
@@ -19,7 +20,7 @@ class ExpenseList extends React.Component {
             const types = await getTypes();
             this.setState({ types, loading: false });
         } catch (e) {
-            // TODO: show error
+            errorToast();
         }
     }
 
@@ -32,7 +33,7 @@ class ExpenseList extends React.Component {
             types.push({ id: typeID, name });
             this.setState({ isAddingType: false, types });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -45,7 +46,7 @@ class ExpenseList extends React.Component {
             const newTypes = types.filter(type => type.id !== typeID);
             this.setState({ types: newTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -63,21 +64,27 @@ class ExpenseList extends React.Component {
             });
             this.setState({ types: newTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
     renderTypes = () => {
         const { types } = this.state;
 
-        return types.map(type => (
-            <Type
-                key={type.id}
-                type={type}
-                handleDeleteType={this.handleDeleteType}
-                handleUpdateType={this.handleUpdateType}
-            />
-        ));
+        return types.map(type => {
+            if (type.name === 'Breakdown') {
+                return null;
+            }
+
+            return (
+                <Type
+                    key={type.id}
+                    type={type}
+                    handleDeleteType={this.handleDeleteType}
+                    handleUpdateType={this.handleUpdateType}
+                />
+            );
+        });
     };
 
     toggleAddingType = () => {

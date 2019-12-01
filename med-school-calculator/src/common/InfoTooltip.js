@@ -1,33 +1,36 @@
 import React from 'react';
-import {COLOURS} from '../utils/constants';
-import {Tooltip} from 'react-lightweight-tooltip';
+import { COLOURS } from '../utils/constants';
+import { Tooltip } from 'react-lightweight-tooltip';
 
 const infoStyle = {
     tooltip: {
-      backgroundColor: 'white',
-      border: `dashed ${COLOURS.lightorange} 2px`,
-      borderRadius: '10px',
-      bottom: '60%',
+        backgroundColor: 'white',
+        border: `dashed ${COLOURS.lightorange} 2px`,
+        borderRadius: '10px',
+        bottom: '60%'
     },
     content: {
-      backgroundColor: 'transparent',
-      fontSize: '.9em',
-      color: 'black',
-      align: 'center',
-      justify: 'center',
+        backgroundColor: 'transparent',
+        fontSize: '.9em',
+        color: 'black',
+        align: 'center',
+        justify: 'center',
+        whitespace: 'normal'
     },
     arrow: {
-      borderTop: `solid ${COLOURS.lightorange} 5px`,
-    },
+        borderTop: `solid ${COLOURS.lightorange} 5px`
+    }
 };
 
 class InfoTooltip extends React.Component {
-  render() {
-      const { hoverMessage, trigger } = this.props;
-      return (<Tooltip content={hoverMessage} styles={infoStyle}>
+    render() {
+        const { hoverMessage, trigger } = this.props;
+        return (
+            <Tooltip content={hoverMessage} styles={infoStyle}>
                 {trigger}
-              </Tooltip>)
-  }
+            </Tooltip>
+        );
+    }
 }
-  
+
 export default InfoTooltip;

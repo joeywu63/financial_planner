@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { Grid, Cell } from "styled-css-grid";
+import { Grid, Cell } from 'styled-css-grid';
 import InfoTooltip from 'common/InfoTooltip';
 import { getAlternativesByExpense } from '../repository';
 import Alternative from './Alternative';
 import info_icon from 'img/question-mark-icon.png';
+import { errorToast } from 'utils/helpers';
 
 const AltTitleDiv = styled.div`
     font-weight: bold;
@@ -15,13 +16,17 @@ const AltTitleDiv = styled.div`
 
 class Expense extends React.Component {
     async componentDidMount() {
-        const data = await getAlternativesByExpense({
-            expenseID: this.props.id
-        });
-        this.setState({ loading: false, alternatives: data });
+        try {
+            const data = await getAlternativesByExpense({
+                expenseID: this.props.id
+            });
+            this.setState({ loading: false, alternatives: data });
 
-        if(this.props.checked){
-            this.handleChange();
+            if (this.props.checked) {
+                this.handleChange();
+            }
+        } catch (e) {
+            errorToast();
         }
     }
 
@@ -34,7 +39,7 @@ class Expense extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        if (!alternatives.length == 0) {
+        if (alternatives.length !== 0) {
             return (
                 <div>
                     <AltTitleDiv>Alternative options:</AltTitleDiv>
@@ -47,7 +52,7 @@ class Expense extends React.Component {
                             cost={alt.cost}
                             checked={this.props.checkedItems.has(alt.id)}
                             onChange={this.props.onChange}
-                        ></Alternative>
+                        />
                     ))}
                 </div>
             );
@@ -60,28 +65,40 @@ class Expense extends React.Component {
         return (
             <div>
                 <form>
-                    <Grid columns={"20px 45px auto"}>
+                    <Grid columns={'20px 45px auto'}>
                         <Cell>
                             <input
                                 type="checkbox"
                                 checked={checked}
                                 onChange={this.handleChange}
-                            ></input>
+                            />
                         </Cell>
                         <Cell>{`$${cost}`}</Cell>
                         <Cell>
                             {`${name} `}
-                            {description ?
+                            {description ? (
                                 <InfoTooltip
                                     hoverMessage={description}
-                                    trigger={<img src={`${info_icon}`} width="15" height="15"/>}
-                                ></InfoTooltip> : ""}
+                                    trigger={
+                                        <img
+                                            src={`${info_icon}`}
+                                            width="15"
+                                            height="15"
+                                            alt="description"
+                                        />
+                                    }
+                                />
+                            ) : (
+                                ''
+                            )}
                         </Cell>
                     </Grid>
                 </form>
-                {loading
-                    ? <>Loading...</>
-                    : this.renderAlternatives(alternatives)}
+                {loading ? (
+                    <>Loading...</>
+                ) : (
+                    this.renderAlternatives(alternatives)
+                )}
             </div>
         );
     }
@@ -89,6 +106,6 @@ class Expense extends React.Component {
 
 Expense.propTypes = {
     checked: PropTypes.bool
-}
+};
 
 export default Expense;

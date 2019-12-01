@@ -11,6 +11,7 @@ import ExpenseForm from './ExpenseForm';
 import Button from 'common/Button';
 import IconButton from 'common/IconButton';
 import Hoverable from 'common/Hoverable';
+import DeleteModal from 'common/DeleteModal';
 
 import {
     getTypeExpenses,
@@ -22,6 +23,7 @@ import {
     deleteExpense,
     updateExpense
 } from '../repository';
+import { errorToast } from 'utils/helpers';
 
 const TypeWrapper = styled.div`
     display: flex;
@@ -45,7 +47,8 @@ class Type extends React.Component {
         subTypes: null,
         isAddingExpense: false,
         isAddingSubType: false,
-        isEditingType: false
+        isEditingType: false,
+        isModalOpen: false
     };
 
     async componentDidMount() {
@@ -57,7 +60,7 @@ class Type extends React.Component {
 
             this.setState({ expenses, subTypes, loading: false });
         } catch (e) {
-            // TODO: show error
+            errorToast();
         }
     }
 
@@ -96,7 +99,7 @@ class Type extends React.Component {
             );
             this.setState({ isAddingExpense: false, expenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -104,13 +107,14 @@ class Type extends React.Component {
         const { expenses } = this.state;
         try {
             await deleteExpense({ expenseID });
+
+            const newExpenses = expenses.filter(
+                expense => expense.id !== expenseID
+            );
+            this.setState({ expenses: newExpenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
-        const newExpenses = expenses.filter(
-            expense => expense.id !== expenseID
-        );
-        this.setState({ expenses: newExpenses });
     };
 
     handleUpdateExpense = async (expenseID, name, description, cost) => {
@@ -132,7 +136,7 @@ class Type extends React.Component {
             });
             this.setState({ expenses: newExpenses });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -151,7 +155,7 @@ class Type extends React.Component {
             subTypes.push(this.createTemporarySubType(subTypeID, name));
             this.setState({ isAddingSubType: false, subTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -166,7 +170,7 @@ class Type extends React.Component {
             );
             this.setState({ subTypes: newSubTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -192,14 +196,14 @@ class Type extends React.Component {
             });
             this.setState({ subTypes: newSubTypes });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
     renderHeader = () => {
         const { handleDeleteType } = this.props;
         const { id, name } = this.props.type;
-        const { isEditingType } = this.state;
+        const { isEditingType, isModalOpen } = this.state;
 
         return isEditingType ? (
             <TypeForm
@@ -208,26 +212,34 @@ class Type extends React.Component {
                 name={name}
             />
         ) : (
-            <Hoverable>
-                {(isHovering, mouseEnter, mouseLeave) => (
-                    <TypeWrapper
-                        onMouseEnter={mouseEnter}
-                        onMouseLeave={mouseLeave}
-                    >
-                        <TypeHeader>{name}</TypeHeader>
-                        <StyledIconButton
-                            name="pen"
-                            onClick={this.toggleEditType}
-                            isHovering={isHovering}
-                        />
-                        <StyledIconButton
-                            name="trash-alt"
-                            onClick={() => handleDeleteType(id)}
-                            isHovering={isHovering}
-                        />
-                    </TypeWrapper>
-                )}
-            </Hoverable>
+            <>
+                <DeleteModal
+                    isOpen={isModalOpen}
+                    onRequestClose={this.toggleModal}
+                    onDelete={() => handleDeleteType(id)}
+                    deleteConfirmationName="DELETE"
+                />
+                <Hoverable>
+                    {(isHovering, mouseEnter, mouseLeave) => (
+                        <TypeWrapper
+                            onMouseEnter={mouseEnter}
+                            onMouseLeave={mouseLeave}
+                        >
+                            <TypeHeader>{name}</TypeHeader>
+                            <StyledIconButton
+                                name="pen"
+                                onClick={this.toggleEditType}
+                                isHovering={isHovering}
+                            />
+                            <StyledIconButton
+                                name="trash-alt"
+                                onClick={this.toggleModal}
+                                isHovering={isHovering}
+                            />
+                        </TypeWrapper>
+                    )}
+                </Hoverable>
+            </>
         );
     };
 
@@ -287,6 +299,12 @@ class Type extends React.Component {
     toggleEditType = () => {
         const { isEditingType } = this.state;
         this.setState({ isEditingType: !isEditingType });
+    };
+
+    toggleModal = () => {
+        const { isModalOpen } = this.state;
+
+        this.setState({ isModalOpen: !isModalOpen });
     };
 
     render() {

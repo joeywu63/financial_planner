@@ -1,22 +1,108 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Cell } from 'styled-css-grid';
+import { Cell, Grid } from 'styled-css-grid';
 
+import Alternative from './Alternative';
+import AlternativeForm from './AlternativeForm';
 import ExpenseForm from './ExpenseForm';
 
+import {
+    getAlternativesByExpense,
+    deleteAlternative,
+    updateAlternative,
+    createAlternative
+} from '../repository';
+
+import { errorToast } from 'utils/helpers';
 import IconButton from 'common/IconButton';
+import DeleteModal from 'common/DeleteModal';
 
 const StyledIconButton = styled(IconButton)`
     visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
 `;
 
+const AltWrapper = styled.div`
+    padding-left: 40px;
+`;
+
+const StyledDivider = styled.div`
+    border-bottom: 2px solid #f1f0f0;
+`;
+
 class Expense extends React.Component {
     state = {
+        alternatives: [],
         loading: true,
         expenses: null,
+        isAddingAlternative: false,
         isEditingExpense: false,
-        isHovering: false
+        isHovering: false,
+        isModalOpen: false
+    };
+
+    async componentDidMount() {
+        try {
+            const { id } = this.props.expense;
+
+            const alternatives = await getAlternativesByExpense({
+                expenseID: id
+            });
+
+            this.setState({ alternatives, loading: false });
+        } catch (e) {
+            errorToast();
+        }
+    }
+
+    createTemporaryAlternative = (
+        id,
+        expenseID,
+        subTypeID,
+        name,
+        description,
+        cost,
+        url
+    ) => {
+        return {
+            id,
+            expenseID,
+            subTypeID,
+            name,
+            description,
+            cost,
+            url
+        };
+    };
+
+    handleCreateAlternative = async (name, description, cost, url) => {
+        try {
+            const { id: expenseID, subtypeID: subTypeID } = this.props.expense;
+            const { alternatives } = this.state;
+
+            const alternativeID = await createAlternative({
+                expenseID,
+                subTypeID,
+                name,
+                description,
+                cost,
+                url
+            });
+
+            alternatives.push(
+                this.createTemporaryAlternative(
+                    alternativeID,
+                    expenseID,
+                    subTypeID,
+                    name,
+                    description,
+                    cost
+                )
+            );
+            this.setState({ isAddingAlternative: false, alternatives });
+        } catch (e) {
+            errorToast();
+        }
     };
 
     handleUpdateExpense = (name, description, cost) => {
@@ -27,6 +113,55 @@ class Expense extends React.Component {
         this.setState({ isEditingExpense: false });
     };
 
+    handleUpdateAlternative = async (
+        alternativeID,
+        name,
+        description,
+        url,
+        cost
+    ) => {
+        try {
+            const { alternatives } = this.state;
+
+            await updateAlternative({
+                alternativeID,
+                name,
+                description,
+                url,
+                cost
+            });
+
+            const newAlternatives = alternatives.map(alternative => {
+                if (alternative.id === alternativeID) {
+                    alternative = {
+                        ...alternative,
+                        name,
+                        description,
+                        url,
+                        cost
+                    };
+                }
+                return alternative;
+            });
+            this.setState({ alternatives: newAlternatives });
+        } catch (e) {
+            errorToast();
+        }
+    };
+
+    handleDeleteAlternative = async alternativeID => {
+        const { alternatives } = this.state;
+        try {
+            await deleteAlternative({ alternativeID });
+        } catch (e) {
+            errorToast();
+        }
+        const newAlternatives = alternatives.filter(
+            alternatives => alternatives.id !== alternativeID
+        );
+        this.setState({ alternatives: newAlternatives });
+    };
+
     handleOnMouseEnter = () => {
         this.setState({ isHovering: true });
     };
@@ -35,16 +170,65 @@ class Expense extends React.Component {
         this.setState({ isHovering: false });
     };
 
+    toggleAddingAlternative = () => {
+        const { isAddingAlternative } = this.state;
+        this.setState({ isAddingAlternative: !isAddingAlternative });
+    };
+
     toggleEditExpense = () => {
         const { isEditingExpense } = this.state;
         this.setState({ isEditingExpense: !isEditingExpense });
+    };
+
+    toggleModal = () => {
+        const { isModalOpen } = this.state;
+
+        this.setState({ isModalOpen: !isModalOpen });
+    };
+
+    renderAlternatives = () => {
+        const { alternatives, isAddingAlternative } = this.state;
+
+        return (
+            <>
+                {alternatives.length > 0 && <b>Alternative Options:</b>}
+                <Grid columns={10} gap="2px" alignContent="center">
+                    {alternatives.map(alternative => (
+                        <Alternative
+                            key={alternative.id}
+                            alternative={alternative}
+                            handleDeleteAlternative={
+                                this.handleDeleteAlternative
+                            }
+                            handleUpdateAlternative={
+                                this.handleUpdateAlternative
+                            }
+                        />
+                    ))}
+                    {isAddingAlternative ? (
+                        <AlternativeForm
+                            handleSubmit={this.handleCreateAlternative}
+                            handleCancel={this.toggleAddingAlternative}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </Grid>
+            </>
+        );
     };
 
     render() {
         const { id, name, cost, description } = this.props.expense;
         //handleDeleteExpense passed in from either Type.js (expenses without a subtype) or SubType.js
         const { handleDeleteExpense } = this.props;
-        const { isEditingExpense, isHovering } = this.state;
+        const {
+            isEditingExpense,
+            isHovering,
+            isModalOpen,
+            loading,
+            alternatives
+        } = this.state;
 
         return isEditingExpense ? (
             <ExpenseForm
@@ -56,6 +240,12 @@ class Expense extends React.Component {
             />
         ) : (
             <>
+                <DeleteModal
+                    isOpen={isModalOpen}
+                    onRequestClose={this.toggleModal}
+                    onDelete={() => handleDeleteExpense(id)}
+                    deleteConfirmationName="DELETE"
+                />
                 <Cell
                     width={2}
                     onMouseEnter={this.handleOnMouseEnter}
@@ -83,8 +273,9 @@ class Expense extends React.Component {
                     onMouseLeave={this.handleOnMouseLeave}
                 >
                     <StyledIconButton
+                        title="Add Alternative"
                         name="plus-square"
-                        onClick={() => {}}
+                        onClick={this.toggleAddingAlternative}
                         isHovering={isHovering}
                     />
                     <StyledIconButton
@@ -94,9 +285,25 @@ class Expense extends React.Component {
                     />
                     <StyledIconButton
                         name="trash-alt"
-                        onClick={() => handleDeleteExpense(id)}
+                        onClick={this.toggleModal}
                         isHovering={isHovering}
                     />
+                </Cell>
+                <Cell width={10}>
+                    {alternatives ? (
+                        <AltWrapper>
+                            {loading ? (
+                                <div>loading</div>
+                            ) : (
+                                this.renderAlternatives()
+                            )}
+                        </AltWrapper>
+                    ) : (
+                        ''
+                    )}
+                </Cell>
+                <Cell width={10}>
+                    <StyledDivider />
                 </Cell>
             </>
         );

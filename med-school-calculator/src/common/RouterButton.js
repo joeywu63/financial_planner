@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Button from "./Button";
+import Button from './Button';
 
 class RouterButton extends React.Component {
     render() {
@@ -9,7 +9,7 @@ class RouterButton extends React.Component {
 
         return (
             <Link to={link}>
-                <Button text={title}/>
+                <Button text={title} />
             </Link>
         );
     }
