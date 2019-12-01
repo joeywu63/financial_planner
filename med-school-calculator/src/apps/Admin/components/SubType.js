@@ -15,13 +15,16 @@ import {
     deleteExpense,
     updateExpense,
     createExpense,
-    getAlternativesForSubtype
+    getAlternativesForSubtype,
+    createAlternative,
+    deleteAlternative
 } from '../repository';
 import { errorToast } from 'utils/helpers';
 
 import Button from 'common/Button';
 import Hoverable from 'common/Hoverable';
 import IconButton from 'common/IconButton';
+import InfoTooltip from 'common/InfoTooltip';
 
 const Wrapper = styled.div`
     padding-left: 40px;
@@ -53,7 +56,8 @@ class SubType extends React.Component {
         isAddingExpense: false,
         isEditingSubType: false,
         isModalOpen: false,
-        alternatives: null
+        alternatives: null,
+        isAddingAlternative: false
     };
 
     async componentDidMount() {
@@ -100,6 +104,57 @@ class SubType extends React.Component {
         };
     };
 
+    createTemporaryAlternative = (
+        id,
+        expenseID,
+        subTypeID,
+        name,
+        description,
+        cost,
+        url
+    ) => {
+        return {
+            id,
+            expenseID,
+            subTypeID,
+            name,
+            description,
+            cost,
+            url
+        };
+    };
+
+    handleCreateAlternative = async (name, description, cost, url) => {
+        try {
+            const { id: subTypeID } = this.props.subType;
+            const { alternatives } = this.state;
+            const expenseID = '';
+
+            const alternativeID = await createAlternative({
+                expenseID,
+                subTypeID,
+                name,
+                description,
+                cost,
+                url
+            });
+
+            alternatives.push(
+                this.createTemporaryAlternative(
+                    alternativeID,
+                    expenseID,
+                    subTypeID,
+                    name,
+                    description,
+                    cost,
+                )
+            );
+            this.setState({ isAddingAlternative: false, alternatives });
+        } catch (e) {
+            errorToast();
+        }
+    };
+
     handleCreateExpense = async (name, description, cost) => {
         try {
             const { id: subTypeID, typeID } = this.props.subType;
@@ -129,6 +184,19 @@ class SubType extends React.Component {
         }
     };
 
+    handleDeleteAlternative = async alternativeID => {
+        const { alternatives } = this.state;
+        try {
+            await deleteAlternative({ alternativeID });
+        } catch (e) {
+            errorToast();
+        }
+        const newAlternatives = alternatives.filter(
+            alternatives => alternatives.id !== alternativeID
+        );
+        this.setState({ alternatives: newAlternatives });
+    };
+    
     handleDeleteExpense = async expenseID => {
         const { expenses } = this.state;
         try {
@@ -246,6 +314,16 @@ class SubType extends React.Component {
                             onMouseLeave={mouseLeave}
                         >
                             <SubTypeHeader>{name}</SubTypeHeader>
+                            <InfoTooltip
+                                hoverMessage={"Add Alternative"}
+                                trigger={
+                                    <StyledIconButton
+                                        name="plus-square"
+                                        onClick={this.toggleAddingAlternative}
+                                        isHovering={isHovering}
+                                    />
+                                }
+                            />
                             <StyledIconButton
                                 name="pen"
                                 onClick={this.toggleEditSubType}
@@ -266,6 +344,11 @@ class SubType extends React.Component {
     toggleEditSubType = () => {
         const { isEditingSubType } = this.state;
         this.setState({ isEditingSubType: !isEditingSubType });
+    };
+
+    toggleAddingAlternative = () => {
+        const { isAddingAlternative } = this.state;
+        this.setState({ isAddingAlternative: !isAddingAlternative });
     };
 
     toggleAddingExpense = () => {
