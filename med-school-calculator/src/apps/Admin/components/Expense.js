@@ -97,7 +97,7 @@ class Expense extends React.Component {
             );
             this.setState({ isAddingAlternative: false, alternatives });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -128,7 +128,7 @@ class Expense extends React.Component {
             });
             this.setState({ alternatives: newAlternatives });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
     };
 
@@ -137,7 +137,7 @@ class Expense extends React.Component {
         try {
             await deleteAlternative({ alternativeID });
         } catch (e) {
-            // TODO: error
+            errorToast();
         }
         const newAlternatives = alternatives.filter(
             alternatives => alternatives.id !== alternativeID
