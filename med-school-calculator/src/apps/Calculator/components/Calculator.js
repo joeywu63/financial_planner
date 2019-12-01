@@ -12,14 +12,21 @@ import Button from 'common/Button';
 
 import { getCurrentUser } from 'utils/currentUser';
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
 
 const NavBar = styled.ul`
     list-style: none;
     overflow: hidden;
-    background-color: white;
+    background-color: ${COLOURS.white};
     border: 1px solid black;
     display: flex;
     flex-direction: row;
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 `;
 
 class Calculator extends React.Component {
@@ -150,7 +157,7 @@ class Calculator extends React.Component {
         const lastCategory = currentStage === 'Breakdown';
         const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
-            <>
+            <div>
                 <div>
                     <NavBar>
                         <FirstChevron />
@@ -158,16 +165,18 @@ class Calculator extends React.Component {
                     </NavBar>
                     {loading ? <>Loading...</> : this.renderType()}
                 </div>
-                {!firstCategory ? (
-                    <Button
-                        text="Previous"
-                        onClick={() => this.handlePrevious()}
-                    />
-                ) : null}
-                {!lastCategory ? (
-                    <Button text="Next" onClick={() => this.handleNext()} />
-                ) : null}
-            </>
+                <Buttons>
+                    {!firstCategory ? (
+                        <Button
+                            text="< Previous"
+                            onClick={() => this.handlePrevious()}
+                        />
+                    ) : null}
+                    {!lastCategory ? (
+                        <Button text="Next >" onClick={() => this.handleNext()} />
+                    ) : null}
+                </Buttons>
+            </div>
         );
     }
 }

@@ -1,7 +1,37 @@
 import React from 'react';
+import styled from 'styled-components';
 import Subtype from './Subtype';
 import { getExpense, getAlternative, saveProgress } from '../repository';
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
+
+const TypeWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 2px solid ${COLOURS.darkblue};
+    border-bottom: 2px solid ${COLOURS.darkblue};
+`;
+
+const PageWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Title = styled.h1`
+    color: ${COLOURS.darkblue};
+    font-weight: 500;
+    font-size: 40px;
+`;
+
+const Subtitle = styled.h2`
+    color: ${COLOURS.darkblue};
+    font-weight: 400;
+    font-size: 30px;
+`;
 
 class Type extends React.Component {
     state = {
@@ -51,7 +81,7 @@ class Type extends React.Component {
 
     renderList = subtypes => {
         return (
-            <div>
+            <TypeWrapper>
                 {subtypes.map(subtype => (
                     <Subtype
                         handleSelection={this.handleSelection}
@@ -61,18 +91,18 @@ class Type extends React.Component {
                         checked={this.props.checked}
                     />
                 ))}
-            </div>
+            </TypeWrapper>
         );
     };
 
     render() {
         const { subTypes } = this.props;
         return (
-            <div>
-                <h1>{this.props.title}</h1>
+            <PageWrapper>
+                <Title>{this.props.title}</Title>
                 {this.renderList(subTypes)}
-                <h2>Total so far: ${this.state.total}</h2>
-            </div>
+                <Subtitle>Total so far: ${this.state.total}</Subtitle>
+            </PageWrapper>
         );
     }
 }
