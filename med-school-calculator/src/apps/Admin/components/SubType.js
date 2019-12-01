@@ -302,24 +302,27 @@ class SubType extends React.Component {
         const { alternatives, isAddingAlternative } = this.state;
 
         return (
-            <Grid columns={10} gap="2px" alignContent="center">
-                {alternatives.map(alternative => (
-                    <Alternative
-                        key={alternative.id}
-                        alternative={alternative}
-                        handleDeleteAlternative={this.handleDeleteAlternative}
-                        handleUpdateAlternative={this.handleUpdateAlternative}
-                    />
-                ))}
-                {isAddingAlternative ? (
-                    <AlternativeForm
-                        handleSubmit={this.handleCreateAlternative}
-                        handleCancel={this.toggleAddingAlternative}
-                    />
-                ) : (
-                    <></>
-                )}
-            </Grid>
+            <>
+                {alternatives.length > 0 && <b>Alternative Options:</b>}
+                <Grid columns={10} gap="2px" alignContent="center">
+                    {alternatives.map(alternative => (
+                        <Alternative
+                            key={alternative.id}
+                            alternative={alternative}
+                            handleDeleteAlternative={this.handleDeleteAlternative}
+                            handleUpdateAlternative={this.handleUpdateAlternative}
+                        />
+                    ))}
+                    {isAddingAlternative ? (
+                        <AlternativeForm
+                            handleSubmit={this.handleCreateAlternative}
+                            handleCancel={this.toggleAddingAlternative}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </Grid>
+            </>
         );
     };
 
