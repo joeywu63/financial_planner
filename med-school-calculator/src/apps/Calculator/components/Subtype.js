@@ -1,5 +1,9 @@
 import React from 'react';
-import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
+import {
+    getExpensesBySubtype,
+    getAlternativesForSubtype,
+    getTypeExpenses
+} from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
 
@@ -12,13 +16,29 @@ class Subtype extends React.Component {
     };
 
     async componentDidMount() {
-        const { title, id } = this.props;
-        let expenses = JSON.parse(localStorage.getItem(title));
+        const { title, id, typeID, typeTitle } = this.props;
+        const cacheLocation = id === null ? `${typeTitle}-expenses` : title;
+        let expenses = JSON.parse(localStorage.getItem(cacheLocation));
         if (!expenses) {
-            expenses = await getExpensesBySubtype({ subTypeID: id });
-            localStorage.setItem(title, JSON.stringify(expenses));
+            if (id === null) {
+                expenses = await getTypeExpenses({ typeID: typeID });
+            } else {
+                expenses = await getExpensesBySubtype({ subTypeID: id });
+            }
+            localStorage.setItem(cacheLocation, JSON.stringify(expenses));
         }
-        const alternatives = await getAlternativesForSubtype({ subtypeID: id });
+        let alternatives = JSON.parse(
+            localStorage.getItem(`${title}-alternatives`)
+        );
+        if (!alternatives) {
+            const alternatives = await getAlternativesForSubtype({
+                subtypeID: id
+            });
+            localStorage.setItem(
+                `${title}-alternatives`,
+                JSON.stringify(alternatives)
+            );
+        }
         this.setState({ loading: false, expenses, alternatives });
     }
 
@@ -33,7 +53,7 @@ class Subtype extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        if (!alternatives.length == 0) {
+        if (alternatives && !alternatives.length == 0) {
             return (
                 <div>
                     <b>Alternative options:</b>

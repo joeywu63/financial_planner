@@ -33,3 +33,6 @@ export const saveProgress = async checked => {
 };
 
 export const updateVersionForUser = updateVersion;
+
+export const getTypeExpenses = ({ typeID }) =>
+    expense.get({ typeID, subTypeID: null });
