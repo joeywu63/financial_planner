@@ -9,7 +9,8 @@ const StyledButton = styled.button`
     border-width: 0;
     border-radius: 2px;
     padding: 5px;
-    color: ${COLOURS.offWhite}
+    background-color: #F1F5F2;
+    color: ${COLOURS.offWhite};
     :hover {
         color: black;
     }

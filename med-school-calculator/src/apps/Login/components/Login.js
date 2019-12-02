@@ -133,10 +133,6 @@ class Login extends React.Component {
             .catch(() => errorToast('Incorrect email or password'));
     };
 
-    handleClick = () => {
-
-    };
-
     togglePopup() {
         this.setState({
              showPopup: !this.state.showPopup

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { COLOURS } from 'utils/constants';
 
 const ChevronAnchor = styled.a`
-    color: ${COLOURS.darkblue};
+    color: ${COLOURS.blue};
     background: ${COLOURS.white};
     padding: 10px 0 10px 0px;
     position: relative;
@@ -15,7 +15,7 @@ const ChevronAnchor = styled.a`
         display: block;
         border-top: 50px solid transparent;
         border-bottom: 50px solid transparent;
-        border-left: 30px solid black;
+        border-left: 30px solid ${COLOURS.blue};
         position: absolute;
         top: 50%;
         margin-top: -50px;
