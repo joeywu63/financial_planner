@@ -5,13 +5,13 @@ import { errorToast } from 'utils/helpers';
 
 class Type extends React.Component {
     state = {
-        subtypes: [],
+        subTypes: [],
+        expenses: [],
         total: 0
     };
 
     async componentDidMount() {
         const { checked } = this.props;
-
         let sum = 0;
         for (const id of checked) {
             try {
@@ -49,13 +49,24 @@ class Type extends React.Component {
         this.props.handleSelection(expense, wasChecked);
     };
 
-    renderList = subtypes => {
+    renderList = (subtypes, expenses) => {
+        const { title } = this.props;
+        if (expenses.length !== 0) {
+            const newSubtype = {
+                id: null,
+                name: 'Miscellanous',
+                key: `${title}-Miscellanous`,
+                typeID: subtypes[0].typeID
+            };
+            subtypes = subtypes.concat([newSubtype]);
+        }
         return (
             <div>
                 {subtypes.map(subtype => (
                     <Subtype
                         handleSelection={this.handleSelection}
-                        key={subtype.id}
+                        key={subtype.id || subtype.key}
+                        expenses={subtype.id === null ? expenses: null}
                         id={subtype.id}
                         title={subtype.name}
                         checked={this.props.checked}
@@ -66,11 +77,11 @@ class Type extends React.Component {
     };
 
     render() {
-        const { subTypes } = this.props;
+        const { subTypes, expenses } = this.props;
         return (
             <div>
                 <h1>{this.props.title}</h1>
-                {this.renderList(subTypes)}
+                {this.renderList(subTypes, expenses)}
                 <h2>Total so far: ${this.state.total}</h2>
             </div>
         );

@@ -15,14 +15,23 @@ class Subtype extends React.Component {
     async componentDidMount() {
         try {
             const { title, id } = this.props;
-            let expenses = JSON.parse(localStorage.getItem(title));
+            let { expenses } = this.props;
             if (!expenses) {
                 expenses = await getExpensesBySubtype({ subTypeID: id });
                 localStorage.setItem(title, JSON.stringify(expenses));
             }
-            const alternatives = await getAlternativesForSubtype({
-                subtypeID: id
-            });
+            let alternatives = JSON.parse(
+                localStorage.getItem(`${title}-alternatives`)
+            );
+            if (!alternatives) {
+                const alternatives = await getAlternativesForSubtype({
+                    subtypeID: id
+                });
+                localStorage.setItem(
+                    `${title}-alternatives`,
+                    JSON.stringify(alternatives)
+                );
+            }
             this.setState({ loading: false, expenses, alternatives });
         } catch (e) {
             errorToast();
@@ -40,7 +49,7 @@ class Subtype extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        if (alternatives.length !== 0) {
+        if (alternatives && alternatives.length !== 0) {
             return (
                 <div>
                     <b>Alternative options:</b>
