@@ -54,6 +54,10 @@ class Calculator extends React.Component {
             // Check if user is up to date with database
             const user = getCurrentUser();
             const databaseVersion = await getDatabaseVersion();
+            if (typeof databaseVersion !== 'number') {
+                return;
+            }
+
             if (user.version !== databaseVersion) {
                 localStorage.clear();
                 user.version = databaseVersion;
