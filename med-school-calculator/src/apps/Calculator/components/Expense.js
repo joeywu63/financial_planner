@@ -34,10 +34,17 @@ const Item = styled.form`
 class Expense extends React.Component {
     async componentDidMount() {
         try {
-            const data = await getAlternativesByExpense({
-                expenseID: this.props.id
-            });
-            this.setState({ loading: false, alternatives: data });
+            const { id } = this.props;
+            let alternatives = JSON.parse(
+                localStorage.getItem(`${id}-alternatives`)
+            );
+            if (!alternatives) {
+                alternatives = await getAlternativesByExpense({
+                    expenseID: this.props.id
+                });
+                localStorage.setItem(`${id}-alternatives`, JSON.stringify(alternatives));
+            }
+            this.setState({ loading: false, alternatives });
 
             if (this.props.checked) {
                 this.handleChange();
@@ -105,7 +112,6 @@ class Expense extends React.Component {
                                         />
                                     }
                                 />
-
                             ) : (
                                 ''
                             )}
