@@ -1,8 +1,10 @@
 import firebase from 'firebase';
+import {incrementVersion} from './version'
 
 const ALTERNATIVES_COLLECTION = 'alternatives';
 
 export const create = ({ expenseID, subTypeID, name, description, cost, url }) => {
+    incrementVersion();
     const altRef = firebase
         .firestore()
         .collection(ALTERNATIVES_COLLECTION)
@@ -14,6 +16,7 @@ export const create = ({ expenseID, subTypeID, name, description, cost, url }) =
 };
 
 export const deleteAlternative = ({ alternativeID }) => {
+    incrementVersion();
     const db = firebase.firestore();
 
     db.collection(ALTERNATIVES_COLLECTION)
@@ -70,6 +73,7 @@ export const getAlternativesForSubtype = ({ subtypeID }) => {
 };
 
 export const update = ({ alternativeID, name, description, url, cost }) => {
+    incrementVersion();
     return firebase
         .firestore()
         .collection(ALTERNATIVES_COLLECTION)
