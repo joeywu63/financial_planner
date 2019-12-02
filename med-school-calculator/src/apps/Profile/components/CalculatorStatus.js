@@ -1,22 +1,19 @@
 import React from 'react';
-import {getAllTypes, getAlternative, getExpense, getUser, saveProgress} from "../../Calculator/repository";
-import {errorToast} from "../../../utils/helpers";
-import RouterButton from "../../../common/RouterButton";
+import {getAllTypes, getAlternative, getExpense, getUser, saveProgress} from 'apps/Calculator/repository';
+import {errorToast} from 'utils/helpers';
+import RouterButton from 'common/RouterButton';
 
 
 class CalculatorStatus extends React.Component {
-    constructor(props) {
-        super(props);
+    state = {
+        loading: true,
+        MCAT: false,
+        applicationSubmission: false,
+        interviewProcess: false,
+        all: false,
+        reached: []
+    };
 
-        this.state = {
-            loading: true,
-            MCAT: false,
-            applicationSubmission: false,
-            interviewProcess: false,
-            all: false,
-            reached: []
-        };
-    }
 
     async componentDidMount() {
         try {
