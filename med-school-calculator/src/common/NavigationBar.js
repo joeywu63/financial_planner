@@ -43,7 +43,6 @@ const MenuOption = styled.li`
     display: inline-block;
     text-align: center;
     font-size: 17px;
-    font-weight: bold;
     color: white;
     :hover {
         background-color: ${COLOURS.darkblue};
