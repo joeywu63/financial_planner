@@ -15,6 +15,21 @@ List the most significant changes you made to your product (if any). It's normal
 
  > *Note:* If you are not making (or haven't made) any changes to your product, it means you successfully scoped, planned and executed the development of your application.This is a very rare occurrence - describe what you believed enabled your team to do so and why. 
 
+ - No MentorCity integration:
+    - Originally, our partners wanted us to import a list of users from MentorCity (A CRM they use to link medical school applicants with prospective tutors)
+    and to use that list as a database for existing users. We changed that by creating an easy sign-up process for prospective users. 
+    We made this change, because we believed that importing that list could prove time-consuming in different ways: The data migration could be tedious due to several mismatches between the way the MentorCity data is formatted versus the way it is stored in Firebase. Since the potential list could be large, and
+    contain potentially 'useless' data (users who graduated, left medical school) we decided it would be better to start from an empty user database.  
+ - Notification system: 
+    - Our partners wanted an automated system to send mass emails to all the users on certain dates to remind them of upcoming important events/deadlines. 
+    The decision to not implement this was a reduction in scope, as we believed our time would be better spent on the other core features and perfecting those instead of having several, incomplete features.
+ - Significant deviation from the provided UI:
+    - Our partners had sent us a sketch of a UI mockup for the initial prototype of the website. We since changed it compeletely, as the way they designed
+    it seemed counterintuitive to the UX and difficult to code.
+ - Rating system:
+    - Our partners wanted a rating system to see how the users responded to the application. While we thought it was a good idea, our decision to cut thois feature is simply a reduction of scope, as we did not want to waste time building this feature when the core functionality of the website was still 
+    incomplete. 
+ 
 ### Handoff plan
 
 Describe your plan for handing off your product and all technical assets to your partner
