@@ -1,6 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
-
-> _Note:_ This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical. 
+# FINANCIAL PLANNER FOR CANADIAN MED-SCHOOL APPLICANTS 
 
 ## Description 
  Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
@@ -72,10 +70,4 @@ All changes are automatically saved
 
  ## Licenses 
 
- Keep this section as brief as possible. You may read this [Github article](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository) for a start.
-
- * What type of license will you apply to your codebase?
- * What affect does it have on the development and use of your codebase?
- * Why did you or your partner make this choice?
-
-We will be licensing our code with the MIT license. The main reason for using this license is so that our partners are able to freely do what they wish with the codebase (modify, sell copies of the software, publish etc.) without our team being liable for any damages.
+We will be licensing our code under the MIT license. The main reason for using this license is so that our partners are able to freely do what they wish with the codebase (modify, sell copies of the software, publish etc.) without our team being liable for any damages.
