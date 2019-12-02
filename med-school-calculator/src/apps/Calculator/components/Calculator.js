@@ -66,6 +66,10 @@ class Calculator extends React.Component {
         this.checked = getCurrentUser().progress;
 
         try {
+            const { subTypes, expenses } = this.state;
+            const {currentStage} = this.props.location.state ? this.props.location.state : this.state;
+            this.setState({currentStage: currentStage});
+
             // Check if user is up to date with database
             const user = getCurrentUser();
             const databaseVersion = await getDatabaseVersion();
@@ -79,7 +83,7 @@ class Calculator extends React.Component {
                 setCurrentUser(user);
                 updateVersionForUser(user.uid, databaseVersion);
             }
-            const { currentStage, subTypes, expenses } = this.state;
+
             // See if all the types have been cached
             let allTypes = JSON.parse(localStorage.getItem('allTypes'));
             if (!allTypes) {
