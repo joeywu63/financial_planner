@@ -13,7 +13,7 @@ const NavBar = styled.nav`
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: ${COLOURS.maroon};
+    background-color: ${COLOURS.blue};
     overflow: hidden;
     border-bottom: 1px solid ${COLOURS.lightgrey};
     z-index: 99;
@@ -46,7 +46,7 @@ const MenuOption = styled.li`
     font-weight: bold;
     color: white;
     :hover {
-        background-color: ${COLOURS.darkgrey};
+        background-color: ${COLOURS.darkblue};
     }
 `;
 

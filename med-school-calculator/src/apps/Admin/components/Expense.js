@@ -15,6 +15,7 @@ import {
 } from '../repository';
 
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
 import IconButton from 'common/IconButton';
 import DeleteModal from 'common/DeleteModal';
 
@@ -27,7 +28,7 @@ const AltWrapper = styled.div`
 `;
 
 const StyledDivider = styled.div`
-    border-bottom: 2px solid #f1f0f0;
+    border-bottom: 2px solid ${COLOURS.lightgrey};
 `;
 
 class Expense extends React.Component {

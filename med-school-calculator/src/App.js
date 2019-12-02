@@ -10,6 +10,7 @@ import Home from 'apps/Login/components/Home';
 import Dashboard from 'apps/Dashboard/components/Dashboard';
 
 import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
+import { errorToast } from 'utils/helpers';
 import * as userModel from 'model/user';
 
 import Spinner from 'common/Spinner';
@@ -58,7 +59,7 @@ class App extends React.Component {
                     setCurrentUser(currentUser);
                     this.setState({ isSignedIn: true, loading: false });
                 } catch (e) {
-                    alert('something went wrong');
+                    errorToast();
                 }
             } else {
                 setCurrentUser(null);

@@ -25,7 +25,7 @@ const NavBar = styled.ul`
     list-style: none;
     overflow: hidden;
     background-color: ${COLOURS.white};
-    border: 1px solid black;
+    border: 1px solid ${COLOURS.blue};
     display: flex;
     flex-direction: row;
 `;
