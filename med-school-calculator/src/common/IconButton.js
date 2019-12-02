@@ -9,15 +9,16 @@ const StyledButton = styled.button`
     border-width: 0;
     border-radius: 2px;
     padding: 5px;
-    color: ${COLOURS.offWhite}
+    background-color: #F1F5F2;
+    color: ${COLOURS.offWhite};
     :hover {
         color: black;
     }
 `;
 
-const IconButton = ({ className, name, onClick }) => {
+const IconButton = ({ className, name, title, onClick }) => {
     return (
-        <StyledButton onClick={onClick} className={className}>
+        <StyledButton onClick={onClick} className={className} title={title}>
             <FontAwesomeIcon icon={name} size="2x" />
         </StyledButton>
     );
@@ -25,7 +26,8 @@ const IconButton = ({ className, name, onClick }) => {
 
 IconButton.propTypes = {
     name: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    title: PropTypes.string
 };
 
 export default IconButton;

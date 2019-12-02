@@ -4,9 +4,12 @@ import { Grid, Cell } from 'styled-css-grid';
 import PropTypes from 'prop-types';
 import InfoTooltip from 'common/InfoTooltip';
 import info_icon from 'img/question-mark-icon.png';
+import { COLOURS } from 'utils/constants';
 
 const AltDiv = styled.div`
     margin-left: 30px;
+    margin-bottom: 3px;
+    color: ${COLOURS.white};
 `;
 
 class Alternative extends React.Component {

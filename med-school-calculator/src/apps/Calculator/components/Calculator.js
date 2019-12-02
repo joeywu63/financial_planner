@@ -6,20 +6,34 @@ import FirstChevron from './FirstChevron';
 import Type from './Type';
 import Breakdown from './Breakdown';
 
-import { getAllTypes, getSubtypesByType, saveProgress } from '../repository';
+import {
+    getAllTypes,
+    getSubtypesByType,
+    saveProgress,
+    getDatabaseVersion,
+    updateVersionForUser,
+    getTypeExpenses
+} from '../repository';
 
 import Button from 'common/Button';
 
-import { getCurrentUser } from 'utils/currentUser';
+import { getCurrentUser, setCurrentUser } from 'utils/currentUser';
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
 
 const NavBar = styled.ul`
     list-style: none;
     overflow: hidden;
-    background-color: white;
-    border: 1px solid black;
+    background-color: ${COLOURS.white};
+    border: 1px solid ${COLOURS.blue};
     display: flex;
     flex-direction: row;
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 `;
 
 class Calculator extends React.Component {
@@ -27,7 +41,8 @@ class Calculator extends React.Component {
         loading: true,
         currentStage: 'MCAT',
         types: [],
-        subTypes: {}
+        subTypes: {},
+        expenses: {}
     };
 
     checked = new Set();
@@ -36,9 +51,20 @@ class Calculator extends React.Component {
         this.checked = getCurrentUser().progress;
 
         try {
-            const { subTypes } = this.state;
+            const { subTypes, expenses } = this.state;
             const {currentStage} = this.props.location.state ? this.props.location.state : this.state;
             this.setState({currentStage: currentStage});
+
+            // Check if user is up to date with database
+            const user = getCurrentUser();
+            const databaseVersion = await getDatabaseVersion();
+            if (user.version !== databaseVersion) {
+                localStorage.clear();
+                user.version = databaseVersion;
+                setCurrentUser(user);
+                updateVersionForUser(user.uid, databaseVersion);
+            }
+
             // See if all the types have been cached
             let allTypes = JSON.parse(localStorage.getItem('allTypes'));
             if (!allTypes) {
@@ -46,6 +72,9 @@ class Calculator extends React.Component {
                 localStorage.setItem('allTypes', JSON.stringify(allTypes));
             }
             let subTypesOfType = JSON.parse(localStorage.getItem(currentStage));
+            let expensesOfType = JSON.parse(
+                localStorage.getItem(`${currentStage}-expenses`)
+            );
             const id = allTypes[0].id;
             if (!subTypesOfType) {
                 subTypesOfType = await getSubtypesByType({ typeID: id });
@@ -54,8 +83,21 @@ class Calculator extends React.Component {
                     JSON.stringify(subTypesOfType)
                 );
             }
+            if (!expensesOfType) {
+                expensesOfType = await getTypeExpenses({ typeID: id });
+                localStorage.setItem(
+                    `${currentStage}-expenses`,
+                    JSON.stringify(expensesOfType)
+                );
+            }
             subTypes[currentStage] = subTypesOfType;
-            this.setState({ loading: false, types: allTypes, subTypes });
+            expenses[currentStage] = expensesOfType;
+            this.setState({
+                loading: false,
+                types: allTypes,
+                subTypes,
+                expenses
+            });
         } catch (e) {
             errorToast();
         }
@@ -68,7 +110,20 @@ class Calculator extends React.Component {
             this.setState({ currentStage: name });
             return;
         }
-        const { subTypes } = this.state;
+        const { subTypes, expenses } = this.state;
+        if (!expenses[name]) {
+            let expensesOfType = JSON.parse(
+                localStorage.getItem(`${name}-expenses`)
+            );
+            if (!expensesOfType) {
+                expensesOfType = await getTypeExpenses({ typeID: id });
+                localStorage.setItem(
+                    `${name}-expenses`,
+                    JSON.stringify(expensesOfType)
+                );
+            }
+            expenses[name] = expensesOfType;
+        }
         if (!subTypes[name]) {
             let subTypesOfType = JSON.parse(localStorage.getItem(name));
             if (!subTypesOfType) {
@@ -80,7 +135,7 @@ class Calculator extends React.Component {
                 }
             }
             subTypes[name] = subTypesOfType;
-            this.setState({ subTypes, currentStage: name });
+            this.setState({ subTypes, currentStage: name, expenses });
         } else {
             this.setState({
                 currentStage: name
@@ -110,7 +165,7 @@ class Calculator extends React.Component {
     };
 
     renderType = () => {
-        const { currentStage, subTypes } = this.state;
+        const { currentStage, subTypes, expenses } = this.state;
         if (currentStage === 'Breakdown') {
             return <Breakdown />;
         } else {
@@ -119,6 +174,7 @@ class Calculator extends React.Component {
                     handleSelection={this.handleSelection}
                     title={currentStage}
                     subTypes={subTypes[currentStage]}
+                    expenses={expenses[currentStage]}
                     checked={this.checked}
                 />
             );
@@ -153,7 +209,7 @@ class Calculator extends React.Component {
         const lastCategory = currentStage === 'Breakdown';
         const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
-            <>
+            <div>
                 <div>
                     <NavBar>
                         <FirstChevron />
@@ -161,16 +217,18 @@ class Calculator extends React.Component {
                     </NavBar>
                     {loading ? <>Loading...</> : this.renderType()}
                 </div>
-                {!firstCategory ? (
-                    <Button
-                        text="Previous"
-                        onClick={() => this.handlePrevious()}
-                    />
-                ) : null}
-                {!lastCategory ? (
-                    <Button text="Next" onClick={() => this.handleNext()} />
-                ) : null}
-            </>
+                <Buttons>
+                    {!firstCategory ? (
+                        <Button
+                            text="< Previous"
+                            onClick={() => this.handlePrevious()}
+                        />
+                    ) : null}
+                    {!lastCategory ? (
+                        <Button text="Next >" onClick={() => this.handleNext()} />
+                    ) : null}
+                </Buttons>
+            </div>
         );
     }
 }

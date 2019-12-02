@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { incrementVersion } from './version';
 
 const EXPENSE_COLLECTION = 'expense';
 
@@ -33,6 +34,7 @@ export const getByID = ({ expenseID }) => {
 };
 
 export const create = ({ typeID, subTypeID, name, description, cost }) => {
+    incrementVersion();
     const expenseRef = firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)
@@ -44,8 +46,8 @@ export const create = ({ typeID, subTypeID, name, description, cost }) => {
 };
 
 export const deleteExpense = ({ expenseID }) => {
+    incrementVersion();
     const db = firebase.firestore();
-
     db.collection(EXPENSE_COLLECTION)
         .doc(expenseID)
         .delete()
@@ -55,6 +57,7 @@ export const deleteExpense = ({ expenseID }) => {
 };
 
 export const update = ({ expenseID, name, description, cost }) => {
+    incrementVersion();
     return firebase
         .firestore()
         .collection(EXPENSE_COLLECTION)

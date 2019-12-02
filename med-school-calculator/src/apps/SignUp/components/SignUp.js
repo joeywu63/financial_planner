@@ -8,7 +8,7 @@ import { createUser } from '../repository';
 import { errorToast } from 'utils/helpers';
 
 const SignUpContainer = styled.div`
-    border: 45px solid ${COLOURS.darkblue};
+    border: 45px solid ${COLOURS.blue};
     align-items: center;
 `;
 
@@ -17,7 +17,7 @@ const FormContainer = styled.form`
     flex-direction: column;
     align-content: center;
     min-height: 390px;
-    background-color: ${COLOURS.darkblue};
+    background-color: ${COLOURS.blue};
 `;
 
 const SignUpInfo = styled.input`

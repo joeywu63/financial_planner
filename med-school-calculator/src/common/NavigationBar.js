@@ -13,7 +13,7 @@ const NavBar = styled.nav`
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: ${COLOURS.maroon};
+    background-color: ${COLOURS.blue};
     overflow: hidden;
     border-bottom: 1px solid ${COLOURS.lightgrey};
     z-index: 99;
@@ -22,11 +22,11 @@ const NavBar = styled.nav`
 const Title = styled.h1`
     margin: 0;
     margin-top: 7px;
-    margin-left: 20px;
+    margin-left: 70px;
     padding: 0;
     float: left;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 500;
     color: white;
     white-space: nowrap;
 `;
@@ -46,7 +46,7 @@ const MenuOption = styled.li`
     font-weight: bold;
     color: white;
     :hover {
-        background-color: ${COLOURS.darkgrey};
+        background-color: ${COLOURS.darkblue};
     }
 `;
 
@@ -57,7 +57,7 @@ class NavigationBar extends React.Component {
                 <Title>Med School Application Costs Calculator</Title>
                 <List>
                     <Link to={'/'} onClick={this.props.handleLogOut}>
-                        <MenuOption>Log out</MenuOption>
+                        <MenuOption>Log Out</MenuOption>
                     </Link>
                     {hasAdminAccess() && (
                         <Link to={'/admin'}>

@@ -8,19 +8,43 @@ import { getAlternativesByExpense } from '../repository';
 import Alternative from './Alternative';
 import info_icon from 'img/question-mark-icon.png';
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
 
 const AltTitleDiv = styled.div`
-    font-weight: bold;
+    font-weight: 500;
+    padding-left: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     margin-left: 30px;
+    color: ${COLOURS.offWhite};
+`;
+
+const Alts = styled.div`
+    margin-bottom: 5px;
+`;
+
+const ExpDiv = styled.div`
+    margin-bottom: 3px;
+`;
+
+const Item = styled.form`
+    color: ${COLOURS.white};
 `;
 
 class Expense extends React.Component {
     async componentDidMount() {
         try {
-            const data = await getAlternativesByExpense({
-                expenseID: this.props.id
-            });
-            this.setState({ loading: false, alternatives: data });
+            const { id } = this.props;
+            let alternatives = JSON.parse(
+                localStorage.getItem(`${id}-alternatives`)
+            );
+            if (!alternatives) {
+                alternatives = await getAlternativesByExpense({
+                    expenseID: this.props.id
+                });
+                localStorage.setItem(`${id}-alternatives`, JSON.stringify(alternatives));
+            }
+            this.setState({ loading: false, alternatives });
 
             if (this.props.checked) {
                 this.handleChange();
@@ -41,8 +65,8 @@ class Expense extends React.Component {
     renderAlternatives = alternatives => {
         if (alternatives.length !== 0) {
             return (
-                <div>
-                    <AltTitleDiv>Alternative options:</AltTitleDiv>
+                <Alts>
+                    <AltTitleDiv>Alternative Options:</AltTitleDiv>
                     {alternatives.map(alt => (
                         <Alternative
                             key={alt.id}
@@ -54,7 +78,7 @@ class Expense extends React.Component {
                             onChange={this.props.onChange}
                         />
                     ))}
-                </div>
+                </Alts>
             );
         }
     };
@@ -63,8 +87,8 @@ class Expense extends React.Component {
         const { loading, checked, alternatives } = this.state;
         const { name, description, cost } = this.props;
         return (
-            <div>
-                <form>
+            <ExpDiv>
+                <Item>
                     <Grid columns={'20px 45px auto'}>
                         <Cell>
                             <input
@@ -93,13 +117,13 @@ class Expense extends React.Component {
                             )}
                         </Cell>
                     </Grid>
-                </form>
+                </Item>
                 {loading ? (
                     <>Loading...</>
                 ) : (
                     this.renderAlternatives(alternatives)
                 )}
-            </div>
+            </ExpDiv>
         );
     }
 }

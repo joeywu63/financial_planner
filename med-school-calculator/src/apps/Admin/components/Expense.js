@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Cell } from 'styled-css-grid';
+import { Cell, Grid } from 'styled-css-grid';
 
 import Alternative from './Alternative';
 import AlternativeForm from './AlternativeForm';
@@ -15,6 +15,7 @@ import {
 } from '../repository';
 
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
 import IconButton from 'common/IconButton';
 import DeleteModal from 'common/DeleteModal';
 
@@ -24,6 +25,10 @@ const StyledIconButton = styled(IconButton)`
 
 const AltWrapper = styled.div`
     padding-left: 40px;
+`;
+
+const StyledDivider = styled.div`
+    border-bottom: 2px solid ${COLOURS.lightgrey};
 `;
 
 class Expense extends React.Component {
@@ -71,7 +76,7 @@ class Expense extends React.Component {
         };
     };
 
-    handleCreateAlternative = async (name, description, cost, url) => {
+    handleCreateAlternative = async (name, description, url, cost) => {
         try {
             const { id: expenseID, subtypeID: subTypeID } = this.props.expense;
             const { alternatives } = this.state;
@@ -92,7 +97,7 @@ class Expense extends React.Component {
                     subTypeID,
                     name,
                     description,
-                    cost,
+                    cost
                 )
             );
             this.setState({ isAddingAlternative: false, alternatives });
@@ -109,11 +114,23 @@ class Expense extends React.Component {
         this.setState({ isEditingExpense: false });
     };
 
-    handleUpdateAlternative = async (alternativeID, name, description, cost) => {
+    handleUpdateAlternative = async (
+        alternativeID,
+        name,
+        description,
+        url,
+        cost
+    ) => {
         try {
             const { alternatives } = this.state;
 
-            await updateAlternative({ alternativeID, name, description, cost });
+            await updateAlternative({
+                alternativeID,
+                name,
+                description,
+                url,
+                cost
+            });
 
             const newAlternatives = alternatives.map(alternative => {
                 if (alternative.id === alternativeID) {
@@ -121,6 +138,7 @@ class Expense extends React.Component {
                         ...alternative,
                         name,
                         description,
+                        url,
                         cost
                     };
                 }
@@ -167,29 +185,36 @@ class Expense extends React.Component {
         const { isModalOpen } = this.state;
 
         this.setState({ isModalOpen: !isModalOpen });
-    }
-    
+    };
+
     renderAlternatives = () => {
         const { alternatives, isAddingAlternative } = this.state;
 
         return (
             <>
-                {alternatives.map(alternative => (
-                    <Alternative
-                        key={alternative.id}
-                        alternative={alternative}
-                        handleDeleteAlternative={this.handleDeleteAlternative}
-                        handleUpdateAlternative={this.handleUpdateAlternative}
-                    />
-                ))}
-                {isAddingAlternative ? (
-                    <AlternativeForm
-                        handleSubmit={this.handleCreateAlternative}
-                        handleCancel={this.toggleAddingAlternative}
-                    />
-                ) : (
-                    <></>
-                )}
+                {alternatives.length > 0 && <b>Alternative Options:</b>}
+                <Grid columns={10} gap="2px" alignContent="center">
+                    {alternatives.map(alternative => (
+                        <Alternative
+                            key={alternative.id}
+                            alternative={alternative}
+                            handleDeleteAlternative={
+                                this.handleDeleteAlternative
+                            }
+                            handleUpdateAlternative={
+                                this.handleUpdateAlternative
+                            }
+                        />
+                    ))}
+                    {isAddingAlternative ? (
+                        <AlternativeForm
+                            handleSubmit={this.handleCreateAlternative}
+                            handleCancel={this.toggleAddingAlternative}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </Grid>
             </>
         );
     };
@@ -198,7 +223,13 @@ class Expense extends React.Component {
         const { id, name, cost, description } = this.props.expense;
         //handleDeleteExpense passed in from either Type.js (expenses without a subtype) or SubType.js
         const { handleDeleteExpense } = this.props;
-        const { isEditingExpense, isHovering, isModalOpen, loading } = this.state;
+        const {
+            isEditingExpense,
+            isHovering,
+            isModalOpen,
+            loading,
+            alternatives
+        } = this.state;
 
         return isEditingExpense ? (
             <ExpenseForm
@@ -243,6 +274,7 @@ class Expense extends React.Component {
                     onMouseLeave={this.handleOnMouseLeave}
                 >
                     <StyledIconButton
+                        title="Add Alternative"
                         name="plus-square"
                         onClick={this.toggleAddingAlternative}
                         isHovering={isHovering}
@@ -259,9 +291,20 @@ class Expense extends React.Component {
                     />
                 </Cell>
                 <Cell width={10}>
-                    <AltWrapper>
-                        {loading ? <div>loading</div> : this.renderAlternatives()}
-                    </AltWrapper>
+                    {alternatives ? (
+                        <AltWrapper>
+                            {loading ? (
+                                <div>loading</div>
+                            ) : (
+                                this.renderAlternatives()
+                            )}
+                        </AltWrapper>
+                    ) : (
+                        ''
+                    )}
+                </Cell>
+                <Cell width={10}>
+                    <StyledDivider />
                 </Cell>
             </>
         );

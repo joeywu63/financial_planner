@@ -10,7 +10,8 @@ export const create = ({ uid, email }) => {
         .doc(uid)
         .set({
             role: ROLES.user,
-            email
+            email,
+            version: 0
         })
         .catch(error => error);
 };
@@ -26,6 +27,19 @@ export const get = ({ uid }) => {
         })
         .catch(error => error);
 };
+
+export const updateVersion = (uid, newVersion) => {
+    firebase
+    .firestore()
+    .collection(USER_COLLECTION)
+    .doc(uid)
+    .set({
+            version: newVersion
+        },
+        {merge: true},
+    )
+    .catch(err => alert(err));
+}
 
 export const updateProgress = (uid, expenses) => {
     firebase

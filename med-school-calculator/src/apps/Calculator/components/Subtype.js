@@ -1,8 +1,41 @@
 import React from 'react';
+import styled from 'styled-components';
 import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
+
+const SubtypeBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: ${COLOURS.blue};
+    flex: 0 0 45%;
+    min-width: 600px;
+    max-width: 40%;
+    margin: 10px;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const SubAlts = styled.div`
+    margin-bottom: 10px;
+`;
+
+const Title = styled.h2`
+    color: ${COLOURS.white};
+    font-weight: 500;
+`;
+
+const Subtitle = styled.h3`
+    color: ${COLOURS.white};
+    font-weight: 400;
+`;
+
+const Bold = styled.b`
+    color: ${COLOURS.offWhite};
+    font-weight: 500;
+`;
 
 class Subtype extends React.Component {
     state = {
@@ -15,14 +48,26 @@ class Subtype extends React.Component {
     async componentDidMount() {
         try {
             const { title, id } = this.props;
-            let expenses = JSON.parse(localStorage.getItem(title));
+            let { expenses } = this.props;
             if (!expenses) {
-                expenses = await getExpensesBySubtype({ subTypeID: id });
-                localStorage.setItem(title, JSON.stringify(expenses));
+                expenses = JSON.parse(localStorage.getItem(title));
+                if (!expenses) {
+                    expenses = await getExpensesBySubtype({ subTypeID: id });
+                    localStorage.setItem(title, JSON.stringify(expenses));
+                }
             }
-            const alternatives = await getAlternativesForSubtype({
-                subtypeID: id
-            });
+            let alternatives = JSON.parse(
+                localStorage.getItem(`${title}-alternatives`)
+            );
+            if (!alternatives) {
+                const alternatives = await getAlternativesForSubtype({
+                    subtypeID: id
+                });
+                localStorage.setItem(
+                    `${title}-alternatives`,
+                    JSON.stringify(alternatives)
+                );
+            }
             this.setState({ loading: false, expenses, alternatives });
         } catch (e) {
             errorToast();
@@ -40,10 +85,10 @@ class Subtype extends React.Component {
     };
 
     renderAlternatives = alternatives => {
-        if (alternatives.length !== 0) {
+        if (alternatives && alternatives.length !== 0) {
             return (
-                <div>
-                    <b>Alternative options:</b>
+                <SubAlts>
+                    <Bold>Alternative Options:</Bold>
                     {alternatives.map(alt => (
                         <Alternative
                             key={alt.id}
@@ -55,7 +100,7 @@ class Subtype extends React.Component {
                             onChange={this.handleSelection}
                         />
                     ))}
-                </div>
+                </SubAlts>
             );
         }
     };
@@ -83,8 +128,8 @@ class Subtype extends React.Component {
         const { loading, expenses, alternatives } = this.state;
 
         return (
-            <div>
-                <h2>{this.props.title}</h2>
+            <SubtypeBox>
+                <Title>{this.props.title}</Title>
                 {loading ? (
                     <>Loading...</>
                 ) : (
@@ -93,8 +138,8 @@ class Subtype extends React.Component {
                         {this.renderExpenses(expenses)}
                     </div>
                 )}
-                <h3>Subtotal: ${this.state.totalPrice}</h3>
-            </div>
+                <Subtitle>Subtotal: ${this.state.totalPrice}</Subtitle>
+            </SubtypeBox>
         );
     }
 }

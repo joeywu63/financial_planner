@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Grid, Cell } from 'styled-css-grid';
+import { Cell } from 'styled-css-grid';
+
 import AlternativeForm from './AlternativeForm';
+
 import IconButton from 'common/IconButton';
 import DeleteModal from 'common/DeleteModal';
-
+import InfoTooltip from 'common/InfoTooltip';
+import info_icon from 'img/question-mark-icon.png';
 
 const StyledIconButton = styled(IconButton)`
     visibility: ${props => (props.isHovering ? 'visible' : 'hidden')};
@@ -30,11 +33,11 @@ class Alternative extends React.Component {
         this.setState({ isHovering: false });
     };
 
-    handleUpdateAlternative = (name, description, cost) => {
+    handleUpdateAlternative = (name, description, url, cost) => {
         const { handleUpdateAlternative } = this.props;
         const { id } = this.props.alternative;
 
-        handleUpdateAlternative(id, name, description, cost);
+        handleUpdateAlternative(id, name, description, url, cost);
         this.setState({ isEditingAlternative: false });
     };
 
@@ -47,7 +50,7 @@ class Alternative extends React.Component {
         const { isModalOpen } = this.state;
 
         this.setState({ isModalOpen: !isModalOpen });
-    }
+    };
 
     render() {
         const { id, name, cost, description, url } = this.props.alternative;
@@ -58,13 +61,14 @@ class Alternative extends React.Component {
             <AlternativeForm
                 handleCancel={this.toggleEditAlternative}
                 handleSubmit={this.handleUpdateAlternative}
+                id={id}
                 name={name}
                 description={description}
-                cost={cost}
                 url={url}
+                cost={cost}
             />
         ) : (
-            <Grid columns={10} gap="2px" alignContent="center">
+            <>
                 <DeleteModal
                     isOpen={isModalOpen}
                     onRequestClose={this.toggleModal}
@@ -80,12 +84,37 @@ class Alternative extends React.Component {
                     {name}
                 </Cell>
                 <Cell
-                    width={5}
+                    width={3}
                     middle={true}
                     onMouseEnter={this.handleOnMouseEnter}
                     onMouseLeave={this.handleOnMouseLeave}
                 >
                     {description}
+                </Cell>
+                <Cell
+                    width={2}
+                    middle={true}
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
+                >
+                    {url.length > 0 ? (
+                        <div>
+                            URL:
+                            <InfoTooltip
+                                hoverMessage={url}
+                                trigger={
+                                    <img
+                                        src={`${info_icon}`}
+                                        width="15"
+                                        height="15"
+                                        alt="url"
+                                    />
+                                }
+                            />
+                        </div>
+                    ) : (
+                        'No URL'
+                    )}
                 </Cell>
                 <Cell
                     onMouseEnter={this.handleOnMouseEnter}
@@ -108,10 +137,9 @@ class Alternative extends React.Component {
                         isHovering={isHovering}
                     />
                 </Cell>
-            </Grid>
+            </>
         );
     }
-
 }
 
 Alternative.propTypes = {
