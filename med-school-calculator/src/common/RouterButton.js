@@ -5,10 +5,10 @@ import Button from './Button';
 
 class RouterButton extends React.Component {
     render() {
-        const { link, title } = this.props;
+        const { link, title, state } = this.props;
 
         return (
-            <Link to={link}>
+            <Link to={{pathname: link, state: state}}>
                 <Button text={title} />
             </Link>
         );
@@ -17,7 +17,8 @@ class RouterButton extends React.Component {
 
 RouterButton.propTypes = {
     link: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    state: PropTypes.object
 };
 
 export default RouterButton;

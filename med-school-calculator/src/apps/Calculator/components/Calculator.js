@@ -36,7 +36,9 @@ class Calculator extends React.Component {
         this.checked = getCurrentUser().progress;
 
         try {
-            const { currentStage, subTypes } = this.state;
+            const { subTypes } = this.state;
+            const {currentStage} = this.props.location.state ? this.props.location.state : this.state;
+            this.setState({currentStage: currentStage});
             // See if all the types have been cached
             let allTypes = JSON.parse(localStorage.getItem('allTypes'));
             if (!allTypes) {
@@ -146,7 +148,8 @@ class Calculator extends React.Component {
     };
 
     render() {
-        const { loading, currentStage, types } = this.state;
+        const { loading, types, currentStage } = this.state;
+
         const lastCategory = currentStage === 'Breakdown';
         const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (

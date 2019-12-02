@@ -1,6 +1,7 @@
 import React from 'react';
 import {getAllTypes, getAlternative, getExpense, getUser, saveProgress} from "../../Calculator/repository";
 import {errorToast} from "../../../utils/helpers";
+import RouterButton from "../../../common/RouterButton";
 
 
 class CalculatorStatus extends React.Component {
@@ -12,6 +13,7 @@ class CalculatorStatus extends React.Component {
             MCAT: false,
             applicationSubmission: false,
             interviewProcess: false,
+            all: false,
             reached: []
         };
     }
@@ -39,7 +41,7 @@ class CalculatorStatus extends React.Component {
             for (const id of progress) {
                 let item = await getExpense({ expenseID: id });
                 if (item === undefined) {
-                    item = await getAlternative({ alternativeID: id });
+                    item = await getExpense({ expenseID: (await getAlternative({ alternativeID: id })).expenseID});
                 }
 
                 try {
@@ -62,7 +64,11 @@ class CalculatorStatus extends React.Component {
             }
 
             Promise.all([reachedMCAT, reachedApplication, reachedInterview]).then((res) => {
-                this.setState({reached: res, loading: false})
+                this.setState({reached: res, loading: false});
+                const all = reachedMCAT && reachedApplication && reachedInterview;
+                this.setState({all: all});
+            }).catch((error) => {
+                errorToast();
             })
         } catch (e) {
             errorToast();
@@ -72,15 +78,20 @@ class CalculatorStatus extends React.Component {
     render() {
         return this.state.loading ? (
             <div>
-                <h2>Calculator Status</h2>
+                <h2>Calculator Progress</h2>
                 <p>Loading...</p>
             </div>
         ) : (
             <div>
-                <h2>Calculator Status</h2>
-                <p>MCAT fees: {this.state.reached[0] ? "saved" : "incomplete"}</p>
-                <p>Application submission: {this.state.reached[1] ? "saved" : "incomplete"}</p>
-                <p>Interview process: {this.state.reached[2] ? "saved" : "incomplete"}</p>
+                <h2>Calculator Progress</h2>
+                <p>MCAT fees: {this.state.reached[0] ? "selections made" : "no selections"}</p>
+                <RouterButton link={"/calculator"} title={"Go to MCAT section"} state={{currentStage: "MCAT"}}/>
+                <p>Application submission: {this.state.reached[1] ? "selections made" : "no selections"}</p>
+                <RouterButton link={"/calculator"} title={"Go to Application Submission section"} state={{currentStage: "Application Submission"}}/>
+                <p>Interview process: {this.state.reached[2] ? "selections made" : "no selections"}</p>
+                <RouterButton link={"/calculator"} title={"Go to Interview Process section"} state={{currentStage: "Interview Process"}}/>
+                <p>All sections complete: {this.state.all ? "yes" : "no"}</p>
+                <RouterButton link={"/calculator"} title={"Go to Costs Breakdown"} state={{currentStage: "Breakdown"}}/>
             </div>
 
         )
