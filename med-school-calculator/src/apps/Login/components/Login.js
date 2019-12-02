@@ -5,6 +5,8 @@ import { COLOURS } from 'utils/constants';
 import ForgotPassword from './ForgotPassword';
 import Button from 'common/Button';
 
+import { errorToast } from 'utils/helpers';
+
 const LoginContainer = styled.div`
     align-items: center;
     border: 45px solid ${COLOURS.white};
@@ -29,7 +31,7 @@ const LoginInfo = styled.input`
     padding: 10px;
     border: none;
     border-radius: 8px;
-    margin-bottom: 1.2em;
+    margin-bottom: 1.5em;
 `;
 
 const LoginButton = styled.input`
@@ -128,18 +130,18 @@ class Login extends React.Component {
 
         auth()
             .signInWithEmailAndPassword(email, password)
-            .catch(error => alert('unable to sign in, please try again later'));
+            .catch(() => errorToast('Incorrect email or password'));
     };
 
     handleClick = () => {
 
     };
 
-    togglePopup() {  
-        this.setState({  
-             showPopup: !this.state.showPopup  
-        });  
-    }  
+    togglePopup() {
+        this.setState({
+             showPopup: !this.state.showPopup
+        });
+    }
 
     render() {
         const { email, password } = this.state;
@@ -167,15 +169,15 @@ class Login extends React.Component {
                     <LoginButton type="submit" value="Sign In" />
                     <StyledButton text="Forgot Password?" onClick={this.togglePopup.bind(this)}/>
                 </FormContainer>
-                
+
             </LoginContainer>
-            {this.state.showPopup ?  
+            {this.state.showPopup ?
                     <ForgotPassword
-                        text='Click "Close Button" to hide popup'  
-                        closePopup={this.togglePopup.bind(this)}  
-                    />  
-                    : null  
-            } 
+                        text='Click "Close Button" to hide popup'
+                        closePopup={this.togglePopup.bind(this)}
+                    />
+                    : null
+            }
             </>
         );
     }

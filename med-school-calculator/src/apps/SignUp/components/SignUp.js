@@ -2,6 +2,7 @@ import React from 'react';
 import { auth } from 'firebase';
 import styled from 'styled-components';
 import { COLOURS } from 'utils/constants';
+import isEmail from 'validator/lib/isEmail';
 
 import { createUser } from '../repository';
 import { errorToast } from 'utils/helpers';
@@ -25,9 +26,9 @@ const SignUpInfo = styled.input`
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
     width: 180px;
     padding: 10px;
-    border: none;
+    border: ${props => props.error ? 'solid 1px red' : 'none'};
     border-radius: 8px;
-    margin-bottom: 1.2em;
+    margin-bottom: ${props => props.error ? '0px' : '1.5em'};
 `;
 
 const SignUpButton = styled.input`
@@ -78,11 +79,21 @@ const Subtitle = styled.h3`
     margin-top: 0.2em;
 `;
 
+const ErrorMessage = styled.div`
+    color: red;
+    font-size: 12px;
+`;
+
 class SignUp extends React.Component {
     state = {
         displayName: '',
         email: '',
-        password: ''
+        password: '',
+        errors: {
+            displayName: '',
+            email: '',
+            password: ''
+        }
     };
 
     handleChange = e => {
@@ -96,10 +107,15 @@ class SignUp extends React.Component {
         e.preventDefault();
         const { displayName, email, password } = this.state;
 
+        if (!this.handleValidate()) {
+            return;
+        }
+
         auth()
             .createUserWithEmailAndPassword(email, password)
             .then(async result => {
                 try {
+                    await auth().currentUser.sendEmailVerification();
                     await createUser({ uid: result.user.uid, email });
                     await result.user.updateProfile({ displayName });
                 } catch (e) {
@@ -111,8 +127,41 @@ class SignUp extends React.Component {
             });
     };
 
-    render() {
+    handleValidate = () => {
         const { displayName, email, password } = this.state;
+        const errors = {
+            displayName: '',
+            email: '',
+            password: '',
+            isValid: true
+        };
+
+        if (displayName.length === 0) {
+            errors.displayName = 'Required *';
+            errors.isValid = false;
+        }
+
+        if (!isEmail(email)) {
+            errors.email = 'Invalid email format';
+            errors.isValid = false;
+        }
+
+        if (email.length === 0) {
+            errors.email = 'Required *';
+            errors.isValid = false;
+        }
+
+        if (password.length < 6) {
+            errors.password = 'Must be at least 6 characters';
+            errors.isValid = false;
+        }
+
+        this.setState({ errors });
+        return errors.isValid;
+    };
+
+    render() {
+        const { displayName, email, password, errors } = this.state;
 
         return (
             <SignUpContainer>
@@ -122,24 +171,36 @@ class SignUp extends React.Component {
                     <SignUpInfo
                         name="displayName"
                         type="text"
-                        placeholder="Full Name"
+                        placeholder="Full Name *"
                         value={displayName}
                         onChange={this.handleChange}
+                        error={errors.displayName}
                     />
+                    {errors.displayName && (
+                        <ErrorMessage>{errors.displayName}</ErrorMessage>
+                    )}
                     <SignUpInfo
                         name="email"
                         type="text"
                         value={email}
-                        placeholder="E-mail"
+                        placeholder="E-mail *"
                         onChange={this.handleChange}
+                        error={errors.email}
                     />
+                    {errors.email && (
+                        <ErrorMessage>{errors.email}</ErrorMessage>
+                    )}
                     <SignUpInfo
                         name="password"
                         type="password"
                         value={password}
-                        placeholder="Password"
+                        placeholder="Password *"
                         onChange={this.handleChange}
+                        error={errors.password}
                     />
+                    {errors.password && (
+                        <ErrorMessage>{errors.password}</ErrorMessage>
+                    )}
                     <SignUpButton type="submit" value="Sign Up" />
                 </FormContainer>
             </SignUpContainer>
