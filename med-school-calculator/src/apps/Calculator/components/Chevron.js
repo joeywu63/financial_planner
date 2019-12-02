@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { COLOURS } from 'utils/constants';
 
 const ChevronAnchor = styled.button`
     outpadding-top: 0px;
     padding-bottom: 0px;
     border-width: 0px;
-    color: ${props => (props.isSelected ? 'white' : 'black')};
-    background: ${props => (props.isSelected ? 'black' : 'white')};
+    color: ${props => (props.isSelected ? `${COLOURS.white}` : `${COLOURS.darkblue}`)};
+    background: ${props => (props.isSelected ? `${COLOURS.darkblue}` : `${COLOURS.white}`)};
     cursor: pointer;
     padding: 10px 0 10px 45px;
     position: relative;
     display: flex;
     align-items: center;
+    height: 50px;
+    font-size: 16px;
 
     :before {
         content: ' ';
@@ -34,7 +37,7 @@ const ChevronAnchor = styled.button`
         border-top: 50px solid transparent;
         border-bottom: 50px solid transparent;
         border-left: 30px solid
-            ${props => (props.isSelected ? 'black' : 'white')};
+            ${props => (props.isSelected ? `${COLOURS.darkblue}` : `${COLOURS.white}`)};
         position: absolute;
         top: 50%;
         margin-top: -50px;
@@ -44,7 +47,7 @@ const ChevronAnchor = styled.button`
 
     :focus {
         color: white;
-        background: black;
+        background: ${COLOURS.darkblue};
         :after {
             border-left: 30px solid black;
         }
@@ -53,7 +56,7 @@ const ChevronAnchor = styled.button`
 
     :hover {
         color: white;
-        background: black;
+        background: ${COLOURS.darkblue};
         :after {
             border-left: 30px solid black;
         }

@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { ExportCSV } from './ExportCSV';
-
 import {
     getAllTypes,
     getSubtype,
@@ -12,6 +10,36 @@ import {
     saveProgress
 } from '../repository';
 import { errorToast } from 'utils/helpers';
+import { COLOURS } from 'utils/constants';
+
+const PageWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const TablesWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid ${COLOURS.darkblue};
+    border-bottom: 2px solid ${COLOURS.darkblue};
+    padding-bottom: 15px;
+`;
+
+const TableWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const CostExport = styled.div`
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
 
 const Table = styled.table`
     margin: 0;
@@ -19,12 +47,12 @@ const Table = styled.table`
     border-collapse: collapse;
     border: 1px solid black
     table-layout: fixed;
+    width: 75%;
 `;
 
 const TableHead = styled.thead`
     font-weight: bold;
     text-align: left;
-    padding 2;
 `;
 
 const TableHeader = styled.th`
@@ -32,15 +60,54 @@ const TableHeader = styled.th`
     border: 1px solid black
     text-align: center;
     vertical-align: middle;
+    padding: 10px;
+    text-align: left;
+    background-color: ${COLOURS.blue};
+    color: ${COLOURS.white};
 `;
 
 const TableRow = styled.tr`
     border-bottom: 1px solid black;
+    :nth-child(even) {
+        background-color: ${COLOURS.offWhite};
+    }
 `;
 
 const TableData = styled.td`
     border-right: 1px solid black;
+    padding: 10px;
+    text-align: left;
 `;
+
+const Title = styled.h1`
+    color: ${COLOURS.darkblue};
+    font-weight: 500;
+    font-size: 40px;
+`;
+
+const Subtitle = styled.h2`
+    color: ${COLOURS.darkblue};
+    font-weight: 400;
+    font-size: 30px;
+`;
+
+const TableTitle = styled.h2`
+    color: ${COLOURS.darkblue};
+    font-weight: 400;
+    font-size: 24px;
+`;
+
+const TableSub = styled.h3`
+    color: ${COLOURS.darkblue};
+    font-weight: 500;
+    font-size: 18px;
+`;
+
+const Pseudo = styled.div`
+    width: 153.3px;
+    height: 35px;
+    visibility: hidden;
+`
 
 class Breakdown extends React.Component {
     state = {
@@ -107,7 +174,7 @@ class Breakdown extends React.Component {
             <TableRow key={expense.id}>
                 <TableData key={expense.name}>{expense.name}</TableData>
                 <TableData key={subtype}>{subtype}</TableData>
-                <TableData key={expense.cost}>{expense.cost}</TableData>
+                <TableData key={expense.cost}>${expense.cost}</TableData>
             </TableRow>
         );
     };
@@ -115,10 +182,19 @@ class Breakdown extends React.Component {
     tableAltRow = (alternative, subtype) => {
         return (
             <TableRow key={alternative.id}>
-                <TableData key={alternative.name}>{alternative.name}</TableData>
+                <TableData key={alternative.name}>
+                    <a
+                        href={alternative.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {alternative.name}
+                    </a>
+                </TableData>
                 <TableData key={subtype}>{subtype}</TableData>
-                <TableData key={alternative.cost}>{alternative.cost}</TableData>
-                <TableData key={alternative.url}>{alternative.url}</TableData>
+                <TableData key={alternative.cost}>
+                    ${alternative.cost}
+                </TableData>
             </TableRow>
         );
     };
@@ -136,20 +212,20 @@ class Breakdown extends React.Component {
         );
 
         return (
-            <div>
-                <h2>{type.name}</h2>
+            <TableWrapper>
+                <TableTitle>{type.name}</TableTitle>
                 <Table key={type.id}>
                     <TableHead>
                         <tr>
                             <TableHeader>Item</TableHeader>
                             <TableHeader>Category</TableHeader>
-                            <TableHeader>Cost</TableHeader>
+                            <TableHeader>Cost (CAD)</TableHeader>
                         </tr>
                     </TableHead>
                     <tbody>{rows}</tbody>
                 </Table>
-                <h4>Subtotal: ${subtotal}</h4>
-            </div>
+                <TableSub>Subtotal: ${subtotal}</TableSub>
+            </TableWrapper>
         );
     };
 
@@ -167,21 +243,20 @@ class Breakdown extends React.Component {
             );
 
             return (
-                <div>
-                    <h2>Alternative Resources</h2>
+                <TableWrapper>
+                    <TableTitle>Alternative Resources</TableTitle>
                     <Table>
                         <TableHead>
                             <tr>
                                 <TableHeader>Item</TableHeader>
                                 <TableHeader>Category</TableHeader>
-                                <TableHeader>Cost</TableHeader>
-                                <TableHeader>Link</TableHeader>
+                                <TableHeader>Cost (CAD)</TableHeader>
                             </tr>
                         </TableHead>
                         <tbody>{rows}</tbody>
                     </Table>
-                    <h4>Subtotal: ${subtotal}</h4>
-                </div>
+                    <TableSub>Subtotal: ${subtotal}</TableSub>
+                </TableWrapper>
             );
         }
     };
@@ -204,12 +279,17 @@ class Breakdown extends React.Component {
         return loading ? (
             <>Loading...</>
         ) : (
-            <div>
-                <h1>Cost Breakdown</h1>
-                <ul>{this.renderTables()}</ul>
-                <h3>Total Cost: ${total}</h3>
-                <ExportCSV csvData={exportData} fileName="costs" />
-            </div>
+            <PageWrapper>
+                <Title>Cost Breakdown</Title>
+                <TablesWrapper>
+                    <ul>{this.renderTables()}</ul>
+                </TablesWrapper>
+                <CostExport>
+                    <Pseudo>Export Selection</Pseudo>
+                    <Subtitle>Total Cost: ${total}</Subtitle>
+                    <ExportCSV csvData={exportData} fileName="costs" />
+                </CostExport>
+            </PageWrapper>
         );
     }
 }

@@ -123,7 +123,7 @@ class SubType extends React.Component {
         };
     };
 
-    handleCreateAlternative = async (name, description, cost, url) => {
+    handleCreateAlternative = async (name, description, url, cost) => {
         try {
             const { id: subTypeID } = this.props.subType;
             const { alternatives } = this.state;
@@ -145,7 +145,8 @@ class SubType extends React.Component {
                     subTypeID,
                     name,
                     description,
-                    cost
+                    cost,
+                    url
                 )
             );
             this.setState({ isAddingAlternative: false, alternatives });
