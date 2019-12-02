@@ -26,9 +26,9 @@ const SignUpInfo = styled.input`
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
     width: 180px;
     padding: 10px;
-    border: ${props => props.error ? 'solid 1px red' : 'none'};
+    border: ${props => (props.error ? 'solid 1px red' : 'none')};
     border-radius: 8px;
-    margin-bottom: ${props => props.error ? '0px' : '1.5em'};
+    margin-bottom: ${props => (props.error ? '0px' : '1.5em')};
 `;
 
 const SignUpButton = styled.input`

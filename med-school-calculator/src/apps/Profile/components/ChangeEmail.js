@@ -49,15 +49,15 @@ class ChangePassword extends React.Component {
         event.preventDefault();
 
         const credential = auth.EmailAuthProvider.credential(
-            getCurrentUser().email, 
+            getCurrentUser().email,
             this.state.password
         );
-        auth().currentUser.reauthenticateWithCredential(credential).then(
-            () => {
+        auth()
+            .currentUser.reauthenticateWithCredential(credential)
+            .then(() => {
                 return auth().currentUser.updateEmail(this.state.email);
-            } 
-        ).then(
-            () => {
+            })
+            .then(() => {
                 successToast('Email updated successfully');
 
                 let currentUser = getCurrentUser();
@@ -65,12 +65,10 @@ class ChangePassword extends React.Component {
                 setCurrentUser(currentUser);
 
                 this.props.handleSwitchPage(PROFILEPAGES.default);
-            }
-        ).catch(
-            err => {
+            })
+            .catch(err => {
                 errorToast();
-            }
-        );
+            });
     };
 
     render() {
@@ -79,11 +77,11 @@ class ChangePassword extends React.Component {
                 <PasswordHeader>Edit Password</PasswordHeader>
                 <StyledForm onSubmit={this.handleSubmit}>
                     <div>Password:</div>
-                        <ShortInput
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handleChange}
+                    <ShortInput
+                        type="password"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
                     />
                     <div>Email:</div>
                     <ShortInput
@@ -96,7 +94,9 @@ class ChangePassword extends React.Component {
                         <SubmitButton value="Submit" />
                         <StyledButton
                             onClick={() =>
-                                this.props.handleSwitchPage(PROFILEPAGES.default)
+                                this.props.handleSwitchPage(
+                                    PROFILEPAGES.default
+                                )
                             }
                             text="Cancel"
                         />

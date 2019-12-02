@@ -23,7 +23,7 @@ import {
     deleteExpense,
     updateExpense
 } from '../repository';
-import { errorToast } from 'utils/helpers';
+import { successToast, errorToast } from 'utils/helpers';
 
 const TypeWrapper = styled.div`
     display: flex;
@@ -98,6 +98,7 @@ class Type extends React.Component {
                 )
             );
             this.setState({ isAddingExpense: false, expenses });
+            successToast('Successfully created Expense');
         } catch (e) {
             errorToast();
         }
@@ -112,6 +113,7 @@ class Type extends React.Component {
                 expense => expense.id !== expenseID
             );
             this.setState({ expenses: newExpenses });
+            successToast('Successfully deleted Expense');
         } catch (e) {
             errorToast();
         }
@@ -135,6 +137,7 @@ class Type extends React.Component {
                 return expense;
             });
             this.setState({ expenses: newExpenses });
+            successToast('Successfully updated Expense');
         } catch (e) {
             errorToast();
         }
@@ -154,6 +157,7 @@ class Type extends React.Component {
 
             subTypes.push(this.createTemporarySubType(subTypeID, name));
             this.setState({ isAddingSubType: false, subTypes });
+            successToast('Successfully created Sub Type');
         } catch (e) {
             errorToast();
         }
@@ -169,6 +173,7 @@ class Type extends React.Component {
                 subType => subType.id !== subTypeID
             );
             this.setState({ subTypes: newSubTypes });
+            successToast('Successfully deleted Sub Type');
         } catch (e) {
             errorToast();
         }
@@ -195,6 +200,7 @@ class Type extends React.Component {
                 return subType;
             });
             this.setState({ subTypes: newSubTypes });
+            successToast('Successfully updated Sub Type');
         } catch (e) {
             errorToast();
         }

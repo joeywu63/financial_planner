@@ -67,8 +67,10 @@ class Calculator extends React.Component {
 
         try {
             const { subTypes, expenses } = this.state;
-            const {currentStage} = this.props.location.state ? this.props.location.state : this.state;
-            this.setState({currentStage: currentStage});
+            const { currentStage } = this.props.location.state
+                ? this.props.location.state
+                : this.state;
+            this.setState({ currentStage: currentStage });
 
             // Check if user is up to date with database
             const user = getCurrentUser();

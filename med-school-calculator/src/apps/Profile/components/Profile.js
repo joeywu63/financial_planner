@@ -68,7 +68,7 @@ class Profile extends React.Component {
                     }
                 />
 
-                <CalculatorStatus/>
+                <CalculatorStatus />
             </>
         );
     };
@@ -82,7 +82,7 @@ class Profile extends React.Component {
                 ) : page === PROFILEPAGES.changepassword ? (
                     <ChangePassword handleSwitchPage={this.handleSwitchPage} />
                 ) : page === PROFILEPAGES.changeemail ? (
-                    <ChangeEmail handleSwitchPage={this.handleSwitchPage}/>
+                    <ChangeEmail handleSwitchPage={this.handleSwitchPage} />
                 ) : page === PROFILEPAGES.changeinfo ? (
                     <ChangeInfo handleSwitchPage={this.handleSwitchPage} />
                 ) : null}

@@ -21,5 +21,5 @@ export const incrementVersion = () => {
         .doc('version')
         .update({
             version: firebase.firestore.FieldValue.increment(1)
-        })
+        });
 };

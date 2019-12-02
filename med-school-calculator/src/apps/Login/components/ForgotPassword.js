@@ -111,7 +111,7 @@ class ForgotPassword extends React.Component {
                             <StyledButton
                                 onClick={this.props.closePopup}
                                 text="Cancel"
-                            ></StyledButton>
+                            />
                         </CenteredDiv>
                     </form>
                 </PopupInner>

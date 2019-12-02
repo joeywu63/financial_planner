@@ -51,21 +51,24 @@ class ChangePassword extends React.Component {
 
         if (this.state.newPassword === this.state.confirmNewPassword) {
             const credential = auth.EmailAuthProvider.credential(
-                getCurrentUser().email, 
+                getCurrentUser().email,
                 this.state.oldPassword
             );
-            auth().currentUser.reauthenticateWithCredential(credential).then(
-                () => {
-                    return auth().currentUser.updatePassword(this.state.newPassword)
-                } 
-            ).then(() => {
-                successToast('Password changed successfully');
-                this.props.handleSwitchPage(PROFILEPAGES.default);
-            })
-            .catch(err => {
-                // TODO: error handling
-                errorToast();
-            });
+            auth()
+                .currentUser.reauthenticateWithCredential(credential)
+                .then(() => {
+                    return auth().currentUser.updatePassword(
+                        this.state.newPassword
+                    );
+                })
+                .then(() => {
+                    successToast('Password changed successfully');
+                    this.props.handleSwitchPage(PROFILEPAGES.default);
+                })
+                .catch(err => {
+                    // TODO: error handling
+                    errorToast();
+                });
         } else {
             // TODO: display password reqs
             errorToast('Passwords do not match');
@@ -78,11 +81,11 @@ class ChangePassword extends React.Component {
                 <PasswordHeader>Edit Password</PasswordHeader>
                 <StyledForm onSubmit={this.handleSubmit}>
                     <div>Old Password:</div>
-                        <ShortInput
-                            type="password"
-                            name="oldPassword"
-                            value={this.state.oldPassword}
-                            onChange={this.handleChange}
+                    <ShortInput
+                        type="password"
+                        name="oldPassword"
+                        value={this.state.oldPassword}
+                        onChange={this.handleChange}
                     />
                     <div>New Password:</div>
                     <ShortInput
@@ -102,7 +105,9 @@ class ChangePassword extends React.Component {
                         <SubmitButton value="Submit" />
                         <StyledButton
                             onClick={() =>
-                                this.props.handleSwitchPage(PROFILEPAGES.default)
+                                this.props.handleSwitchPage(
+                                    PROFILEPAGES.default
+                                )
                             }
                             text="Cancel"
                         />

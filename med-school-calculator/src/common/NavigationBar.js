@@ -63,9 +63,15 @@ class NavigationBar extends React.Component {
                             <MenuOption>Admin</MenuOption>
                         </Link>
                     )}
-                    <Link to={"/profile"}><MenuOption>Profile</MenuOption></Link>
-                    <Link to={"/calculator"}><MenuOption>Calculator</MenuOption></Link>
-                    <Link to={"/about"}><MenuOption>About Us</MenuOption></Link>
+                    <Link to={'/profile'}>
+                        <MenuOption>Profile</MenuOption>
+                    </Link>
+                    <Link to={'/calculator'}>
+                        <MenuOption>Calculator</MenuOption>
+                    </Link>
+                    <Link to={'/about'}>
+                        <MenuOption>About Us</MenuOption>
+                    </Link>
                 </List>
             </NavBar>
         );

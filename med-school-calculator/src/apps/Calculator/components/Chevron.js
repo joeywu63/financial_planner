@@ -7,8 +7,10 @@ const ChevronAnchor = styled.button`
     outpadding-top: 0px;
     padding-bottom: 0px;
     border-width: 0px;
-    color: ${props => (props.isSelected ? `${COLOURS.white}` : `${COLOURS.blue}`)};
-    background: ${props => (props.isSelected ? `${COLOURS.blue}` : `${COLOURS.white}`)};
+    color: ${props =>
+        props.isSelected ? `${COLOURS.white}` : `${COLOURS.blue}`};
+    background: ${props =>
+        props.isSelected ? `${COLOURS.blue}` : `${COLOURS.white}`};
     cursor: pointer;
     padding: 10px 0 10px 45px;
     position: relative;
@@ -37,7 +39,8 @@ const ChevronAnchor = styled.button`
         border-top: 50px solid transparent;
         border-bottom: 50px solid transparent;
         border-left: 30px solid
-            ${props => (props.isSelected ? `${COLOURS.blue}` : `${COLOURS.white}`)};
+            ${props =>
+                props.isSelected ? `${COLOURS.blue}` : `${COLOURS.white}`};
         position: absolute;
         top: 50%;
         margin-top: -50px;

@@ -30,16 +30,17 @@ export const get = ({ uid }) => {
 
 export const updateVersion = (uid, newVersion) => {
     firebase
-    .firestore()
-    .collection(USER_COLLECTION)
-    .doc(uid)
-    .set({
-            version: newVersion
-        },
-        {merge: true},
-    )
-    .catch(err => alert(err));
-}
+        .firestore()
+        .collection(USER_COLLECTION)
+        .doc(uid)
+        .set(
+            {
+                version: newVersion
+            },
+            { merge: true }
+        )
+        .catch(err => alert(err));
+};
 
 export const updateProgress = (uid, expenses) => {
     firebase

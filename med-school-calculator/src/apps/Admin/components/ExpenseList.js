@@ -6,7 +6,7 @@ import TypeForm from './TypeForm';
 import Button from 'common/Button';
 
 import { getTypes, createType, deleteType, updateType } from '../repository';
-import { errorToast } from 'utils/helpers';
+import { successToast, errorToast } from 'utils/helpers';
 
 class ExpenseList extends React.Component {
     state = {
@@ -32,6 +32,7 @@ class ExpenseList extends React.Component {
 
             types.push({ id: typeID, name });
             this.setState({ isAddingType: false, types });
+            successToast('Successfully created Type');
         } catch (e) {
             errorToast();
         }
@@ -45,6 +46,7 @@ class ExpenseList extends React.Component {
 
             const newTypes = types.filter(type => type.id !== typeID);
             this.setState({ types: newTypes });
+            successToast('Successfully deleted Type');
         } catch (e) {
             errorToast();
         }
@@ -63,6 +65,7 @@ class ExpenseList extends React.Component {
                 return type;
             });
             this.setState({ types: newTypes });
+            successToast('Successfully updated Type');
         } catch (e) {
             errorToast();
         }
