@@ -12,7 +12,7 @@ const LoginContainer = styled.div`
     border: 45px solid ${COLOURS.white};
     border-left: 65px solid ${COLOURS.white};
     border-right: 65px solid ${COLOURS.white};
-    background: white;
+    background-color: ${COLOURS.white};
 `;
 
 const FormContainer = styled.form`
@@ -20,7 +20,6 @@ const FormContainer = styled.form`
     flex-direction: column;
     align-content: center
     justify-content: center
-    background-color: ${COLOURS.white};
 `;
 
 const LoginInfo = styled.input`
