@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth } from 'firebase';
-import { Redirect, BrowserRouter as Router, Switch, Route, Link, HashRouter } from 'react-router-dom';
+import { Redirect, Switch, Route, HashRouter } from 'react-router-dom';
 
 
 import NavigationBar from 'common/NavigationBar';

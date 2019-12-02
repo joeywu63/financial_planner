@@ -7,6 +7,7 @@ import Button from 'common/Button';
 import ChangeInfo from './ChangeInfo';
 import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
+import CalculatorStatus from './CalculatorStatus';
 
 const ProfileHeader = styled.div`
     font-weight: bold;
@@ -66,6 +67,8 @@ class Profile extends React.Component {
                         this.handleSwitchPage(PROFILEPAGES.changepassword)
                     }
                 />
+
+                <CalculatorStatus/>
             </>
         );
     };
