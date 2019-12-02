@@ -12,7 +12,9 @@ import {
     saveProgress,
     getDatabaseVersion,
     updateVersionForUser,
-    getTypeExpenses
+    getTypeExpenses,
+    getExpense,
+    getAlternative
 } from '../repository';
 
 import Button from 'common/Button';
@@ -30,10 +32,22 @@ const NavBar = styled.ul`
     flex-direction: row;
 `;
 
+const PageWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const Buttons = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+`;
+
+const Subtitle = styled.h2`
+    color: ${COLOURS.darkblue};
+    font-weight: 400;
+    font-size: 30px;
 `;
 
 class Calculator extends React.Component {
@@ -42,7 +56,8 @@ class Calculator extends React.Component {
         currentStage: 'MCAT',
         types: [],
         subTypes: {},
-        expenses: {}
+        expenses: {},
+        total: 0
     };
 
     checked = new Set();
@@ -58,6 +73,10 @@ class Calculator extends React.Component {
             // Check if user is up to date with database
             const user = getCurrentUser();
             const databaseVersion = await getDatabaseVersion();
+            if (typeof databaseVersion !== 'number') {
+                return;
+            }
+
             if (user.version !== databaseVersion) {
                 localStorage.clear();
                 user.version = databaseVersion;
@@ -98,10 +117,47 @@ class Calculator extends React.Component {
                 subTypes,
                 expenses
             });
+            let sum = 0;
+            for (const id of this.checked) {
+                try {
+                    const expense = await getExpense({ expenseID: id });
+                    if (expense !== undefined) {
+                        sum += expense.cost;
+                    } else {
+                        const alt = await getAlternative({ alternativeID: id });
+                        sum += alt.cost;
+                    }
+                } catch (error) {
+                    const removedInvalid = [...this.checked].filter(
+                        item => item !== id
+                    );
+                    saveProgress(removedInvalid).catch(() => {
+                        errorToast();
+                    });
+                    errorToast();
+                    continue;
+                }
+            }
+            Promise.all(this.checked)
+                .then(res => this.setState({ total: sum }))
+                .catch(() => errorToast());
         } catch (e) {
             errorToast();
         }
     }
+
+    handleSelection = (expense, wasChecked) => {
+        const { total } = this.state;
+        if (wasChecked) {
+            if (!this.checked.has(expense.id)) {
+                this.checked.add(expense.id);
+                this.setState({ total: total + expense.cost });
+            }
+        } else {
+            this.checked.delete(expense.id);
+            this.setState({ total: total - expense.cost });
+        }
+    };
 
     handleClick = async (id, name) => {
         saveProgress(this.checked).catch(() => errorToast());
@@ -143,14 +199,6 @@ class Calculator extends React.Component {
         }
     };
 
-    handleSelection = (expense, wasChecked) => {
-        if (wasChecked) {
-            this.checked.add(expense.id);
-        } else {
-            this.checked.delete(expense.id);
-        }
-    };
-
     renderList = () => {
         const { types, currentStage } = this.state;
 
@@ -165,9 +213,9 @@ class Calculator extends React.Component {
     };
 
     renderType = () => {
-        const { currentStage, subTypes, expenses } = this.state;
+        const { currentStage, subTypes, expenses, total } = this.state;
         if (currentStage === 'Breakdown') {
-            return <Breakdown />;
+            return <Breakdown types={this.state.types} />;
         } else {
             return (
                 <Type
@@ -176,6 +224,7 @@ class Calculator extends React.Component {
                     subTypes={subTypes[currentStage]}
                     expenses={expenses[currentStage]}
                     checked={this.checked}
+                    total={total}
                 />
             );
         }
@@ -204,12 +253,11 @@ class Calculator extends React.Component {
     };
 
     render() {
-        const { loading, types, currentStage } = this.state;
-
+        const { loading, currentStage, types, total } = this.state;
         const lastCategory = currentStage === 'Breakdown';
         const firstCategory = types[0] ? types[0].name === currentStage : false;
         return (
-            <div>
+            <PageWrapper>
                 <div>
                     <NavBar>
                         <FirstChevron />
@@ -217,6 +265,7 @@ class Calculator extends React.Component {
                     </NavBar>
                     {loading ? <>Loading...</> : this.renderType()}
                 </div>
+                <Subtitle>Total Cost: ${total}</Subtitle>
                 <Buttons>
                     {!firstCategory ? (
                         <Button
@@ -225,10 +274,13 @@ class Calculator extends React.Component {
                         />
                     ) : null}
                     {!lastCategory ? (
-                        <Button text="Next >" onClick={() => this.handleNext()} />
+                        <Button
+                            text="Next >"
+                            onClick={() => this.handleNext()}
+                        />
                     ) : null}
                 </Buttons>
-            </div>
+            </PageWrapper>
         );
     }
 }

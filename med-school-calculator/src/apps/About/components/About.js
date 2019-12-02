@@ -5,17 +5,22 @@ import styled from 'styled-components';
 const PageWrapper = styled.div`
 `;
 
+const Card = styled.div`
+    margin: 0 100px 0 100px;
+    padding: 20px 50px 20px 50px;
+    background-color: white;
+`;
+
 const TextDiv = styled.div`
     width: 100%;
-    margin-right: 30px;
 `;
 
 const Image = styled.img`
     width: 35%;
     max-height: auto;
-    margin-top: 1em;
+    margin-top: 3em;
     margin-bottom: 30px;
-    margin-left: 30px;
+    margin-left: 50px;
     float: right;
 `;
 
@@ -34,6 +39,7 @@ class About extends React.Component {
     render() {
         return (
             <PageWrapper>
+                <Card>
                 <Title>Community of Support</Title>
                 <Image src={img} />
                 <TextDiv>
@@ -118,6 +124,7 @@ class About extends React.Component {
                         </span>
                     </p>
                 </TextDiv>
+                </Card>
             </PageWrapper>
         );
     }

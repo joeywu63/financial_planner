@@ -75,11 +75,14 @@ class Subtype extends React.Component {
     }
 
     handleSelection = (expense, wasChecked) => {
-        const { totalPrice } = this.state;
         if (wasChecked) {
-            this.setState({ totalPrice: totalPrice + expense.cost });
+            this.setState((prevState, props) => {
+                return {totalPrice: prevState.totalPrice + expense.cost}
+            });
         } else {
-            this.setState({ totalPrice: totalPrice - expense.cost });
+            this.setState((prevState, props) => {
+                return {totalPrice: prevState.totalPrice - expense.cost}
+            });
         }
         this.props.handleSelection(expense, wasChecked);
     };

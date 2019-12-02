@@ -18,6 +18,15 @@ const PageWrapper = styled.div`
     align-items: center;
 `;
 
+const Loading = styled.div`
+    min-width: 100%
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    min-width: 100vh;
+`;
+
 const TablesWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -85,12 +94,6 @@ const Title = styled.h1`
     font-size: 40px;
 `;
 
-const Subtitle = styled.h2`
-    color: ${COLOURS.darkblue};
-    font-weight: 400;
-    font-size: 30px;
-`;
-
 const TableTitle = styled.h2`
     color: ${COLOURS.darkblue};
     font-weight: 400;
@@ -107,7 +110,7 @@ const Pseudo = styled.div`
     width: 153.3px;
     height: 35px;
     visibility: hidden;
-`
+`;
 
 class Breakdown extends React.Component {
     state = {
@@ -119,28 +122,34 @@ class Breakdown extends React.Component {
 
     async componentDidMount() {
         try {
-            const data = await getAllTypes();
+            const data = this.props.types;
             const user = getUser();
             const progress = user.progress;
             const selectedOptions = [];
             const exportData = [];
             for (const id of progress) {
-                let item = await getExpense({ expenseID: id });
-                if (item === undefined) {
-                    item = await getAlternative({ alternativeID: id });
-                }
                 try {
-                    const subtype = await getSubtype({
-                        subtypeID: item.subtypeID
-                    });
+                    let item = await getExpense({ expenseID: id });
+                    if (item === undefined) {
+                        item = await getAlternative({ alternativeID: id });
+                    }
+                    let subtypeName;
+                    if (item.subtypeID === null) {
+                        subtypeName = 'Miscellaneous';
+                    } else {
+                        const subtype = await getSubtype({
+                            subtypeID: item.subtypeID
+                        });
+                        subtypeName = subtype.name;
+                    }
                     selectedOptions.push({
                         expense: item,
-                        category: subtype.name
+                        category: subtypeName
                     });
                     exportData.push({
                         Item: `${item.name}`,
                         Description: `${item.description}`,
-                        Category: `${subtype.name}`,
+                        Category: `${subtypeName}`,
                         Cost: `${item.cost}`
                     });
                 } catch (e) {
@@ -277,18 +286,21 @@ class Breakdown extends React.Component {
         const total = selected.reduce((sum, e) => sum + e.expense.cost, 0);
         exportData.push({ Total: `$${total}` });
         return loading ? (
-            <>Loading...</>
+            <Loading>
+                <TableTitle>
+                    One moment while we fetch your selections...
+                </TableTitle>
+            </Loading>
         ) : (
             <PageWrapper>
                 <Title>Cost Breakdown</Title>
                 <TablesWrapper>
                     <ul>{this.renderTables()}</ul>
+                    <CostExport>
+                        <Pseudo>Export Selection</Pseudo>
+                        <ExportCSV csvData={exportData} fileName="costs" />
+                    </CostExport>
                 </TablesWrapper>
-                <CostExport>
-                    <Pseudo>Export Selection</Pseudo>
-                    <Subtitle>Total Cost: ${total}</Subtitle>
-                    <ExportCSV csvData={exportData} fileName="costs" />
-                </CostExport>
             </PageWrapper>
         );
     }
