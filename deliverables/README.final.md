@@ -1,29 +1,38 @@
 # FINANCIAL PLANNER FOR CANADIAN MED-SCHOOL APPLICANTS 
 
 ## Description 
+
  Our product will be a website that will allow prospective medical school applicants in Canada to **calculate the cumulative cost of the application process**, and to **notify them of alternatives and deadlines** for various steps in the process.
  The problem we hope to address is **poor accessibility of information regarding the financial aspect of medical school applications**. There are two main types of information that are of particular interest. The first is information regarding the **various costs involved in the medical school application process**, such as transcript costs, exam preparation resources, and interview preparation, which differ based on instutition, mehod of preparation, location and so on. The second is information on **cheaper alternatives available to the applicant** for various steps in the application process, for example, a cheaper MCAT prep course or a business that provides a cheaper interview prep consultation. The problem is important because the cost of the entire application process can easily reach in excess of 10,000 CAD, which places heavy strain on financially-struggling applicants.
 
 ## Key Features
+
+#### About Us
+The About Us page includes a description of our partners: the UofT Faculty of Medicine Community of Support, as well as a link to sign up for their mentorship program.
+
 #### User Profile
 The User Profile page allows users to view and edit their stored name and email.
 Users also have the ability to change their account password.
 
 #### Calculator Page
 The Calculator Page displays to users all expenses related to the medical school application process, in an easy to follow step by step process.
-At each step, the user is given a list of options to choose from for each type of expense. Once users select their desired expense options, the calculators total cost will update.
-This allows users to get an overview of how much the application process will cost them. The options chosen by users will be saved in our database for the users future reference.
+
+At each step, the user is given a list of options to choose from for each category of expense. The total cost updates dynamically upon selection. This allows users to get an overview of how much the application process will cost them. The options chosen by users are saved upon switching to a different category.
+
+The calculator also includes alternative options (if available), organized under each category
+or category if they are available.
 
 #### Admin Page
 Overtime, the expense data currently stored in the system could become outdated. We are giving admins to the site the ability to create, update, and delete current expense information on the Admin Page. Once updated, users who visit the site will be able to view the new expense information.
 
 #### Exporting Cost Breakdown
-The last page of the calculator will allow users to see the breakdown of their expenses after they finish checking off their expenses in the calculator. Users will have an option to export the breakdown to a csv file so they can have a copy even when not logged in to the app.
+The last page of the calculator will allow users to see the breakdown of their expenses after they finish checking off their expenses in the calculator. Users will have an option to export the breakdown to an excel file so they can have a copy even when not logged in to the app.
 
-## Instructions
+## How to use the app
 1. Visit https://med-school-calculator.firebaseapp.com
 2. When first visiting the site, you will need to create an account. Click the 'Sign Up' button
-3. Once the sign up process is complete you will be redirected to a blank page with 3 clickable buttons on the top left of the screen
+3. Once the sign up process is complete, you will be redirected to the calculator page where you
+can navigate to other pages via the navigation bar at the top of the page.
 
 #### Profile Usage
 1. Click on the Profile button on the top left of the page.
@@ -51,21 +60,26 @@ The last page of the calculator will allow users to see the breakdown of their e
 All changes are automatically saved
  
 ## Development requirements
-* If a developer were to set this up on their machine or a remote server, what are the technical requirements (e.g. OS, libraries, etc.)?
-* Briefly describe instructions for setting up and running the application (think a true README).
 
-#### Local
+#### Technical Requirements:
+
+This application was written in JavaScript using the React library. To set up the application
+locally and to deploy it, you will need to install the correct version of `Node.js` for your operating system, which comes with the `npm` tool used to install React, and all other packages 
+required for this application.
+
+#### Setting up on local server
 1. Ask for access to the codebase and Firebase project.
-2. ```git clone https://github.com/csc301-fall-2019/team-project-uoft-faculty-of-medicine.git```
-3. ```cd team-project-uoft-faculty-of-medicine/med-school-calculator```
-4. ```npm install```
-5. ```npm start```
+2. Install ```Node.js```, which comes with the ```npm``` tool
+3. Clone the project from GitHub with ```git clone https://github.com/csc301-fall-2019/team-project-uoft-faculty-of-medicine.git```
+4. Navigate to the source directly with ```cd team-project-uoft-faculty-of-medicine/med-school-calculator```
+5. Install all necessary packages with ```npm install```
+6. Start a local development server on localhost with ```npm start```
 
-#### Deploy to Firebase Hosting
+#### Deploy via Firebase Hosting
 1. Ensure you are on the branch you wish to deploy, typically master.
-2. ```cd team-project-uoft-faculty-of-medicine/med-school-calculator```
-3. ```npm run build```
-4. ```firebase deploy```
+2. Navigate to the source directly with ```cd team-project-uoft-faculty-of-medicine/med-school-calculator```
+3. Create a production build with ```npm run build```
+4. Deploy the application with ```firebase deploy```
 5. Visit the link Firebase generates.
 
  ## Licenses 
