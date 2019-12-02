@@ -20,7 +20,7 @@ import {
     deleteAlternative,
     updateAlternative
 } from '../repository';
-import { errorToast } from 'utils/helpers';
+import { successToast, errorToast } from 'utils/helpers';
 
 import Button from 'common/Button';
 import Hoverable from 'common/Hoverable';
@@ -150,6 +150,7 @@ class SubType extends React.Component {
                 )
             );
             this.setState({ isAddingAlternative: false, alternatives });
+            successToast('Successfully created Alternative');
         } catch (e) {
             errorToast();
         }
@@ -179,6 +180,7 @@ class SubType extends React.Component {
                 )
             );
             this.setState({ isAddingExpense: false, expenses });
+            successToast('Successfully created Expense');
         } catch (e) {
             errorToast();
         }
@@ -188,26 +190,28 @@ class SubType extends React.Component {
         const { alternatives } = this.state;
         try {
             await deleteAlternative({ alternativeID });
+            const newAlternatives = alternatives.filter(
+                alternatives => alternatives.id !== alternativeID
+            );
+            this.setState({ alternatives: newAlternatives });
+            successToast('Successfully deleted Alternative');
         } catch (e) {
             errorToast();
         }
-        const newAlternatives = alternatives.filter(
-            alternatives => alternatives.id !== alternativeID
-        );
-        this.setState({ alternatives: newAlternatives });
     };
 
     handleDeleteExpense = async expenseID => {
         const { expenses } = this.state;
         try {
             await deleteExpense({ expenseID });
+            const newExpenses = expenses.filter(
+                expense => expense.id !== expenseID
+            );
+            this.setState({ expenses: newExpenses });
+            successToast('Successfully deleted Expense');
         } catch (e) {
             errorToast();
         }
-        const newExpenses = expenses.filter(
-            expense => expense.id !== expenseID
-        );
-        this.setState({ expenses: newExpenses });
     };
 
     handleUpdateExpense = async (expenseID, name, description, cost) => {
@@ -228,6 +232,7 @@ class SubType extends React.Component {
                 return expense;
             });
             this.setState({ expenses: newExpenses });
+            successToast('Successfully updated Expense');
         } catch (e) {
             errorToast();
         }
@@ -264,6 +269,7 @@ class SubType extends React.Component {
                 return alternative;
             });
             this.setState({ alternatives: newAlternatives });
+            successToast('Successfully updated Alternative');
         } catch (e) {
             errorToast();
         }
@@ -310,8 +316,12 @@ class SubType extends React.Component {
                         <Alternative
                             key={alternative.id}
                             alternative={alternative}
-                            handleDeleteAlternative={this.handleDeleteAlternative}
-                            handleUpdateAlternative={this.handleUpdateAlternative}
+                            handleDeleteAlternative={
+                                this.handleDeleteAlternative
+                            }
+                            handleUpdateAlternative={
+                                this.handleUpdateAlternative
+                            }
                         />
                     ))}
                     {isAddingAlternative ? (

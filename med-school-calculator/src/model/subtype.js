@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import {incrementVersion} from './version'
+import { incrementVersion } from './version';
 
 const SUB_TYPE_COLLECTION = 'subtype';
 const EXPENSE_COLLECTION = 'expense';

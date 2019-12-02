@@ -1,9 +1,16 @@
 import firebase from 'firebase';
-import {incrementVersion} from './version'
+import { incrementVersion } from './version';
 
 const ALTERNATIVES_COLLECTION = 'alternatives';
 
-export const create = ({ expenseID, subTypeID, name, description, cost, url }) => {
+export const create = ({
+    expenseID,
+    subTypeID,
+    name,
+    description,
+    cost,
+    url
+}) => {
     incrementVersion();
     const altRef = firebase
         .firestore()

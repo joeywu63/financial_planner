@@ -134,7 +134,7 @@ class Login extends React.Component {
 
     togglePopup() {
         this.setState({
-             showPopup: !this.state.showPopup
+            showPopup: !this.state.showPopup
         });
     }
 
@@ -143,36 +143,37 @@ class Login extends React.Component {
 
         return (
             <>
-            <LoginContainer>
-                <FormContainer onSubmit={this.handleSubmit}>
-                    <Title>Welcome Back.</Title>
-                    <Subtitle>Sign in to continue</Subtitle>
-                    <LoginInfo
-                        name="email"
-                        type="text"
-                        placeholder="E-mail"
-                        value={email}
-                        onChange={this.handleChange}
-                    />
-                    <LoginInfo
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={this.handleChange}
-                    />
-                    <LoginButton type="submit" value="Sign In" />
-                    <StyledButton text="Forgot Password?" onClick={this.togglePopup.bind(this)}/>
-                </FormContainer>
-
-            </LoginContainer>
-            {this.state.showPopup ?
+                <LoginContainer>
+                    <FormContainer onSubmit={this.handleSubmit}>
+                        <Title>Welcome Back.</Title>
+                        <Subtitle>Sign in to continue</Subtitle>
+                        <LoginInfo
+                            name="email"
+                            type="text"
+                            placeholder="E-mail"
+                            value={email}
+                            onChange={this.handleChange}
+                        />
+                        <LoginInfo
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={this.handleChange}
+                        />
+                        <LoginButton type="submit" value="Sign In" />
+                        <StyledButton
+                            text="Forgot Password?"
+                            onClick={this.togglePopup.bind(this)}
+                        />
+                    </FormContainer>
+                </LoginContainer>
+                {this.state.showPopup ? (
                     <ForgotPassword
                         text='Click "Close Button" to hide popup'
                         closePopup={this.togglePopup.bind(this)}
                     />
-                    : null
-            }
+                ) : null}
             </>
         );
     }

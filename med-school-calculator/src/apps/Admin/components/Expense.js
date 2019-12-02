@@ -14,7 +14,7 @@ import {
     createAlternative
 } from '../repository';
 
-import { errorToast } from 'utils/helpers';
+import { successToast, errorToast } from 'utils/helpers';
 import { COLOURS } from 'utils/constants';
 import IconButton from 'common/IconButton';
 import DeleteModal from 'common/DeleteModal';
@@ -101,6 +101,7 @@ class Expense extends React.Component {
                 )
             );
             this.setState({ isAddingAlternative: false, alternatives });
+            successToast('Successfully created Alternative');
         } catch (e) {
             errorToast();
         }
@@ -145,6 +146,7 @@ class Expense extends React.Component {
                 return alternative;
             });
             this.setState({ alternatives: newAlternatives });
+            successToast('Successfully updated Alternative');
         } catch (e) {
             errorToast();
         }
@@ -154,13 +156,14 @@ class Expense extends React.Component {
         const { alternatives } = this.state;
         try {
             await deleteAlternative({ alternativeID });
+            const newAlternatives = alternatives.filter(
+                alternatives => alternatives.id !== alternativeID
+            );
+            this.setState({ alternatives: newAlternatives });
+            successToast('Successfully deleted Alternative');
         } catch (e) {
             errorToast();
         }
-        const newAlternatives = alternatives.filter(
-            alternatives => alternatives.id !== alternativeID
-        );
-        this.setState({ alternatives: newAlternatives });
     };
 
     handleOnMouseEnter = () => {
@@ -231,15 +234,7 @@ class Expense extends React.Component {
             alternatives
         } = this.state;
 
-        return isEditingExpense ? (
-            <ExpenseForm
-                handleCancel={this.toggleEditExpense}
-                handleSubmit={this.handleUpdateExpense}
-                name={name}
-                description={description}
-                cost={cost}
-            />
-        ) : (
+        return (
             <>
                 <DeleteModal
                     isOpen={isModalOpen}
@@ -247,49 +242,61 @@ class Expense extends React.Component {
                     onDelete={() => handleDeleteExpense(id)}
                     deleteConfirmationName="DELETE"
                 />
-                <Cell
-                    width={2}
-                    onMouseEnter={this.handleOnMouseEnter}
-                    onMouseLeave={this.handleOnMouseLeave}
-                    middle={true}
-                >
-                    {name}
-                </Cell>
-                <Cell
-                    width={5}
-                    middle={true}
-                    onMouseEnter={this.handleOnMouseEnter}
-                    onMouseLeave={this.handleOnMouseLeave}
-                >
-                    {description}
-                </Cell>
-                <Cell
-                    onMouseEnter={this.handleOnMouseEnter}
-                    onMouseLeave={this.handleOnMouseLeave}
-                    middle={true}
-                >{`$${cost}`}</Cell>
-                <Cell
-                    width={2}
-                    onMouseEnter={this.handleOnMouseEnter}
-                    onMouseLeave={this.handleOnMouseLeave}
-                >
-                    <StyledIconButton
-                        title="Add Alternative"
-                        name="plus-square"
-                        onClick={this.toggleAddingAlternative}
-                        isHovering={isHovering}
+                {isEditingExpense ? (
+                    <ExpenseForm
+                        handleCancel={this.toggleEditExpense}
+                        handleSubmit={this.handleUpdateExpense}
+                        name={name}
+                        description={description}
+                        cost={cost}
                     />
-                    <StyledIconButton
-                        name="pen"
-                        onClick={this.toggleEditExpense}
-                        isHovering={isHovering}
-                    />
-                    <StyledIconButton
-                        name="trash-alt"
-                        onClick={this.toggleModal}
-                        isHovering={isHovering}
-                    />
-                </Cell>
+                ) : (
+                    <>
+                        <Cell
+                            width={2}
+                            onMouseEnter={this.handleOnMouseEnter}
+                            onMouseLeave={this.handleOnMouseLeave}
+                            middle={true}
+                        >
+                            {name}
+                        </Cell>
+                        <Cell
+                            width={5}
+                            middle={true}
+                            onMouseEnter={this.handleOnMouseEnter}
+                            onMouseLeave={this.handleOnMouseLeave}
+                        >
+                            {description}
+                        </Cell>
+                        <Cell
+                            onMouseEnter={this.handleOnMouseEnter}
+                            onMouseLeave={this.handleOnMouseLeave}
+                            middle={true}
+                        >{`$${cost}`}</Cell>
+                        <Cell
+                            width={2}
+                            onMouseEnter={this.handleOnMouseEnter}
+                            onMouseLeave={this.handleOnMouseLeave}
+                        >
+                            <StyledIconButton
+                                title="Add Alternative"
+                                name="plus-square"
+                                onClick={this.toggleAddingAlternative}
+                                isHovering={isHovering}
+                            />
+                            <StyledIconButton
+                                name="pen"
+                                onClick={this.toggleEditExpense}
+                                isHovering={isHovering}
+                            />
+                            <StyledIconButton
+                                name="trash-alt"
+                                onClick={this.toggleModal}
+                                isHovering={isHovering}
+                            />
+                        </Cell>
+                    </>
+                )}
                 <Cell width={10}>
                     {alternatives ? (
                         <AltWrapper>

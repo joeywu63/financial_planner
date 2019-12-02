@@ -31,8 +31,7 @@ class Type extends React.Component {
         expenses: []
     };
 
-    async componentDidMount() {
-    }
+    async componentDidMount() {}
 
     handleSelection = (expense, wasChecked) => {
         const { checked, total } = this.props;
@@ -63,7 +62,7 @@ class Type extends React.Component {
                     <Subtype
                         handleSelection={this.handleSelection}
                         key={subtype.id || subtype.key}
-                        expenses={subtype.id === null ? expenses: null}
+                        expenses={subtype.id === null ? expenses : null}
                         id={subtype.id}
                         title={subtype.name}
                         checked={this.props.checked}

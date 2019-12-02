@@ -23,6 +23,6 @@ export const ExportCSV = ({ csvData, fileName }) => {
         <Button
             text="Export Selections"
             onClick={e => exportToCSV(csvData, fileName)}
-        ></Button>
+        />
     );
 };

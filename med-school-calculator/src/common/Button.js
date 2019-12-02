@@ -4,15 +4,14 @@ import styled from 'styled-components';
 import { COLOURS } from '../utils/constants';
 
 const StyledButton = styled.button`
-    height: 35px;
-    font-size: 16px;
+    height: 30px;
+    font-size: 14px;
     font-weight: 500;
-    background-color: ${COLOURS.darkblue};
+    background-color: ${COLOURS.blue};
     color: ${COLOURS.white};
     text-align: center;
-    border-radius: 8px;
     border-width: 0;
-    padding: 0 0.9em;
+    padding: 0 0.5em;
     margin: 0.15em;
     cursor: pointer;
     :hover {

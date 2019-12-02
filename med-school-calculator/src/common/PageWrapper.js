@@ -5,7 +5,7 @@ import { COLOURS } from 'utils/constants';
 const Wrapper = styled.div`
     padding: 40px 20px;
     background-color: ${COLOURS.white};
-    min-height: 100vh
+    min-height: 100vh;
 `;
 
 class PageWrapper extends React.Component {

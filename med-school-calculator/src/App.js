@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import * as firebase from 'firebase';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -29,6 +30,12 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+const StyledSpinner = styled(Spinner)`
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+`;
+
 class App extends React.Component {
     componentDidMount() {
         this.checkIfLoggedIn();
@@ -54,7 +61,7 @@ class App extends React.Component {
                         displayName: user.displayName,
                         role: userRole,
                         progress: new Set(progress),
-                        version: userVersion 
+                        version: userVersion
                     };
                     setCurrentUser(currentUser);
                     this.setState({ isSignedIn: true, loading: false });
@@ -73,7 +80,7 @@ class App extends React.Component {
         const currentUser = getCurrentUser(); // we need to get current user also for security reason
 
         return loading ? (
-            <Spinner />
+            <StyledSpinner />
         ) : isSignedIn && currentUser ? (
             <Dashboard />
         ) : (

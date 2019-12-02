@@ -8,7 +8,7 @@ class RouterButton extends React.Component {
         const { link, title, state } = this.props;
 
         return (
-            <Link to={{pathname: link, state: state}}>
+            <Link to={{ pathname: link, state: state }}>
                 <Button text={title} />
             </Link>
         );

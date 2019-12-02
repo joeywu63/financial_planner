@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { getExpensesBySubtype, getAlternativesForSubtype } from '../repository';
 import Expense from './Expense';
 import Alternative from './Alternative';
+
+import Spinner from 'common/Spinner';
+
 import { errorToast } from 'utils/helpers';
 import { COLOURS } from 'utils/constants';
 
@@ -77,11 +80,11 @@ class Subtype extends React.Component {
     handleSelection = (expense, wasChecked) => {
         if (wasChecked) {
             this.setState((prevState, props) => {
-                return {totalPrice: prevState.totalPrice + expense.cost}
+                return { totalPrice: prevState.totalPrice + expense.cost };
             });
         } else {
             this.setState((prevState, props) => {
-                return {totalPrice: prevState.totalPrice - expense.cost}
+                return { totalPrice: prevState.totalPrice - expense.cost };
             });
         }
         this.props.handleSelection(expense, wasChecked);
@@ -134,7 +137,7 @@ class Subtype extends React.Component {
             <SubtypeBox>
                 <Title>{this.props.title}</Title>
                 {loading ? (
-                    <>Loading...</>
+                    <Spinner />
                 ) : (
                     <div>
                         {this.renderAlternatives(alternatives)}

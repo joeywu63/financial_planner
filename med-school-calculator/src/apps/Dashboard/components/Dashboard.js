@@ -2,7 +2,6 @@ import React from 'react';
 import { auth } from 'firebase';
 import { Redirect, Switch, Route, HashRouter } from 'react-router-dom';
 
-
 import NavigationBar from 'common/NavigationBar';
 import Admin from 'apps/Admin/components/Admin';
 import Profile from 'apps/Profile/components/Profile';
@@ -27,11 +26,11 @@ class Dashboard extends React.Component {
 
                     <PageWrapper>
                         <Switch>
-                            <Route path='/admin' component={Admin} />
-                            <Route path='/profile' component={Profile} />
-                            <Route path='/calculator' component={Calculator} />
-                            <Route path='/about' component={About} />
-                            <Redirect to='/calculator' />
+                            <Route path="/admin" component={Admin} />
+                            <Route path="/profile" component={Profile} />
+                            <Route path="/calculator" component={Calculator} />
+                            <Route path="/about" component={About} />
+                            <Redirect to="/calculator" />
                         </Switch>
                     </PageWrapper>
                 </HashRouter>

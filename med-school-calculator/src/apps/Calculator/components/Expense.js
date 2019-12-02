@@ -42,7 +42,10 @@ class Expense extends React.Component {
                 alternatives = await getAlternativesByExpense({
                     expenseID: this.props.id
                 });
-                localStorage.setItem(`${id}-alternatives`, JSON.stringify(alternatives));
+                localStorage.setItem(
+                    `${id}-alternatives`,
+                    JSON.stringify(alternatives)
+                );
             }
             this.setState({ loading: false, alternatives });
 
