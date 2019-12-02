@@ -27,7 +27,7 @@ List the most significant changes you made to your product (if any). It's normal
     - Our partners had sent us a sketch of a UI mockup for the initial prototype of the website. We since changed it compeletely, as the way they designed
     it seemed counterintuitive to the UX and difficult to code.
  - Rating system:
-    - Our partners wanted a rating system to see how the users responded to the application. While we thought it was a good idea, our decision to cut thois feature is simply a reduction of scope, as we did not want to waste time building this feature when the core functionality of the website was still 
+    - Our partners wanted a rating system to see how the users responded to the application. While we thought it was a good idea, our decision to cut this feature is simply a reduction of scope, as we did not want to waste time building this feature when the core functionality of the website was still 
     incomplete. 
  
 ### Handoff plan
