@@ -77,3 +77,5 @@ All changes are automatically saved
  * What type of license will you apply to your codebase?
  * What affect does it have on the development and use of your codebase?
  * Why did you or your partner make this choice?
+
+We will be licensing our code with the MIT license. The main reason for using this license is so that our partners are able to freely do what they wish with the codebase (modify, sell copies of the software, publish etc.) without our team being liable for any damages.
