@@ -75,7 +75,7 @@ class Expense extends React.Component {
         };
     };
 
-    handleCreateAlternative = async (name, description, cost, url) => {
+    handleCreateAlternative = async (name, description, url, cost) => {
         try {
             const { id: expenseID, subtypeID: subTypeID } = this.props.expense;
             const { alternatives } = this.state;
