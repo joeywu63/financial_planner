@@ -12,6 +12,10 @@ const AltDiv = styled.div`
     color: ${COLOURS.white};
 `;
 
+const StyledLink = styled.a`
+    color: white;
+`;
+
 class Alternative extends React.Component {
     componentDidMount() {
         if (this.props.checked) {
@@ -29,7 +33,7 @@ class Alternative extends React.Component {
 
     render() {
         const { checked } = this.state;
-        const { name, description, cost } = this.props;
+        const { name, description, url, cost } = this.props;
         return (
             <AltDiv>
                 <Grid columns={'20px 45px auto'}>
@@ -42,7 +46,13 @@ class Alternative extends React.Component {
                     </Cell>
                     <Cell>{`$${cost}`}</Cell>
                     <Cell>
-                        {`${name} `}
+                        <StyledLink
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {name}
+                        </StyledLink>
                         {description ? (
                             <InfoTooltip
                                 hoverMessage={description}

@@ -101,6 +101,7 @@ class Subtype extends React.Component {
                             id={alt.id}
                             name={alt.name}
                             description={alt.description}
+                            url={alt.url}
                             cost={alt.cost}
                             checked={this.props.checked.has(alt.id)}
                             onChange={this.handleSelection}
