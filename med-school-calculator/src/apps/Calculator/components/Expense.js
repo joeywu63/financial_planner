@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { Grid, Cell } from 'styled-css-grid';
+import { Cell } from 'styled-css-grid';
 import InfoTooltip from 'common/InfoTooltip';
 import { getAlternativesByExpense } from '../repository';
 import Alternative from './Alternative';
@@ -11,24 +11,16 @@ import { errorToast } from 'utils/helpers';
 import { COLOURS } from 'utils/constants';
 
 const AltTitleDiv = styled.div`
-    font-weight: 500;
+    font-weight: bold;
     padding-left: 5px;
     margin-top: 3px;
     margin-bottom: 3px;
-    margin-left: 30px;
+    margin-left: 50px;
     color: ${COLOURS.offWhite};
 `;
 
 const Alts = styled.div`
     margin-bottom: 5px;
-`;
-
-const ExpDiv = styled.div`
-    margin-bottom: 3px;
-`;
-
-const Item = styled.form`
-    color: ${COLOURS.white};
 `;
 
 class Expense extends React.Component {
@@ -76,6 +68,7 @@ class Expense extends React.Component {
                             id={alt.id}
                             name={alt.name}
                             description={alt.description}
+                            url={alt.url}
                             cost={alt.cost}
                             checked={this.props.checkedItems.has(alt.id)}
                             onChange={this.props.onChange}
@@ -90,43 +83,41 @@ class Expense extends React.Component {
         const { loading, checked, alternatives } = this.state;
         const { name, description, cost } = this.props;
         return (
-            <ExpDiv>
-                <Item>
-                    <Grid columns={'20px 45px auto'}>
-                        <Cell>
-                            <input
-                                type="checkbox"
-                                checked={checked}
-                                onChange={this.handleChange}
-                            />
-                        </Cell>
-                        <Cell>{`$${cost}`}</Cell>
-                        <Cell>
-                            {`${name} `}
-                            {description ? (
-                                <InfoTooltip
-                                    hoverMessage={description}
-                                    trigger={
-                                        <img
-                                            src={`${info_icon}`}
-                                            width="15"
-                                            height="15"
-                                            alt="description"
-                                        />
-                                    }
+            <>
+                <Cell width={1} center={true}>
+                    <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={this.handleChange}
+                    />
+                </Cell>
+                <Cell width={1}>{`$${cost}`}</Cell>
+                <Cell width={8}>
+                    {`${name} `}
+                    {description ? (
+                        <InfoTooltip
+                            hoverMessage={description}
+                            trigger={
+                                <img
+                                    src={`${info_icon}`}
+                                    width="15"
+                                    height="15"
+                                    alt="description"
                                 />
-                            ) : (
-                                ''
-                            )}
-                        </Cell>
-                    </Grid>
-                </Item>
-                {loading ? (
-                    <>Loading...</>
-                ) : (
-                    this.renderAlternatives(alternatives)
-                )}
-            </ExpDiv>
+                            }
+                        />
+                    ) : (
+                        ''
+                    )}
+                </Cell>
+                <Cell width={10}>
+                    {loading ? (
+                        <>Loading...</>
+                    ) : (
+                        this.renderAlternatives(alternatives)
+                    )}
+                </Cell>
+            </>
         );
     }
 }

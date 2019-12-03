@@ -21,11 +21,11 @@ const NavBar = styled.nav`
 
 const Title = styled.h1`
     margin: 0;
-    margin-top: 7px;
-    margin-left: 70px;
+    margin-top: 8px;
+    margin-left: 25px;
     padding: 0;
     float: left;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 500;
     color: white;
     white-space: nowrap;
@@ -53,7 +53,7 @@ class NavigationBar extends React.Component {
     render() {
         return (
             <NavBar>
-                <Title>Med School Application Costs Calculator</Title>
+                <Title>COS Medical School Application Cost Calculator</Title>
                 <List>
                     <Link to={'/'} onClick={this.props.handleLogOut}>
                         <MenuOption>Log Out</MenuOption>
