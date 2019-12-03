@@ -5,6 +5,7 @@ import { COLOURS } from '../utils/constants';
 
 const StyledButton = styled.input`
     height: 30px;
+    width: 190px;
     font-size: 14px;
     font-weight: 500;
     background-color: ${COLOURS.blue};
