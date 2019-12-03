@@ -8,6 +8,7 @@ import Spinner from 'common/Spinner';
 
 import { errorToast } from 'utils/helpers';
 import { COLOURS } from 'utils/constants';
+import { Grid } from "styled-css-grid";
 
 const SubtypeBox = styled.div`
     display: flex;
@@ -21,8 +22,13 @@ const SubtypeBox = styled.div`
     justify-content: space-between;
 `;
 
+const ExpenseWrapper = styled.div`
+    width: 90%;
+    color: ${COLOURS.white};
+`;
+
 const SubAlts = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 `;
 
 const Title = styled.h2`
@@ -37,7 +43,8 @@ const Subtitle = styled.h3`
 
 const Bold = styled.b`
     color: ${COLOURS.offWhite};
-    font-weight: 500;
+    font-weight: bold;
+    margin-left: 20px;
 `;
 
 class Subtype extends React.Component {
@@ -114,7 +121,7 @@ class Subtype extends React.Component {
 
     renderExpenses = expenses => {
         return (
-            <div>
+            <Grid columns={10} gap="2px" alignContent="center">
                 {expenses.map(expense => (
                     <Expense
                         key={expense.id}
@@ -127,7 +134,7 @@ class Subtype extends React.Component {
                         checkedItems={this.props.checked}
                     />
                 ))}
-            </div>
+            </Grid>
         );
     };
 
@@ -140,10 +147,10 @@ class Subtype extends React.Component {
                 {loading ? (
                     <Spinner />
                 ) : (
-                    <div>
+                    <ExpenseWrapper>
                         {this.renderAlternatives(alternatives)}
                         {this.renderExpenses(expenses)}
-                    </div>
+                    </ExpenseWrapper>
                 )}
                 <Subtitle>Subtotal: ${this.state.totalPrice}</Subtitle>
             </SubtypeBox>

@@ -7,7 +7,7 @@ import info_icon from 'img/question-mark-icon.png';
 import { COLOURS } from 'utils/constants';
 
 const AltDiv = styled.div`
-    margin-left: 30px;
+    margin-left: 60px;
     margin-bottom: 3px;
     color: ${COLOURS.white};
 `;
