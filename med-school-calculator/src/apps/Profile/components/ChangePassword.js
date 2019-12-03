@@ -66,11 +66,9 @@ class ChangePassword extends React.Component {
                     this.props.handleSwitchPage(PROFILEPAGES.default);
                 })
                 .catch(err => {
-                    // TODO: error handling
                     errorToast();
                 });
         } else {
-            // TODO: display password reqs
             errorToast('Passwords do not match');
         }
     };
@@ -102,7 +100,6 @@ class ChangePassword extends React.Component {
                         onChange={this.handleChange}
                     />
                     <div>
-                        <SubmitButton value="Submit" />
                         <StyledButton
                             onClick={() =>
                                 this.props.handleSwitchPage(
@@ -111,6 +108,7 @@ class ChangePassword extends React.Component {
                             }
                             text="Cancel"
                         />
+                        <SubmitButton value="Submit" />
                     </div>
                 </StyledForm>
             </>

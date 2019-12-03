@@ -74,15 +74,8 @@ class ChangePassword extends React.Component {
     render() {
         return (
             <>
-                <PasswordHeader>Edit Password</PasswordHeader>
+                <PasswordHeader>Edit Email</PasswordHeader>
                 <StyledForm onSubmit={this.handleSubmit}>
-                    <div>Password:</div>
-                    <ShortInput
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
                     <div>Email:</div>
                     <ShortInput
                         type="text"
@@ -90,8 +83,14 @@ class ChangePassword extends React.Component {
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
+                    <div>Password:</div>
+                    <ShortInput
+                        type="password"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                    />
                     <div>
-                        <SubmitButton value="Submit" />
                         <StyledButton
                             onClick={() =>
                                 this.props.handleSwitchPage(
@@ -100,6 +99,7 @@ class ChangePassword extends React.Component {
                             }
                             text="Cancel"
                         />
+                        <SubmitButton value="Submit" />
                     </div>
                 </StyledForm>
             </>

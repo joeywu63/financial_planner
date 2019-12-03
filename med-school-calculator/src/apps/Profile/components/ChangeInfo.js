@@ -84,7 +84,6 @@ class ChangeInfo extends React.Component {
                         onChange={this.handleChange}
                     />
                     <div>
-                        <SubmitButton value="Submit" />
                         <StyledButton
                             onClick={() =>
                                 this.props.handleSwitchPage(
@@ -93,6 +92,7 @@ class ChangeInfo extends React.Component {
                             }
                             text="Cancel"
                         />
+                        <SubmitButton value="Submit" />
                     </div>
                 </StyledForm>
             </>
