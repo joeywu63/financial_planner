@@ -1,0 +1,30 @@
+Faculty of Medicine
+
+FINAL.md
+
+Changes
+- meets expectations
+
+Handoff plan
+- Good plan
+
+README.md
+
+Description: 
+- Meets expectations
+
+Key Features
+- Meets expectations, detailed and easy to understand exactly what you implemented
+
+Instructions: 85
+- Meets expectations, very thorough
+
+Dev. Requirements: 
+- Meets expectations
+
+Licensing: 75
+- You did not explain why you and your partner chose this (i.e. your team does not want to be involved in the project anymore? partner requested it?)
+
+Deployed Product: 85
+- Great application! I think this will be very useful to med school applicants
+- All the functionalities work as expected, the app is very intuitive, easy to use

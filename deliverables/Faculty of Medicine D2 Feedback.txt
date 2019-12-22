@@ -1,0 +1,88 @@
+UofT Faculty of Medicine 
+
+PLAN.MD: Overall Grade - 2
+
+Process
+
+Roles & Responsibilities: 2
+- How about your front end and back end developers categorization?
+- You don't have eough details on the software-related work that your team members will be working on
+
+Group Communication: 2
+- When will you be having video calls? What is the expected frequency?
+
+Partner Communication: 3
+- Meets expectations
+
+Meetings: 2
+- Is there a moderator? 
+
+Conflict Resolution: 3
+- Meets expectations
+
+Events: 3
+- Meets expectations
+
+Partner Meetings: 3
+- meets expectations
+
+Artifacts: 2
+- You should provide info on how to request an invite to your dashboard or provide a screenshot 
+- What if no one volunteers to do a task? How will it be assigned?
+
+Github: 3
+- Meets expectations
+
+Deployment: 2
+- Could be more detailed - missing overall process for deployment 
+
+Product
+
+Goals & Tasks: 3
+- Meets expectations
+
+Artifacts: 2
+- Missing screenshots of your UI here as one of the artifacts
+
+------------------------------------------------------------------------------------------------------
+
+REVIEW.MD: Overall Grade - 3
+
+Process: 3
+
+Good Decisions: 3
+- Thorough
+
+Bad Decisions: 2
+- It still might be good to use a task management platform even if your team members know what they are doing, it will help all members see the overall progress of the project
+
+Planned Changes: 3
+- Good that you addressed the issue with the task management board here 
+
+Product
+
+Goals Met: 2
+- Missing the screenshot of your board 
+
+Product Demo
+- Meets expectations, very thorough
+
+Meeting Highlights: 4
+- Good!
+
+---------------------------------------------------------------------------------------------------
+
+README.MD
+
+Description: 3
+- meets expectations
+
+Key Features: 3
+- meets expectations
+
+Instructions: 3
+- very clear, easy to follow 
+
+Deployed App: 3
+- All functionalities specified in README.md works
+- The admin page buttons could use some restructuring but overall, the application looks great!
